@@ -12,6 +12,8 @@ namespace OurResumeIR.Domain.Models
         public string Username { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
+
+        // Navigation Property  
         public ICollection<UserExpertise> UserExpertise { get; set; }
         public ICollection<Blog> Blog { get; set; }
         public ICollection<Documents> Documents { get; set; }
