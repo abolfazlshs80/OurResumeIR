@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35514.174 d17.12
+VisualStudioVersion = 17.12.35514.174
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OurResumeIR.Domain", "OurResumeIR.Domain\OurResumeIR.Domain.csproj", "{B6419749-93BE-44A0-AC0E-C33DC7DBE5FD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{5B62AE20-1461-400F-AD1C-4B1810F88453}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +20,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B6419749-93BE-44A0-AC0E-C33DC7DBE5FD} = {5B62AE20-1461-400F-AD1C-4B1810F88453}
 	EndGlobalSection
 EndGlobal
