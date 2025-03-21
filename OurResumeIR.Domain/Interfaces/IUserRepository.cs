@@ -10,7 +10,7 @@ namespace OurResumeIR.Domain.Interfaces
 {
     public interface IUserRepository
     {
-        Task<IEnumerable<User>> FindAsync(Expression<Func<User, bool>> predicate);
+        Task<IQueryable<User>> FindAsync(Expression<Func<User, bool>> predicate);
         Task<IQueryable<User>> GetAll();
         Task<IQueryable<User>> GetAllDetails();
         Task<User> GetByUserId(int UserId);

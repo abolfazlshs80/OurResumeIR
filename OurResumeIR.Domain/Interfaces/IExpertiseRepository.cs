@@ -6,7 +6,7 @@ namespace OurResumeIR.Domain.Interfaces;
 public interface IExpertiseRepository
 {
 
-    Task<IEnumerable<Expertise>> FindAsync(Expression<Func<Expertise, bool>> predicate);
+    Task<IQueryable<Expertise>> FindAsync(Expression<Func<Expertise, bool>> predicate);
     Task<IQueryable<Expertise>> GetAll();
     Task<IQueryable<Expertise>> GetAllDetails();
     Task<Expertise> GetById(int Id);
