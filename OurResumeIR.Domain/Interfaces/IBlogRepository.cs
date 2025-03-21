@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace OurResumeIR.Domain.Interfaces
 {
-    public interface IAboutMeRepository
+    public interface IBlogRepository
     {
-        Task GetByUserIdAsync(int userId);
-        Task AddAsync(AboutMe aboutMe);
-        Task UpdateAsync(AboutMe aboutMe);
-        Task DeleteAsync(int userId);
+        Task GetByUserId(int userId);
+        Task AddBlogAsync(Blog blog);
+        Task UpdateBlogAsync(Blog blog);
+        Task DeleteBlogAsync(Blog blog);
         Task SaveChangesAsync();
     }
 }
