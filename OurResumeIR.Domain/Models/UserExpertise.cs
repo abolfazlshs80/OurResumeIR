@@ -13,7 +13,7 @@ namespace OurResumeIR.Domain.Models
         public int ExpertiseId { get; set; }
 
         // Navigation Property  
-        public Expertise Expertise { get; set; }
+        public Experience Expertise { get; set; }
         public User User { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace OurResumeIR.Domain.Models;
 
-public class Expertise
+public class Experience
 {
     public int Id { get; set; }
     public int ExpertiseLayerId { get; set; }

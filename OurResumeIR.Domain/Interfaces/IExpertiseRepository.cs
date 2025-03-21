@@ -6,15 +6,15 @@ namespace OurResumeIR.Domain.Interfaces;
 public interface IExpertiseRepository
 {
 
-    Task<IQueryable<Expertise>> FindAsync(Expression<Func<Expertise, bool>> predicate);
-    Task<IQueryable<Expertise>> GetAll();
-    Task<IQueryable<Expertise>> GetAllDetails();
-    Task<Expertise> GetById(int Id);
-    Task<Expertise> GetByExpertiseLayerId(int ExpertiseLayerId);
-    Task<Expertise> GetExpertiseByName(string Name);
+    Task<IQueryable<Experience>> FindAsync(Expression<Func<Experience, bool>> predicate);
+    Task<IQueryable<Experience>> GetAll();
+    Task<IQueryable<Experience>> GetAllDetails();
+    Task<Experience> GetById(int Id);
+    Task<Experience> GetByExpertiseLayerId(int ExpertiseLayerId);
+    Task<Experience> GetExpertiseByName(string Name);
 
-    Task<Expertise> CreateExpertise(Expertise Expertise);
-    Task<Expertise> UpdateExpertise(Expertise Expertise);
-    Task<Expertise> DeleteExpertise(int ExpertiseId);
-    Task<Expertise> SaveChanges();
+    Task<Experience> CreateExpertise(Experience Expertise);
+    Task<Experience> UpdateExpertise(Experience Expertise);
+    Task<Experience> DeleteExpertise(int ExpertiseId);
+    Task<Experience> SaveChanges();
 }

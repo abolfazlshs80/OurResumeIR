@@ -11,6 +11,7 @@ namespace OurResumeIR.Domain.Interfaces
     {
         Task<IQueryable<Documents>> GetAllDocumentsAsync();
         Task GetDocumentByIdAsync(int id);
+        Task AddDocumentAsync(Documents documents);
         Task UpdateDocumentAsync(Documents documents);
         Task DeleteDocumentByIdAsync(int id);
         Task DeleteDocumentAsync(Documents documents);
