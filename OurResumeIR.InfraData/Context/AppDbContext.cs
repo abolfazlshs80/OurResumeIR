@@ -3,6 +3,7 @@ using OurResumeIR.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,6 +16,11 @@ namespace OurResumeIR.Infra.Data.Context
 
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetAssembly(typeof(AppDbContext)));
+            base.OnModelCreating(modelBuilder);
+        }
 
         #region DbSet
 
