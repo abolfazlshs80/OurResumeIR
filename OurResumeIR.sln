@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OurResumeIR.Domain", "OurRe
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{5B62AE20-1461-400F-AD1C-4B1810F88453}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra.Data", "Infra.Data", "{9050B741-B8E0-4719-983D-069B02440A3C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OurResumeIR.InfraData", "OurResumeIR.InfraData\OurResumeIR.InfraData.csproj", "{F9A02076-2E45-4C59-B175-ACC6D47CA059}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,11 +21,16 @@ Global
 		{B6419749-93BE-44A0-AC0E-C33DC7DBE5FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6419749-93BE-44A0-AC0E-C33DC7DBE5FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6419749-93BE-44A0-AC0E-C33DC7DBE5FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9A02076-2E45-4C59-B175-ACC6D47CA059}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9A02076-2E45-4C59-B175-ACC6D47CA059}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9A02076-2E45-4C59-B175-ACC6D47CA059}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9A02076-2E45-4C59-B175-ACC6D47CA059}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B6419749-93BE-44A0-AC0E-C33DC7DBE5FD} = {5B62AE20-1461-400F-AD1C-4B1810F88453}
+		{F9A02076-2E45-4C59-B175-ACC6D47CA059} = {9050B741-B8E0-4719-983D-069B02440A3C}
 	EndGlobalSection
 EndGlobal
