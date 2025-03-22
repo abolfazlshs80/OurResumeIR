@@ -17,7 +17,7 @@ namespace OurResumeIR.Infra.Data.Configuration
         public void Configure(EntityTypeBuilder<ExpertiseLayer> builder)
         {
             builder.HasKey(e => e.Id);
-        /   builder.Property(e => e.Name).IsRequired().HasMaxLength(100);
+           builder.Property(e => e.Name).IsRequired().HasMaxLength(100);
 
             //// تنظیمات فیلد Shadow برای به‌روزرسانی تاریخ
             //builder.Property<DateTime>("UpdatedDate");

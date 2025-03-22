@@ -3,12 +3,12 @@ using OurResumeIR.Domain.Models;
 
 namespace OurResumeIR.Domain.Interfaces;
 
-public interface IExpertiseLayerLayerRepository
+public interface IExpertiseLayerRepository
 {
 
     Task<IQueryable<ExpertiseLayer>> FindAsync(Expression<Func<ExpertiseLayer, bool>> predicate);
-    Task<ExpertiseLayer> CreateExpertiseLayer(ExpertiseLayer ExpertiseLayer);
-    Task<ExpertiseLayer> UpdateExpertiseLayer(ExpertiseLayer ExpertiseLayer);
-    Task<ExpertiseLayer> DeleteExpertiseLayer(int ExpertiseLayerId);
-    Task<ExpertiseLayer> SaveChanges();
+    Task<int> CreateExpertiseLayer(ExpertiseLayer ExpertiseLayer);
+    Task<bool> UpdateExpertiseLayer(ExpertiseLayer ExpertiseLayer);
+    Task<bool> DeleteExpertiseLayer(int ExpertiseLayerId);
+    Task<bool> SaveChanges();
 }
