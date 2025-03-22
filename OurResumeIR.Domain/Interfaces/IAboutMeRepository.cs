@@ -9,7 +9,7 @@ namespace OurResumeIR.Domain.Interfaces
 {
     public interface IAboutMeRepository
     {
-        Task GetByUserIdAsync(int userId);
+        Task<AboutMe> GetByUserIdAsync(int userId);
         Task AddAsync(AboutMe aboutMe);
         Task UpdateAsync(AboutMe aboutMe);
         Task DeleteAsync(int userId);
