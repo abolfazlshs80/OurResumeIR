@@ -15,6 +15,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OurResumeIR.Application", "OurResumeIR.Application\OurResumeIR.Application.csproj", "{47821D0F-CF05-45FF-A745-C973785F9856}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{9BD2E7EE-72B0-4376-8677-71A209E8BA07}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OurResumeIR.MVC", "OurResumeIR.MVC\OurResumeIR.MVC.csproj", "{FDDDB15F-4818-4C73-A969-63B7B2ABED19}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,10 @@ Global
 		{47821D0F-CF05-45FF-A745-C973785F9856}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47821D0F-CF05-45FF-A745-C973785F9856}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47821D0F-CF05-45FF-A745-C973785F9856}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDDDB15F-4818-4C73-A969-63B7B2ABED19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDDDB15F-4818-4C73-A969-63B7B2ABED19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDDDB15F-4818-4C73-A969-63B7B2ABED19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDDDB15F-4818-4C73-A969-63B7B2ABED19}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,5 +49,6 @@ Global
 		{B6419749-93BE-44A0-AC0E-C33DC7DBE5FD} = {5B62AE20-1461-400F-AD1C-4B1810F88453}
 		{F9A02076-2E45-4C59-B175-ACC6D47CA059} = {9050B741-B8E0-4719-983D-069B02440A3C}
 		{47821D0F-CF05-45FF-A745-C973785F9856} = {22E2EA29-C9CE-4894-81FE-969434FE1113}
+		{FDDDB15F-4818-4C73-A969-63B7B2ABED19} = {9BD2E7EE-72B0-4376-8677-71A209E8BA07}
 	EndGlobalSection
 EndGlobal
