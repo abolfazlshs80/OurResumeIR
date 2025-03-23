@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Context\AppDbContext.cs~RF7409b0.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\OurResumeIR.Domain\OurResumeIR.Domain.csproj" />
   </ItemGroup>
 
