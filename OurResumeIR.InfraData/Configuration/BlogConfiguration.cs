@@ -17,23 +17,22 @@ namespace OurResumeIR.Infra.Data.Configuration
 
             builder.Property(b => b.Title)
                 .IsRequired()
-                .HasMaxLength(250)
-                .HasColumnType("String");
+                .HasMaxLength(250);
 
-            builder.Property(b => b.Description) 
+
+            builder.Property(b => b.Description)
                 .IsRequired()
-                .HasMaxLength(3000)
-                .HasColumnType ("String");
+                .HasMaxLength(3000);
+
 
             builder.Property(b => b.ImageName)
-                .IsRequired()
-                .HasColumnType("String");
+                .IsRequired();
+
 
             builder.Property(b => b.Text)
                 .IsRequired()
-                .HasMaxLength(4000)
-                .HasColumnType("String");
-
+                .HasMaxLength(4000);
+               
             builder.HasOne(b => b.User)
                 .WithMany(b => b.Blog);
         }

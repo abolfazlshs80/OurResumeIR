@@ -16,15 +16,15 @@ namespace OurResumeIR.Infra.Data.Configuration
         {
             builder.HasKey(e => e.Id);
 
-            builder.Property( d => d.Name)
+            builder.Property(d => d.Name)
                 .IsRequired()
-                .HasMaxLength(256)
-                .HasColumnType("String");
+                .HasMaxLength(256);
+                
 
             builder.Property(d => d.ImageName)
                 .IsRequired()
-                .HasMaxLength(256)
-                .HasColumnType ("String");
+                .HasMaxLength(256);
+               
 
             builder.HasOne(d => d.User)
                 .WithMany(d => d.Documents);

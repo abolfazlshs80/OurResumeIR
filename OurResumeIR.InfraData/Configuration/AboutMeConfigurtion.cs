@@ -16,9 +16,9 @@ namespace OurResumeIR.Infra.Data.Configuration
            builder.HasKey(a => a.Id);
 
             builder.Property(a => a.Description)
-                .HasColumnType("String")
-                .IsRequired()
-                .HasMaxLength(1500);
+
+                .IsRequired();
+             
 
             builder.HasOne(a => a.User)
                 .WithOne(a => a.AboutMe);

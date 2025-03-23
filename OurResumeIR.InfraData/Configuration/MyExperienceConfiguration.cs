@@ -15,10 +15,10 @@ namespace OurResumeIR.Infra.Data.Configuration
         {
             builder.HasKey(x => x.Id);
 
-            builder.Property(m =>m.Name)
+            builder.Property(m => m.Name)
                 .IsRequired()
-                .HasMaxLength(256)
-                .HasColumnType("string");
+                .HasMaxLength(256);
+            
 
             builder.HasOne(m => m.User)
                 .WithMany(m => m.MyExperiences);

@@ -1,5 +1,7 @@
+
 namespace OurResumeIR.MVC
 {
+    using Infra.Ioc;
     public class Program
     {
         public static void Main(string[] args)
@@ -8,6 +10,11 @@ namespace OurResumeIR.MVC
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            // 1. Configuration
+            var connectionString = builder.Configuration.GetConnectionString("LocalMain");
+
+            // 2. Register DbContext
+            builder.Services.RegisterService(connectionString);
 
             var app = builder.Build();
 

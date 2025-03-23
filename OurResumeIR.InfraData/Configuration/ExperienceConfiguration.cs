@@ -19,6 +19,10 @@ namespace OurResumeIR.Infra.Data.Configuration
             builder.HasKey(e => e.Id);
             builder.Property(e => e.Name).IsRequired().HasMaxLength(100);
 
+            builder.HasMany(a => a.UserExpertise)
+                .WithOne(a => a.Expertise)
+                .HasForeignKey(a => a.ExpertiseId);
+
             //// تنظیمات فیلد Shadow برای به‌روزرسانی تاریخ
             //builder.Property<DateTime>("UpdatedDate");
         }
