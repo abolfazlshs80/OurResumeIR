@@ -6,4 +6,20 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Convertor\" />
+    <Folder Include="Securities\" />
+    <Folder Include="Services\Interfaces\" />
+    <Folder Include="Services\Implementation\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OurResumeIR.InfraData\OurResumeIR.Infra.Data.csproj" />
+  </ItemGroup>
+
 </Project>
