@@ -6,8 +6,8 @@ namespace OurResumeIR.Domain.Interfaces;
 public interface IUserExpertiseRepository
 {
     Task<IQueryable<UserExpertise>> FindAsync(Expression<Func<UserExpertise, bool>> predicate);
-    Task<UserExpertise> CreateUserExpertise(UserExpertise UserExpertise);
-    Task<UserExpertise> UpdateUserExpertise(UserExpertise UserExpertise);
-    Task<UserExpertise> DeleteUserExpertise(int UserExpertiseId);
-    Task<UserExpertise> SaveChanges();
+    Task<int> CreateUserExpertise(UserExpertise UserExpertise);
+    Task<bool> UpdateUserExpertise(UserExpertise UserExpertise);
+    Task<bool> DeleteUserExpertise(int UserExpertiseId);
+    Task<bool> SaveChanges();
 }
