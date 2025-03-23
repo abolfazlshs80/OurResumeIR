@@ -31,30 +31,31 @@ namespace OurResumeIR.Infra.Data.Repositories
             await _context.SaveChangesAsync();
         }
 
-        //public async Task DeleteDocumentByIdAsync(int id)
-        //{
-        //    int documentid = await GetDocumentByIdAsync(id);
-        //    await DeleteDocumentAsync(documentid);
-        //}
-
-        //public async Task<IQueryable<Documents>> GetAllDocumentsAsync()
-        //{
-        //    return await _context.Documents.ToListAsync();
-        //}
-
-        public Task GetDocumentByIdAsync(int id)
+        public async Task DeleteDocumentByIdAsync(int id)
         {
-            throw new NotImplementedException();
+          _context.Remove(id);
+            await _context.SaveChangesAsync();
         }
 
-        public Task SaveChangeAsync()
+        public async Task<IQueryable<Documents>> GetAllDocumentsAsync()
         {
-            throw new NotImplementedException();
+            return _context.Documents.AsQueryable();
         }
 
-        public Task UpdateDocumentAsync(Documents documents)
+        public async Task GetDocumentByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            await _context.Documents.FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task SaveChangeAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateDocumentAsync(Documents documents)
+        {
+            _context.Update(documents);
+            await SaveChangeAsync();
         }
     }
 }
