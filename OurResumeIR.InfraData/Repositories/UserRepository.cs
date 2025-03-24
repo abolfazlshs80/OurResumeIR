@@ -15,17 +15,17 @@ namespace OurResumeIR.Infra.Data.Repositories
     {
         private AppDbContext _context;
 
-        public UserRepository( AppDbContext context) 
+        public UserRepository(AppDbContext context)
         {
             _context = context;
         }
 
 
 
- 
+
         public async Task<IQueryable<User>> FindAsync(Expression<Func<User, bool>> predicate)
         {
-            return  _context.Users.Where(predicate).AsQueryable();
+            return _context.Users.Where(predicate).AsQueryable();
         }
 
         public async Task<int> CreateUser(User User)
@@ -39,8 +39,8 @@ namespace OurResumeIR.Infra.Data.Repositories
             {
                 return 0;
             }
-      
-            
+
+
         }
 
         public async Task<bool> UpdateUser(User User)
@@ -54,7 +54,7 @@ namespace OurResumeIR.Infra.Data.Repositories
             {
                 return false;
             }
-           
+
         }
 
         public async Task<bool> DeleteUser(int UserId)
@@ -68,8 +68,8 @@ namespace OurResumeIR.Infra.Data.Repositories
             {
                 return false;
             }
-         
-           
+
+
         }
 
         public async Task<bool> SaveChanges()
@@ -83,7 +83,7 @@ namespace OurResumeIR.Infra.Data.Repositories
             {
                 return false;
             }
-            
+
         }
     }
 }
