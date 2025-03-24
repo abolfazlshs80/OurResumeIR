@@ -30,59 +30,41 @@ namespace OurResumeIR.Infra.Data.Repositories
 
         public async Task<int> CreateUser(User User)
         {
-            try
-            {
+          
                 _context.Add(User);
                 return User.Id;
-            }
-            catch (Exception e)
-            {
-                return 0;
-            }
+         
 
 
         }
 
         public async Task<bool> UpdateUser(User User)
         {
-            try
-            {
+            
                 _context.Update(User);
                 return true;
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
-
+            
+      
         }
 
         public async Task<bool> DeleteUser(int UserId)
         {
-            try
-            {
+          
                 _context.Remove(await _context.Users.FindAsync(UserId));
                 return true;
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
+            
+            
 
 
         }
 
         public async Task<bool> SaveChanges()
         {
-            try
-            {
+           
                 await _context.SaveChangesAsync();
                 return true;
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
+          
+           
 
         }
     }
