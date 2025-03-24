@@ -30,59 +30,34 @@ namespace OurResumeIR.Infra.Data.Repositories
 
         public async Task<int> CreateExpertiseLayer(ExpertiseLayer ExpertiseLayer)
         {
-            try
-            {
                 _context.Add(ExpertiseLayer);
                 return ExpertiseLayer.Id;
-            }
-            catch (Exception e)
-            {
-                return 0;
-            }
+        
       
             
         }
 
         public async Task<bool> UpdateExpertiseLayer(ExpertiseLayer ExpertiseLayer)
         {
-            try
-            {
                 _context.Update(ExpertiseLayer);
                 return true;
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
+         
            
         }
 
         public async Task<bool> DeleteExpertiseLayer(int ExpertiseLayerId)
         {
-            try
-            {
                 _context.Remove(await _context.ExpertiseLayers.FindAsync(ExpertiseLayerId));
                 return true;
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
-         
+          
            
         }
 
         public async Task<bool> SaveChanges()
         {
-            try
-            {
                 await _context.SaveChangesAsync();
                 return true;
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
+ 
             
         }
     }
