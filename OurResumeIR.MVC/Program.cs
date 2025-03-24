@@ -11,7 +11,8 @@ namespace OurResumeIR.MVC
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             // 1. Configuration
-            var connectionString = builder.Configuration.GetConnectionString("LocalMain");
+            //  var connectionString = builder.Configuration.GetConnectionString("LocalMain");
+            var connectionString = builder.Configuration.GetConnectionString("LocalMaiSqllite");
 
             // 2. Register DbContext
             builder.Services.RegisterService(connectionString);

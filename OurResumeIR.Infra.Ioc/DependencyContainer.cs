@@ -15,8 +15,11 @@ namespace OurResumeIR.Infra.Ioc
     {
         public static void RegisterService(this IServiceCollection services, string connectionString)
         {
+            //services.AddDbContext<AppDbContext>(options =>
+            //  options.UseSqlServer(connectionString));
+
             services.AddDbContext<AppDbContext>(options =>
-              options.UseSqlServer(connectionString));
+                options.UseSqlite(connectionString));
             services.AddScoped<IAboutMeRepository, AboutRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IBlogRepository,BlogRepository>();
