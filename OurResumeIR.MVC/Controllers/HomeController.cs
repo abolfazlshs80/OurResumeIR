@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using OurResumeIR.Domain.Interfaces;
 using OurResumeIR.MVC.Models;
 using System.Diagnostics;
 
@@ -6,16 +7,21 @@ namespace OurResumeIR.MVC.Controllers
 {
     public class HomeController : Controller
     {
+
+        private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork)
         {
+            _unitOfWork = unitOfWork;
             _logger = logger;
         }
 
         public IActionResult Index()
         {
+    
             return View();
+       
         }
 
         public IActionResult Privacy()
