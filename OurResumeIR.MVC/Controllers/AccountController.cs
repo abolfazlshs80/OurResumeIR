@@ -19,7 +19,7 @@ namespace OurResumeIR.MVC.Controllers
             return View();
         }
 
-        public IActionResult ForgotPasword()
+        public IActionResult ForgotPassword()
         {
             return View();
         }
