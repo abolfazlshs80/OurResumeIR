@@ -1,72 +1,102 @@
-﻿<!DOCTYPE html>
-
+﻿
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 
-<!-- Mirrored from madaeny.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 20 Mar 2025 05:39:24 GMT -->
-<!-- Added by HTTrack -->
-<meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+	<title>Eduport - قالب HTML دوره آنلاین و آموزش</title>
 
-<partial name="./Partials/Layout/_Link.cshtml" />
-<body dir="rtl">
-	<div b-mvpyz72na4 class="home-wrapper">
+	<!-- Meta Tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="author" content="">
+	<meta name="description" content="Eduport - قالب HTML دوره آنلاین و آموزش">
 
-		<!-- Navbar -->
+	<!-- Dark mode -->
+	<script>
+		const storedTheme = localStorage.getItem('theme')
 
-@* 
-		<partial name="./Partials/Layout/_Menu" /> *@
-		<!-- Header -->
-		@RenderBody()
+		const getPreferredTheme = () => {
+			if (storedTheme) {
+				return storedTheme
+			}
+			return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+		}
 
+		const setTheme = function (theme) {
+			if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				document.documentElement.setAttribute('data-bs-theme', 'dark')
+			} else {
+				document.documentElement.setAttribute('data-bs-theme', theme)
+			}
+		}
 
+		setTheme(getPreferredTheme())
 
-		@* <partial name="./Partials/Layout/_Header" />
-		<!-- Brand -->
-		<!-- About -->
-		<partial name="~/Views/Shared/Partials/Layout/_About.cshtml" />
-		<!-- About -->
-		<partial name="./Partials/Layout/_About" />
+		window.addEventListener('DOMContentLoaded', () => {
+			var el = document.querySelector('.theme-icon-active');
+			if(el != 'undefined' && el != null) {
+				const showActiveTheme = theme => {
+				const activeThemeIcon = document.querySelector('.theme-icon-active use')
+				const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`)
+				const svgOfActiveBtn = btnToActive.querySelector('.mode-switch use').getAttribute('href')
 
+				document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
+					element.classList.remove('active')
+				})
 
-		<!-- Skils -->
+				btnToActive.classList.add('active')
+				activeThemeIcon.setAttribute('href', svgOfActiveBtn)
+			}
 
+			window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+				if (storedTheme !== 'light' || storedTheme !== 'dark') {
+					setTheme(getPreferredTheme())
+				}
+			})
 
-		<partial name="./Partials/Layout/_Skill" />
-		<!-- Documents -->
+			showActiveTheme(getPreferredTheme())
 
+			document.querySelectorAll('[data-bs-theme-value]')
+				.forEach(toggle => {
+					toggle.addEventListener('click', () => {
+						const theme = toggle.getAttribute('data-bs-theme-value')
+						localStorage.setItem('theme', theme)
+						setTheme(theme)
+						showActiveTheme(theme)
+					})
+				})
 
-		<partial name="./Partials/Layout/_Document" />
+			}
+		})
 
+	</script>
 
-		<!-- Banner Link -->
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="/assets/images/favicon.ico">
 
+	<!-- Plugins CSS -->
+	<link rel="stylesheet" type="text/css" href="/assets/vendor/font-awesome/css/all.min.css">
+	<link rel="stylesheet" type="text/css" href="/assets/vendor/bootstrap-icons/bootstrap-icons.css">
 
+	<!-- Theme CSS -->
+	<link rel="stylesheet" type="text/css" href="/assets/css/style-rtl.css">
 
+</head>
 
-		<partial name="./Partials/Layout/_Experience" /> *@
+<body>
 
-		<!-- Blogs -->
+	<!-- **************** MAIN CONTENT START **************** -->
+@RenderBody();
+	<!-- **************** MAIN CONTENT END **************** -->
+	<!-- Back to top -->
+	<div class="back-top"><i class="bi bi-arrow-up-short position-absolute top-50 start-50 translate-middle"></i></div>
 
+	<!-- Bootstrap JS -->
+	<script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
-
-		@* <partial name="./Partials/Layout/_Blog" /> *@
-		<!-- Contact -->
-
-
-@* 
-		<partial name="./Partials/Layout/_Contact" /> *@
-
-
-		<!-- Footer -->
-		<partial name="./Partials/Layout/_Footer" />
-	</div>
-
-	<partial name="./Partials/Layout/_Script" />
-	@await RenderSectionAsync("Scripts", required: false)
+	<!-- Template Functions -->
+	<script src="assets/js/functions.js"></script>
 
 </body>
 
-<!-- Mirrored from madaeny.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 20 Mar 2025 05:44:44 GMT -->
 </html>
-
-
