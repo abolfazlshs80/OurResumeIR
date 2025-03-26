@@ -3,33 +3,34 @@
 <html lang="fa" dir="rtl">
 
 <head>
-	<title>Eduport - قالب HTML دوره آنلاین و آموزش</title>
+    <title>Eduport - قالب HTML دوره آنلاین و آموزش</title>
 
-	<!-- Meta Tags -->
-	@* <partial name="_AuthorizeMetaTagPartial" /> *@
+    <!-- Meta Tags -->
+    <partial name="_AuthorizeMetaTagPartial" />
 
-	<!-- Dark mode -->
-	@* <partial name="_AuthorizeScipt" /> *@
-		@* <partial name="./Partials/Layout/_Menu" /> *@
+    <!-- Dark mode -->
+    @* <partial name="./Partials/Layout/_AuthorizeScriptPartial" /> *@
+    <partial name="_AuthorizeScriptPartial" />
 
-	<!-- Links -->
-	<partial name="_AuthorizeLinkPartial" />
+    <!-- Links -->
+    @* <partial name="./Partials/Layout/_AuthorizeLinkPartial" /> *@
+    <partial name="_AuthorizeLinkPartial" />
 
 </head>
 
 <body>
 
-	<!-- **************** MAIN CONTENT START **************** -->
-@RenderBody();
-	<!-- **************** MAIN CONTENT END **************** -->
-	<!-- Back to top -->
-	<div class="back-top"><i class="bi bi-arrow-up-short position-absolute top-50 start-50 translate-middle"></i></div>
+    <!-- **************** MAIN CONTENT START **************** -->
+    @RenderBody();
+    <!-- **************** MAIN CONTENT END **************** -->
+    <!-- Back to top -->
+    <div class="back-top"><i class="bi bi-arrow-up-short position-absolute top-50 start-50 translate-middle"></i></div>
 
-	<!-- Bootstrap JS -->
-	<script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
-	<!-- Template Functions -->
-	<script src="/assets/js/functions.js"></script>
+    <!-- Template Functions -->
+    <script src="/assets/js/functions.js"></script>
 
 </body>
 
