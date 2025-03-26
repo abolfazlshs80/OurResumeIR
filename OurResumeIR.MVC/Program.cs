@@ -1,4 +1,4 @@
-
+﻿
 namespace OurResumeIR.MVC
 {
     using Infra.Ioc;
@@ -9,7 +9,12 @@ namespace OurResumeIR.MVC
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews()
+                .AddRazorOptions(options =>
+                {
+                    // اضافه کردن مسیرهای سفارشی برای جست‌وجوی Partial View
+                    options.ViewLocationFormats.Add("/Views/Shared/Partials/Layout/{0}.cshtml");
+                });
             // 1. Configuration
             //  var connectionString = builder.Configuration.GetConnectionString("LocalMain");
             var connectionString = builder.Configuration.GetConnectionString("LocalMaiSqllite");
