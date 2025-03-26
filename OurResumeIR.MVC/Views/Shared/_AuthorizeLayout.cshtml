@@ -6,24 +6,14 @@
 	<title>Eduport - قالب HTML دوره آنلاین و آموزش</title>
 
 	<!-- Meta Tags -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="author" content="">
-	<meta name="description" content="Eduport - قالب HTML دوره آنلاین و آموزش">
+	@* <partial name="_AuthorizeMetaTagPartial" /> *@
 
 	<!-- Dark mode -->
 	@* <partial name="_AuthorizeScipt" /> *@
 		@* <partial name="./Partials/Layout/_Menu" /> *@
 
-	<!-- Favicon -->
-	<link rel="shortcut icon" href="/assets/images/favicon.ico">
-
-	<!-- Plugins CSS -->
-	<link rel="stylesheet" type="text/css" href="/assets/vendor/font-awesome/css/all.min.css">
-	<link rel="stylesheet" type="text/css" href="/assets/vendor/bootstrap-icons/bootstrap-icons.css">
-
-	<!-- Theme CSS -->
-	<link rel="stylesheet" type="text/css" href="/assets/css/style-rtl.css">
+	<!-- Links -->
+	<partial name="_AuthorizeLinkPartial" />
 
 </head>
 
@@ -39,7 +29,7 @@
 	<script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
 	<!-- Template Functions -->
-	<script src="assets/js/functions.js"></script>
+	<script src="/assets/js/functions.js"></script>
 
 </body>
 
