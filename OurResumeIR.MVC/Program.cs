@@ -2,6 +2,10 @@
 namespace OurResumeIR.MVC
 {
     using Infra.Ioc;
+    using Microsoft.AspNetCore.Identity;
+    using OurResumeIR.Domain.Models;
+    using OurResumeIR.Infra.Data.Context;
+
     public class Program
     {
         public static void Main(string[] args)
@@ -21,6 +25,12 @@ namespace OurResumeIR.MVC
 
             // 2. Register DbContext
             builder.Services.RegisterService(connectionString);
+
+            // تنظیمات Identity
+
+            builder.Services.AddIdentity<ApplicationUser , IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
 
             var app = builder.Build();
 
