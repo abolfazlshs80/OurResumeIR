@@ -28,6 +28,8 @@ namespace OurResumeIR.Infra.Ioc
             services.AddScoped<IMyExperiencesRepository, MyExperienceRepository >();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserExpertiseRepository, UserExpertiseRepository >();
+
+
         }
     }
 }

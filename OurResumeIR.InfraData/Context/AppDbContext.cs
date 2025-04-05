@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace OurResumeIR.Infra.Data.Context
 {
-    public class AppDbContext : IdentityDbContext<IdentityUser>
+    public class AppDbContext : IdentityDbContext<User,IdentityRole,string>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
