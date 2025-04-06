@@ -38,10 +38,11 @@ namespace OurResumeIR.Application.Services.Implementation
             var user = new User
             {
                 Email = viewModel.Email,
-                PasswordHash = viewModel.Password,
+               UserName = viewModel.Email,
+               
             };
 
-          await  _userManager.CreateAsync(user);
+    var status=      await  _userManager.CreateAsync(user, viewModel.Password);
            await _userRepository.SaveChanges();
 
 

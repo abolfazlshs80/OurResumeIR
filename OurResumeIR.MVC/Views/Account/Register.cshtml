@@ -128,4 +128,11 @@
 </main>
 <!-- **************** MAIN CONTENT END **************** -->
 
-<partial name="_ValidationScriptsPartial" />
+
+
+@section Scripts {
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -38,8 +38,12 @@
     <!-- Bootstrap JS -->
     <script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
     <!-- Template Functions -->
     <script src="/assets/js/functions.js"></script>
+@await RenderSectionAsync("Scripts", required: false)
+
 
 </body>
 
