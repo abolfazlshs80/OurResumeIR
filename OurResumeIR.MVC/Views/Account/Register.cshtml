@@ -47,7 +47,7 @@
                             <p class="mb-4">از دیدن شما خوشحالم! لطفا با حساب کاربری خود ثبت نام کنید.</p>
 
                             <!-- Form START -->
-                            <form asp-controller="Account" asp-action="Register" class="auth-form">
+                            <form method="post" asp-controller="Account" asp-action="Register" class="auth-form">
                                 <!-- Email -->
                                 <div class="mb-4">
                                     <label for="exampleInputEmail1" class="form-label">ایمیل</label>
@@ -85,7 +85,7 @@
                                 <!-- Button -->
                                 <div class="align-items-center mt-0">
                                     <div class="d-grid">
-                                        <button asp-action="Register" asp-controller="Account" class="btn btn-primary mb-0" type="button">ثبت نام</button>
+                                        <button  asp-action="Register" asp-controller="Account" class="btn btn-primary mb-0" type="submit">ثبت نام</button>
                                     </div>
                                 </div>
                             </form>
@@ -106,6 +106,7 @@
                                     <a href="#" class="btn bg-facebook mb-0"><i class="fab fa-fw fa-facebook-f me-2"></i>با Facebook</a>
                                 </div>
                             </div>
+                   
 
                             <!-- Sign up link -->
                             <div class="mt-4 text-center">
