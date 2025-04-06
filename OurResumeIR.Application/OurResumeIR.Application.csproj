@@ -9,7 +9,6 @@
   <ItemGroup>
     <Folder Include="Convertor\" />
     <Folder Include="Securities\" />
-    <Folder Include="Services\Implementation\" />
   </ItemGroup>
 
   <ItemGroup>

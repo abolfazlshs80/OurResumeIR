@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OurResumeIR.Domain.Enums
 {
-     public enum RegisterResult
+    public enum RegisterResult
     {
         Success = 1,
         DupplicateEmail = 2,
