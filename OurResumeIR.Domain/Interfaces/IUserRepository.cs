@@ -15,5 +15,6 @@ namespace OurResumeIR.Domain.Interfaces
         Task<bool> UpdateUser(User User);
         Task<bool> DeleteUser(string UserId);
         Task<bool> SaveChanges();
+        Task<bool> EmailIsExist(string email);
     }
 }
