@@ -45,9 +45,9 @@
                             <img src="/assets/images/element/03.svg" class="h-40px mb-2" alt="">
                             <h2 class="">ثبت نام</h2>
                             <p class="mb-4">از دیدن شما خوشحالم! لطفا با حساب کاربری خود ثبت نام کنید.</p>
-
+                            @Html.ValidationSummary()
                             <!-- Form START -->
-                            <form asp-controller="Account" asp-action="Register" class="auth-form">
+                            <form asp-controller="Account" asp-action="Register"  method="post" class="auth-form">
                                 <!-- Email -->
                                 <div class="mb-4">
                                     <label for="exampleInputEmail1" class="form-label">ایمیل</label>
@@ -85,7 +85,7 @@
                                 <!-- Button -->
                                 <div class="align-items-center mt-0">
                                     <div class="d-grid">
-                                        <button asp-action="Register" asp-controller="Account" class="btn btn-primary mb-0" type="button">ثبت نام</button>
+                                        <input type="submit" class="btn btn-primary mb-0" />
                                     </div>
                                 </div>
                             </form>
@@ -119,3 +119,5 @@
     </section>
 </main>
 <!-- **************** MAIN CONTENT END **************** -->
+
+<partial name="_ValidationScriptsPartial" />
