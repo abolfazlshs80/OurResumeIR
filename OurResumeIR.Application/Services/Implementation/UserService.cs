@@ -1,4 +1,5 @@
-﻿using OurResumeIR.Application.Services.Interfaces;
+﻿using Microsoft.AspNetCore.Identity;
+using OurResumeIR.Application.Services.Interfaces;
 using OurResumeIR.Domain.Enums;
 using OurResumeIR.Domain.Interfaces;
 using OurResumeIR.Domain.Models;
@@ -15,9 +16,11 @@ namespace OurResumeIR.Application.Services.Implementation
     {
 
         private readonly IUserRepository _userRepository;
-        public UserService(IUserRepository userRepository) 
+        private readonly UserManager<User> _userManager;
+        public UserService(IUserRepository userRepository, UserManager<User> userManager) 
         {
             _userRepository = userRepository;
+            _userManager = userManager;
         }
         public async Task<RegisterResult> RegisterUser(RegisterViewModel viewModel)
         {
@@ -38,7 +41,7 @@ namespace OurResumeIR.Application.Services.Implementation
                 PasswordHash = viewModel.Password,
             };
 
-          await  _userRepository.CreateUser(user);
+          await  _userManager.CreateAsync(user);
            await _userRepository.SaveChanges();
 
 

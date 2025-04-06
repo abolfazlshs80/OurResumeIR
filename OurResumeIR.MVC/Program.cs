@@ -31,7 +31,7 @@ namespace OurResumeIR.MVC
             builder.Services.RegisterService(connectionString); 
 
             // تنظیمات Identity
-            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+            builder.Services.AddIdentity<User, IdentityRole>()
            .AddEntityFrameworkStores<AppDbContext>()
            .AddDefaultTokenProviders();
 
