@@ -9,7 +9,7 @@ namespace OurResumeIR.Domain.Interfaces
 {
     public interface IBlogRepository
     {
-        Task<Blog> GetByUserId(int userId);
+        Task<Blog> GetByUserId(string userId);
         Task AddBlogAsync(Blog blog);
         Task UpdateBlogAsync(Blog blog);
         Task DeleteBlogAsync(Blog blog);

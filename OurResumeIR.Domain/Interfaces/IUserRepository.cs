@@ -11,9 +11,9 @@ namespace OurResumeIR.Domain.Interfaces
     public interface IUserRepository
     {
         Task<IQueryable<User>> FindAsync(Expression<Func<User, bool>> predicate);
-        Task<int> CreateUser(User User);
+        Task<string> CreateUser(User User);
         Task<bool> UpdateUser(User User);
-        Task<bool> DeleteUser(int UserId);
+        Task<bool> DeleteUser(string UserId);
         Task<bool> SaveChanges();
     }
 }

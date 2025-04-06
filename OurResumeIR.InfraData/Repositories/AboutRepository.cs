@@ -25,14 +25,14 @@ namespace OurResumeIR.Infra.Data.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(int userId)
+        public async Task DeleteAsync(string userId)
         {
             _context.Remove(userId);
             await _context.SaveChangesAsync();
 
         }
 
-        public async Task<AboutMe> GetByUserIdAsync(int userId)
+        public async Task<AboutMe> GetByUserIdAsync(string userId)
         {
             return await _context.AboutMes.FirstOrDefaultAsync(a => a.UserId == userId);
  

@@ -28,11 +28,11 @@ namespace OurResumeIR.Infra.Data.Repositories
             return _context.Users.Where(predicate).AsQueryable();
         }
 
-        public async Task<int> CreateUser(User User)
+        public async Task<string> CreateUser(User User)
         {
           
                 _context.Add(User);
-                return User.Id;
+            return "";
          
 
 
@@ -47,7 +47,9 @@ namespace OurResumeIR.Infra.Data.Repositories
       
         }
 
-        public async Task<bool> DeleteUser(int UserId)
+
+
+        public async Task<bool> DeleteUser(string UserId)
         {
           
                 _context.Remove(await _context.Users.FindAsync(UserId));

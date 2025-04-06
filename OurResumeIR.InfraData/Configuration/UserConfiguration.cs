@@ -17,7 +17,7 @@ namespace OurResumeIR.Infra.Data.Configuration
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.HasKey(e => e.Id);
-            builder.Property(e => e.Username).IsRequired().HasMaxLength(100);
+            //builder.Property(e => e.Username).IsRequired().HasMaxLength(100);
 
 
             builder.HasMany(a => a.UserExpertise)
