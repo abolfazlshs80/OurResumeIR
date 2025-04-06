@@ -38,8 +38,8 @@ namespace OurResumeIR.Application.Services.Implementation
                 PasswordHash = viewModel.Password,
             };
 
-            _userRepository.CreateUser(user);
-            _userRepository.SaveChanges();
+          await  _userRepository.CreateUser(user);
+           await _userRepository.SaveChanges();
 
 
             return RegisterResult.Success;

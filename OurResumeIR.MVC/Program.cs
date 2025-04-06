@@ -26,6 +26,10 @@ namespace OurResumeIR.MVC
             // 2. Register DbContext
             builder.Services.RegisterService(connectionString);
 
+            // ثبت سرویس‌ها از IoC
+    
+            builder.Services.RegisterService(connectionString); 
+
             // تنظیمات Identity
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
            .AddEntityFrameworkStores<AppDbContext>()

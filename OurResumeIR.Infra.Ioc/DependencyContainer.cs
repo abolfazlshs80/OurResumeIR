@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using OurResumeIR.Application.Services.Implementation;
+using OurResumeIR.Application.Services.Interfaces;
 using OurResumeIR.Domain.Interfaces;
 using OurResumeIR.Infra.Data.Context;
 using OurResumeIR.Infra.Data.Repositories;
@@ -28,6 +30,7 @@ namespace OurResumeIR.Infra.Ioc
             services.AddScoped<IMyExperiencesRepository, MyExperienceRepository >();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserExpertiseRepository, UserExpertiseRepository >();
+            services.AddScoped<IUserService, UserService>();
 
 
         }
