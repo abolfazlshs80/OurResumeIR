@@ -17,12 +17,12 @@ namespace OurResumeIR.Application.Services.Implementation
     {
 
         private readonly IUserRepository _userRepository;
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
         //private readonly RoleManager<ApplicationRole> _roleManager;
         public UserService(IUserRepository userRepository,
-            UserManager<ApplicationUser> userManager , 
-            SignInManager<ApplicationUser> signInManager )
+            UserManager<User> userManager , 
+            SignInManager<User> signInManager )
         {
             _userRepository = userRepository;
             _userManager = userManager;
@@ -41,7 +41,7 @@ namespace OurResumeIR.Application.Services.Implementation
             }
 
 
-            var user = new ApplicationUser
+            var user = new User
             {
                 Email = viewModel.Email,
                 UserName = viewModel.Email,
