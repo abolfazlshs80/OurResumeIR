@@ -7,6 +7,7 @@ using OurResumeIR.Domain.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,36 +17,49 @@ namespace OurResumeIR.Application.Services.Implementation
     {
 
         private readonly IUserRepository _userRepository;
-        private readonly UserManager<User> _userManager;
-        public UserService(IUserRepository userRepository, UserManager<User> userManager) 
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        //private readonly RoleManager<ApplicationRole> _roleManager;
+        public UserService(IUserRepository userRepository,
+            UserManager<ApplicationUser> userManager , 
+            SignInManager<ApplicationUser> signInManager )
         {
             _userRepository = userRepository;
             _userManager = userManager;
+            _signInManager = signInManager;
         }
         public async Task<RegisterResult> RegisterUser(RegisterViewModel viewModel)
         {
-            if (await _userRepository.EmailIsExist(viewModel.Email)) 
+            if (await _userRepository.EmailIsExist(viewModel.Email))
             {
-               return RegisterResult.DupplicateEmail;
+                return RegisterResult.DupplicateEmail;
             }
 
-            if (viewModel.Password != viewModel.RePassword) 
+            if (viewModel.Password != viewModel.RePassword)
             {
                 return RegisterResult.UnequalPassAndRePass;
             }
 
 
-            var user = new User
+            var user = new ApplicationUser
             {
                 Email = viewModel.Email,
-               UserName = viewModel.Email,
-               
+                UserName = viewModel.Email,
+
             };
 
-    var status=      await  _userManager.CreateAsync(user, viewModel.Password);
-           await _userRepository.SaveChanges();
-
-
+            var status = await _userManager.CreateAsync(user, viewModel.Password);
+            if (status.Succeeded)
+            {
+                var additionalClaims = new List<Claim>
+                {
+                   /* new Claim(ClaimTypes.Name, user.FullName ),*/ // افزودن claim سفارشی
+                    new Claim(ClaimTypes.Email, user.Email) ,        // افزودن نقش کاربر
+                   /* new Claim("UserName", user.UserName)     */    // افزودن نقش کاربر
+                };
+                await _signInManager.SignInAsync(user, true);
+              
+            }
             return RegisterResult.Success;
         }
     }
