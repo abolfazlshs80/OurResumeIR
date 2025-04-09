@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using OurResumeIR.Application.Services.Interfaces;
 using OurResumeIR.Domain.Enums;
 using OurResumeIR.Domain.Interfaces;
@@ -17,12 +19,12 @@ namespace OurResumeIR.Application.Services.Implementation
     {
 
         private readonly IUserRepository _userRepository;
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
         //private readonly RoleManager<ApplicationRole> _roleManager;
         public UserService(IUserRepository userRepository,
-            UserManager<ApplicationUser> userManager , 
-            SignInManager<ApplicationUser> signInManager )
+            UserManager<User> userManager,
+            SignInManager<User> signInManager)
         {
             _userRepository = userRepository;
             _userManager = userManager;
@@ -41,7 +43,7 @@ namespace OurResumeIR.Application.Services.Implementation
             }
 
 
-            var user = new ApplicationUser
+            var user = new User
             {
                 Email = viewModel.Email,
                 UserName = viewModel.Email,
@@ -51,16 +53,28 @@ namespace OurResumeIR.Application.Services.Implementation
             var status = await _userManager.CreateAsync(user, viewModel.Password);
             if (status.Succeeded)
             {
-                var additionalClaims = new List<Claim>
+                var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                        new Claim(ClaimTypes.Name, user.Email),
+                         new Claim("CodeMeli", "3"),
+
+                    };
+                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                var principal = new ClaimsPrincipal(identity);
+
+                var properties = new AuthenticationProperties
                 {
-                   /* new Claim(ClaimTypes.Name, user.FullName ),*/ // افزودن claim سفارشی
-                    new Claim(ClaimTypes.Email, user.Email) ,        // افزودن نقش کاربر
-                   /* new Claim("UserName", user.UserName)     */    // افزودن نقش کاربر
+                    IsPersistent = true
                 };
-                await _signInManager.SignInAsync(user, true);
-              
+
+                await _signInManager.SignInAsync(user, properties);
+
             }
+      
             return RegisterResult.Success;
         }
+
     }
 }
