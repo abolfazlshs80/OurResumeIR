@@ -1,5 +1,5 @@
 ﻿using OurResumeIR.Domain.Enums;
-using OurResumeIR.Domain.ViewModels.Account;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;

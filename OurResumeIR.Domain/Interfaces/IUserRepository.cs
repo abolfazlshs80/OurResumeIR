@@ -1,6 +1,6 @@
 ﻿using OurResumeIR.Domain.Enums;
 using OurResumeIR.Domain.Models;
-using OurResumeIR.Domain.ViewModels;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
