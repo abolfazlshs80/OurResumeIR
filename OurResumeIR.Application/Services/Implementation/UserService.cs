@@ -5,7 +5,7 @@ using OurResumeIR.Application.Services.Interfaces;
 using OurResumeIR.Domain.Enums;
 using OurResumeIR.Domain.Interfaces;
 using OurResumeIR.Domain.Models;
-using OurResumeIR.Domain.ViewModels;
+using OurResumeIR.Domain.ViewModels.Account;
 using System;
 using System.Collections.Generic;
 using System.Linq;

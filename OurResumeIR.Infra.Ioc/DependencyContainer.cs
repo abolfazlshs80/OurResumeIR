@@ -8,6 +8,7 @@ using OurResumeIR.Infra.Data.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,6 +21,7 @@ namespace OurResumeIR.Infra.Ioc
             //services.AddDbContext<AppDbContext>(options =>
             //  options.UseSqlServer(connectionString));
 
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlite(connectionString));
             services.AddScoped<IAboutMeRepository, AboutRepository>();

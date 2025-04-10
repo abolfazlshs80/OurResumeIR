@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OurResumeIR.Domain.ViewModels
+namespace OurResumeIR.Domain.ViewModels.Account
 {
     public class LoginViewModel
     {
-    
+
         [EmailAddress]
         [Required(ErrorMessage = "ایمیل را وارد کنید")]
         [StringLength(70, ErrorMessage = "ایمیل بین 5 تا 30 کارکتر باید باشد", MinimumLength = 5)]

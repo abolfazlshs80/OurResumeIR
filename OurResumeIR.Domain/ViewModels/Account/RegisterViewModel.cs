@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OurResumeIR.Domain.ViewModels
+namespace OurResumeIR.Domain.ViewModels.Account
 {
     public class RegisterViewModel
     {
