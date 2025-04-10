@@ -1,13 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OurResumeIR.Application.Services.Interfaces;
 
 namespace OurResumeIR.MVC.Areas.User.Controllers
 {
     [Area("User")]
-    public class ManageExpertiseLayersController : Controller
+    public class ManageExpertiseLayersController(IExpertiseLayersService expertiseLayersService) : Controller
     {
-        public IActionResult List()
+        public async Task< IActionResult> List()
         {
-            return View();
+            var list=await expertiseLayersService.GetAll();
+            
+            return View(list);
         }
     }
 }

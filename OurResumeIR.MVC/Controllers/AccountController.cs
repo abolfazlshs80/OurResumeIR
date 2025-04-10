@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OurResumeIR.Application.Services.Interfaces;
+using OurResumeIR.Application.ViewModels.Account;
 using OurResumeIR.Domain.Enums;
 using OurResumeIR.Domain.Models;
-using OurResumeIR.Domain.ViewModels.Account;
+
 
 namespace OurResumeIR.MVC.Controllers
 {

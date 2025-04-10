@@ -1,7 +1,8 @@
-﻿
+﻿@model List<OurResumeIR.Application.ViewModels.ExpertiseLayers.ExpertiseLayerVM >
 
 @{
 	Layout = "_ProfileLayout";
+	ViewBag.titlepage = "سطح تخصص";
 }
 
 
@@ -12,7 +13,7 @@
 	<div class="card bg-transparent border rounded-3">
 		<!-- Card header START -->
 		<div class="card-header bg-transparent border-bottom">
-			<h3 class="mb-0 fs-5 ff-vb">لیست دوره های من</h3>
+			<h3 class="mb-0 fs-5 ff-vb">لیست @ViewBag.titlepage من</h3>
 		</div>
 		<!-- Card header END -->
 		<!-- Card body START -->
@@ -23,7 +24,7 @@
 				<!-- Content -->
 				<div class="col-md-8">
 					<form class="rounded position-relative">
-						<input class="form-control pe-5 bg-transparent" type="search" placeholder="جستجوی دوره" aria-label="Search">
+						<input class="form-control pe-5 bg-transparent" type="search" placeholder="جستجوی @ViewBag.titlepage" aria-label="Search">
 						<button class="bg-transparent p-2 position-absolute top-50 end-0 translate-middle-y border-0 text-primary-hover text-reset" type="submit">
 							<i class="fas fa-search fs-6 "></i>
 						</button>

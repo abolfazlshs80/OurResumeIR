@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using OurResumeIR.Application;
 using OurResumeIR.Application.Services.Implementation;
 using OurResumeIR.Application.Services.Interfaces;
 using OurResumeIR.Domain.Interfaces;
@@ -21,19 +22,27 @@ namespace OurResumeIR.Infra.Ioc
             //services.AddDbContext<AppDbContext>(options =>
             //  options.UseSqlServer(connectionString));
 
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlite(connectionString));
+
+            #region  Repository
             services.AddScoped<IAboutMeRepository, AboutRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IBlogRepository,BlogRepository>();
+            services.AddScoped<IBlogRepository, BlogRepository>();
             services.AddScoped<IDocumentsRepository, DocumentRepository>();
             services.AddScoped<IExpertiseLayerRepository, ExpertiseLayerRepository>();
-            services.AddScoped<IMyExperiencesRepository, MyExperienceRepository >();
+            services.AddScoped<IMyExperiencesRepository, MyExperienceRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IUserExpertiseRepository, UserExpertiseRepository >();
-            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserExpertiseRepository, UserExpertiseRepository>();
+            #endregion
 
+            #region Service
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IExpertiseLayersService, ExpertiseLayersService>();
+            #endregion
+            //services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddAutoMapper(typeof(MappingProfile));
 
         }
     }

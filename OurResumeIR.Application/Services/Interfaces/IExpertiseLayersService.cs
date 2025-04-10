@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OurResumeIR.Domain.Models;
+using ExpertiseLayerVM = OurResumeIR.Application.ViewModels.ExpertiseLayers.ExpertiseLayerVM;
 
 namespace OurResumeIR.Application.Services.Interfaces
 {
@@ -13,6 +14,6 @@ namespace OurResumeIR.Application.Services.Interfaces
         Task<ExpertiseLayerVM> GetById(int Id);
         Task<bool> Update(ExpertiseLayerVM model);
         Task<bool> Create(ExpertiseLayerVM model);
-        Task<List<ExpertiseLayerVM>> Delete(int Id);
+        Task<bool> Delete(int Id);
     }
 }
