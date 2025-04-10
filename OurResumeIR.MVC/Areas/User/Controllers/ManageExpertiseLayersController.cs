@@ -12,5 +12,8 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             
             return View(list);
         }
+
+
+        
     }
 }

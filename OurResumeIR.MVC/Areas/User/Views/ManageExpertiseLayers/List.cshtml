@@ -7,7 +7,7 @@
 
 
 <div class="col-xl-9">
-	
+
 
 
 	<div class="card bg-transparent border rounded-3">
@@ -52,9 +52,8 @@
 					<!-- Table head -->
 					<thead>
 						<tr>
-							<th scope="col" class="border-0 rounded-start">دوره</th>
-							<th scope="col" class="border-0">کل دوره ها</th>
-							<th scope="col" class="border-0">دوره های تکمیل</th>
+							<th scope="col" class="border-0 rounded-start">نام</th>
+
 							<th scope="col" class="border-0 rounded-end">عملیات</th>
 						</tr>
 					</thead>
@@ -62,183 +61,28 @@
 					<!-- Table body START -->
 					<tbody>
 						<!-- Table item -->
-						<tr>
-							<!-- Table data -->
-							<td>
-								<div class="d-flex align-items-center">
-									<!-- Image -->
-									<div class="w-100px">
-										<img src="assets/images/courses/4by3/08.jpg" class="rounded" alt="">
-									</div>
-									<div class="mb-0 ms-2">
-										<!-- Title -->
-										<h6 class="fw-normal"><a href="#">دوره جامع آموزش Sketch</a></h6>
-										<!-- Info -->
-										<div class="overflow-hidden">
-											<h6 class="mb-0 text-end">85%</h6>
-											<div class="progress progress-sm bg-primary bg-opacity-10">
-												<div class="progress-bar bg-primary aos" role="progressbar" data-aos="slide-left" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-in-out" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</td>
+						@foreach (var item in Model)
+						{
+							<tr>
+								<!-- Table data -->
+								<td>
+									@item.Name
+								</td>
 
-							<!-- Table data -->
-							<td>56</td>
 
-							<!-- Table data -->
-							<td>40</td>
 
-							<!-- Table data -->
-							<td>
-								<a href="#" class="btn btn-sm btn-primary-soft me-1 mb-1 mb-md-0"><i class="bi bi-play-circle me-1"></i>ادامه</a>
-							</td>
-						</tr>
+								<!-- Table data -->
+								<td>
+						
+									<a href class="btn btn-sm btn-primary-soft me-1 mb-1 mb-x;-0 ">ویرایش</a>
+									<a href="#" class="btn btn-sm btn-danger me-1"><i class="bi  me-1"></i>حذف</a>
+								</td>
+							</tr>
 
+						}
 						<!-- Table item -->
-						<tr>
-							<!-- Table data -->
-							<td>
-								<div class="d-flex align-items-center">
-									<!-- Image -->
-									<div class="w-100px">
-										<img src="assets/images/courses/4by3/03.jpg" class="rounded" alt="">
-									</div>
-									<div class="mb-0 ms-2">
-										<!-- Title -->
-										<h6 class="fw-normal"><a href="#">دوره جامع آموزش Figma</a></h6>
-										<!-- Info -->
-										<div class="overflow-hidden">
-											<h6 class="mb-0 text-end">100%</h6>
-											<div class="progress progress-sm bg-primary bg-opacity-10">
-												<div class="progress-bar bg-primary aos" role="progressbar" data-aos="slide-left" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-in-out" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</td>
 
-							<!-- Table data -->
-							<td>42</td>
 
-							<!-- Table data -->
-							<td>42</td>
-
-							<!-- Table data -->
-							<td>
-								<button class="btn btn-sm btn-success me-1 mb-1 mb-x;-0 disabled"><i class="bi bi-check me-1"></i>تکمیل شده</button>
-								<a href="#" class="btn btn-sm btn-light me-1"><i class="bi bi-arrow-repeat me-1"></i>راه اندازی مجدد</a>
-							</td>
-						</tr>
-
-						<!-- Table item -->
-						<tr>
-							<!-- Table data -->
-							<td>
-								<div class="d-flex align-items-center">
-									<!-- Image -->
-									<div class="w-100px">
-										<img src="assets/images/courses/4by3/05.jpg" class="rounded" alt="">
-									</div>
-									<div class="mb-0 ms-2">
-										<!-- Title -->
-										<h6 class="fw-normal"><a href="#">دوره جامع آموزش Python</a></h6>
-										<!-- Info -->
-										<div class="overflow-hidden">
-											<h6 class="mb-0 text-end">60%</h6>
-											<div class="progress progress-sm bg-primary bg-opacity-10">
-												<div class="progress-bar bg-primary aos" role="progressbar" data-aos="slide-left" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-in-out" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</td>
-
-							<!-- Table data -->
-							<td>28</td>
-
-							<!-- Table data -->
-							<td>12</td>
-
-							<!-- Table data -->
-							<td>
-								<a href="#" class="btn btn-sm btn-primary-soft me-1 mb-1 mb-md-0"><i class="bi bi-play-circle me-1"></i>ادامه</a>
-							</td>
-						</tr>
-
-						<!-- Table item -->
-						<tr>
-							<!-- Table data -->
-							<td>
-								<div class="d-flex align-items-center">
-									<!-- Image -->
-									<div class="w-100px">
-										<img src="assets/images/courses/4by3/01.jpg" class="rounded" alt="">
-									</div>
-									<div class="mb-0 ms-2">
-										<!-- Title -->
-										<h6 class="fw-normal"><a href="#">دوره جامع آموزش Laravel</a></h6>
-										<!-- Info -->
-										<div class="overflow-hidden">
-											<h6 class="mb-0 text-end">40%</h6>
-											<div class="progress progress-sm bg-primary bg-opacity-10">
-												<div class="progress-bar bg-primary aos" role="progressbar" data-aos="slide-left" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-in-out" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</td>
-							<!-- Table data -->
-							<td>32</td>
-
-							<!-- Table data -->
-							<td>18</td>
-
-							<!-- Table data -->
-							<td>
-								<a href="#" class="btn btn-sm btn-primary-soft me-1 mb-1 mb-md-0"><i class="bi bi-play-circle me-1"></i>ادامه</a>
-							</td>
-						</tr>
-
-						<!-- Table item -->
-						<tr>
-							<!-- Table data -->
-							<td>
-								<div class="d-flex align-items-center">
-									<!-- Image -->
-									<div class="w-100px">
-										<img src="assets/images/courses/4by3/02.jpg" class="rounded" alt="">
-									</div>
-									<div class="mb-0 ms-2">
-										<!-- Title -->
-										<h6 class="fw-normal"><a href="#">دوره جامع آموزش Photoshop</a></h6>
-										<!-- Info -->
-										<div class="overflow-hidden">
-											<h6 class="mb-0 text-end">90%</h6>
-											<div class="progress progress-sm bg-primary bg-opacity-10">
-												<div class="progress-bar bg-primary aos" role="progressbar" data-aos="slide-left" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-in-out" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</td>
-							<!-- Table data -->
-							<td>16</td>
-
-							<!-- Table data -->
-							<td>14</td>
-
-							<!-- Table data -->
-							<td>
-								<a href="#" class="btn btn-sm btn-primary-soft me-1 mb-1 mb-md-0"><i class="bi bi-play-circle me-1"></i>ادامه</a>
-							</td>
-						</tr>
 					</tbody>
 					<!-- Table body END -->
 				</table>
