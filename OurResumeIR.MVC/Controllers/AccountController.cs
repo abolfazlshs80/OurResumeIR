@@ -1,16 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using OurResumeIR.Application.Services.Interfaces;
 using OurResumeIR.Domain.Enums;
+using OurResumeIR.Domain.Models;
 using OurResumeIR.Domain.ViewModels;
 
 namespace OurResumeIR.MVC.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly IUserService _userService;
-        public AccountController(IUserService userService)
+        private  IUserService _userService;
+        private  SignInManager<User> _signInManager;
+        public AccountController(IUserService userService , SignInManager<User> signInManager)
         {
             _userService = userService;
+            _signInManager = signInManager;
         }
 
         public IActionResult Index()
@@ -83,6 +87,12 @@ namespace OurResumeIR.MVC.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Login", "Account");
+        }
 
 
         public IActionResult ForgotPassword()

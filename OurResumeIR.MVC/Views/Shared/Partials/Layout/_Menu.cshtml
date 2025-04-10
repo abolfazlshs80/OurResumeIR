@@ -19,6 +19,9 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li class="nav-item">
+                            <a asp-action="Logout" asp-controller="Account" class="nav-link">خروج </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="#about">حساب کاربری</a>
                         </li>
                     }

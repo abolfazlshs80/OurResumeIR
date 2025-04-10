@@ -18,9 +18,9 @@ namespace OurResumeIR.Application.Services.Implementation
     public class UserService : IUserService
     {
 
-        private readonly IUserRepository _userRepository;
-        private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
+        private  IUserRepository _userRepository;
+        private  UserManager<User> _userManager;
+        private  SignInManager<User> _signInManager;
         //private readonly RoleManager<ApplicationRole> _roleManager;
         public UserService(IUserRepository userRepository,
             UserManager<User> userManager,
