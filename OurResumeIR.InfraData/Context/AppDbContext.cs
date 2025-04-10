@@ -26,7 +26,7 @@ namespace OurResumeIR.Infra.Data.Context
 
         #region DbSet
 
-        public DbSet<User> Users { get; set; }
+      //  public DbSet<User> Users { get; set; }
         public DbSet<AboutMe> AboutMes { get; set; }
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Documents> Documents { get; set; }

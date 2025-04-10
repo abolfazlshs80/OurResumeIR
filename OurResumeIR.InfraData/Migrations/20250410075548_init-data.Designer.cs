@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OurResumeIR.Infra.Data.Context;
 
@@ -10,9 +11,16 @@ using OurResumeIR.Infra.Data.Context;
 namespace OurResumeIR.Infra.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+<<<<<<<< HEAD:OurResumeIR.InfraData/Migrations/20250410075548_init-data.Designer.cs
+    [Migration("20250410075548_init-data")]
+    partial class initdata
+========
+    [Migration("20250410100725_initDb")]
+    partial class initDb
+>>>>>>>> 828bd5cd274a843a4da6589a3c88584c62db5460:OurResumeIR.InfraData/Migrations/20250410100725_initDb.Designer.cs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.2");

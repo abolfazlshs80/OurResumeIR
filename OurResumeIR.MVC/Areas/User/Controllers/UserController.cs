@@ -9,5 +9,10 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         {
             return View();
         }
+
+        public IActionResult DeleteProfile()
+        {
+            return RedirectToAction("Dashboard");
+        }
     }
 }
