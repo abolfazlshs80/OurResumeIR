@@ -361,3 +361,9 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# database File SQlite
+App.db
+/OurResumeIR.MVC/App.db
+/OurResumeIR.MVC/App.db-shm
+/OurResumeIR.MVC/App.db-wal
