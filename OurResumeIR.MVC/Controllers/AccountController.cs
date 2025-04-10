@@ -42,7 +42,7 @@ namespace OurResumeIR.MVC.Controllers
             {
                 case RegisterResult.Success:
                     ViewBag.Message = "ثبت نام شما با موفقیت انجام شد";
-                    return View(register);
+                    return RedirectToAction("Index", "Home");
                 case RegisterResult.DupplicateEmail:
                     ViewBag.Message = "ایمیل وارد شده قبلا ثبت نام کرده است";
                     return View(register);
