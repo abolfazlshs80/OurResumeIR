@@ -11,13 +11,8 @@ using OurResumeIR.Infra.Data.Context;
 namespace OurResumeIR.Infra.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-<<<<<<<< HEAD:OurResumeIR.InfraData/Migrations/20250410075548_init-data.Designer.cs
-    [Migration("20250410075548_init-data")]
+    [Migration("20250410140301_init-data")]
     partial class initdata
-========
-    [Migration("20250410100725_initDb")]
-    partial class initDb
->>>>>>>> 828bd5cd274a843a4da6589a3c88584c62db5460:OurResumeIR.InfraData/Migrations/20250410100725_initDb.Designer.cs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
