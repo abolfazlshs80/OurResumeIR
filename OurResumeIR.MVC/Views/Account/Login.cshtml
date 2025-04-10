@@ -1,4 +1,7 @@
-﻿@{
+﻿@using OurResumeIR.Domain.ViewModels
+@model LoginViewModel
+
+@{
 	ViewData["Title"] = "ورود به حساب کاربری";
 	Layout = "_AuthorizeLayout";
 }
@@ -49,23 +52,25 @@
 							<span class="mb-0 fs-1">👋</span>
 							<h1 class="fs-4">ورود به حساب کاربری</h1>
 							<p class="mb-4">از دیدن شما خوشحالم! لطفا با حساب کاربری خود وارد شوید.</p>
-
+							@Html.ValidationSummary()
 							<!-- Form START -->
-							<form>
+							<form asp-controller="Account" asp-action="Login" method="post" class="auth-form">
 								<!-- Email -->
 								<div class="mb-4">
 									<label for="exampleInputEmail1" class="form-label">ایمیل *</label>
 									<div class="input-group input-group-lg">
 										<span class="input-group-text bg-light rounded-start border-0 text-secondary px-3"><i class="bi bi-envelope-fill"></i></span>
-										<input type="email" class="form-control border-0 bg-light rounded-end ps-1" placeholder="" id="exampleInputEmail1">
+										<input type="email" asp-for="Email" class="form-control border-0 bg-light rounded-end ps-1" placeholder="" id="exampleInputEmail1">
+										<span asp-validation-for="Email" class="text-danger" />
 									</div>
 								</div>
 								<!-- Password -->
 								<div class="mb-4">
 									<label for="inputPassword5" class="form-label">رمز عبور *</label>
-									<div class="input-group input-group-lg">
+									<div class="input-group input-group-lg">	
 										<span class="input-group-text bg-light rounded-start border-0 text-secondary px-3"><i class="fas fa-lock"></i></span>
-										<input type="password" class="form-control border-0 bg-light rounded-end ps-1" placeholder="********" id="inputPassword5">
+										<input type="password" asp-for="Password" class="form-control border-0 bg-light rounded-end ps-1" placeholder="********" id="inputPassword5">
+										<span asp-validation-for="Password" class="text-danger" />
 									</div>
 									<div id="passwordHelpBlock" class="form-text">
 										رمز عبور شما باید حداقل 8 کاراکتر باشد
@@ -86,7 +91,7 @@
 								<!-- Button -->
 								<div class="align-items-center mt-0">
 									<div class="d-grid">
-										<button class="btn btn-primary mb-0" type="button">ورود</button>
+										<button  class="btn btn-primary mb-0" type="submit">ورود</button>
 									</div>
 								</div>
 							</form>
@@ -121,3 +126,9 @@
 	</section>
 </main>
 
+@section Scripts {
+
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

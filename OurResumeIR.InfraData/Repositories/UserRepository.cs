@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using OurResumeIR.Domain.Enums;
 using OurResumeIR.Domain.Interfaces;
 using OurResumeIR.Domain.Models;
+using OurResumeIR.Domain.ViewModels;
 using OurResumeIR.Infra.Data.Context;
 using System;
 using System.Collections.Generic;
@@ -60,5 +62,7 @@ namespace OurResumeIR.Infra.Data.Repositories
         {
             return _context.Users.FirstOrDefault(u => u.Email == email && u.PasswordHash == password);
         }
+
+     
     }
 }

@@ -76,5 +76,24 @@ namespace OurResumeIR.Application.Services.Implementation
             return RegisterResult.Success;
         }
 
+
+        public async Task<LoginResult> LoginUser(LoginViewModel viewModel)
+        {
+            var user = await _userManager.FindByEmailAsync(viewModel.Email);
+
+            if (user == null)
+                return LoginResult.UserNotFound;
+
+            var result = await _signInManager.PasswordSignInAsync(user, viewModel.Password, viewModel.RememberMe, false);
+
+            if (result.Succeeded)
+            {
+                return LoginResult.Success;
+            }
+
+            return LoginResult.InvalidPassword;
+        }
+
+
     }
 }

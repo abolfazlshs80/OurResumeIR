@@ -58,6 +58,32 @@ namespace OurResumeIR.MVC.Controllers
             return View();
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var result = await _userService.LoginUser(model);
+
+            switch (result)
+            {
+                case LoginResult.Success:
+                    return RedirectToAction("Index", "Home");
+
+                case LoginResult.UserNotFound:
+                    ModelState.AddModelError("", "کاربری با این ایمیل یافت نشد.");
+                    break;
+
+                case LoginResult.InvalidPassword:
+                    ModelState.AddModelError("", "رمز عبور اشتباه است.");
+                    break;
+            }
+
+            return View(model);
+        }
+
+
 
         public IActionResult ForgotPassword()
         {
