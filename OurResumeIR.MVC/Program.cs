@@ -51,7 +51,10 @@ namespace OurResumeIR.MVC
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.MapControllerRoute(
+                name: "areas",
+                pattern: "{area:exists}/{controller=User}/{action=ProFile}/{id?}"
+            );
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
