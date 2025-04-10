@@ -85,9 +85,13 @@
 								<!-- Table data -->
 								<td>
 						
-									<a href class="btn btn-sm btn-primary-soft me-1 mb-1 mb-x;-0 ">ویرایش</a>
+									@Html.ActionLink("ویرایش", "Update",
+									"ManageExpertiseLayers", new { id = item.Id },
+									new { @class = "btn btn-sm btn-primary-soft me-1 mb-1 mb-x;-0 " })
 
-									@Html.ActionLink("حذف", "Delete", "ManageExpertiseLayers", new { id = item.Id }, new { @class = "btn btn-sm btn-danger me-1" })
+									@Html.ActionLink("حذف", "Delete",
+									"ManageExpertiseLayers", new { id = item.Id },
+									new { @class = "btn btn-sm btn-danger me-1" })
 								</td>
 							</tr>
 

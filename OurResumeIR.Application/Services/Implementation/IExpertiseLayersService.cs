@@ -30,7 +30,7 @@ namespace OurResumeIR.Application.Services.Interfaces
 
         public async Task<ExpertiseLayerVM> GetById(int Id)
         {
-            return mapper.Map<ExpertiseLayerVM>(await rep_expertiseLayer.FindAsync(a => a.Id == Id));
+            return mapper.Map<ExpertiseLayerVM>((await rep_expertiseLayer.FindAsync(a => a.Id == Id)).FirstOrDefault());
         }
 
         public async Task<bool> Update(UpdateExpertiseLayerVM model)
