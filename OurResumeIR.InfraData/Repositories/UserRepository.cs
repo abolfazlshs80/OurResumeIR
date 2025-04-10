@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using OurResumeIR.Domain.Enums;
 using OurResumeIR.Domain.Interfaces;
 using OurResumeIR.Domain.Models;
+using OurResumeIR.Domain.ViewModels;
 using OurResumeIR.Infra.Data.Context;
 using System;
 using System.Collections.Generic;
@@ -51,9 +53,16 @@ namespace OurResumeIR.Infra.Data.Repositories
             return true;
         }
 
-        public async Task<bool> EmailIsExist(string email)
+        public async Task<bool> EmailIsExist(string email )
         {
           return _context.Users.Where(x => x.Email == email).Any();
         }
+
+        public User UserIsExistForLogin(string email, string password)
+        {
+            return _context.Users.FirstOrDefault(u => u.Email == email && u.PasswordHash == password);
+        }
+
+     
     }
 }

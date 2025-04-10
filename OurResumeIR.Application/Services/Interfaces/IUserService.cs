@@ -10,6 +10,7 @@ namespace OurResumeIR.Application.Services.Interfaces
 {
     public interface IUserService
     {
+        Task<LoginResult> LoginUser(LoginViewModel model);
         Task<RegisterResult> RegisterUser(RegisterViewModel viewModel);
     }
 }

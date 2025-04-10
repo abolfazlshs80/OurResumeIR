@@ -1,4 +1,6 @@
-﻿using OurResumeIR.Domain.Models;
+﻿using OurResumeIR.Domain.Enums;
+using OurResumeIR.Domain.Models;
+using OurResumeIR.Domain.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +18,7 @@ namespace OurResumeIR.Domain.Interfaces
         Task<bool> DeleteUser(string UserId);
         Task<bool> SaveChanges();
         Task<bool> EmailIsExist(string email);
+        User UserIsExistForLogin(string email , string password);
+      
     }
 }

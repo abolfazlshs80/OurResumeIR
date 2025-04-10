@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using OurResumeIR.Application.Services.Interfaces;
 using OurResumeIR.Domain.Enums;
 using OurResumeIR.Domain.Interfaces;
@@ -16,13 +18,13 @@ namespace OurResumeIR.Application.Services.Implementation
     public class UserService : IUserService
     {
 
-        private readonly IUserRepository _userRepository;
-        private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
+        private  IUserRepository _userRepository;
+        private  UserManager<User> _userManager;
+        private  SignInManager<User> _signInManager;
         //private readonly RoleManager<ApplicationRole> _roleManager;
         public UserService(IUserRepository userRepository,
-            UserManager<User> userManager , 
-            SignInManager<User> signInManager )
+            UserManager<User> userManager,
+            SignInManager<User> signInManager)
         {
             _userRepository = userRepository;
             _userManager = userManager;
@@ -51,16 +53,47 @@ namespace OurResumeIR.Application.Services.Implementation
             var status = await _userManager.CreateAsync(user, viewModel.Password);
             if (status.Succeeded)
             {
-                var additionalClaims = new List<Claim>
+                var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                        new Claim(ClaimTypes.Name, user.Email),
+                         new Claim("CodeMeli", "3"),
+
+                    };
+                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                var principal = new ClaimsPrincipal(identity);
+
+                var properties = new AuthenticationProperties
                 {
-                   /* new Claim(ClaimTypes.Name, user.FullName ),*/ // افزودن claim سفارشی
-                    new Claim(ClaimTypes.Email, user.Email) ,        // افزودن نقش کاربر
-                   /* new Claim("UserName", user.UserName)     */    // افزودن نقش کاربر
+                    IsPersistent = true
                 };
-                await _signInManager.SignInAsync(user, true);
-              
+
+                await _signInManager.SignInAsync(user, properties);
+
             }
+      
             return RegisterResult.Success;
         }
+
+
+        public async Task<LoginResult> LoginUser(LoginViewModel viewModel)
+        {
+            var user = await _userManager.FindByEmailAsync(viewModel.Email);
+
+            if (user == null)
+                return LoginResult.UserNotFound;
+
+            var result = await _signInManager.PasswordSignInAsync(user, viewModel.Password, viewModel.RememberMe, false);
+
+            if (result.Succeeded)
+            {
+                return LoginResult.Success;
+            }
+
+            return LoginResult.InvalidPassword;
+        }
+
+
     }
 }
