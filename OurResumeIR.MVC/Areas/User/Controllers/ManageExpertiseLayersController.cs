@@ -31,6 +31,15 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Update() => View();
 
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            bool status = await expertiseLayersService.Delete(id);
+            return RedirectToAction("List");
+
+        }
     }
 }

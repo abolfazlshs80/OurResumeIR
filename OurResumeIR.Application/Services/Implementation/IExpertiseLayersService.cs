@@ -37,7 +37,7 @@ namespace OurResumeIR.Application.Services.Interfaces
         {
             var newModel = mapper.Map<ExpertiseLayer>(model);
             bool status = await rep_expertiseLayer.UpdateExpertiseLayer(newModel);
-          
+            await rep_expertiseLayer.SaveChanges();
 
             return status;
         }
@@ -46,7 +46,8 @@ namespace OurResumeIR.Application.Services.Interfaces
         {
             var newModel = mapper.Map<ExpertiseLayer>(model);
             int id = await rep_expertiseLayer.CreateExpertiseLayer(newModel);
-            if (id != 0)
+            await rep_expertiseLayer.SaveChanges();
+            if (newModel.Id != 0)
                 return true;
 
             return false;
@@ -55,7 +56,10 @@ namespace OurResumeIR.Application.Services.Interfaces
 
         public async Task<bool> Delete(int Id)
         {
-            throw new NotImplementedException();
+            var status = await rep_expertiseLayer.DeleteExpertiseLayer(Id);
+            await rep_expertiseLayer.SaveChanges();
+            return status;
+
         }
     }
 }
