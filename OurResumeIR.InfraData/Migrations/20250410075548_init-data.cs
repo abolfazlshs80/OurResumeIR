@@ -5,12 +5,9 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OurResumeIR.Infra.Data.Migrations
 {
-    /// <inheritdoc />
-<<<<<<<< HEAD:OurResumeIR.InfraData/Migrations/20250410075548_init-data.cs
-    public partial class initdata : Migration
-========
+
+
     public partial class initDb : Migration
->>>>>>>> 828bd5cd274a843a4da6589a3c88584c62db5460:OurResumeIR.InfraData/Migrations/20250410100725_initDb.cs
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
