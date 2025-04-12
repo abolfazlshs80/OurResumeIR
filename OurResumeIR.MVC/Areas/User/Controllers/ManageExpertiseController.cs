@@ -8,7 +8,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
     [Area("User")]
     public class ManageExpertiseController(IExpertiseService expertiseLayersService, IMapper mapper) : Controller
     {
-
+        #region Specialties Layer
 
         public async Task<IActionResult> List()
         {
@@ -37,10 +37,10 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         public async Task<IActionResult> Update(int id)
         {
 
-            var find_xpertiseLayers =await expertiseLayersService.GetById(id);
-            if(find_xpertiseLayers == null)
+            var find_xpertiseLayers = await expertiseLayersService.GetById(id);
+            if (find_xpertiseLayers == null)
                 return NotFound();
-          return  View(mapper.Map<UpdateExpertiseLayerVM>(find_xpertiseLayers));
+            return View(mapper.Map<UpdateExpertiseLayerVM>(find_xpertiseLayers));
 
 
 
@@ -68,5 +68,20 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             return RedirectToAction("List");
 
         }
+
+        #endregion
+
+
+        #region Specialties
+
+        [HttpGet]
+        public async Task<IActionResult> AddExperiences()
+        {
+            return View();
+        }
+
+        #endregion
+
+
     }
 }

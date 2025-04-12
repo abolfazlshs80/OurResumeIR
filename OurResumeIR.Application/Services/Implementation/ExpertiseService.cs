@@ -11,6 +11,7 @@ using ExpertiseLayerVM = OurResumeIR.Application.ViewModels.ExpertiseLayers.Expe
 
 namespace OurResumeIR.Application.Services.Interfaces
 {
+    #region Specialties Layer
     public class ExpertiseService(IExpertiseLayerRepository rep_expertiseLayer, IMapper mapper) : IExpertiseService
     {
         public async Task<List<ExpertiseLayerVM>> GetAll()
@@ -62,4 +63,8 @@ namespace OurResumeIR.Application.Services.Interfaces
 
         }
     }
+
+    #endregion
+
+
 }

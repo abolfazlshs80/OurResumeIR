@@ -11,10 +11,18 @@ namespace OurResumeIR.Application.Services.Interfaces
 {
     public  interface IExpertiseService
     {
+        #region Specialties Layer
+
         Task<List<ExpertiseLayerVM>> GetAll();
         Task<ExpertiseLayerVM> GetById(int Id);
         Task<bool> Update(UpdateExpertiseLayerVM model);
         Task<bool> Create(CreateExpertiseLayerVM model);
         Task<bool> Delete(int Id);
+
+        #endregion
+
+
+
+
     }
 }
