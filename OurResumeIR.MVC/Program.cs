@@ -21,7 +21,7 @@ namespace OurResumeIR.MVC
                 });
             // 1. Configuration
             //  var connectionString = builder.Configuration.GetConnectionString("LocalMain");
-            var connectionString = builder.Configuration.GetConnectionString("LocalMaiSqllite");
+            var connectionString = builder.Configuration.GetConnectionString("LocalMain");
 
             // 2. Register DbContext
             builder.Services.RegisterService(connectionString);

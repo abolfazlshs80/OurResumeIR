@@ -21,7 +21,7 @@ namespace OurResumeIR.Infra.Ioc
             //  options.UseSqlServer(connectionString));
 
             services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlite(connectionString));
+                options.UseSqlServer(connectionString));
             services.AddScoped<IAboutMeRepository, AboutRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IBlogRepository,BlogRepository>();
