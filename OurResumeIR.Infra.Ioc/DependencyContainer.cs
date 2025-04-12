@@ -24,9 +24,8 @@ namespace OurResumeIR.Infra.Ioc
 
 
             services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlite(connectionString));
+                options.UseSqlServer(connectionString));
 
-            #region  Repository
             services.AddScoped<IAboutMeRepository, AboutRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IBlogRepository, BlogRepository>();
@@ -35,7 +34,7 @@ namespace OurResumeIR.Infra.Ioc
             services.AddScoped<IMyExperiencesRepository, MyExperienceRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserExpertiseRepository, UserExpertiseRepository>();
-            #endregion
+      
 
             #region Service
             services.AddScoped<IUserService, UserService>();
