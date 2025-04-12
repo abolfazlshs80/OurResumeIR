@@ -6,8 +6,10 @@ using OurResumeIR.Application.ViewModels.Experience;
 namespace OurResumeIR.MVC.Areas.User.Controllers
 {
     [Area("User")]
-    public class ManageExpertiseLayersController(IExpertiseLayersService expertiseLayersService, IMapper mapper) : Controller
+    public class ManageExpertiseController(IExpertiseService expertiseLayersService, IMapper mapper) : Controller
     {
+
+
         public async Task<IActionResult> List()
         {
             var list = await expertiseLayersService.GetAll();

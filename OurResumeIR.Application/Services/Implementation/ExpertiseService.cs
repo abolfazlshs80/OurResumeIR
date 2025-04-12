@@ -11,7 +11,7 @@ using ExpertiseLayerVM = OurResumeIR.Application.ViewModels.ExpertiseLayers.Expe
 
 namespace OurResumeIR.Application.Services.Interfaces
 {
-    public class ExpertiseLayersService(IExpertiseLayerRepository rep_expertiseLayer, IMapper mapper) : IExpertiseLayersService
+    public class ExpertiseService(IExpertiseLayerRepository rep_expertiseLayer, IMapper mapper) : IExpertiseService
     {
         public async Task<List<ExpertiseLayerVM>> GetAll()
         {

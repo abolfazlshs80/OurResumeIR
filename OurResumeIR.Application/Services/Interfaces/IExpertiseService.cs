@@ -9,7 +9,7 @@ using ExpertiseLayerVM = OurResumeIR.Application.ViewModels.ExpertiseLayers.Expe
 
 namespace OurResumeIR.Application.Services.Interfaces
 {
-    public  interface IExpertiseLayersService
+    public  interface IExpertiseService
     {
         Task<List<ExpertiseLayerVM>> GetAll();
         Task<ExpertiseLayerVM> GetById(int Id);
