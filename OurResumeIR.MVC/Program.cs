@@ -21,7 +21,7 @@ namespace OurResumeIR.MVC
                 });
             // 1. Configuration
             //  var connectionString = builder.Configuration.GetConnectionString("LocalMain");
-            var connectionString = builder.Configuration.GetConnectionString("LocalMain");
+            var connectionString = builder.Configuration.GetConnectionString("OnlineMain");
 
             // 2. Register DbContext
             builder.Services.RegisterService(connectionString);
