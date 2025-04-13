@@ -24,6 +24,10 @@
 	font-weight: 400;
 	font-style: normal
 }
+
+#ExpertiseLayerId > option {
+    direction: rtl !important;
+}
 :root,
 [data-bs-theme=light] {
   --bs-blue: #1d3b53;

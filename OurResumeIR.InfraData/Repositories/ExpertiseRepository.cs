@@ -1,4 +1,5 @@
-﻿using OurResumeIR.Domain.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using OurResumeIR.Domain.Interfaces;
 using OurResumeIR.Domain.Models;
 using OurResumeIR.Infra.Data.Context;
 using System;
@@ -12,17 +13,22 @@ namespace OurResumeIR.Infra.Data.Repositories
 {
     public class ExpertiseRepository : IExpertiseRepository
     {
-        private AppDbContext _Context;
+        private AppDbContext _context;
         public ExpertiseRepository(AppDbContext Context) 
         {
-            _Context = Context;
+            _context = Context;
         }
 
         
         public async Task AddExpertise(Experience Expertise)
         {
-            _Context.Add(Expertise);
-            await _Context.SaveChangesAsync();
+            _context.Add(Expertise);
+            await _context.SaveChangesAsync();
+        }
+
+        public Task AddExpertiseAsync(Experience Expertise)
+        {
+            throw new NotImplementedException();
         }
 
         public Task<Experience> DeleteExpertise(int ExpertiseId)
@@ -35,7 +41,13 @@ namespace OurResumeIR.Infra.Data.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<Experience> SaveChanges()
+        public async Task<List<ExpertiseLayer>> GetAllExpertiseLayersAsync()
+        {
+            return await _context.ExpertiseLayers.ToListAsync();
+        }
+
+   
+        public Task<Experience> SaveChangesAsync()
         {
             throw new NotImplementedException();
         }

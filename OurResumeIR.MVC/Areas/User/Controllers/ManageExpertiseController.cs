@@ -77,8 +77,15 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         [HttpGet]
         public async Task<IActionResult> AddExperiences()
         {
-            return View();
+            var viewModel = await expertiseLayersService.GetCreateFormAsync();
+            return View(viewModel);
         }
+
+        //[HttpPost]
+        //public async Task<IActionResult> AddExperiences()
+        //{
+
+        //}
 
         #endregion
 

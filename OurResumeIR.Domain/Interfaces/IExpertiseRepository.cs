@@ -7,11 +7,12 @@ public interface IExpertiseRepository
 {
 
     Task<IQueryable<Experience>> FindAsync(Expression<Func<Experience, bool>> predicate);
-    Task AddExpertise(Experience Expertise);
+    Task AddExpertiseAsync(Experience Expertise);
     Task<Experience> UpdateExpertise(Experience Expertise);
     Task<Experience> DeleteExpertise(int ExpertiseId);
-    Task<Experience> SaveChanges();
+    Task<Experience> SaveChangesAsync();
+    Task<List<ExpertiseLayer>> GetAllExpertiseLayersAsync();
 
 
-   
+
 }

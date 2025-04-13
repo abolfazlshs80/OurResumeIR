@@ -4,16 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using OurResumeIR.Application.ViewModels.Experience;
 using OurResumeIR.Domain.Interfaces;
 using OurResumeIR.Domain.Models;
+using OurResumeIR.Infra.Data.Context;
 using ExpertiseLayerVM = OurResumeIR.Application.ViewModels.ExpertiseLayers.ExpertiseLayerVM;
 
 namespace OurResumeIR.Application.Services.Interfaces
 {
-    #region Specialties Layer
-    public class ExpertiseService(IExpertiseLayerRepository rep_expertiseLayer, IMapper mapper) : IExpertiseService
+   
+    public class ExpertiseService(IExpertiseLayerRepository rep_expertiseLayer, IMapper mapper , IExpertiseRepository expertise) : IExpertiseService
     {
+      
+
+        #region Specialties Layer
         public async Task<List<ExpertiseLayerVM>> GetAll()
         {
             try
@@ -62,9 +68,49 @@ namespace OurResumeIR.Application.Services.Interfaces
             return status;
 
         }
-    }
 
-    #endregion
+
+
+        #endregion
+
+        #region Specialties 
+
+        public Task<List<ExperienceFormViewModel>> GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task CreateAsync(ExperienceFormViewModel model)
+        {
+            Experience newExperience = new Experience()
+            {
+                Name = model.Name,
+                ExpertiseLayerId = model.ExpertiseLayerId,
+            };
+
+            expertise.AddExpertiseAsync(newExperience);
+           await expertise.SaveChangesAsync();
+           
+        }
+
+        public async Task<ExperienceFormViewModel> GetCreateFormAsync()
+        {
+            var layers = await expertise.GetAllExpertiseLayersAsync();
+            return new ExperienceFormViewModel
+            {
+                ExpertiseLayerOptions = layers.Select(l => new SelectListItem
+                {
+                    Value = l.Id.ToString(),
+                    Text = l.Name,
+                }).ToList(),
+            };
+        }
+
+
+        #endregion
+
+
+    }
 
 
 }
