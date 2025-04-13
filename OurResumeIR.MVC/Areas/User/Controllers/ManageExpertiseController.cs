@@ -75,7 +75,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         #region Specialties
 
         [HttpGet]
-        public async Task<IActionResult> AddExperiences()
+        public async Task<IActionResult> ()
         {
             var viewModel = await expertiseLayersService.GetCreateFormAsync();
             return View(viewModel);
