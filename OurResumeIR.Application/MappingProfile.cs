@@ -20,6 +20,7 @@ namespace OurResumeIR.Application
             CreateMap<CreateExpertiseLayerVM, ExpertiseLayer>().ReverseMap();
             CreateMap<UpdateExpertiseLayerVM, ExpertiseLayer>().ReverseMap();
             CreateMap<UpdateExpertiseLayerVM, ExpertiseLayerVM>().ReverseMap();
+            CreateMap<ExperienceListViewModel, Experience>().ReverseMap();
            
         }
     }

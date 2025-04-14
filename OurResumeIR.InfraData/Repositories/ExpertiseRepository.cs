@@ -14,12 +14,12 @@ namespace OurResumeIR.Infra.Data.Repositories
     public class ExpertiseRepository : IExpertiseRepository
     {
         private AppDbContext _context;
-        public ExpertiseRepository(AppDbContext Context) 
+        public ExpertiseRepository(AppDbContext Context)
         {
             _context = Context;
         }
 
-        
+
         public async Task AddExpertise(Experience Expertise)
         {
             _context.Add(Expertise);
@@ -54,7 +54,13 @@ namespace OurResumeIR.Infra.Data.Repositories
             return await _context.ExpertiseLayers.ToListAsync();
         }
 
-   
+        public async Task<Experience> GetByIdAsync(int id)
+        {
+            return await _context.Experiences
+                  .Include(e => e.ExpertiseLayer) // برای جلوگیری از خطای null
+                  .FirstOrDefaultAsync(e => e.Id == id);
+        }
+
         public Task<Experience> SaveChangesAsync()
         {
             throw new NotImplementedException();

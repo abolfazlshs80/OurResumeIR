@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using OurResumeIR.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -19,7 +20,8 @@ namespace OurResumeIR.Application.ViewModels.Experience
         public int ExpertiseLayerId { get; set; }
 
         // 👇 این ویژگی جدید برای نمایش سطح تخصص
-        public string ExpertiseLayerTitle { get; set; }
+        //public string ExpertiseLayerTitle { get; set; }
+        public ExpertiseLayer ExpertiseLayer { get; set; }
 
         //// برای DropDown
         //public List<SelectListItem> ExpertiseLayerOptions { get; set; } = new();

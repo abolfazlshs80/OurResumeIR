@@ -31,6 +31,7 @@ namespace OurResumeIR.Application.Services.Interfaces
         Task<ExperienceFormViewModel> GetAllExperiencesLayerAsync(); // برای نمایش لیست تمام سطح های تخصص
         Task AddExperienceAsync(ExperienceFormViewModel model);
         Task<List<ExperienceListViewModel>> GetAllExperiencesAsync();
+        Task<ExperienceFormViewModel> GetExperienceFormByIdAsync(int id);
 
         #endregion
 

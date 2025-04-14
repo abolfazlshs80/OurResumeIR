@@ -109,6 +109,28 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             return RedirectToAction("Index"); 
         }
 
+
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var model = await expertiseLayersService.GetExperienceFormByIdAsync(id);
+            return View(model);
+        }
+
+        //[HttpPost]
+        //public async Task<IActionResult> Edit(ExperienceFormViewModel model)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        model = await expertiseLayersService.GetCreateFormAsync(model);
+        //        return View(model);
+        //    }
+
+        //    await expertiseLayersService.UpdateExperienceAsync(model);
+        //    return RedirectToAction("Index");
+        //}
+
         #endregion
 
 

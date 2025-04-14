@@ -10,15 +10,19 @@ using OurResumeIR.Application.ViewModels.Experience;
 using OurResumeIR.Domain.Interfaces;
 using OurResumeIR.Domain.Models;
 using OurResumeIR.Infra.Data.Context;
+using OurResumeIR.Infra.Data.Repositories;
 using ExpertiseLayerVM = OurResumeIR.Application.ViewModels.ExpertiseLayers.ExpertiseLayerVM;
 
 namespace OurResumeIR.Application.Services.Interfaces
 {
    
-    public class ExpertiseService(IExpertiseLayerRepository rep_expertiseLayer, IMapper mapper , IExpertiseRepository expertise) : IExpertiseService
+    public class ExpertiseService(IExpertiseLayerRepository rep_expertiseLayer, 
+        IMapper mapper ,
+        IExpertiseRepository expertise) 
+        : IExpertiseService
     {
       
-
+        
         #region Specialties Layer
         public async Task<List<ExpertiseLayerVM>> GetAll()
         {
@@ -122,12 +126,40 @@ namespace OurResumeIR.Application.Services.Interfaces
         {
             var experiences = await expertise.GetAllExperiencesAsync();
 
-            return experiences.Select(e => new ExperienceListViewModel
+            //return experiences.Select(e => new ExperienceListViewModel
+            //{
+            //    Id = e.Id,
+            //    Name = e.Name,
+            //    ExpertiseLayerTitle = e.ExpertiseLayer.Name
+            //}).ToList();
+            return mapper.Map<List<ExperienceListViewModel>>(experiences);
+        }
+
+        //public Task<ExperienceFormViewModel> GetExperienceByIdAsync(int id)
+        //{
+        //    //return await _repository.GetExperienceFormByIdAsync(id);
+        //    throw new NotImplementedException();
+        //}
+
+        public async Task<ExperienceFormViewModel> GetExperienceFormByIdAsync(int id)
+        {
+            var experience = await expertise.GetByIdAsync(id);
+            var layers = await expertise.GetAllExpertiseLayersAsync();
+
+            if (experience == null)
+                return null;
+
+            return new ExperienceFormViewModel
             {
-                Id = e.Id,
-                Name = e.Name,
-                ExpertiseLayerTitle = e.ExpertiseLayer.Name
-            }).ToList();
+                Id = experience.Id,
+                Name = experience.Name,
+                ExpertiseLayerId = experience.ExpertiseLayerId,
+                ExpertiseLayerOptions = layers.Select(l => new SelectListItem
+                {
+                    Value = l.Id.ToString(),
+                    Text = l.Name,
+                }).ToList()
+            };
         }
 
 

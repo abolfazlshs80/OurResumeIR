@@ -13,7 +13,7 @@ public interface IExpertiseRepository
     Task<Experience> SaveChangesAsync();
     Task<List<ExpertiseLayer>> GetAllExpertiseLayersAsync();
     Task<List<Experience>> GetAllExperiencesAsync();
-  
+    Task<Experience> GetByIdAsync(int id);
 
 
 }
