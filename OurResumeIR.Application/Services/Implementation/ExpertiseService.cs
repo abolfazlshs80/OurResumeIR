@@ -70,8 +70,9 @@ namespace OurResumeIR.Application.Services.Interfaces
         }
 
 
-
         #endregion
+
+
 
         #region Specialties 
 
@@ -93,7 +94,7 @@ namespace OurResumeIR.Application.Services.Interfaces
            
         }
 
-        public async Task<ExperienceFormViewModel> GetCreateFormAsync()
+        public async Task<ExperienceFormViewModel> GetAllExpertiseLayers()
         {
             var layers = await expertise.GetAllExpertiseLayersAsync();
             return new ExperienceFormViewModel
@@ -104,6 +105,17 @@ namespace OurResumeIR.Application.Services.Interfaces
                     Text = l.Name,
                 }).ToList(),
             };
+        }
+
+        public async Task AddExperienceAsync(ExperienceFormViewModel model)
+        {
+            var experience = new Experience
+            {
+                Name = model.Name,
+                ExpertiseLayerId = model.ExpertiseLayerId 
+            };
+
+            await expertise.AddExpertiseAsync(experience);
         }
 
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,12 +11,13 @@ namespace OurResumeIR.Application.ViewModels.Experience
 {
     public class ExperienceFormViewModel
     {
-        //public int? Id { get; set; } // Nullable برای استفاده در Edit
+        [Required(ErrorMessage = "نام تخصص را وارد کنید")]
         public string Name { get; set; }
 
+        [Required(ErrorMessage = "سطح تخصص را انتخاب کنید")]
         public int ExpertiseLayerId { get; set; }
 
         // برای DropDown
-        public IEnumerable<SelectListItem> ExpertiseLayerOptions { get; set; }
+        public List<SelectListItem> ExpertiseLayerOptions { get; set; } = new();
     }
 }

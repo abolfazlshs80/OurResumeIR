@@ -26,9 +26,10 @@ namespace OurResumeIR.Infra.Data.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public Task AddExpertiseAsync(Experience Expertise)
+        public async Task AddExpertiseAsync(Experience experience)
         {
-            throw new NotImplementedException();
+            _context.Experiences.Add(experience);
+            await _context.SaveChangesAsync();
         }
 
         public Task<Experience> DeleteExpertise(int ExpertiseId)

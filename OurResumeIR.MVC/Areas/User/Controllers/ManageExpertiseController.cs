@@ -78,15 +78,26 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         [HttpGet]
         public async Task<IActionResult> AddExperiences()
         {
-            var viewModel = await expertiseLayersService.GetCreateFormAsync();
+            var viewModel = await expertiseLayersService.GetAllExpertiseLayers();
             return View(viewModel);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> AddExperiences()
-        //{
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddExperiences(ExperienceFormViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                // دوباره لیست سطح‌ها رو برای DropDown پر می‌کنیم
+                model = await expertiseLayersService.GetAllExpertiseLayers();
+                model.Name = model.Name; // چون ممکنه کاربر مقداری وارد کرده باشد
+                model.ExpertiseLayerId = model.ExpertiseLayerId;
+                return View(model);
+            }
 
-        //}
+            await expertiseLayersService.AddExperienceAsync(model);
+            return RedirectToAction("Dashboard" , "User"); 
+        }
 
         #endregion
 

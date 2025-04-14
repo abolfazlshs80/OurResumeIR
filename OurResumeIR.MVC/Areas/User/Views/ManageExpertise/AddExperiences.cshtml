@@ -16,17 +16,17 @@
         </div>
 
         <div class="card-body">
-            <form asp-action="Create" asp-controller="ManageExpertiseLayers" asp-area="User" method="post">
+            <form asp-action="AddExperiences" asp-controller="ManageExpertise" asp-area="User" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 @*                 <input type="hidden" name="__RequestVerificationToken" value="@Antiforgery.GetTokens(HttpContext).RequestToken" />
- *@   @*              @Html.AntiForgeryToken()  *@<!-- افزودن توکن امنیتی -->
+ *@   
                 <div class="mb-3">
                     <label asp-for="Name" class="form-label"></label>
-                    <input asp-for="Name" class="form-control" placeholder="مثلاً طراحی سایت" />
+                    <input name="Name" class="form-control" placeholder="نام تخصص را وارد کنید" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
 
-                <div class="mb-3" dir="rtl">
+                <div class="mb-3" >
                   @*   <label  asp-for="ExpertiseLayerId" class="form-label"></label> *@
                     @Html.DropDownListFor(a => a.ExpertiseLayerId, Model.ExpertiseLayerOptions, "سطح تخصص", new { @class = "form-select text-end" })
                @*      <select asp-for="ExpertiseLayerId" asp-items="Model.ExpertiseLayerOptions" class="form-select text-end">
@@ -35,7 +35,7 @@
                    @*  <span asp-validation-for="ExpertiseLayerId" class="text-danger"></span> *@
                 </div>
 
-                <button type="submit" class="btn btn-primary">ثبت تخصص</button>
+                <button  type="submit" class="btn btn-primary">ثبت تخصص</button>
             </form>
         </div>
     </div>

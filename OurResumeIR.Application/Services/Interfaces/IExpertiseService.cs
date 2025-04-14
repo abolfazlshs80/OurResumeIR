@@ -25,10 +25,11 @@ namespace OurResumeIR.Application.Services.Interfaces
         #region Specialties 
 
         // TO DO Interface
-        //Task<List<ExpertiseLayer>> GetExpertiseLayersAsync(); // برای نمایش لیست در فرم
+    
         Task<List<ExperienceFormViewModel>> GetAllAsync();
         Task CreateAsync(ExperienceFormViewModel model);
-        Task<ExperienceFormViewModel> GetCreateFormAsync();
+        Task<ExperienceFormViewModel> GetAllExpertiseLayers(); // برای نمایش لیست تمام سطح های تخصص
+        Task AddExperienceAsync(ExperienceFormViewModel model);
 
         #endregion
 
