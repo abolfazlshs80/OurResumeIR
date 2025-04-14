@@ -28,8 +28,9 @@ namespace OurResumeIR.Application.Services.Interfaces
     
         Task<List<ExperienceFormViewModel>> GetAllAsync();
         Task CreateAsync(ExperienceFormViewModel model);
-        Task<ExperienceFormViewModel> GetAllExpertiseLayers(); // برای نمایش لیست تمام سطح های تخصص
+        Task<ExperienceFormViewModel> GetAllExperiencesLayerAsync(); // برای نمایش لیست تمام سطح های تخصص
         Task AddExperienceAsync(ExperienceFormViewModel model);
+        Task<List<ExperienceListViewModel>> GetAllExperiencesAsync();
 
         #endregion
 

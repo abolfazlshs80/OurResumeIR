@@ -12,7 +12,8 @@ public interface IExpertiseRepository
     Task<Experience> DeleteExpertise(int ExpertiseId);
     Task<Experience> SaveChangesAsync();
     Task<List<ExpertiseLayer>> GetAllExpertiseLayersAsync();
-
+    Task<List<Experience>> GetAllExperiencesAsync();
+  
 
 
 }

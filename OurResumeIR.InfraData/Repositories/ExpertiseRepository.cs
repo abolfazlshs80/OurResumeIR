@@ -42,6 +42,13 @@ namespace OurResumeIR.Infra.Data.Repositories
             throw new NotImplementedException();
         }
 
+        public async Task<List<Experience>> GetAllExperiencesAsync()
+        {
+            return await _context.Experiences
+                          .Include(e => e.ExpertiseLayer)
+                          .ToListAsync();
+        }
+
         public async Task<List<ExpertiseLayer>> GetAllExpertiseLayersAsync()
         {
             return await _context.ExpertiseLayers.ToListAsync();

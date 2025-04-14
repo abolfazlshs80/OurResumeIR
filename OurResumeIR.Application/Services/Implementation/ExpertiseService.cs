@@ -94,7 +94,7 @@ namespace OurResumeIR.Application.Services.Interfaces
            
         }
 
-        public async Task<ExperienceFormViewModel> GetAllExpertiseLayers()
+        public async Task<ExperienceFormViewModel> GetAllExperiencesLayerAsync()
         {
             var layers = await expertise.GetAllExpertiseLayersAsync();
             return new ExperienceFormViewModel
@@ -116,6 +116,18 @@ namespace OurResumeIR.Application.Services.Interfaces
             };
 
             await expertise.AddExpertiseAsync(experience);
+        }
+
+        public async Task<List<ExperienceListViewModel>> GetAllExperiencesAsync()
+        {
+            var experiences = await expertise.GetAllExperiencesAsync();
+
+            return experiences.Select(e => new ExperienceListViewModel
+            {
+                Id = e.Id,
+                Name = e.Name,
+                ExpertiseLayerTitle = e.ExpertiseLayer.Name
+            }).ToList();
         }
 
 
