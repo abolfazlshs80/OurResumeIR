@@ -1,0 +1,41 @@
+﻿@using OurResumeIR.Application.ViewModels.Experience
+@model List<SkillListViewModel>
+@{
+    Layout = "_ProfileLayout";
+    ViewBag.Title = "لیست تخصص‌ها";
+}
+<div class="col-xl-9">
+    <div class="card bg-transparent border rounded-3">
+        <div class="card-header bg-transparent border-bottom d-flex justify-content-between">
+            <h3 class="mb-0 fs-5 ff-vb">لیست تخصص‌ها</h3>
+            <a class="btn btn-success btn-sm" asp-action="AddSkill" asp-controller="ManageSkill" asp-area="User">افزودن تخصص جدید</a>
+        </div>
+
+        <div class="card-body">
+            <table class="table table-bordered text-center align-middle">
+                <thead>
+                    <tr>
+                        <th>نام تخصص</th>
+              @*           <th>سطح تخصص</th> *@
+                        <th>عملیات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                    @*         <td>@item.SkillLevel.Name</td> *@
+                            <td>
+                                <a asp-action="SkillEdit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">ویرایش</a>
+                                <form asp-action="DeleteSkill" asp-route-id="@item.Id" method="post" class="d-inline">
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('آیا از حذف اطمینان دارید؟')">حذف</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

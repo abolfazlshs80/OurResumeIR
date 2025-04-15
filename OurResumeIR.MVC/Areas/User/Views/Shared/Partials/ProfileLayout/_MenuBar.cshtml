@@ -4,10 +4,10 @@
         <div class="list-group list-group-dark list-group-borderless collapse-list">
 
             @Html.ActionLink("داشبورد", "Dashboard", "User", new { area = "User" }, new { @class = "list-group-item" })
-            <a asp-area="User" asp-controller="ManageExpertise" asp-action="Index" class="list-group-item">مدیریت تخصص ها </a>
-@*             <a asp-area="User" asp-controller="ManageExpertise" asp-action="List" class="list-group-item"> مدیریت تخصص ها </a>
- *@            @Html.ActionLink("مدیریت سطح تخصص", "List", "ManageExpertise", new { area = "User" }, new { @class = "list-group-item" })
-            @* <a asp-area="User" asp-controller="ManageExpertise" asp-action="List" class="list-group-item"> مدیریت سطح تخصص </a> *@
+            <a asp-area="User" asp-controller="ManageSkill" asp-action="SkillIndex" class="list-group-item">مدیریت تخصص ها </a>
+@*             <a asp-area="User" asp-controller="ManageSkill" asp-action="List" class="list-group-item"> مدیریت تخصص ها </a>
+ *@            @Html.ActionLink("مدیریت سطح تخصص", "SkillLevelList", "ManageSkill", new { area = "User" }, new { @class = "list-group-item" })
+            @* <a asp-area="User" asp-controller="ManageSkill" asp-action="List" class="list-group-item"> مدیریت سطح تخصص </a> *@
 
             @Html.ActionLink("ورود به سایت", "Index", "Home", null, new { @class = "list-group-item" })
             @Html.ActionLink("خروج", "Logout", "Account", null, new { @class = "list-group-item text-danger bg-danger-soft-hover" })

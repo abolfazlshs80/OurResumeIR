@@ -20,7 +20,7 @@ namespace OurResumeIR.Infra.Data.Configuration
             //builder.Property(e => e.Username).IsRequired().HasMaxLength(100);
 
 
-            builder.HasMany(a => a.UserExpertise)
+            builder.HasMany(a => a.History)
                 .WithOne(a => a.User)
                 .HasForeignKey(a => a.UserId);
 
@@ -33,7 +33,7 @@ namespace OurResumeIR.Infra.Data.Configuration
                 .HasForeignKey(a => a.UserId);
 
 
-            builder.HasMany(a => a.MyExperiences)
+            builder.HasMany(a => a.UserToSkill)
                 .WithOne(a => a.User)
                 .HasForeignKey(a => a.UserId);
             builder.HasOne(a => a.AboutMe)

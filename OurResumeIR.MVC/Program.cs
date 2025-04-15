@@ -21,7 +21,7 @@ namespace OurResumeIR.MVC
                 });
             // 1. Configuration
             //  var connectionString = builder.Configuration.GetConnectionString("LocalMain");
-            var connectionString = builder.Configuration.GetConnectionString("OnlineMain");
+            var connectionString = builder.Configuration.GetConnectionString("LocalMain");
 
             // 2. Register DbContext
             builder.Services.RegisterService(connectionString);
@@ -60,7 +60,7 @@ namespace OurResumeIR.MVC
 
                 app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Home}/{action=SkillIndex}/{id?}");
 
             //app.MapRazorPages();
 

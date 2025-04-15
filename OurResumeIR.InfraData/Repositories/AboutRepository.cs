@@ -34,7 +34,7 @@ namespace OurResumeIR.Infra.Data.Repositories
 
         public async Task<AboutMe> GetByUserIdAsync(string userId)
         {
-            return await _context.AboutMes.FirstOrDefaultAsync(a => a.UserId == userId);
+            return await _context.AboutMe.FirstOrDefaultAsync(a => a.UserId == userId);
  
         }
 

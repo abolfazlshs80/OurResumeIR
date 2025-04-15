@@ -1,0 +1,33 @@
+﻿@using OurResumeIR.Application.ViewModels.Experience
+@model SkillFormViewModel
+@{
+    Layout = "_ProfileLayout";
+    ViewBag.Title = "ویرایش تخصص";
+}
+<div class="col-xl-9">
+    <div class="card bg-transparent border rounded-3">
+        <div class="card-header bg-transparent border-bottom">
+            <h3 class="mb-0 fs-5 ff-vb">ویرایش تخصص</h3>
+        </div>
+
+        <div class="card-body">
+            <form asp-action="SkillEdit" asp-controller="ManageSkill" asp-area="User" method="post">
+                <input type="hidden" asp-for="Id" />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+@* 
+                <div class="mb-3">
+                    @Html.DropDownListFor(a => a.ExpertiseLayerId, Model.ExpertiseLayerOptions, "سطح تخصص", new { @class = "form-select text-end" })
+                    <span asp-validation-for="ExpertiseLayerId" class="text-danger"></span>
+                </div> *@
+
+                <button type="submit" class="btn btn-primary">ذخیره تغییرات</button>
+            </form>
+        </div>
+    </div>
+</div>
