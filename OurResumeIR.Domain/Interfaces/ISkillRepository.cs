@@ -3,14 +3,14 @@ using System.Linq.Expressions;
 
 namespace OurResumeIR.Domain.Interfaces;
 
-public interface IExpertiseRepository
+public interface ISkillRepository
 {
 
     Task<IQueryable<Skill>> FindAsync(Expression<Func<Skill, bool>> predicate);
-    Task AddExpertiseAsync(Skill skill);
-    Task<Skill> SaveChangesAsync();
-    Task<List<SkillLevel>> GetAllExpertiseLayersAsync();
-    Task<List<Skill>> GetAllExperiencesAsync();
+    Task AddSkillAsync(Skill skill);
+    Task SaveChangesAsync();
+    Task<List<SkillLevel>> GetAllSkillLevelAsync();
+    Task<List<Skill>> GetAllSkillAsync();
     Task<Skill> GetByIdAsync(int id);
     Task UpdateAsync(Skill skill);
     Task DeleteAsync(Skill skill);

@@ -30,11 +30,11 @@ namespace OurResumeIR.Infra.Ioc
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IBlogRepository, BlogRepository>();
             services.AddScoped<IDocumentsRepository, DocumentRepository>();
-            services.AddScoped<IExpertiseLayerRepository, ExpertiseLayerRepository>();
-            services.AddScoped<IMyExperiencesRepository, MyExperienceRepository>();
+            services.AddScoped<IHistoryRepository, HistoryRepository>();
+            services.AddScoped<ISkillLevelRepository, SkillLevelRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IUserExpertiseRepository, UserExpertiseRepository>();
-            services.AddScoped<IExpertiseRepository, ExpertiseRepository>();
+            services.AddScoped<IUserToSkillRepository, UserToSkillRepository>();
+            services.AddScoped<ISkillRepository, SkillRepository>();
       
 
             #region Service

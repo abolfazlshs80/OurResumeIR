@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace OurResumeIR.Infra.Data.Repositories
 {
-    public class ExpertiseLayerRepository : IExpertiseLayerRepository
+    public class SkillLevelRepository : ISkillLevelRepository
     {
         private AppDbContext _context;
 
-        public ExpertiseLayerRepository( AppDbContext context) 
+        public SkillLevelRepository( AppDbContext context) 
         {
             _context = context;
         }
@@ -28,31 +28,27 @@ namespace OurResumeIR.Infra.Data.Repositories
             return  _context.SkillLevel.Where(predicate).AsQueryable();
         }
 
-        public async Task<int> CreateExpertiseLayer(SkillLevel skillLevel)
+        public async Task<int> CreateSkillLevelLevel(SkillLevel skillLevel)
         {
-                _context.Add(skillLevel);
-                return skillLevel.Id;
-        
-      
-            
+            _context.Add(skillLevel);
+            return skillLevel.Id;
+
+
         }
 
-        public async Task<bool> UpdateExpertiseLayer(SkillLevel skillLevel)
+        public async Task<bool> UpdateSkillLevelLevel(SkillLevel skillLevel)
         {
-                _context.Update(skillLevel);
-                return true;
-         
-           
+            _context.Update(skillLevel);
+            return true;
         }
 
-        public async Task<bool> DeleteExpertiseLayer(int ExpertiseLayerId)
+        public async Task<bool> DeleteSkillLevelLevel(int SkillLevelId)
         {
-                _context.Remove(await _context.SkillLevel.FindAsync(ExpertiseLayerId));
-                return true;
-          
-           
+            _context.Remove(await _context.SkillLevel.FindAsync(SkillLevelId));
+            return true;
         }
 
+ 
         public async Task<bool> SaveChanges()
         {
                 await _context.SaveChangesAsync();

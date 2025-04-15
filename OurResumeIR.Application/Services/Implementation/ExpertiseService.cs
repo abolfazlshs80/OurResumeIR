@@ -16,9 +16,9 @@ using ExpertiseLayerVM = OurResumeIR.Application.ViewModels.ExpertiseLayers.Expe
 namespace OurResumeIR.Application.Services.Interfaces
 {
    
-    public class ExpertiseService(IExpertiseLayerRepository rep_expertiseLayer, 
+    public class ExpertiseService(ISkillLevelRepository rep_SkillLevel, 
         IMapper mapper ,
-        IExpertiseRepository expertise) 
+        ISkillRepository rep_Skill) 
         : IExpertiseService
     {
       
@@ -28,7 +28,7 @@ namespace OurResumeIR.Application.Services.Interfaces
         {
             try
             {
-                var list = (await rep_expertiseLayer.FindAsync(a => a.Id != 0)).ToList();
+                var list = (await rep_SkillLevel.FindAsync(a => a.Id != 0)).ToList();
                 return mapper.Map<List<ExpertiseLayerVM>>(list);
             }
             catch (Exception e)
@@ -41,14 +41,14 @@ namespace OurResumeIR.Application.Services.Interfaces
 
         public async Task<ExpertiseLayerVM> GetById(int Id)
         {
-            return mapper.Map<ExpertiseLayerVM>((await rep_expertiseLayer.FindAsync(a => a.Id == Id)).FirstOrDefault());
+            return mapper.Map<ExpertiseLayerVM>((await rep_SkillLevel.FindAsync(a => a.Id == Id)).FirstOrDefault());
         }
 
         public async Task<bool> Update(UpdateExpertiseLayerVM model)
         {
             var newModel = mapper.Map<SkillLevel>(model);
-            bool status = await rep_expertiseLayer.UpdateExpertiseLayer(newModel);
-            await rep_expertiseLayer.SaveChanges();
+            bool status = await rep_SkillLevel.UpdateSkillLevelLevel(newModel);
+            await rep_SkillLevel.SaveChanges();
 
             return status;
         }
@@ -56,8 +56,8 @@ namespace OurResumeIR.Application.Services.Interfaces
         public async Task<bool> Create(CreateExpertiseLayerVM model)
         {
             var newModel = mapper.Map<SkillLevel>(model);
-            int id = await rep_expertiseLayer.CreateExpertiseLayer(newModel);
-            await rep_expertiseLayer.SaveChanges();
+            int id = await rep_SkillLevel.CreateSkillLevelLevel(newModel);
+            await rep_SkillLevel.SaveChanges();
             if (newModel.Id != 0)
                 return true;
 
@@ -67,8 +67,8 @@ namespace OurResumeIR.Application.Services.Interfaces
 
         public async Task<bool> Delete(int Id)
         {
-            var status = await rep_expertiseLayer.DeleteExpertiseLayer(Id);
-            await rep_expertiseLayer.SaveChanges();
+            var status = await rep_SkillLevel.DeleteSkillLevelLevel(Id);
+            await rep_SkillLevel.SaveChanges();
             return status;
 
         }
@@ -93,14 +93,14 @@ namespace OurResumeIR.Application.Services.Interfaces
                 //ExpertiseLayerId = model.ExpertiseLayerId,
             };
 
-            expertise.AddExpertiseAsync(newSkill);
-           await expertise.SaveChangesAsync();
+     await       rep_Skill.AddSkillAsync(newSkill);
+           await rep_Skill.SaveChangesAsync();
            
         }
 
         public async Task<ExperienceFormViewModel> GetAllExperiencesLayerAsync()
         {
-            var layers = await expertise.GetAllExpertiseLayersAsync();
+            var layers = await rep_Skill.GetAllSkillLevelAsync();
             return new ExperienceFormViewModel
             {
                 ExpertiseLayerOptions = layers.Select(l => new SelectListItem
@@ -119,12 +119,12 @@ namespace OurResumeIR.Application.Services.Interfaces
                 //ExpertiseLayerId = model.ExpertiseLayerId 
             };
 
-            await expertise.AddExpertiseAsync(experience);
+            await rep_Skill.AddSkillAsync(experience);
         }
 
         public async Task<List<ExperienceListViewModel>> GetAllExperiencesAsync()
         {
-            var experiences = await expertise.GetAllExperiencesAsync();
+            var experiences = await rep_Skill.GetAllSkillAsync();
 
             //return experiences.Select(e => new ExperienceListViewModel
             //{
@@ -143,8 +143,8 @@ namespace OurResumeIR.Application.Services.Interfaces
 
         public async Task<ExperienceFormViewModel> GetExperienceFormByIdAsync(int id)
         {
-            var experience = await expertise.GetByIdAsync(id);
-            var layers = await expertise.GetAllExpertiseLayersAsync();
+            var experience = await rep_Skill.GetByIdAsync(id);
+            var layers = await rep_Skill.GetAllSkillLevelAsync();
 
             if (experience == null)
                 return null;
@@ -164,24 +164,24 @@ namespace OurResumeIR.Application.Services.Interfaces
 
         public async Task<bool> UpdateExperienceAsync(ExperienceFormViewModel model)
         {
-            var experience = await expertise.GetByIdAsync(model.Id);
+            var experience = await rep_Skill.GetByIdAsync(model.Id);
             if (experience == null)
                 return false;
 
             experience.Name = model.Name;
             //experience.ExpertiseLayerId = model.ExpertiseLayerId;
 
-            await expertise.UpdateAsync(experience);
+            await rep_Skill.UpdateAsync(experience);
             return true;
         }
 
         public async Task<bool> DeleteExperienceAsync(int id)
         {
-            var experience = await expertise.GetByIdAsync(id);
+            var experience = await rep_Skill.GetByIdAsync(id);
             if (experience == null)
                 return false;
 
-            await expertise.DeleteAsync(experience);
+            await rep_Skill.DeleteAsync(experience);
             return true;
         }
 

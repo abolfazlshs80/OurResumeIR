@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace OurResumeIR.Infra.Data.Repositories
 {
-    public class UserExpertiseRepository : IUserExpertiseRepository
+    public class UserToSkillRepository : IUserToSkillRepository
     {
         private AppDbContext _context;
 
-        public UserExpertiseRepository( AppDbContext context) 
+        public UserToSkillRepository( AppDbContext context) 
         {
             _context = context;
         }
@@ -28,7 +28,7 @@ namespace OurResumeIR.Infra.Data.Repositories
             return  _context.UserToSkill.Where(predicate).AsQueryable();
         }
 
-        public async Task<int> CreateUserExpertise(UserToSkill userToSkill)
+        public async Task<int> CreateUserToSkill(UserToSkill userToSkill)
         {
                 _context.Add(userToSkill);
                 return userToSkill.Id;
@@ -37,7 +37,7 @@ namespace OurResumeIR.Infra.Data.Repositories
             
         }
 
-        public async Task<bool> UpdateUserExpertise(UserToSkill userToSkill)
+        public async Task<bool> UpdateUserToSkill(UserToSkill userToSkill)
         {
                 _context.Update(userToSkill);
                 return true;
@@ -45,9 +45,9 @@ namespace OurResumeIR.Infra.Data.Repositories
            
         }
 
-        public async Task<bool> DeleteUserExpertise(int UserExpertiseId)
+        public async Task<bool> DeleteUserToSkill(int UserToSkillId)
         {
-                _context.Remove(await _context.UserToSkill.FindAsync(UserExpertiseId));
+                _context.Remove(await _context.UserToSkill.FindAsync(UserToSkillId));
                 return true;
           
            

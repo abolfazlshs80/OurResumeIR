@@ -15,7 +15,7 @@ namespace OurResumeIR.Infra.Data.Repositories
         public IAboutMeRepository AboutMeRepository { get; }
         public IBlogRepository BlogRepository { get; }
         public IDocumentsRepository DocumentsRepository { get; }
-        public IMyExperiencesRepository MyExperiencesRepository { get; }
+        public IHistoryRepository HistoryRepository { get; }
         public IUserRepository UserRepository { get; }
 
         public UnitOfWork(
@@ -23,14 +23,14 @@ namespace OurResumeIR.Infra.Data.Repositories
             IAboutMeRepository aboutMeRepository,
             IBlogRepository blogRepository,
             IDocumentsRepository documentsRepository,
-            IMyExperiencesRepository myExperiencesRepository,
+            IHistoryRepository historyRepository,
             IUserRepository userRepository)
         {
             _context = context;
             AboutMeRepository = aboutMeRepository;
             BlogRepository = blogRepository;
             DocumentsRepository = documentsRepository;
-            MyExperiencesRepository = myExperiencesRepository;
+            HistoryRepository = historyRepository;
             UserRepository = userRepository;
         }
 
