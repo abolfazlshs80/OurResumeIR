@@ -2,12 +2,12 @@
 
 namespace OurResumeIR.Domain.Models;
 
-public class ExperienceVM
+public class SkillVM
 {
     public int Id { get; set; }
-    public int ExpertiseLayerId { get; set; }
+    //public int ExpertiseLayerId { get; set; }
     public string Name { get; set; }
     // Navigation Property  
-    public ExpertiseLayerVM ExpertiseLayer { get; set; }
+    //public SkillLevelVM SkillLevel { get; set; }
   //  public ICollection<UserToSkill> UserToSkill { get; set; }
 }

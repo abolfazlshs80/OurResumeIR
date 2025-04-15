@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OurResumeIR.Application.ViewModels.Experience;
+using OurResumeIR.Application.ViewModels.ExpertiseLayers;
 using OurResumeIR.Domain.Models;
-using ExpertiseLayerVM = OurResumeIR.Application.ViewModels.ExpertiseLayers.ExpertiseLayerVM;
 
 namespace OurResumeIR.Application.Services.Interfaces
 {
@@ -13,10 +13,10 @@ namespace OurResumeIR.Application.Services.Interfaces
     {
         #region Specialties Layer
 
-        Task<List<ExpertiseLayerVM>> GetAll();
-        Task<ExpertiseLayerVM> GetById(int Id);
-        Task<bool> Update(UpdateExpertiseLayerVM model);
-        Task<bool> Create(CreateExpertiseLayerVM model);
+        Task<List<SkillLevelVM>> GetAll();
+        Task<SkillLevelVM> GetById(int Id);
+        Task<bool> Update(UpdateSkillLevelVM model);
+        Task<bool> Create(CreateSkillLevelVM model);
         Task<bool> Delete(int Id);
 
         #endregion
@@ -26,13 +26,13 @@ namespace OurResumeIR.Application.Services.Interfaces
 
         // TO DO Interface
     
-        Task<List<ExperienceFormViewModel>> GetAllAsync();
-        Task CreateAsync(ExperienceFormViewModel model);
-        Task<ExperienceFormViewModel> GetAllExperiencesLayerAsync(); // برای نمایش لیست تمام سطح های تخصص
-        Task AddExperienceAsync(ExperienceFormViewModel model);
-        Task<List<ExperienceListViewModel>> GetAllExperiencesAsync();
-        Task<ExperienceFormViewModel> GetExperienceFormByIdAsync(int id);
-        Task<bool> UpdateExperienceAsync(ExperienceFormViewModel model);
+        Task<List<SkillFormViewModel>> GetAllAsync();
+        Task CreateAsync(SkillFormViewModel model);
+        Task<SkillFormViewModel> GetAllExperiencesLayerAsync(); // برای نمایش لیست تمام سطح های تخصص
+        Task AddExperienceAsync(SkillFormViewModel model);
+        Task<List<SkillListViewModel>> GetAllExperiencesAsync();
+        Task<SkillFormViewModel> GetExperienceFormByIdAsync(int id);
+        Task<bool> UpdateExperienceAsync(SkillFormViewModel model);
         Task<bool> DeleteExperienceAsync(int id);
 
         #endregion

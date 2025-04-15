@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OurResumeIR.Application.ViewModels.Experience
 {
-    public class CreateExpertiseLayerVM
+    public class CreateSkillLevelVM
     {
         [Required(ErrorMessage ="نام را وارد کنید")]
         [Display(Name ="نام را وارد کنید")]

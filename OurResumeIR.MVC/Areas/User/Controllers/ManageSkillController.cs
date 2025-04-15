@@ -9,21 +9,21 @@ using OurResumeIR.Infra.Data.Repositories;
 namespace OurResumeIR.MVC.Areas.User.Controllers
 {
     [Area("User")]
-    public class ManageExpertiseController(IExpertiseService expertiseLayersService, IMapper mapper) : Controller
+    public class ManageSkillController(IExpertiseService expertiseLayersService, IMapper mapper) : Controller
     {
-        #region Specialties Layer
+        #region SkillLevel Layer
 
-        public async Task<IActionResult> List()
+        public async Task<IActionResult> SkillLevelList()
         {
             var list = await expertiseLayersService.GetAll();
 
             return View(list);
         }
         [HttpGet]
-        public async Task<IActionResult> Create() => View();
+        public async Task<IActionResult> SkillLevelCreate() => View();
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateExpertiseLayerVM model)
+        public async Task<IActionResult> SkillLevelCreate(CreateSkillLevelVM model)
         {
             if (!ModelState.IsValid)
                 return View(model);
@@ -31,26 +31,26 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
 
             bool status = await expertiseLayersService.Create(model);
             if (status)
-                return RedirectToAction("List");
+                return RedirectToAction("SkillLevelList");
 
             return View(model);
         }
 
         [HttpGet]
-        public async Task<IActionResult> Update(int id)
+        public async Task<IActionResult> SkillLevelUpdate(int id)
         {
 
             var find_xpertiseLayers = await expertiseLayersService.GetById(id);
             if (find_xpertiseLayers == null)
                 return NotFound();
-            return View(mapper.Map<UpdateExpertiseLayerVM>(find_xpertiseLayers));
+            return View(mapper.Map<UpdateSkillLevelVM>(find_xpertiseLayers));
 
 
 
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(UpdateExpertiseLayerVM model)
+        public async Task<IActionResult> SkillLevelUpdate(UpdateSkillLevelVM model)
         {
             if (!ModelState.IsValid)
                 return View(model);
@@ -58,17 +58,17 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
 
             bool status = await expertiseLayersService.Update(model);
             if (status)
-                return RedirectToAction("List");
+                return RedirectToAction("SkillLevelList");
 
             return View(model);
         }
 
 
         [HttpGet]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> SkillLevelDelete(int id)
         {
             bool status = await expertiseLayersService.Delete(id);
-            return RedirectToAction("List");
+            return RedirectToAction("SkillLevelList");
 
         }
 
@@ -95,7 +95,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
 
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddExperiences(ExperienceFormViewModel model)
+        public async Task<IActionResult> AddExperiences(SkillFormViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -120,7 +120,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(ExperienceFormViewModel model)
+        public async Task<IActionResult> Edit(SkillFormViewModel model)
         {
             //if (!ModelState.IsValid)
             //{

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace OurResumeIR.Application.ViewModels.Experience
 {
-    public class ExperienceFormViewModel
+    public class SkillFormViewModel
     {
 
         public int Id { get; set; }
@@ -17,8 +17,8 @@ namespace OurResumeIR.Application.ViewModels.Experience
         [Required(ErrorMessage = "نام تخصص را وارد کنید")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "سطح تخصص را انتخاب کنید")]
-        public int ExpertiseLayerId { get; set; }
+        //[Required(ErrorMessage = "سطح تخصص را انتخاب کنید")]
+        //public int ExpertiseLayerId { get; set; }
 
         // برای DropDown
         public List<SelectListItem> ExpertiseLayerOptions { get; set; } = new();

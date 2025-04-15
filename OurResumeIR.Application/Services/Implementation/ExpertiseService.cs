@@ -7,11 +7,11 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OurResumeIR.Application.ViewModels.Experience;
+using OurResumeIR.Application.ViewModels.ExpertiseLayers;
 using OurResumeIR.Domain.Interfaces;
 using OurResumeIR.Domain.Models;
 using OurResumeIR.Infra.Data.Context;
 using OurResumeIR.Infra.Data.Repositories;
-using ExpertiseLayerVM = OurResumeIR.Application.ViewModels.ExpertiseLayers.ExpertiseLayerVM;
 
 namespace OurResumeIR.Application.Services.Interfaces
 {
@@ -24,12 +24,12 @@ namespace OurResumeIR.Application.Services.Interfaces
       
         
         #region Specialties Layer
-        public async Task<List<ExpertiseLayerVM>> GetAll()
+        public async Task<List<SkillLevelVM>> GetAll()
         {
             try
             {
                 var list = (await rep_SkillLevel.FindAsync(a => a.Id != 0)).ToList();
-                return mapper.Map<List<ExpertiseLayerVM>>(list);
+                return mapper.Map<List<SkillLevelVM>>(list);
             }
             catch (Exception e)
             {
@@ -39,12 +39,12 @@ namespace OurResumeIR.Application.Services.Interfaces
 
         }
 
-        public async Task<ExpertiseLayerVM> GetById(int Id)
+        public async Task<SkillLevelVM> GetById(int Id)
         {
-            return mapper.Map<ExpertiseLayerVM>((await rep_SkillLevel.FindAsync(a => a.Id == Id)).FirstOrDefault());
+            return mapper.Map<SkillLevelVM>((await rep_SkillLevel.FindAsync(a => a.Id == Id)).FirstOrDefault());
         }
 
-        public async Task<bool> Update(UpdateExpertiseLayerVM model)
+        public async Task<bool> Update(UpdateSkillLevelVM model)
         {
             var newModel = mapper.Map<SkillLevel>(model);
             bool status = await rep_SkillLevel.UpdateSkillLevelLevel(newModel);
@@ -53,7 +53,7 @@ namespace OurResumeIR.Application.Services.Interfaces
             return status;
         }
 
-        public async Task<bool> Create(CreateExpertiseLayerVM model)
+        public async Task<bool> Create(CreateSkillLevelVM model)
         {
             var newModel = mapper.Map<SkillLevel>(model);
             int id = await rep_SkillLevel.CreateSkillLevelLevel(newModel);
@@ -80,12 +80,12 @@ namespace OurResumeIR.Application.Services.Interfaces
 
         #region Specialties 
 
-        public Task<List<ExperienceFormViewModel>> GetAllAsync()
+        public Task<List<SkillFormViewModel>> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public async Task CreateAsync(ExperienceFormViewModel model)
+        public async Task CreateAsync(SkillFormViewModel model)
         {
             Skill newSkill = new Skill()
             {
@@ -98,10 +98,10 @@ namespace OurResumeIR.Application.Services.Interfaces
            
         }
 
-        public async Task<ExperienceFormViewModel> GetAllExperiencesLayerAsync()
+        public async Task<SkillFormViewModel> GetAllExperiencesLayerAsync()
         {
             var layers = await rep_Skill.GetAllSkillLevelAsync();
-            return new ExperienceFormViewModel
+            return new SkillFormViewModel
             {
                 ExpertiseLayerOptions = layers.Select(l => new SelectListItem
                 {
@@ -111,7 +111,7 @@ namespace OurResumeIR.Application.Services.Interfaces
             };
         }
 
-        public async Task AddExperienceAsync(ExperienceFormViewModel model)
+        public async Task AddExperienceAsync(SkillFormViewModel model)
         {
             var experience = new Skill
             {
@@ -122,26 +122,26 @@ namespace OurResumeIR.Application.Services.Interfaces
             await rep_Skill.AddSkillAsync(experience);
         }
 
-        public async Task<List<ExperienceListViewModel>> GetAllExperiencesAsync()
+        public async Task<List<SkillListViewModel>> GetAllExperiencesAsync()
         {
             var experiences = await rep_Skill.GetAllSkillAsync();
 
-            //return experiences.Select(e => new ExperienceListViewModel
+            //return experiences.Select(e => new SkillListViewModel
             //{
             //    Id = e.Id,
             //    Name = e.Name,
             //    ExpertiseLayerTitle = e.SkillLevel.Name
             //}).ToList();
-            return mapper.Map<List<ExperienceListViewModel>>(experiences);
+            return mapper.Map<List<SkillListViewModel>>(experiences);
         }
 
-        //public Task<ExperienceFormViewModel> GetExperienceByIdAsync(int id)
+        //public Task<SkillFormViewModel> GetExperienceByIdAsync(int id)
         //{
         //    //return await _repository.GetExperienceFormByIdAsync(id);
         //    throw new NotImplementedException();
         //}
 
-        public async Task<ExperienceFormViewModel> GetExperienceFormByIdAsync(int id)
+        public async Task<SkillFormViewModel> GetExperienceFormByIdAsync(int id)
         {
             var experience = await rep_Skill.GetByIdAsync(id);
             var layers = await rep_Skill.GetAllSkillLevelAsync();
@@ -149,7 +149,7 @@ namespace OurResumeIR.Application.Services.Interfaces
             if (experience == null)
                 return null;
 
-            return new ExperienceFormViewModel
+            return new SkillFormViewModel
             {
                 Id = experience.Id,
                 Name = experience.Name,
@@ -162,7 +162,7 @@ namespace OurResumeIR.Application.Services.Interfaces
             };
         }
 
-        public async Task<bool> UpdateExperienceAsync(ExperienceFormViewModel model)
+        public async Task<bool> UpdateExperienceAsync(SkillFormViewModel model)
         {
             var experience = await rep_Skill.GetByIdAsync(model.Id);
             if (experience == null)
