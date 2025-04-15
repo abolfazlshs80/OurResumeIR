@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using OurResumeIR.Domain.Interfaces;
 using OurResumeIR.MVC.Models;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace OurResumeIR.MVC.Controllers
 {
@@ -19,7 +20,10 @@ namespace OurResumeIR.MVC.Controllers
         [Route("/")]
         public IActionResult Index()
         {
-    
+            if (User.Identity.IsAuthenticated)
+            {
+               // var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            }
             return View();
        
         }

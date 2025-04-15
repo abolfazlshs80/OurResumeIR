@@ -13,6 +13,8 @@ namespace OurResumeIR.Domain.Interfaces
         IDocumentsRepository DocumentsRepository { get; }
         IHistoryRepository HistoryRepository { get; }
         IUserRepository UserRepository { get; }
+        ISkillRepository SkillRepository { get; }
+        ISkillLevelRepository SkillLevelRepository { get; }
 
         Task<int> SaveChangesAsync();
     }

@@ -16,7 +16,7 @@ using OurResumeIR.Infra.Data.Repositories;
 namespace OurResumeIR.Application.Services.Interfaces
 {
    
-    public class SkillService(ISkillLevelRepository rep_SkillLevel, 
+    public class SkillService( IUnitOfWork unitOfWork,
         IMapper mapper ,
         ISkillRepository rep_Skill) 
         : ISkillService
@@ -26,6 +26,7 @@ namespace OurResumeIR.Application.Services.Interfaces
         #region Specialties Layer
         public async Task<List<SkillLevelVM>> GetAll()
         {
+            var rep_SkillLevel = unitOfWork.SkillLevelRepository;
             try
             {
                 var list = (await rep_SkillLevel.FindAsync(a => a.Id != 0)).ToList();
@@ -41,11 +42,13 @@ namespace OurResumeIR.Application.Services.Interfaces
 
         public async Task<SkillLevelVM> GetById(int Id)
         {
+            var rep_SkillLevel = unitOfWork.SkillLevelRepository;
             return mapper.Map<SkillLevelVM>((await rep_SkillLevel.FindAsync(a => a.Id == Id)).FirstOrDefault());
         }
 
         public async Task<bool> Update(UpdateSkillLevelVM model)
         {
+            var rep_SkillLevel = unitOfWork.SkillLevelRepository;
             var newModel = mapper.Map<SkillLevel>(model);
             bool status = await rep_SkillLevel.UpdateSkillLevelLevel(newModel);
             await rep_SkillLevel.SaveChanges();
@@ -55,6 +58,7 @@ namespace OurResumeIR.Application.Services.Interfaces
 
         public async Task<bool> Create(CreateSkillLevelVM model)
         {
+            var rep_SkillLevel = unitOfWork.SkillLevelRepository;
             var newModel = mapper.Map<SkillLevel>(model);
             int id = await rep_SkillLevel.CreateSkillLevelLevel(newModel);
             await rep_SkillLevel.SaveChanges();
@@ -67,6 +71,7 @@ namespace OurResumeIR.Application.Services.Interfaces
 
         public async Task<bool> Delete(int Id)
         {
+            var rep_SkillLevel = unitOfWork.SkillLevelRepository;
             var status = await rep_SkillLevel.DeleteSkillLevelLevel(Id);
             await rep_SkillLevel.SaveChanges();
             return status;

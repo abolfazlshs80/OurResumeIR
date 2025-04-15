@@ -25,6 +25,16 @@ namespace OurResumeIR.Infra.Data.Repositories
  
         public async Task<IQueryable<UserToSkill>> FindAsync(Expression<Func<UserToSkill, bool>> predicate)
         {
+            //_context.UserToSkill
+            //    .Include(a=>a.SkillLevel)
+            //    .Include(a=>a.Skill)
+            //    .Where(a => a.UserId == "");
+            //_context.UserToSkill.AddAsync(new UserToSkill()
+            //{
+            //    SkillId = 1,
+            //    SkillLevelId = 2,
+            //    UserId = ""
+            //})
             return  _context.UserToSkill.Where(predicate).AsQueryable();
         }
 
