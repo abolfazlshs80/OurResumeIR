@@ -16,10 +16,10 @@ using OurResumeIR.Infra.Data.Repositories;
 namespace OurResumeIR.Application.Services.Interfaces
 {
    
-    public class ExpertiseService(ISkillLevelRepository rep_SkillLevel, 
+    public class SkillService(ISkillLevelRepository rep_SkillLevel, 
         IMapper mapper ,
         ISkillRepository rep_Skill) 
-        : IExpertiseService
+        : ISkillService
     {
       
         
@@ -98,7 +98,7 @@ namespace OurResumeIR.Application.Services.Interfaces
            
         }
 
-        public async Task<SkillFormViewModel> GetAllExperiencesLayerAsync()
+        public async Task<SkillFormViewModel> GetAllSkillLevelAsync()
         {
             var layers = await rep_Skill.GetAllSkillLevelAsync();
             return new SkillFormViewModel
@@ -111,7 +111,7 @@ namespace OurResumeIR.Application.Services.Interfaces
             };
         }
 
-        public async Task AddExperienceAsync(SkillFormViewModel model)
+        public async Task AddSkillAsync(SkillFormViewModel model)
         {
             var experience = new Skill
             {
@@ -122,7 +122,7 @@ namespace OurResumeIR.Application.Services.Interfaces
             await rep_Skill.AddSkillAsync(experience);
         }
 
-        public async Task<List<SkillListViewModel>> GetAllExperiencesAsync()
+        public async Task<List<SkillListViewModel>> GetAllSkillAsync()
         {
             var experiences = await rep_Skill.GetAllSkillAsync();
 
@@ -137,11 +137,11 @@ namespace OurResumeIR.Application.Services.Interfaces
 
         //public Task<SkillFormViewModel> GetExperienceByIdAsync(int id)
         //{
-        //    //return await _repository.GetExperienceFormByIdAsync(id);
+        //    //return await _repository.GetSkillFormByIdAsync(id);
         //    throw new NotImplementedException();
         //}
 
-        public async Task<SkillFormViewModel> GetExperienceFormByIdAsync(int id)
+        public async Task<SkillFormViewModel> GetSkillFormByIdAsync(int id)
         {
             var experience = await rep_Skill.GetByIdAsync(id);
             var layers = await rep_Skill.GetAllSkillLevelAsync();
@@ -162,7 +162,7 @@ namespace OurResumeIR.Application.Services.Interfaces
             };
         }
 
-        public async Task<bool> UpdateExperienceAsync(SkillFormViewModel model)
+        public async Task<bool> UpdateSkillAsync(SkillFormViewModel model)
         {
             var experience = await rep_Skill.GetByIdAsync(model.Id);
             if (experience == null)
@@ -175,7 +175,7 @@ namespace OurResumeIR.Application.Services.Interfaces
             return true;
         }
 
-        public async Task<bool> DeleteExperienceAsync(int id)
+        public async Task<bool> DeleteSkillAsync(int id)
         {
             var experience = await rep_Skill.GetByIdAsync(id);
             if (experience == null)

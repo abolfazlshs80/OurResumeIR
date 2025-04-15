@@ -16,7 +16,7 @@ namespace OurResumeIR.MVC.Controllers
             _unitOfWork = unitOfWork;
             _logger = logger;
         }
-
+        [Route("/")]
         public IActionResult Index()
         {
     

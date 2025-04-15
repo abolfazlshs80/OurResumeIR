@@ -9,7 +9,7 @@ using OurResumeIR.Domain.Models;
 
 namespace OurResumeIR.Application.Services.Interfaces
 {
-    public  interface IExpertiseService
+    public  interface ISkillService
     {
         #region Specialties Layer
 
@@ -28,12 +28,12 @@ namespace OurResumeIR.Application.Services.Interfaces
     
         Task<List<SkillFormViewModel>> GetAllAsync();
         Task CreateAsync(SkillFormViewModel model);
-        Task<SkillFormViewModel> GetAllExperiencesLayerAsync(); // برای نمایش لیست تمام سطح های تخصص
-        Task AddExperienceAsync(SkillFormViewModel model);
-        Task<List<SkillListViewModel>> GetAllExperiencesAsync();
-        Task<SkillFormViewModel> GetExperienceFormByIdAsync(int id);
-        Task<bool> UpdateExperienceAsync(SkillFormViewModel model);
-        Task<bool> DeleteExperienceAsync(int id);
+        Task<SkillFormViewModel> GetAllSkillLevelAsync(); // برای نمایش لیست تمام سطح های تخصص
+        Task AddSkillAsync(SkillFormViewModel model);
+        Task<List<SkillListViewModel>> GetAllSkillAsync();
+        Task<SkillFormViewModel> GetSkillFormByIdAsync(int id);
+        Task<bool> UpdateSkillAsync(SkillFormViewModel model);
+        Task<bool> DeleteSkillAsync(int id);
 
         #endregion
 

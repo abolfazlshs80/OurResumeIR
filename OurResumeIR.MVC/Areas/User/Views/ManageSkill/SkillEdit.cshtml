@@ -11,7 +11,7 @@
         </div>
 
         <div class="card-body">
-            <form asp-action="Edit" asp-controller="ManageExpertise" asp-area="User" method="post">
+            <form asp-action="SkillEdit" asp-controller="ManageSkill" asp-area="User" method="post">
                 <input type="hidden" asp-for="Id" />
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -20,11 +20,11 @@
                     <input asp-for="Name" class="form-control" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
-
+@* 
                 <div class="mb-3">
                     @Html.DropDownListFor(a => a.ExpertiseLayerId, Model.ExpertiseLayerOptions, "سطح تخصص", new { @class = "form-select text-end" })
                     <span asp-validation-for="ExpertiseLayerId" class="text-danger"></span>
-                </div>
+                </div> *@
 
                 <button type="submit" class="btn btn-primary">ذخیره تغییرات</button>
             </form>

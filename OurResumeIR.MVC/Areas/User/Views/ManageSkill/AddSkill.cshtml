@@ -16,7 +16,7 @@
         </div>
 
         <div class="card-body">
-            <form asp-action="AddExperiences" asp-controller="ManageExpertise" asp-area="User" method="post">
+            <form asp-action="AddSkill" asp-controller="ManageSkill" asp-area="User" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 @*                 <input type="hidden" name="__RequestVerificationToken" value="@Antiforgery.GetTokens(HttpContext).RequestToken" />
  *@   
@@ -28,8 +28,8 @@
 
                 <div class="mb-3" >
                   @*   <label  asp-for="SkillLevelId" class="form-label"></label> *@
-                    @Html.DropDownListFor(a => a.ExpertiseLayerId, Model.ExpertiseLayerOptions, "سطح تخصص", new { @class = "form-select text-end" })
-               @*      <select asp-for="SkillLevelId" asp-items="Model.SkillLevelOptions" class="form-select text-end">
+        @*             @Html.DropDownListFor(a => a.ExpertiseLayerId, Model.ExpertiseLayerOptions, "سطح تخصص", new { @class = "form-select text-end" })
+          *@      @*      <select asp-for="SkillLevelId" asp-items="Model.SkillLevelOptions" class="form-select text-end">
                         <option  value="">-- انتخاب سطح --</option> <!-- این فقط گزینه‌ی خالی اولیه‌ست -->
                     </select> *@
                    @*  <span asp-validation-for="SkillLevelId" class="text-danger"></span> *@

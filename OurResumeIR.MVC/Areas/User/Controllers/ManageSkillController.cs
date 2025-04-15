@@ -9,13 +9,13 @@ using OurResumeIR.Infra.Data.Repositories;
 namespace OurResumeIR.MVC.Areas.User.Controllers
 {
     [Area("User")]
-    public class ManageSkillController(IExpertiseService expertiseLayersService, IMapper mapper) : Controller
+    public class ManageSkillController(ISkillService skillLayersService, IMapper mapper) : Controller
     {
         #region SkillLevel Layer
 
         public async Task<IActionResult> SkillLevelList()
         {
-            var list = await expertiseLayersService.GetAll();
+            var list = await skillLayersService.GetAll();
 
             return View(list);
         }
@@ -29,7 +29,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
                 return View(model);
 
 
-            bool status = await expertiseLayersService.Create(model);
+            bool status = await skillLayersService.Create(model);
             if (status)
                 return RedirectToAction("SkillLevelList");
 
@@ -40,7 +40,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         public async Task<IActionResult> SkillLevelUpdate(int id)
         {
 
-            var find_xpertiseLayers = await expertiseLayersService.GetById(id);
+            var find_xpertiseLayers = await skillLayersService.GetById(id);
             if (find_xpertiseLayers == null)
                 return NotFound();
             return View(mapper.Map<UpdateSkillLevelVM>(find_xpertiseLayers));
@@ -56,7 +56,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
                 return View(model);
 
 
-            bool status = await expertiseLayersService.Update(model);
+            bool status = await skillLayersService.Update(model);
             if (status)
                 return RedirectToAction("SkillLevelList");
 
@@ -67,7 +67,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         [HttpGet]
         public async Task<IActionResult> SkillLevelDelete(int id)
         {
-            bool status = await expertiseLayersService.Delete(id);
+            bool status = await skillLayersService.Delete(id);
             return RedirectToAction("SkillLevelList");
 
         }
@@ -79,64 +79,64 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> SkillIndex()
         {
-            var list = await expertiseLayersService.GetAllExperiencesAsync();
+            var list = await skillLayersService.GetAllSkillAsync();
             return View(list);
         }
 
 
         [HttpGet]
-        public async Task<IActionResult> AddExperiences()
+        public async Task<IActionResult> AddSkill()
         {
-            var viewModel = await expertiseLayersService.GetAllExperiencesLayerAsync();
+            var viewModel = await skillLayersService.GetAllSkillLevelAsync();
             return View(viewModel);
         }
 
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddExperiences(SkillFormViewModel model)
+        public async Task<IActionResult> AddSkill(SkillFormViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 // دوباره لیست سطح‌ها رو برای DropDown پر می‌کنیم
-                model = await expertiseLayersService.GetAllExperiencesLayerAsync();
+                model = await skillLayersService.GetAllSkillLevelAsync();
                 model.Name = model.Name; // چون ممکنه کاربر مقداری وارد کرده باشد
-                model.ExpertiseLayerId = model.ExpertiseLayerId;
+                //model.ExpertiseLayerId = model.ExpertiseLayerId;
                 return View(model);
             }
 
-            await expertiseLayersService.AddExperienceAsync(model);
-            return RedirectToAction("Index"); 
+            await skillLayersService.AddSkillAsync(model);
+            return RedirectToAction("SkillIndex"); 
         }
 
 
 
         [HttpGet]
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> SkillEdit(int id)
         {
-            var model = await expertiseLayersService.GetExperienceFormByIdAsync(id);
+            var model = await skillLayersService.GetSkillFormByIdAsync(id);
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(SkillFormViewModel model)
+        public async Task<IActionResult> SkillEdit(SkillFormViewModel model)
         {
             //if (!ModelState.IsValid)
             //{
-            //    model = await expertiseLayersService.GetCreateFormAsync(model);
+            //    model = await skillLayersService.GetCreateFormAsync(model);
             //    return View(model);
             //}
 
-            //await expertiseLayersService.UpdateExperienceAsync(model);
-            //return RedirectToAction("Index");
+            //await skillLayersService.UpdateSkillAsync(model);
+            //return RedirectToAction("SkillIndex");
 
 
 
             if (!ModelState.IsValid)
             {
                 //// لیست سطح‌ها رو دوباره بارگذاری می‌کنیم
-                //var layers = await expertiseLayersService.GetAllExperiencesLayerAsync();
+                //var layers = await skillLayersService.GetAllSkillLevelAsync();
                 //model.ExpertiseLayerOptions = layers.Select(l => new SelectListItem
                 //{
                 //    Value = l.Id.ToString(),
@@ -146,22 +146,22 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
                 return View(model);
             }
 
-            var result = await expertiseLayersService.UpdateExperienceAsync(model);
+            var result = await skillLayersService.UpdateSkillAsync(model);
             if (!result)
                 return NotFound();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("SkillIndex");
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> DeleteExperiences(int id)
+        public async Task<IActionResult> DeleteSkill(int id)
         {
-            var result = await expertiseLayersService.DeleteExperienceAsync(id);
+            var result = await skillLayersService.DeleteSkillAsync(id);
             if (!result)
                 return NotFound();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("SkillIndex");
         }
 
 
