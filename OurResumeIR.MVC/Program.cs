@@ -27,8 +27,8 @@ namespace OurResumeIR.MVC
             builder.Services.RegisterService(connectionString);
 
             // ثبت سرویس‌ها از IoC
-    
-            builder.Services.RegisterService(connectionString); 
+
+            builder.Services.RegisterService(connectionString);
 
             // تنظیمات Identity
             builder.Services.AddIdentity<User, IdentityRole>()
@@ -55,7 +55,10 @@ namespace OurResumeIR.MVC
                 name: "areas",
                 pattern: "{area:exists}/{controller=User}/{action=ProFile}/{id?}"
             );
-            app.MapControllerRoute(
+
+   
+
+                app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
