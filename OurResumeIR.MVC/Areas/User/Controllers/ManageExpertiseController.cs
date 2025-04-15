@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using OurResumeIR.Application.Services.Interfaces;
 using OurResumeIR.Application.ViewModels.Experience;
+using OurResumeIR.Domain.Models;
+using OurResumeIR.Infra.Data.Repositories;
 
 namespace OurResumeIR.MVC.Areas.User.Controllers
 {
@@ -83,8 +86,6 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         }
 
 
-
-
         [HttpGet]
         public async Task<IActionResult> AddExperiences()
         {
@@ -118,18 +119,51 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             return View(model);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Edit(ExperienceFormViewModel model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        model = await expertiseLayersService.GetCreateFormAsync(model);
-        //        return View(model);
-        //    }
+        [HttpPost]
+        public async Task<IActionResult> Edit(ExperienceFormViewModel model)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    model = await expertiseLayersService.GetCreateFormAsync(model);
+            //    return View(model);
+            //}
 
-        //    await expertiseLayersService.UpdateExperienceAsync(model);
-        //    return RedirectToAction("Index");
-        //}
+            //await expertiseLayersService.UpdateExperienceAsync(model);
+            //return RedirectToAction("Index");
+
+
+
+            if (!ModelState.IsValid)
+            {
+                //// لیست سطح‌ها رو دوباره بارگذاری می‌کنیم
+                //var layers = await expertiseLayersService.GetAllExperiencesLayerAsync();
+                //model.ExpertiseLayerOptions = layers.Select(l => new SelectListItem
+                //{
+                //    Value = l.Id.ToString(),
+                //    Text = l.Title
+                //}).ToList();
+
+                return View(model);
+            }
+
+            var result = await expertiseLayersService.UpdateExperienceAsync(model);
+            if (!result)
+                return NotFound();
+
+            return RedirectToAction("Index");
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteExperiences(int id)
+        {
+            var result = await expertiseLayersService.DeleteExperienceAsync(id);
+            if (!result)
+                return NotFound();
+
+            return RedirectToAction("Index");
+        }
+
 
         #endregion
 

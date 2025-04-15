@@ -32,6 +32,8 @@ namespace OurResumeIR.Application.Services.Interfaces
         Task AddExperienceAsync(ExperienceFormViewModel model);
         Task<List<ExperienceListViewModel>> GetAllExperiencesAsync();
         Task<ExperienceFormViewModel> GetExperienceFormByIdAsync(int id);
+        Task<bool> UpdateExperienceAsync(ExperienceFormViewModel model);
+        Task<bool> DeleteExperienceAsync(int id);
 
         #endregion
 

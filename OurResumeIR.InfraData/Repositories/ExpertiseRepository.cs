@@ -32,9 +32,10 @@ namespace OurResumeIR.Infra.Data.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public Task<Experience> DeleteExpertise(int ExpertiseId)
+        public async Task DeleteAsync(Experience experience)
         {
-            throw new NotImplementedException();
+            _context.Experiences.Remove(experience);
+            _context.SaveChanges();
         }
 
         public Task<IQueryable<Experience>> FindAsync(Expression<Func<Experience, bool>> predicate)
@@ -66,9 +67,12 @@ namespace OurResumeIR.Infra.Data.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<Experience> UpdateExpertise(Experience Expertise)
+        public async Task UpdateAsync(Experience experience)
         {
-            throw new NotImplementedException();
+            _context.Experiences.Update(experience);
+            await _context.SaveChangesAsync();
         }
+
+    
     }
 }

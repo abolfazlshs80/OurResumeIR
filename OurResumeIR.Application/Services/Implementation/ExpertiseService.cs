@@ -162,6 +162,29 @@ namespace OurResumeIR.Application.Services.Interfaces
             };
         }
 
+        public async Task<bool> UpdateExperienceAsync(ExperienceFormViewModel model)
+        {
+            var experience = await expertise.GetByIdAsync(model.Id);
+            if (experience == null)
+                return false;
+
+            experience.Name = model.Name;
+            experience.ExpertiseLayerId = model.ExpertiseLayerId;
+
+            await expertise.UpdateAsync(experience);
+            return true;
+        }
+
+        public async Task<bool> DeleteExperienceAsync(int id)
+        {
+            var experience = await expertise.GetByIdAsync(id);
+            if (experience == null)
+                return false;
+
+            await expertise.DeleteAsync(experience);
+            return true;
+        }
+
 
         #endregion
 
