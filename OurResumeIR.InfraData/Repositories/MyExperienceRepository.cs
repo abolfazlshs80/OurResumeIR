@@ -18,9 +18,9 @@ namespace OurResumeIR.Infra.Data.Repositories
         {
 
         }
-        public async Task AddExperienceAsync(Experience experience)
+        public async Task AddExperienceAsync(Skill skill)
         {
-            _context.Add(experience);
+            _context.Add(skill);
             await _context.SaveChangesAsync();
         }
 
@@ -29,20 +29,20 @@ namespace OurResumeIR.Infra.Data.Repositories
             throw new NotImplementedException();
         }
 
-        public async Task DeletExperienceAsync(Experience experience)
+        public async Task DeletExperienceAsync(Skill skill)
         {
-            _context.Remove(experience);
+            _context.Remove(skill);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IQueryable<MyExperiences>> GetAllExperiencesAsync()
+        public async Task<IQueryable<History>> GetAllExperiencesAsync()
         {
-            return _context.MyExperiences.AsQueryable();
+            return _context.History.AsQueryable();
         }
 
-        public Task<MyExperiences> GetExperienceByIdAsync(int id)
+        public Task<History> GetExperienceByIdAsync(int id)
         {
-            return _context.MyExperiences.FirstOrDefaultAsync(x => x.Id == id);
+            return _context.History.FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task SaveChangeAsync()
@@ -50,9 +50,9 @@ namespace OurResumeIR.Infra.Data.Repositories
            await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateExperienceAsync(Experience experience)
+        public async Task UpdateExperienceAsync(Skill skill)
         {
-            _context.Update(experience);
+            _context.Update(skill);
             await SaveChangeAsync();
         }
     }

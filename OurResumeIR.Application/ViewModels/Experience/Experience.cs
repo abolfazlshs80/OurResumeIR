@@ -9,5 +9,5 @@ public class ExperienceVM
     public string Name { get; set; }
     // Navigation Property  
     public ExpertiseLayerVM ExpertiseLayer { get; set; }
-  //  public ICollection<UserExpertise> UserExpertise { get; set; }
+  //  public ICollection<UserToSkill> UserToSkill { get; set; }
 }

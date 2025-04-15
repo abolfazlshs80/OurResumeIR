@@ -6,9 +6,9 @@ namespace OurResumeIR.Domain.Interfaces;
 public interface IExpertiseLayerRepository
 {
 
-    Task<IQueryable<ExpertiseLayer>> FindAsync(Expression<Func<ExpertiseLayer, bool>> predicate);
-    Task<int> CreateExpertiseLayer(ExpertiseLayer ExpertiseLayer);
-    Task<bool> UpdateExpertiseLayer(ExpertiseLayer ExpertiseLayer);
+    Task<IQueryable<SkillLevel>> FindAsync(Expression<Func<SkillLevel, bool>> predicate);
+    Task<int> CreateExpertiseLayer(SkillLevel skillLevel);
+    Task<bool> UpdateExpertiseLayer(SkillLevel skillLevel);
     Task<bool> DeleteExpertiseLayer(int ExpertiseLayerId);
     Task<bool> SaveChanges();
 }

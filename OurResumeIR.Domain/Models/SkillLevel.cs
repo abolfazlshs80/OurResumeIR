@@ -1,9 +1,10 @@
 ﻿namespace OurResumeIR.Domain.Models;
 
-public class ExpertiseLayer
+public class SkillLevel
 {
     public int Id { get; set; }
     public string Name { get; set; }
     // Navigation Property  
-    public ICollection<Experience> Experience { get; set; }
+    //public ICollection<Skill> Skill { get; set; }
+    public ICollection<UserToSkill> UserToSkill { get; set; }
 }

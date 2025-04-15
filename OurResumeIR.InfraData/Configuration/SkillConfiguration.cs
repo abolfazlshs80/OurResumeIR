@@ -12,15 +12,16 @@ namespace OurResumeIR.Infra.Data.Configuration
 
 
  
-    public class ExpertiseLayerConfiguration : IEntityTypeConfiguration<ExpertiseLayer>
+    public class SkillConfiguration : IEntityTypeConfiguration<Skill>
     {
-        public void Configure(EntityTypeBuilder<ExpertiseLayer> builder)
+        public void Configure(EntityTypeBuilder<Skill> builder)
         {
             builder.HasKey(e => e.Id);
-           builder.Property(e => e.Name).IsRequired().HasMaxLength(100);
-           builder.HasMany(a => a.Experience)
-               .WithOne(a => a.ExpertiseLayer)
-               .HasForeignKey(a => a.ExpertiseLayerId);
+            builder.Property(e => e.Name).IsRequired().HasMaxLength(100);
+
+       
+
+   
             //// تنظیمات فیلد Shadow برای به‌روزرسانی تاریخ
             //builder.Property<DateTime>("UpdatedDate");
         }

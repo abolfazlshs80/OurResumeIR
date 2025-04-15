@@ -23,23 +23,23 @@ namespace OurResumeIR.Infra.Data.Repositories
 
 
  
-        public async Task<IQueryable<ExpertiseLayer>> FindAsync(Expression<Func<ExpertiseLayer, bool>> predicate)
+        public async Task<IQueryable<SkillLevel>> FindAsync(Expression<Func<SkillLevel, bool>> predicate)
         {
-            return  _context.ExpertiseLayers.Where(predicate).AsQueryable();
+            return  _context.SkillLevel.Where(predicate).AsQueryable();
         }
 
-        public async Task<int> CreateExpertiseLayer(ExpertiseLayer ExpertiseLayer)
+        public async Task<int> CreateExpertiseLayer(SkillLevel skillLevel)
         {
-                _context.Add(ExpertiseLayer);
-                return ExpertiseLayer.Id;
+                _context.Add(skillLevel);
+                return skillLevel.Id;
         
       
             
         }
 
-        public async Task<bool> UpdateExpertiseLayer(ExpertiseLayer ExpertiseLayer)
+        public async Task<bool> UpdateExpertiseLayer(SkillLevel skillLevel)
         {
-                _context.Update(ExpertiseLayer);
+                _context.Update(skillLevel);
                 return true;
          
            
@@ -47,7 +47,7 @@ namespace OurResumeIR.Infra.Data.Repositories
 
         public async Task<bool> DeleteExpertiseLayer(int ExpertiseLayerId)
         {
-                _context.Remove(await _context.ExpertiseLayers.FindAsync(ExpertiseLayerId));
+                _context.Remove(await _context.SkillLevel.FindAsync(ExpertiseLayerId));
                 return true;
           
            

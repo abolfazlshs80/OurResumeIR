@@ -20,56 +20,56 @@ namespace OurResumeIR.Infra.Data.Repositories
         }
 
 
-        public async Task AddExpertise(Experience Expertise)
+        public async Task AddExpertise(Skill Expertise)
         {
             _context.Add(Expertise);
             await _context.SaveChangesAsync();
         }
 
-        public async Task AddExpertiseAsync(Experience experience)
+        public async Task AddExpertiseAsync(Skill skill)
         {
-            _context.Experiences.Add(experience);
+            _context.Skill.Add(skill);
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(Experience experience)
+        public async Task DeleteAsync(Skill skill)
         {
-            _context.Experiences.Remove(experience);
+            _context.Skill.Remove(skill);
             _context.SaveChanges();
         }
 
-        public Task<IQueryable<Experience>> FindAsync(Expression<Func<Experience, bool>> predicate)
+        public Task<IQueryable<Skill>> FindAsync(Expression<Func<Skill, bool>> predicate)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<List<Experience>> GetAllExperiencesAsync()
+        public async Task<List<Skill>> GetAllExperiencesAsync()
         {
-            return await _context.Experiences
-                          .Include(e => e.ExpertiseLayer)
+            return await _context.Skill
+                          //.Include(e => e.SkillLevel)
                           .ToListAsync();
         }
 
-        public async Task<List<ExpertiseLayer>> GetAllExpertiseLayersAsync()
+        public async Task<List<SkillLevel>> GetAllExpertiseLayersAsync()
         {
-            return await _context.ExpertiseLayers.ToListAsync();
+            return await _context.SkillLevel.ToListAsync();
         }
 
-        public async Task<Experience> GetByIdAsync(int id)
+        public async Task<Skill> GetByIdAsync(int id)
         {
-            return await _context.Experiences
-                  .Include(e => e.ExpertiseLayer) // برای جلوگیری از خطای null
+            return await _context.Skill
+                  //.Include(e => e.SkillLevel) // برای جلوگیری از خطای null
                   .FirstOrDefaultAsync(e => e.Id == id);
         }
 
-        public Task<Experience> SaveChangesAsync()
+        public Task<Skill> SaveChangesAsync()
         {
             throw new NotImplementedException();
         }
 
-        public async Task UpdateAsync(Experience experience)
+        public async Task UpdateAsync(Skill skill)
         {
-            _context.Experiences.Update(experience);
+            _context.Skill.Update(skill);
             await _context.SaveChangesAsync();
         }
 

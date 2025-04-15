@@ -21,7 +21,7 @@ namespace OurResumeIR.Application.ViewModels.Experience
 
         // 👇 این ویژگی جدید برای نمایش سطح تخصص
         //public string ExpertiseLayerTitle { get; set; }
-        public ExpertiseLayer ExpertiseLayer { get; set; }
+        public SkillLevel SkillLevel { get; set; }
 
         //// برای DropDown
         //public List<SelectListItem> ExpertiseLayerOptions { get; set; } = new();

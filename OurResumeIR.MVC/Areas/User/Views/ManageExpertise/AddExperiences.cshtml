@@ -27,12 +27,12 @@
                 </div>
 
                 <div class="mb-3" >
-                  @*   <label  asp-for="ExpertiseLayerId" class="form-label"></label> *@
+                  @*   <label  asp-for="SkillLevelId" class="form-label"></label> *@
                     @Html.DropDownListFor(a => a.ExpertiseLayerId, Model.ExpertiseLayerOptions, "سطح تخصص", new { @class = "form-select text-end" })
-               @*      <select asp-for="ExpertiseLayerId" asp-items="Model.ExpertiseLayerOptions" class="form-select text-end">
+               @*      <select asp-for="SkillLevelId" asp-items="Model.SkillLevelOptions" class="form-select text-end">
                         <option  value="">-- انتخاب سطح --</option> <!-- این فقط گزینه‌ی خالی اولیه‌ست -->
                     </select> *@
-                   @*  <span asp-validation-for="ExpertiseLayerId" class="text-danger"></span> *@
+                   @*  <span asp-validation-for="SkillLevelId" class="text-danger"></span> *@
                 </div>
 
                 <button  type="submit" class="btn btn-primary">ثبت تخصص</button>

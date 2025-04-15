@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace OurResumeIR.Domain.Models
 {
-    public class UserExpertise
+    public class History
     {
         public int Id { get; set; }
+        public string Name { get; set; }
         public string UserId { get; set; }
-        public int ExpertiseId { get; set; }
 
-        // Navigation Property  
-        public Experience Expertise { get; set; }
+        // Navigation Property
         public User User { get; set; }
     }
 }

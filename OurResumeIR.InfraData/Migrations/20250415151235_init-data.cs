@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace OurResumeIR.Infra.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class initiDb : Migration
+    public partial class initdata : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -51,7 +51,7 @@ namespace OurResumeIR.Infra.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ExpertiseLayers",
+                name: "Skill",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -60,7 +60,20 @@ namespace OurResumeIR.Infra.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ExpertiseLayers", x => x.Id);
+                    table.PrimaryKey("PK_Skill", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SkillLevel",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SkillLevel", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -85,7 +98,7 @@ namespace OurResumeIR.Infra.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AboutMes",
+                name: "AboutMe",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -96,9 +109,9 @@ namespace OurResumeIR.Infra.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AboutMes", x => x.Id);
+                    table.PrimaryKey("PK_AboutMe", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AboutMes_AspNetUsers_UserId",
+                        name: "FK_AboutMe_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -235,7 +248,7 @@ namespace OurResumeIR.Infra.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MyExperiences",
+                name: "History",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -245,9 +258,9 @@ namespace OurResumeIR.Infra.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MyExperiences", x => x.Id);
+                    table.PrimaryKey("PK_History", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_MyExperiences_AspNetUsers_UserId",
+                        name: "FK_History_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -255,54 +268,41 @@ namespace OurResumeIR.Infra.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Experiences",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ExpertiseLayerId = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Experiences", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Experiences_ExpertiseLayers_ExpertiseLayerId",
-                        column: x => x.ExpertiseLayerId,
-                        principalTable: "ExpertiseLayers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserExpertises",
+                name: "UserToSkill",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ExpertiseId = table.Column<int>(type: "int", nullable: false)
+                    SkillId = table.Column<int>(type: "int", nullable: false),
+                    SkillLevelId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserExpertises", x => x.Id);
+                    table.PrimaryKey("PK_UserToSkill", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserExpertises_AspNetUsers_UserId",
+                        name: "FK_UserToSkill_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserExpertises_Experiences_ExpertiseId",
-                        column: x => x.ExpertiseId,
-                        principalTable: "Experiences",
+                        name: "FK_UserToSkill_SkillLevel_SkillLevelId",
+                        column: x => x.SkillLevelId,
+                        principalTable: "SkillLevel",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserToSkill_Skill_SkillId",
+                        column: x => x.SkillId,
+                        principalTable: "Skill",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AboutMes_UserId",
-                table: "AboutMes",
+                name: "IX_AboutMe_UserId",
+                table: "AboutMe",
                 column: "UserId",
                 unique: true);
 
@@ -356,23 +356,23 @@ namespace OurResumeIR.Infra.Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Experiences_ExpertiseLayerId",
-                table: "Experiences",
-                column: "ExpertiseLayerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MyExperiences_UserId",
-                table: "MyExperiences",
+                name: "IX_History_UserId",
+                table: "History",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserExpertises_ExpertiseId",
-                table: "UserExpertises",
-                column: "ExpertiseId");
+                name: "IX_UserToSkill_SkillId",
+                table: "UserToSkill",
+                column: "SkillId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserExpertises_UserId",
-                table: "UserExpertises",
+                name: "IX_UserToSkill_SkillLevelId",
+                table: "UserToSkill",
+                column: "SkillLevelId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserToSkill_UserId",
+                table: "UserToSkill",
                 column: "UserId");
         }
 
@@ -380,7 +380,7 @@ namespace OurResumeIR.Infra.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AboutMes");
+                name: "AboutMe");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
@@ -404,10 +404,10 @@ namespace OurResumeIR.Infra.Data.Migrations
                 name: "Documents");
 
             migrationBuilder.DropTable(
-                name: "MyExperiences");
+                name: "History");
 
             migrationBuilder.DropTable(
-                name: "UserExpertises");
+                name: "UserToSkill");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -416,10 +416,10 @@ namespace OurResumeIR.Infra.Data.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Experiences");
+                name: "SkillLevel");
 
             migrationBuilder.DropTable(
-                name: "ExpertiseLayers");
+                name: "Skill");
         }
     }
 }

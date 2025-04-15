@@ -9,11 +9,11 @@ namespace OurResumeIR.Domain.Interfaces
 {
     public interface IMyExperiencesRepository
     {
-        Task<IQueryable<MyExperiences>> GetAllExperiencesAsync();
-        Task<MyExperiences> GetExperienceByIdAsync(int id);
-        Task AddExperienceAsync(Experience experience);
-        Task UpdateExperienceAsync(Experience experience);
-        Task DeletExperienceAsync(Experience experience);
+        Task<IQueryable<History>> GetAllExperiencesAsync();
+        Task<History> GetExperienceByIdAsync(int id);
+        Task AddExperienceAsync(Skill skill);
+        Task UpdateExperienceAsync(Skill skill);
+        Task DeletExperienceAsync(Skill skill);
         Task DeleteExperienceByIdAsync(int id);
         Task SaveChangeAsync();
     }

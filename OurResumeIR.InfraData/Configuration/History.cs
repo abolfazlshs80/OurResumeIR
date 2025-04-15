@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace OurResumeIR.Infra.Data.Configuration
 {
-    public class MyExperienceConfiguration : IEntityTypeConfiguration<MyExperiences>
+    public class HistoryConfiguration : IEntityTypeConfiguration<History>
     {
-        public void Configure(EntityTypeBuilder<MyExperiences> builder)
+        public void Configure(EntityTypeBuilder<History> builder)
         {
             builder.HasKey(x => x.Id);
 
@@ -21,7 +21,7 @@ namespace OurResumeIR.Infra.Data.Configuration
             
 
             builder.HasOne(m => m.User)
-                .WithMany(m => m.MyExperiences);
+                .WithMany(m => m.History);
         }
     }
 }

@@ -13,10 +13,10 @@ namespace OurResumeIR.Domain.Models
   
 
         // Navigation Property  
-        public ICollection<UserExpertise> UserExpertise { get; set; }
+        public ICollection<UserToSkill> UserToSkill { get; set; }
         public ICollection<Blog> Blog { get; set; }
         public ICollection<Documents> Documents { get; set; }
-        public ICollection<MyExperiences> MyExperiences { get; set; }
+        public ICollection<History> History { get; set; }
         public AboutMe AboutMe { get; set; }
     }
 }

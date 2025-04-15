@@ -180,7 +180,7 @@ namespace OurResumeIR.Infra.Data.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("AboutMes");
+                    b.ToTable("AboutMe");
                 });
 
             modelBuilder.Entity("OurResumeIR.Domain.Models.Blog", b =>
@@ -250,48 +250,7 @@ namespace OurResumeIR.Infra.Data.Migrations
                     b.ToTable("Documents");
                 });
 
-            modelBuilder.Entity("OurResumeIR.Domain.Models.Experience", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ExpertiseLayerId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ExpertiseLayerId");
-
-                    b.ToTable("Experiences");
-                });
-
-            modelBuilder.Entity("OurResumeIR.Domain.Models.ExpertiseLayer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ExpertiseLayers");
-                });
-
-            modelBuilder.Entity("OurResumeIR.Domain.Models.MyExperiences", b =>
+            modelBuilder.Entity("OurResumeIR.Domain.Models.History", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -312,7 +271,43 @@ namespace OurResumeIR.Infra.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("MyExperiences");
+                    b.ToTable("History");
+                });
+
+            modelBuilder.Entity("OurResumeIR.Domain.Models.Skill", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Skill");
+                });
+
+            modelBuilder.Entity("OurResumeIR.Domain.Models.SkillLevel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SkillLevel");
                 });
 
             modelBuilder.Entity("OurResumeIR.Domain.Models.User", b =>
@@ -380,7 +375,7 @@ namespace OurResumeIR.Infra.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("OurResumeIR.Domain.Models.UserExpertise", b =>
+            modelBuilder.Entity("OurResumeIR.Domain.Models.UserToSkill", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -388,7 +383,10 @@ namespace OurResumeIR.Infra.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ExpertiseId")
+                    b.Property<int>("SkillId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SkillLevelId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
@@ -397,11 +395,13 @@ namespace OurResumeIR.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ExpertiseId");
+                    b.HasIndex("SkillId");
+
+                    b.HasIndex("SkillLevelId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserExpertises");
+                    b.ToTable("UserToSkill");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -488,21 +488,10 @@ namespace OurResumeIR.Infra.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("OurResumeIR.Domain.Models.Experience", b =>
-                {
-                    b.HasOne("OurResumeIR.Domain.Models.ExpertiseLayer", "ExpertiseLayer")
-                        .WithMany("Expertise")
-                        .HasForeignKey("ExpertiseLayerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ExpertiseLayer");
-                });
-
-            modelBuilder.Entity("OurResumeIR.Domain.Models.MyExperiences", b =>
+            modelBuilder.Entity("OurResumeIR.Domain.Models.History", b =>
                 {
                     b.HasOne("OurResumeIR.Domain.Models.User", "User")
-                        .WithMany("MyExperiences")
+                        .WithMany("History")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -510,33 +499,41 @@ namespace OurResumeIR.Infra.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("OurResumeIR.Domain.Models.UserExpertise", b =>
+            modelBuilder.Entity("OurResumeIR.Domain.Models.UserToSkill", b =>
                 {
-                    b.HasOne("OurResumeIR.Domain.Models.Experience", "Expertise")
-                        .WithMany("UserExpertise")
-                        .HasForeignKey("ExpertiseId")
+                    b.HasOne("OurResumeIR.Domain.Models.Skill", "Skill")
+                        .WithMany("UserToSkill")
+                        .HasForeignKey("SkillId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OurResumeIR.Domain.Models.SkillLevel", "SkillLevel")
+                        .WithMany("UserToSkill")
+                        .HasForeignKey("SkillLevelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("OurResumeIR.Domain.Models.User", "User")
-                        .WithMany("UserExpertise")
+                        .WithMany("UserToSkill")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Expertise");
+                    b.Navigation("Skill");
+
+                    b.Navigation("SkillLevel");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("OurResumeIR.Domain.Models.Experience", b =>
+            modelBuilder.Entity("OurResumeIR.Domain.Models.Skill", b =>
                 {
-                    b.Navigation("UserExpertise");
+                    b.Navigation("UserToSkill");
                 });
 
-            modelBuilder.Entity("OurResumeIR.Domain.Models.ExpertiseLayer", b =>
+            modelBuilder.Entity("OurResumeIR.Domain.Models.SkillLevel", b =>
                 {
-                    b.Navigation("Expertise");
+                    b.Navigation("UserToSkill");
                 });
 
             modelBuilder.Entity("OurResumeIR.Domain.Models.User", b =>
@@ -548,9 +545,9 @@ namespace OurResumeIR.Infra.Data.Migrations
 
                     b.Navigation("Documents");
 
-                    b.Navigation("MyExperiences");
+                    b.Navigation("History");
 
-                    b.Navigation("UserExpertise");
+                    b.Navigation("UserToSkill");
                 });
 #pragma warning restore 612, 618
         }

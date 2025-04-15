@@ -16,11 +16,11 @@ namespace OurResumeIR.Application
         public MappingProfile()
         {
             // مثال: Mapping از Domain Model به DTO
-            CreateMap<ExpertiseLayerVM, ExpertiseLayer>().ReverseMap();
-            CreateMap<CreateExpertiseLayerVM, ExpertiseLayer>().ReverseMap();
-            CreateMap<UpdateExpertiseLayerVM, ExpertiseLayer>().ReverseMap();
+            CreateMap<ExpertiseLayerVM, SkillLevel>().ReverseMap();
+            CreateMap<CreateExpertiseLayerVM, SkillLevel>().ReverseMap();
+            CreateMap<UpdateExpertiseLayerVM, SkillLevel>().ReverseMap();
             CreateMap<UpdateExpertiseLayerVM, ExpertiseLayerVM>().ReverseMap();
-            CreateMap<ExperienceListViewModel, Experience>().ReverseMap();
+            CreateMap<ExperienceListViewModel, Skill>().ReverseMap();
            
         }
     }

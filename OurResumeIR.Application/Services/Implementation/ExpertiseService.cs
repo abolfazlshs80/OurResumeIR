@@ -46,7 +46,7 @@ namespace OurResumeIR.Application.Services.Interfaces
 
         public async Task<bool> Update(UpdateExpertiseLayerVM model)
         {
-            var newModel = mapper.Map<ExpertiseLayer>(model);
+            var newModel = mapper.Map<SkillLevel>(model);
             bool status = await rep_expertiseLayer.UpdateExpertiseLayer(newModel);
             await rep_expertiseLayer.SaveChanges();
 
@@ -55,7 +55,7 @@ namespace OurResumeIR.Application.Services.Interfaces
 
         public async Task<bool> Create(CreateExpertiseLayerVM model)
         {
-            var newModel = mapper.Map<ExpertiseLayer>(model);
+            var newModel = mapper.Map<SkillLevel>(model);
             int id = await rep_expertiseLayer.CreateExpertiseLayer(newModel);
             await rep_expertiseLayer.SaveChanges();
             if (newModel.Id != 0)
@@ -87,13 +87,13 @@ namespace OurResumeIR.Application.Services.Interfaces
 
         public async Task CreateAsync(ExperienceFormViewModel model)
         {
-            Experience newExperience = new Experience()
+            Skill newSkill = new Skill()
             {
                 Name = model.Name,
-                ExpertiseLayerId = model.ExpertiseLayerId,
+                //ExpertiseLayerId = model.ExpertiseLayerId,
             };
 
-            expertise.AddExpertiseAsync(newExperience);
+            expertise.AddExpertiseAsync(newSkill);
            await expertise.SaveChangesAsync();
            
         }
@@ -113,10 +113,10 @@ namespace OurResumeIR.Application.Services.Interfaces
 
         public async Task AddExperienceAsync(ExperienceFormViewModel model)
         {
-            var experience = new Experience
+            var experience = new Skill
             {
                 Name = model.Name,
-                ExpertiseLayerId = model.ExpertiseLayerId 
+                //ExpertiseLayerId = model.ExpertiseLayerId 
             };
 
             await expertise.AddExpertiseAsync(experience);
@@ -130,7 +130,7 @@ namespace OurResumeIR.Application.Services.Interfaces
             //{
             //    Id = e.Id,
             //    Name = e.Name,
-            //    ExpertiseLayerTitle = e.ExpertiseLayer.Name
+            //    ExpertiseLayerTitle = e.SkillLevel.Name
             //}).ToList();
             return mapper.Map<List<ExperienceListViewModel>>(experiences);
         }
@@ -153,7 +153,7 @@ namespace OurResumeIR.Application.Services.Interfaces
             {
                 Id = experience.Id,
                 Name = experience.Name,
-                ExpertiseLayerId = experience.ExpertiseLayerId,
+                //ExpertiseLayerId = experience.ExpertiseLayerId,
                 ExpertiseLayerOptions = layers.Select(l => new SelectListItem
                 {
                     Value = l.Id.ToString(),
@@ -169,7 +169,7 @@ namespace OurResumeIR.Application.Services.Interfaces
                 return false;
 
             experience.Name = model.Name;
-            experience.ExpertiseLayerId = model.ExpertiseLayerId;
+            //experience.ExpertiseLayerId = model.ExpertiseLayerId;
 
             await expertise.UpdateAsync(experience);
             return true;

@@ -23,23 +23,23 @@ namespace OurResumeIR.Infra.Data.Repositories
 
 
  
-        public async Task<IQueryable<UserExpertise>> FindAsync(Expression<Func<UserExpertise, bool>> predicate)
+        public async Task<IQueryable<UserToSkill>> FindAsync(Expression<Func<UserToSkill, bool>> predicate)
         {
-            return  _context.UserExpertises.Where(predicate).AsQueryable();
+            return  _context.UserToSkill.Where(predicate).AsQueryable();
         }
 
-        public async Task<int> CreateUserExpertise(UserExpertise UserExpertise)
+        public async Task<int> CreateUserExpertise(UserToSkill userToSkill)
         {
-                _context.Add(UserExpertise);
-                return UserExpertise.Id;
+                _context.Add(userToSkill);
+                return userToSkill.Id;
        
       
             
         }
 
-        public async Task<bool> UpdateUserExpertise(UserExpertise UserExpertise)
+        public async Task<bool> UpdateUserExpertise(UserToSkill userToSkill)
         {
-                _context.Update(UserExpertise);
+                _context.Update(userToSkill);
                 return true;
       
            
@@ -47,7 +47,7 @@ namespace OurResumeIR.Infra.Data.Repositories
 
         public async Task<bool> DeleteUserExpertise(int UserExpertiseId)
         {
-                _context.Remove(await _context.UserExpertises.FindAsync(UserExpertiseId));
+                _context.Remove(await _context.UserToSkill.FindAsync(UserExpertiseId));
                 return true;
           
            
