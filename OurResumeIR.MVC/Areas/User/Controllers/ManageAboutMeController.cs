@@ -12,8 +12,15 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         public async Task<IActionResult> Index()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var model =await aboutMeService.GetAll(userId);
+            var model = await aboutMeService.GetAll(userId);
             return View(model);
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            await aboutMeService.Delete(userId);
+            return RedirectToAction("Index");
         }
     }
 }
