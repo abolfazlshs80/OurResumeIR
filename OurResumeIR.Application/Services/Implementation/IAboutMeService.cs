@@ -17,7 +17,17 @@ namespace OurResumeIR.Application.Services.Implementation
         {
             var curentRep = unitOfWork.AboutMeRepository;
             var aboutMe = await curentRep.GetByUserIdAsync(userId);
-
+            if (aboutMe == null)
+            {
+                await curentRep.AddAsync(new AboutMe()
+                {
+                    Description = "-",
+                    ImageName = "-",
+                    UserId = userId
+                });
+                await unitOfWork.SaveChangesAsync();
+                aboutMe = await curentRep.GetByUserIdAsync(userId);
+            }
             return mapper.Map<AboutMeVM>(aboutMe);
         }
 
