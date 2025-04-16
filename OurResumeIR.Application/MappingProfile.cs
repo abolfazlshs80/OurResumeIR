@@ -42,8 +42,8 @@ namespace OurResumeIR.Application
 
 
             CreateMap<AboutMe, AboutMeVM>().ReverseMap();
-            CreateMap<CreateAboutMeVM, AboutMeVM>().ReverseMap();
-            CreateMap<UpdateAboutMeVM, AboutMeVM>().ReverseMap();
+            CreateMap<CreateAboutMeVM, AboutMe>().ReverseMap();
+            CreateMap<UpdateAboutMeVM, AboutMe>().ReverseMap();
 
             #endregion
         }
