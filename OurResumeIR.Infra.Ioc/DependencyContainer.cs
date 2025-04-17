@@ -26,16 +26,23 @@ namespace OurResumeIR.Infra.Ioc
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
+            #region Repository
             services.AddScoped<IAboutMeRepository, AboutRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IBlogRepository, BlogRepository>();
             services.AddScoped<IDocumentsRepository, DocumentRepository>();
             services.AddScoped<IHistoryRepository, HistoryRepository>();
             services.AddScoped<ISkillLevelRepository, SkillLevelRepository>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserToSkillRepository, UserToSkillRepository>();
             services.AddScoped<ISkillRepository, SkillRepository>();
-      
+
+            #endregion
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IFileUploaderService, LocalUploaderService>();
+
+
+
 
             #region Service
             services.AddScoped<IUserService, UserService>();

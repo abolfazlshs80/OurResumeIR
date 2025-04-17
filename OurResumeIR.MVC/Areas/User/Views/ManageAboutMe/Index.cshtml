@@ -15,7 +15,7 @@
 			<table class="table table-bordered text-center align-middle">
 				<thead>
 				<tr>
-					<th>نام تخصص</th>
+					<th></th>
 					@*           <th>سطح تخصص</th> *@
 					<th>عملیات</th>
 				</tr>
@@ -23,7 +23,11 @@
 				<tbody>
 				
 					<tr>
-						<td>@Model.Id</td>
+						<td>
+							<a href="#">
+								<img src="@Model.ImageName.ConvartImagePathForAboutMe()" class="img-thumbnail" width="50" height="50"/>
+							</a>
+						</td>
 						@*         <td>@item.SkillLevel.Name</td> *@
 						<td>
 							<a asp-action="Update" asp-route-id="@(Model.Id)" class="btn btn-warning btn-sm">ویرایش</a>

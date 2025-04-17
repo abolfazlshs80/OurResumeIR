@@ -5,13 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using OurResumeIR.Application.ViewModels.AboutMe;
 using OurResumeIR.Domain.Interfaces;
 using OurResumeIR.Domain.Models;
 
 namespace OurResumeIR.Application.Services.Implementation
 {
-    public class AboutMeService(IUnitOfWork unitOfWork, IMapper mapper) : IAboutMeService
+    public class AboutMeService(IUnitOfWork unitOfWork, IFileUploaderService uploaderService, IMapper mapper) : IAboutMeService
     {
         public async Task<AboutMeVM> GetAll(string userId)
         {
@@ -54,8 +55,11 @@ namespace OurResumeIR.Application.Services.Implementation
             try
             {
                 var curentRep = unitOfWork.AboutMeRepository;
-                var aboutMe = mapper.Map<AboutMe>(model);
-                await curentRep.UpdateAsync(aboutMe);
+                var curentAboutMe =await curentRep.GetByUserIdAsync(model.UserId);
+                curentAboutMe.Description=model.Description;
+              
+                curentAboutMe.Id=model.Id;
+                await curentRep.UpdateAsync(curentAboutMe);
                 await unitOfWork.SaveChangesAsync();
                 return true;
             }
@@ -65,6 +69,23 @@ namespace OurResumeIR.Application.Services.Implementation
             }
         }
 
+        public async Task<bool> UploadFile(IFormFile File, string UserId)
+        {
+            if (File != null)
+            {
+                var curentRep = unitOfWork.AboutMeRepository;
+                var curentAboutMe = await curentRep.GetByUserIdAsync(UserId);
+                await uploaderService.DeleteFile("AboutMe", curentAboutMe.ImageName);
+                curentAboutMe.ImageName = await uploaderService.UpdloadFile(File, "AboutMe", UserId);
+                await curentRep.UpdateAsync(curentAboutMe);
+                await unitOfWork.SaveChangesAsync();
+                return true;
+            }
+
+            return false;
+
+        }
+
 
         public async Task<bool> Delete(string userId)
         {
@@ -72,6 +93,7 @@ namespace OurResumeIR.Application.Services.Implementation
             {
                 var curentRep = unitOfWork.AboutMeRepository;
                 var aboutMe = await curentRep.GetByUserIdAsync(userId);
+                await uploaderService.DeleteFile("AboutMe", aboutMe.ImageName);
                 await curentRep.DeleteAsync(aboutMe);
                 await unitOfWork.SaveChangesAsync();
                 return true;
