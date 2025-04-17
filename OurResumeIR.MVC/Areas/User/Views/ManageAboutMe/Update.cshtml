@@ -1,0 +1,62 @@
+﻿@using OurResumeIR.Application.ViewModels.Experience
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model OurResumeIR.Application.ViewModels.AboutMe.UpdateAboutMeVM
+
+@{
+
+	Layout = "_ProfileLayout";
+	ViewBag.Title = "ویرایش درباره من";
+}
+
+@section Styles {
+
+	<!-- Dropzone CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.css">
+
+}
+<style>
+
+</style>
+<div class="col-xl-9">
+	<div class="card bg-transparent border rounded-3">
+		<div class="card-header bg-transparent border-bottom">
+			<h3 class="mb-0 fs-5 ff-vb">@ViewBag.Title</h3>
+		</div>
+
+		<div class="card-body">
+			<form asp-action="UploadFile" asp-controller="ManageAboutMe" class="dropzone" id="myDropzone"></form>
+			<form asp-action="Update" asp-controller="ManageAboutMe" asp-area="User" method="post" enctype="multipart/form-data">
+				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+				@*                 <input type="hidden" name="__RequestVerificationToken" value="@Antiforgery.GetTokens(HttpContext).RequestToken" />
+ *@
+				<div class="mb-3">
+					<label asp-for="Description" class="form-label"></label>
+					<textarea asp-for="Description" class="form-control myTextarea" id="myTextarea"></textarea>
+					<span asp-validation-for="Description" class="text-danger"></span>
+				</div>
+				<input type="hidden" asp-for="Id" />
+				<input type="hidden" asp-for="UserId" />
+	
+				<div class="mb-3">
+				</div>
+
+				<button type="submit" class="btn btn-primary">ثبت </button>
+			</form>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	<!-- Add this to the <head> section of your HTML -->
+	<!-- Dropzone JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"></script>
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+	<script src="https://cdn.tiny.cloud/1/7at3pq1ag4a2zejio7k06fy3a1kzkyi4ctywq47k8f3carzc/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+	<script src="/lib/js/custom_tinymce.js"></script>
+
+	<script src="/lib/js/custom-dropzone.js"></script>
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

@@ -9,6 +9,7 @@ namespace OurResumeIR.Domain.Interfaces
     public interface IUnitOfWork : IDisposable
     {
         IAboutMeRepository AboutMeRepository { get; }
+ 
         IBlogRepository BlogRepository { get; }
         IDocumentsRepository DocumentsRepository { get; }
         IHistoryRepository HistoryRepository { get; }
