@@ -102,12 +102,11 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
                 // دوباره لیست سطح‌ها رو برای DropDown پر می‌کنیم
                 model = await skillLayersService.GetAllSkillLevelAsync();
                 model.Name = model.Name; // چون ممکنه کاربر مقداری وارد کرده باشد
-                //model.ExpertiseLayerId = model.ExpertiseLayerId;
                 return View(model);
             }
 
             await skillLayersService.AddSkillAsync(model);
-            return RedirectToAction("SkillIndex"); 
+            return RedirectToAction("SkillIndex");
         }
 
 
@@ -122,17 +121,6 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         [HttpPost]
         public async Task<IActionResult> SkillEdit(SkillFormViewModel model)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    model = await skillLayersService.GetCreateFormAsync(model);
-            //    return View(model);
-            //}
-
-            //await skillLayersService.UpdateSkillAsync(model);
-            //return RedirectToAction("SkillIndex");
-
-
-
             if (!ModelState.IsValid)
             {
                 //// لیست سطح‌ها رو دوباره بارگذاری می‌کنیم
@@ -164,6 +152,18 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             return RedirectToAction("SkillIndex");
         }
 
+
+        #endregion
+
+
+
+        #region My skills
+
+        public async Task<IActionResult> MySkillsList()
+        {
+            // گرفتن ویو مدل از لایه سرویس برای نمایش نام تخصص و سطح تخصص داخل یک لیست
+            return View();
+        }
 
         #endregion
 
