@@ -37,5 +37,13 @@ namespace OurResumeIR.Application.Services.Interfaces
 
         #endregion
 
+
+        #region My Skills
+        // ساخت ویو مدل برای نمایش نام تخصص و سطح تخصص داخل کنترولر
+        // نوشتن متد گرفتن نام تخصص و سطح تخصص از ریپوزیتوری و خروجی ویو مدل برای کنترولر
+
+
+        #endregion
+
     }
 }
