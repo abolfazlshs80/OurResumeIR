@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
+using CleanArch.Store.Application.Extention;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.Elfie.Serialization;
 using OurResumeIR.Application.Services.Interfaces;
 using OurResumeIR.Application.ViewModels.Experience;
 using OurResumeIR.Domain.Models;
 using OurResumeIR.Infra.Data.Repositories;
+using System.Security.Claims;
 
 namespace OurResumeIR.MVC.Areas.User.Controllers
 {
@@ -162,7 +165,9 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         public async Task<IActionResult> MySkillsList()
         {
             // گرفتن ویو مدل از لایه سرویس برای نمایش نام تخصص و سطح تخصص داخل یک لیست
-            return View();
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var model = await skillLayersService.GetAllSkillAndSkillLevelForViewAsync(userId);
+            return View(model);
         }
 
         #endregion
