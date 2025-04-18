@@ -170,6 +170,13 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             return View(model);
         }
 
+
+        [HttpGet]
+        public async Task<IActionResult> AddMySkills()
+        {
+            return View();
+        }
+
         #endregion
 
 
