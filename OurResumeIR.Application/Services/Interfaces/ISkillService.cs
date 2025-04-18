@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OurResumeIR.Application.ViewModels.Experience;
 using OurResumeIR.Application.ViewModels.ExpertiseLayers;
+using OurResumeIR.Application.ViewModels.MySkills;
 using OurResumeIR.Domain.Models;
 
 namespace OurResumeIR.Application.Services.Interfaces
@@ -41,7 +42,7 @@ namespace OurResumeIR.Application.Services.Interfaces
         #region My Skills
         // ساخت ویو مدل برای نمایش نام تخصص و سطح تخصص داخل کنترولر
         // نوشتن متد گرفتن نام تخصص و سطح تخصص از ریپوزیتوری و خروجی ویو مدل برای کنترولر
-
+        Task<List<MySkillsForListViewModel>> GetAllSkillAndSkillLevelForViewAsync(string userId);
 
         #endregion
 

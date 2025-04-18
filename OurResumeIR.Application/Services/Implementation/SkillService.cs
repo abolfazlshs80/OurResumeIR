@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OurResumeIR.Application.ViewModels.Experience;
 using OurResumeIR.Application.ViewModels.ExpertiseLayers;
+using OurResumeIR.Application.ViewModels.MySkills;
 using OurResumeIR.Domain.Interfaces;
 using OurResumeIR.Domain.Models;
 using OurResumeIR.Infra.Data.Context;
@@ -18,7 +19,7 @@ namespace OurResumeIR.Application.Services.Interfaces
    
     public class SkillService( IUnitOfWork unitOfWork,
         IMapper mapper ,
-        ISkillRepository rep_Skill) 
+        ISkillRepository rep_Skill, IMySkillsRepository mySkills) 
         : ISkillService
     {
       
@@ -190,6 +191,23 @@ namespace OurResumeIR.Application.Services.Interfaces
             return true;
         }
 
+
+        #endregion
+
+
+        #region My Skills
+
+        public async Task<List<MySkillsForListViewModel>> GetAllSkillAndSkillLevelForViewAsync(string userId)
+        {
+            var userSkills = await mySkills.GetAllSkillAndSkillLevelAsync(userId);
+
+            return userSkills.Select(x => new MySkillsForListViewModel
+            {
+                SkillName = x.Skill.Name,
+                SkillLevelName = x.SkillLevel.Name
+                
+            }).ToList();
+        }
 
         #endregion
 
