@@ -43,6 +43,9 @@ namespace OurResumeIR.Application.Services.Interfaces
         // ساخت ویو مدل برای نمایش نام تخصص و سطح تخصص داخل کنترولر
         // نوشتن متد گرفتن نام تخصص و سطح تخصص از ریپوزیتوری و خروجی ویو مدل برای کنترولر
         Task<List<MySkillsForListViewModel>> GetAllSkillAndSkillLevelForViewAsync(string userId);
+        // ساخت ویو مدل برای پر کردن دراپ دان های سطح تخصص و تخصص
+        // نوشتن متد گرفتن نام و سطح تخصص از ریپوزیتوری و خروجی ویو مدل و پر کردن سلکت آپشن ها
+        Task<AddMySkillsViewModel> GetAllSkillAndSkillLevelForDropDownAsync();
 
         #endregion
 

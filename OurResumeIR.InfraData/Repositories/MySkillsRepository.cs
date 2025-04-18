@@ -26,5 +26,13 @@ namespace OurResumeIR.Infra.Data.Repositories
                 .Where(u => u.UserId == userId)
                 .ToListAsync();
         }
+
+        public async Task<List<UserToSkill>> GetAllSkillAndSkillLevelAsync()
+        {
+            return await _Context.UserToSkill
+                .Include(u => u.Skill)
+                .Include(u => u.SkillLevel)
+                .ToListAsync(); 
+        }
     }
 }

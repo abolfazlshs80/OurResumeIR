@@ -174,6 +174,8 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         [HttpGet]
         public async Task<IActionResult> AddMySkills()
         {
+            // گرفتن نام تخصص ها و سطح تخصص ها از لایه سرویس و نمایش آن ها داخل دراپ دان ویو
+
             return View();
         }
 
