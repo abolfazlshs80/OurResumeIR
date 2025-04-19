@@ -1,17 +1,19 @@
 ﻿<div class="offcanvas-body p-3 p-xl-0">
-	<div class="bg-dark border rounded-3 p-3 w-100">
-		<!-- Dashboard menu -->
-		<div class="list-group list-group-dark list-group-borderless collapse-list">
+    <div class="bg-dark border rounded-3 p-3 w-100">
+        <!-- Dashboard menu -->
+        <div class="list-group list-group-dark list-group-borderless collapse-list">
 
-			@Html.ActionLink("داشبورد", "Dashboard", "User", new { area = "User" }, new { @class = "list-group-item" })
-			@Html.ActionLink("مدیریت سطح تخصص", "List", "ManageExpertiseLayers", new { area = "User" }, new { @class = "list-group-item" })
-			@* @Html.ActionLink("داشبورد", "Dashboard", "Manage", new { area = "User" }, new { @class = "list-group-item" }) *@
-		
-			@Html.ActionLink("ورود به سایت", "Index", "Home", null, new { @class = "list-group-item" })
-			@Html.ActionLink("خروج", "Logout", "Account", null, new { @class = "list-group-item text-danger bg-danger-soft-hover" })
-			@Html.ActionLink("حذف پروفایل", "DeleteProfile", "User", new { area = "User" }, new { @class = "list-group-item text-danger bg-danger-soft-hover" })
+            @Html.ActionLink("داشبورد", "Dashboard", "User", new { area = "User" }, new { @class = "list-group-item" })
+            <a asp-area="User" asp-controller="ManageSkill" asp-action="SkillIndex" class="list-group-item">مدیریت تخصص ها </a>
+@*             <a asp-area="User" asp-controller="ManageSkill" asp-action="List" class="list-group-item"> مدیریت تخصص ها </a>
+ *@            @Html.ActionLink("مدیریت سطح تخصص", "SkillLevelList", "ManageSkill", new { area = "User" }, new { @class = "list-group-item" })
+            @* <a asp-area="User" asp-controller="ManageSkill" asp-action="List" class="list-group-item"> مدیریت سطح تخصص </a> *@
 
-		@* 	<!-- Collapse menu -->
+            @Html.ActionLink("ورود به سایت", "Index", "Home", null, new { @class = "list-group-item" })
+            @Html.ActionLink("خروج", "Logout", "Account", null, new { @class = "list-group-item text-danger bg-danger-soft-hover" })
+            @Html.ActionLink("حذف پروفایل", "DeleteProfile", "User", new { area = "User" }, new { @class = "list-group-item text-danger bg-danger-soft-hover" })
+
+            @* 	<!-- Collapse menu -->
 			<a class="list-group-item" data-bs-toggle="collapse" href="#collapseauthentication" role="button" aria-expanded="false" aria-controls="collapseauthentication">
 				<i class="bi bi-lock fa-fw me-2"></i>زیر منو
 			</a>
@@ -20,6 +22,6 @@
 				<li class="nav-item"> <a class="nav-link" href="#">عنوان 1</a></li>
 				<li class="nav-item"> <a class="nav-link" href="#">عنوان 2</a></li>
 			</ul> *@
-		</div>
-	</div>
+        </div>
+    </div>
 </div>

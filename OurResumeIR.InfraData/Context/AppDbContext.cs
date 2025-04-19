@@ -27,13 +27,14 @@ namespace OurResumeIR.Infra.Data.Context
         #region DbSet
 
       //  public DbSet<User> Users { get; set; }
-        public DbSet<AboutMe> AboutMes { get; set; }
+        public DbSet<AboutMe> AboutMe { get; set; }
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Documents> Documents { get; set; }
-        public DbSet<Experience> Experiences { get; set; }
-        public DbSet<ExpertiseLayer> ExpertiseLayers { get; set; }
-        public DbSet<MyExperiences> MyExperiences { get; set; }
-        public DbSet<UserExpertise> UserExpertises { get; set; }
+        public DbSet<Skill> Skill { get; set; }
+        public DbSet<SkillLevel> SkillLevel { get; set; }
+        public DbSet<UserToSkill> UserToSkill { get; set; }
+        public DbSet<History> History { get; set; }
+
 
 
         #endregion

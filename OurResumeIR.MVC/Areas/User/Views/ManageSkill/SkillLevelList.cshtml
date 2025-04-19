@@ -1,0 +1,127 @@
+﻿@model List<OurResumeIR.Application.ViewModels.ExpertiseLayers.SkillLevelVM >
+
+@{
+	Layout = "_ProfileLayout";
+	ViewBag.titlepage = "سطح تخصص";
+}
+
+
+<div class="col-xl-9">
+	<div class="row mb-3">
+		<div class="col-12 d-sm-flex justify-content-between align-items-center">
+			
+
+			@Html.ActionLink("افزودن ",
+							"SkillLevelCreate",
+							"ManageSkill",
+			new { area = "User" },
+							new { @class = "btn btn-sm btn-primary mb-0" })
+
+		</div>
+	</div>
+
+
+	<div class="card bg-transparent border rounded-3">
+		<!-- Card header START -->
+		<div class="card-header bg-transparent border-bottom">
+			<h3 class="mb-0 fs-5 ff-vb">لیست @ViewBag.titlepage من</h3>
+		</div>
+		<!-- Card header END -->
+		<!-- Card body START -->
+		<div class="card-body">
+
+			<!-- Search and select START -->
+			<div class="row g-3 align-items-center justify-content-between mb-4">
+				<!-- Content -->
+				<div class="col-md-8">
+					<form class="rounded position-relative">
+						<input class="form-control pe-5 bg-transparent" type="search" placeholder="جستجوی @ViewBag.titlepage" aria-label="Search">
+						<button class="bg-transparent p-2 position-absolute top-50 end-0 translate-middle-y border-0 text-primary-hover text-reset" type="submit">
+							<i class="fas fa-search fs-6 "></i>
+						</button>
+					</form>
+				</div>
+
+				<!-- Select option -->
+				<div class="col-md-3">
+					<!-- Short by filter -->
+					<form>
+						<select class="form-select js-choice border-0 z-index-9 bg-transparent" aria-label=".form-select-sm">
+							<option value="">مرتب سازی</option>
+							<option>رایگان</option>
+							<option>جدیدترین</option>
+							<option>پربازدیدترین</option>
+							<option>پرفروش ترین</option>
+						</select>
+					</form>
+				</div>
+			</div>
+			<!-- Search and select END -->
+			<!-- Course list table START -->
+			<div class="table-responsive border-0">
+				<table class="table table-dark-gray align-middle p-4 mb-0 table-hover">
+					<!-- Table head -->
+					<thead>
+						<tr>
+							<th scope="col" class="border-0 rounded-start">نام</th>
+
+							<th scope="col" class="border-0 rounded-end">عملیات</th>
+						</tr>
+					</thead>
+
+					<!-- Table body START -->
+					<tbody>
+						<!-- Table item -->
+						@foreach (var item in Model)
+						{
+							<tr>
+								<!-- Table data -->
+								<td>
+									@item.Name
+								</td>
+
+
+
+								<!-- Table data -->
+								<td>
+
+									@Html.ActionLink("ویرایش", "SkillLevelUpdate",
+																		"ManageSkill", new { id = item.Id },
+									new { @class = "btn btn-sm btn-primary-soft me-1 mb-1 mb-x;-0 " })
+
+									@Html.ActionLink("حذف", "SkillLevelDelete",
+																		"ManageSkill", new { id = item.Id },
+									new { @class = "btn btn-sm btn-danger me-1" })
+								</td>
+							</tr>
+
+						}
+						<!-- Table item -->
+
+
+					</tbody>
+					<!-- Table body END -->
+				</table>
+			</div>
+			<!-- Course list table END -->
+			<!-- Pagination START -->
+			<div class="d-sm-flex justify-content-sm-between align-items-sm-center mt-4 mt-sm-3">
+				<!-- Content -->
+				<p class="mb-0 text-center text-sm-start">نمایش 1 تا 8 از 20</p>
+				<!-- Pagination -->
+				<nav class="d-flex justify-content-center mb-0" aria-label="navigation">
+					<ul class="pagination pagination-sm pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
+						<li class="page-item mb-0"><a class="page-link" href="#" tabindex="-1"><i class="fas fa-angle-right"></i></a></li>
+						<li class="page-item mb-0"><a class="page-link" href="#">1</a></li>
+						<li class="page-item mb-0 active"><a class="page-link" href="#">2</a></li>
+						<li class="page-item mb-0"><a class="page-link" href="#">3</a></li>
+						<li class="page-item mb-0"><a class="page-link" href="#"><i class="fas fa-angle-left"></i></a></li>
+					</ul>
+				</nav>
+			</div>
+			<!-- Pagination END -->
+		</div>
+		<!-- Card body START -->
+	</div>
+
+</div>

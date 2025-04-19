@@ -11,8 +11,10 @@ namespace OurResumeIR.Domain.Interfaces
         IAboutMeRepository AboutMeRepository { get; }
         IBlogRepository BlogRepository { get; }
         IDocumentsRepository DocumentsRepository { get; }
-        IMyExperiencesRepository MyExperiencesRepository { get; }
+        IHistoryRepository HistoryRepository { get; }
         IUserRepository UserRepository { get; }
+        ISkillRepository SkillRepository { get; }
+        ISkillLevelRepository SkillLevelRepository { get; }
 
         Task<int> SaveChangesAsync();
     }

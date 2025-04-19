@@ -1,0 +1,42 @@
+﻿@using OurResumeIR.Application.ViewModels.Experience
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model SkillFormViewModel
+
+@{
+    Layout = "_ProfileLayout";
+    ViewBag.Title = "افزودن تخصص جدید";
+}
+      <style>
+ 
+      </style>
+<div class="col-xl-9" >
+    <div class="card bg-transparent border rounded-3">
+        <div class="card-header bg-transparent border-bottom">
+            <h3 class="mb-0 fs-5 ff-vb">افزودن تخصص جدید</h3>
+        </div>
+
+        <div class="card-body">
+            <form asp-action="AddSkill" asp-controller="ManageSkill" asp-area="User" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+@*                 <input type="hidden" name="__RequestVerificationToken" value="@Antiforgery.GetTokens(HttpContext).RequestToken" />
+ *@   
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label"></label>
+                    <input name="Name" class="form-control" placeholder="نام تخصص را وارد کنید" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3" >
+                  @*   <label  asp-for="SkillLevelId" class="form-label"></label> *@
+        @*             @Html.DropDownListFor(a => a.ExpertiseLayerId, Model.ExpertiseLayerOptions, "سطح تخصص", new { @class = "form-select text-end" })
+          *@      @*      <select asp-for="SkillLevelId" asp-items="Model.SkillLevelOptions" class="form-select text-end">
+                        <option  value="">-- انتخاب سطح --</option> <!-- این فقط گزینه‌ی خالی اولیه‌ست -->
+                    </select> *@
+                   @*  <span asp-validation-for="SkillLevelId" class="text-danger"></span> *@
+                </div>
+
+                <button  type="submit" class="btn btn-primary">ثبت تخصص</button>
+            </form>
+        </div>
+    </div>
+</div>
