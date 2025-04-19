@@ -29,10 +29,11 @@ namespace OurResumeIR.Infra.Data.Repositories
 
         public async Task<List<UserToSkill>> GetAllSkillAndSkillLevelAsync()
         {
-            return await _Context.UserToSkill
+             var result = await _Context.UserToSkill
                 .Include(u => u.Skill)
                 .Include(u => u.SkillLevel)
                 .ToListAsync(); 
+            return result;
         }
     }
 }

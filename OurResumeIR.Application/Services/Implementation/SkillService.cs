@@ -16,14 +16,14 @@ using OurResumeIR.Infra.Data.Repositories;
 
 namespace OurResumeIR.Application.Services.Interfaces
 {
-   
-    public class SkillService( IUnitOfWork unitOfWork,
-        IMapper mapper ,
-        ISkillRepository rep_Skill, IMySkillsRepository mySkills) 
+
+    public class SkillService(IUnitOfWork unitOfWork,
+        IMapper mapper,
+        ISkillRepository rep_Skill, IMySkillsRepository mySkills)
         : ISkillService
     {
-      
-        
+
+
         #region Specialties Layer
         public async Task<List<SkillLevelVM>> GetAll()
         {
@@ -96,12 +96,12 @@ namespace OurResumeIR.Application.Services.Interfaces
             Skill newSkill = new Skill()
             {
                 Name = model.Name,
-                //ExpertiseLayerId = model.ExpertiseLayerId,
+
             };
 
-     await       rep_Skill.AddSkillAsync(newSkill);
-           await rep_Skill.SaveChangesAsync();
-           
+            await rep_Skill.AddSkillAsync(newSkill);
+            await rep_Skill.SaveChangesAsync();
+
         }
 
         public async Task<SkillFormViewModel> GetAllSkillLevelAsync()
@@ -122,7 +122,6 @@ namespace OurResumeIR.Application.Services.Interfaces
             var experience = new Skill
             {
                 Name = model.Name,
-                //ExpertiseLayerId = model.ExpertiseLayerId 
             };
 
             await rep_Skill.AddSkillAsync(experience);
@@ -141,11 +140,7 @@ namespace OurResumeIR.Application.Services.Interfaces
             return mapper.Map<List<SkillListViewModel>>(experiences);
         }
 
-        //public Task<SkillFormViewModel> GetExperienceByIdAsync(int id)
-        //{
-        //    //return await _repository.GetSkillFormByIdAsync(id);
-        //    throw new NotImplementedException();
-        //}
+
 
         public async Task<SkillFormViewModel> GetSkillFormByIdAsync(int id)
         {
@@ -159,7 +154,6 @@ namespace OurResumeIR.Application.Services.Interfaces
             {
                 Id = experience.Id,
                 Name = experience.Name,
-                //ExpertiseLayerId = experience.ExpertiseLayerId,
                 ExpertiseLayerOptions = layers.Select(l => new SelectListItem
                 {
                     Value = l.Id.ToString(),
@@ -175,7 +169,7 @@ namespace OurResumeIR.Application.Services.Interfaces
                 return false;
 
             experience.Name = model.Name;
-            //experience.ExpertiseLayerId = model.ExpertiseLayerId;
+
 
             await rep_Skill.UpdateAsync(experience);
             return true;
@@ -205,14 +199,14 @@ namespace OurResumeIR.Application.Services.Interfaces
             {
                 SkillName = x.Skill.Name,
                 SkillLevelName = x.SkillLevel.Name
-                
+
             }).ToList();
         }
 
         public async Task<AddMySkillsViewModel> GetAllSkillAndSkillLevelForDropDownAsync()
         {
             var userSkill = await mySkills.GetAllSkillAndSkillLevelAsync();
-            
+
             var distinctSkills = userSkill
                 .Select(s => s.Skill)
                 .DistinctBy(s => s.Id) //برای حذف موارد تکراری داخل دادها

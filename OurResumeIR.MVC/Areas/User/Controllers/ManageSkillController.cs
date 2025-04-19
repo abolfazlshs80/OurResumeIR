@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.Elfie.Serialization;
 using OurResumeIR.Application.Services.Interfaces;
 using OurResumeIR.Application.ViewModels.Experience;
+using OurResumeIR.Application.ViewModels.MySkills;
 using OurResumeIR.Domain.Models;
 using OurResumeIR.Infra.Data.Repositories;
 using System.Security.Claims;
@@ -175,8 +176,22 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         public async Task<IActionResult> AddMySkills()
         {
             // گرفتن نام تخصص ها و سطح تخصص ها از لایه سرویس و نمایش آن ها داخل دراپ دان ویو
+            var model = await skillLayersService.GetAllSkillAndSkillLevelForDropDownAsync();
+            return View(model);
+        }
 
-            return View();
+        [HttpPost]
+        public async Task<IActionResult> AddMySkills(AddMySkillsViewModel viewModel)
+        {
+            // گرفتن نام تخصص و سطح تخصص از کاربر و  برای لایه س
+
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+        
+       
+            return View(model);
         }
 
         #endregion
