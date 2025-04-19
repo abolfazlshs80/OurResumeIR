@@ -46,6 +46,8 @@ namespace OurResumeIR.Application.Services.Interfaces
         // ساخت ویو مدل برای پر کردن دراپ دان های سطح تخصص و تخصص
         // نوشتن متد گرفتن نام و سطح تخصص از ریپوزیتوری و خروجی ویو مدل و پر کردن سلکت آپشن ها
         Task<AddMySkillsViewModel> GetAllSkillAndSkillLevelForDropDownAsync();
+        // نوشتن متد  که ورودی ویو مدل دارد و تبدیل اطلاعات ورودی به مدل و صدا زدن متد ریپوزیتوری برای اد کردن مدل در دیتابیس
+        Task AddMySkillAsync(AddMySkillsViewModel model);
 
         #endregion
 

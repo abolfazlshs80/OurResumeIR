@@ -18,6 +18,13 @@ namespace OurResumeIR.Infra.Data.Repositories
         {
             _Context = context;
         }
+
+        public async Task AddMySkillsAsync(UserToSkill skill)
+        {
+            _Context.UserToSkill.Add(skill);
+            _Context.SaveChanges();
+        }
+
         public async Task<List<UserToSkill>> GetAllSkillAndSkillLevelAsync(string userId)
         {
             return await _Context.UserToSkill

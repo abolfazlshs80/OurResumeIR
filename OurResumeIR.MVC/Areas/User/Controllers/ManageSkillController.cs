@@ -3,6 +3,7 @@ using CleanArch.Store.Application.Extention;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.Elfie.Serialization;
+using OurResumeIR.Application.Services.Implementation;
 using OurResumeIR.Application.Services.Interfaces;
 using OurResumeIR.Application.ViewModels.Experience;
 using OurResumeIR.Application.ViewModels.MySkills;
@@ -167,6 +168,8 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         {
             // گرفتن ویو مدل از لایه سرویس برای نمایش نام تخصص و سطح تخصص داخل یک لیست
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            //User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
             var model = await skillLayersService.GetAllSkillAndSkillLevelForViewAsync(userId);
             return View(model);
         }
@@ -177,21 +180,23 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         {
             // گرفتن نام تخصص ها و سطح تخصص ها از لایه سرویس و نمایش آن ها داخل دراپ دان ویو
             var model = await skillLayersService.GetAllSkillAndSkillLevelForDropDownAsync();
+            model.UserId = User.GetUserId();
             return View(model);
         }
 
         [HttpPost]
         public async Task<IActionResult> AddMySkills(AddMySkillsViewModel viewModel)
         {
-            // گرفتن نام تخصص و سطح تخصص از کاربر و  برای لایه س
+            // گرفتن نام تخصص و سطح تخصص از کاربر و  برای لایه سرویس و تبدیل ویو مدل به مدل در لایه سرویس
 
             if (!ModelState.IsValid)
             {
                 return View(viewModel);
             }
-        
        
-            return View(viewModel);
+            await skillLayersService.AddMySkillAsync(viewModel);
+
+            return RedirectToAction("MySkillsList");
         }
 
         #endregion

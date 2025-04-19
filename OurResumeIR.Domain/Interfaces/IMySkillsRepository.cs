@@ -12,6 +12,7 @@ namespace OurResumeIR.Domain.Interfaces
         // گرفتن نام تخصص و سطح تخصص از دیتابیس برای استفاده در سرویس
         Task<List<UserToSkill>> GetAllSkillAndSkillLevelAsync(string userId);
         Task<List<UserToSkill>> GetAllSkillAndSkillLevelAsync();
+        Task AddMySkillsAsync(UserToSkill skill);
     
     }
 }

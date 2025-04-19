@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 using OurResumeIR.Application.ViewModels.Experience;
 using OurResumeIR.Application.ViewModels.ExpertiseLayers;
 using OurResumeIR.Application.ViewModels.MySkills;
@@ -205,29 +206,25 @@ namespace OurResumeIR.Application.Services.Interfaces
 
         public async Task<AddMySkillsViewModel> GetAllSkillAndSkillLevelForDropDownAsync()
         {
-            var userSkill = await mySkills.GetAllSkillAndSkillLevelAsync();
-
-            var distinctSkills = userSkill
-                .Select(s => s.Skill)
-                .DistinctBy(s => s.Id) //برای حذف موارد تکراری داخل دادها
-                .ToList();
-
-            var distinctSkillLevels = userSkill
-                .Select(s => s.SkillLevel)
-                .DistinctBy(s => s.Id)
-                .ToList();
-
+            // var userSkill = await mySkills.GetAllSkillAndSkillLevelAsync();
+            var skill = await unitOfWork.SkillRepository.GetAllSkillAsync();
+            var skillLevel = await unitOfWork.SkillRepository.GetAllSkillLevelAsync();
+            // از ورودی گرفته شود
+            //     int iduserToSkill = 0;
+            //  var userToSkill =  await unitOfWork.UserToSkillRepository.FindAsync(a => a.Id == iduserToSkill).Result.FirstOrDefaultAsync();
             var model = new AddMySkillsViewModel
             {
                 // پر کردن SelectListItem برای دراپ دان ها داخل ویو
-                Skills = distinctSkills.Select(s => new SelectListItem
+                Skills = skill.Select(s => new SelectListItem
                 {
                     Value = s.Id.ToString(),
                     Text = s.Name,
+                    //    Selected = s.Id == userToSkill.SkillId,
+
 
                 }).ToList(),
 
-                SkillLevels = distinctSkillLevels.Select(s => new SelectListItem
+                SkillLevels = skillLevel.Select(s => new SelectListItem
                 {
                     Value = s.Id.ToString(),
                     Text = s.Name,
@@ -236,6 +233,20 @@ namespace OurResumeIR.Application.Services.Interfaces
 
             return model;
         }
+
+        public async Task AddMySkillAsync(AddMySkillsViewModel model)
+        {
+            var UserSkills = new UserToSkill
+            {
+                SkillId = model.SelectedSkillId,
+                SkillLevelId = model.SelectedSkillLevelId,
+                UserId = model.UserId.ToString(),
+            };
+
+            await mySkills.AddMySkillsAsync(UserSkills);
+
+        }
+
 
         #endregion
 

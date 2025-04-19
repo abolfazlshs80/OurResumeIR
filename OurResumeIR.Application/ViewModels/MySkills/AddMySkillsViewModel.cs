@@ -15,6 +15,7 @@ namespace OurResumeIR.Application.ViewModels.MySkills
 
         [Required]
         public int SelectedSkillLevelId { get; set; }
+        public string UserId { get; set; }
 
         public List<SelectListItem> Skills { get; set; } = new();
         public List<SelectListItem> SkillLevels { get; set; } = new();
