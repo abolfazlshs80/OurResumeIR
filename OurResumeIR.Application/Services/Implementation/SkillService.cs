@@ -209,6 +209,40 @@ namespace OurResumeIR.Application.Services.Interfaces
             }).ToList();
         }
 
+        public async Task<AddMySkillsViewModel> GetAllSkillAndSkillLevelForDropDownAsync()
+        {
+            var userSkill = await mySkills.GetAllSkillAndSkillLevelAsync();
+            
+            var distinctSkills = userSkill
+                .Select(s => s.Skill)
+                .DistinctBy(s => s.Id) //برای حذف موارد تکراری داخل دادها
+                .ToList();
+
+            var distinctSkillLevels = userSkill
+                .Select(s => s.SkillLevel)
+                .DistinctBy(s => s.Id)
+                .ToList();
+
+            var model = new AddMySkillsViewModel
+            {
+                // پر کردن SelectListItem برای دراپ دان ها داخل ویو
+                Skills = distinctSkills.Select(s => new SelectListItem
+                {
+                    Value = s.Id.ToString(),
+                    Text = s.Name,
+
+                }).ToList(),
+
+                SkillLevels = distinctSkillLevels.Select(s => new SelectListItem
+                {
+                    Value = s.Id.ToString(),
+                    Text = s.Name,
+                }).ToList()
+            };
+
+            return model;
+        }
+
         #endregion
 
 
