@@ -25837,7 +25837,7 @@ html[dir=rtl] .choices__input {
 /*# sourceMappingURL=style-rtl.css.map */
 
 /* فیکس نهایی برای راست‌چین کردن کامل select و گزینه‌ها */
-select.form-select {
+/*select.form-select {
     direction: rtl !important;
     text-align: right !important;
 }
@@ -25846,4 +25846,4 @@ select.form-select option {
         direction: rtl !important;
         text-align: right !important;
         unicode-bidi: plaintext;
-    }
+    }*/

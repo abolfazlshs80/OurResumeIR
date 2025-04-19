@@ -191,7 +191,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             }
         
        
-            return View(model);
+            return View(viewModel);
         }
 
         #endregion
