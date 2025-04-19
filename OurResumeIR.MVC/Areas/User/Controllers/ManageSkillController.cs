@@ -199,6 +199,14 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             return RedirectToAction("MySkillsList");
         }
 
+
+
+        [HttpGet]
+        public async Task<IActionResult> EditMySkills()
+        {
+            return View();
+        }
+
         #endregion
 
 
