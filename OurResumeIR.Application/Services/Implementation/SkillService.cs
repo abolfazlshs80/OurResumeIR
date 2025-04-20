@@ -247,6 +247,16 @@ namespace OurResumeIR.Application.Services.Interfaces
 
         }
 
+        public async Task<EditMySkillsViewModel> GetSkillForEditAsync(int userToSkill)
+        {
+            var userSkill = await unitOfWork.UserToSkillRepository.FindAsync(u => u.Id == userToSkill);
+
+            var selected = userSkill.FirstOrDefaultAsync(); 
+
+            var skillList = await unitOfWork.SkillRepository.GetAllSkillAsync();
+            var skillLevelList = await unitOfWork.SkillLevelRepository
+        }
+
 
         #endregion
 

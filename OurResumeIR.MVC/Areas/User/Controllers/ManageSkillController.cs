@@ -202,8 +202,9 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> EditMySkills()
+        public async Task<IActionResult> EditMySkills(int id)
         {
+            // گرفتن نام تخصص و سطح تخصص  از لایه سرویس توسط یک ویو مدل برای نمایش مقادیری که کاربر میخواهد ویرایش کند
             return View();
         }
 
