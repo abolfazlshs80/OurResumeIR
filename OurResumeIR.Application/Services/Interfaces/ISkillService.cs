@@ -10,7 +10,7 @@ using OurResumeIR.Domain.Models;
 
 namespace OurResumeIR.Application.Services.Interfaces
 {
-    public  interface ISkillService
+    public interface ISkillService
     {
         #region Specialties Layer
 
@@ -26,7 +26,7 @@ namespace OurResumeIR.Application.Services.Interfaces
         #region Specialties 
 
         // TO DO Interface
-    
+
         Task<List<SkillFormViewModel>> GetAllAsync();
         Task CreateAsync(SkillFormViewModel model);
         Task<SkillFormViewModel> GetAllSkillLevelAsync(); // برای نمایش لیست تمام سطح های تخصص
@@ -51,7 +51,7 @@ namespace OurResumeIR.Application.Services.Interfaces
         // درست کردن ویو مدل برای پر کردن دراپ دان های تخصص و سطح تخصص که در هنگام ویرایش مقدار لازم پر شده باشد
         // نوشتن یک متد که خروجی ویو مدل داشته باشد و مقدار سلکت آپشن ها پر شود و برای نمایش به کاربر آماده باشد
         Task<EditMySkillsViewModel> GetSkillForEditAsync(int userToSkillId);
-
+        Task FillDropDownsForEditViewModel(EditMySkillsViewModel model);
        // نوشتن متدی که ورودی ویو مدل دارد و تبدیل ویو مدل به مدل و صدا زدن متد ریپوزیتوری برای ثبت اطلاعات در بانک اطلاعاتی
         #endregion
 

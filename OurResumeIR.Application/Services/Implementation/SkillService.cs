@@ -281,6 +281,26 @@ namespace OurResumeIR.Application.Services.Interfaces
             return model;
         }
 
+        public async Task FillDropDownsForEditViewModel(EditMySkillsViewModel model)
+        {
+            var skillList = await unitOfWork.SkillRepository.GetAllSkillAsync();
+            var skillLevelList = await unitOfWork.SkillLevelRepository.GetAllSkillLevelAsync();
+
+            model.Skills = skillList.Select(s => new SelectListItem
+            {
+                Value = s.Id.ToString(),
+                Text = s.Name,
+                Selected = s.Id == model.SkillId
+            }).ToList();
+
+            model.SkillLevels = skillLevelList.Select(s => new SelectListItem
+            {
+                Value = s.Id.ToString(),
+                Text = s.Name,
+                Selected = s.Id == model.SkillLevelId
+            }).ToList();
+        }
+
 
         #endregion
 
