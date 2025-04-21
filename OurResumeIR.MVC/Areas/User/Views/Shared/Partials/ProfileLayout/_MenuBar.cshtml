@@ -5,6 +5,7 @@
 
             @Html.ActionLink("داشبورد", "Dashboard", "User", new { area = "User" }, new { @class = "list-group-item" })
             <a asp-area="User" asp-controller="ManageSkill" asp-action="SkillIndex" class="list-group-item">مدیریت تخصص ها </a>
+            <a asp-area="User" asp-controller="ManageAboutMe" asp-action="Index" class="list-group-item"> درباره من </a>
 @*             <a asp-area="User" asp-controller="ManageSkill" asp-action="List" class="list-group-item"> مدیریت تخصص ها </a>
  *@            @Html.ActionLink("مدیریت سطح تخصص", "SkillLevelList", "ManageSkill", new { area = "User" }, new { @class = "list-group-item" })
             @* <a asp-area="User" asp-controller="ManageSkill" asp-action="List" class="list-group-item"> مدیریت سطح تخصص </a> *@

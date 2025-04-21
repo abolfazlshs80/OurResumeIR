@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\User\Views\Shared\Partials\ProfileLayout\NewFolder\" />
+    <Folder Include="wwwroot\Images\AboutMe\" />
     <Folder Include="wwwroot\madaeny.com\Home\" />
   </ItemGroup>
 
