@@ -12,10 +12,12 @@ namespace OurResumeIR.Application.ViewModels.MySkills
     {
         public int Id { get; set; } // Id مربوط به جدول UserToSkill
 
-        [Required]
+        [Required(ErrorMessage = "لطفاً یک تخصص انتخاب کنید")]
+        [Range(1, int.MaxValue, ErrorMessage = "لطفاً یک تخصص انتخاب کنید")]
         public int SkillId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "لطفاً سطح تخصص را انتخاب کنید")]
+        [Range(1, int.MaxValue, ErrorMessage = "لطفاً سطح تخصص را انتخاب کنید")]
         public int SkillLevelId { get; set; }
 
         public string UserId { get; set; }

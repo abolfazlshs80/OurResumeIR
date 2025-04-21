@@ -42,5 +42,7 @@ namespace OurResumeIR.Infra.Data.Repositories
                 .ToListAsync(); 
             return result;
         }
+
+      
     }
 }

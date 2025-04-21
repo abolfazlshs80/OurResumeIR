@@ -301,6 +301,20 @@ namespace OurResumeIR.Application.Services.Interfaces
             }).ToList();
         }
 
+        public async Task UpdateUserSkillAsync(EditMySkillsViewModel model)
+        {
+            var userSkill = await unitOfWork.UserToSkillRepository.FindAsync(u => u.Id == model.Id);
+
+            if (userSkill == null)
+                return;
+
+            userSkill.SkillId = model.SkillId;
+            userSkill.SkillLevelId = model.SkillLevelId;
+
+            unitOfWork.UserToSkillRepository.UpdateUserToSkill(userSkill);
+            await unitOfWork.SaveChangesAsync();
+        }
+
 
         #endregion
 

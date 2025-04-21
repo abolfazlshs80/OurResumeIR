@@ -52,7 +52,8 @@ namespace OurResumeIR.Application.Services.Interfaces
         // نوشتن یک متد که خروجی ویو مدل داشته باشد و مقدار سلکت آپشن ها پر شود و برای نمایش به کاربر آماده باشد
         Task<EditMySkillsViewModel> GetSkillForEditAsync(int userToSkillId);
         Task FillDropDownsForEditViewModel(EditMySkillsViewModel model);
-       // نوشتن متدی که ورودی ویو مدل دارد و تبدیل ویو مدل به مدل و صدا زدن متد ریپوزیتوری برای ثبت اطلاعات در بانک اطلاعاتی
+        // نوشتن متدی که ورودی ویو مدل دارد و تبدیل ویو مدل به مدل و صدا زدن متد ریپوزیتوری برای ثبت اطلاعات در بانک اطلاعاتی
+        Task UpdateUserSkillAsync(EditMySkillsViewModel model);
         #endregion
 
     }
