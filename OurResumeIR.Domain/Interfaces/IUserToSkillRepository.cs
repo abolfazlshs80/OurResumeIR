@@ -5,9 +5,10 @@ namespace OurResumeIR.Domain.Interfaces;
 
 public interface IUserToSkillRepository
 {
-    Task<IQueryable<UserToSkill>> FindAsync(Expression<Func<UserToSkill, bool>> predicate);
+    Task<UserToSkill> FindAsync(Expression<Func<UserToSkill, bool>> predicate);
     Task<int> CreateUserToSkill(UserToSkill userToSkill);
     Task<bool> UpdateUserToSkill(UserToSkill userToSkill);
     Task<bool> DeleteUserToSkill(int UserToSkillId);
+  
     Task<bool> SaveChanges();
 }

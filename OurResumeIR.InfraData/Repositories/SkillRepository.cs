@@ -43,7 +43,7 @@ namespace OurResumeIR.Infra.Data.Repositories
 
         public async Task<List<Skill>> GetAllSkillAsync()
         {
-            return await _context.Skill .ToListAsync();
+            return await _context.Skill.ToListAsync();
         }
 
         public async Task<Skill> GetByIdAsync(int id)

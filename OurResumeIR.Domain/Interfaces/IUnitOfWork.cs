@@ -16,6 +16,7 @@ namespace OurResumeIR.Domain.Interfaces
         IUserRepository UserRepository { get; }
         ISkillRepository SkillRepository { get; }
         ISkillLevelRepository SkillLevelRepository { get; }
+        IUserToSkillRepository UserToSkillRepository { get; }
 
         Task<int> SaveChangesAsync();
     }

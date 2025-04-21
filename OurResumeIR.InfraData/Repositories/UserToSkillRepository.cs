@@ -20,22 +20,15 @@ namespace OurResumeIR.Infra.Data.Repositories
             _context = context;
         }
 
+                  
 
-
- 
-        public async Task<IQueryable<UserToSkill>> FindAsync(Expression<Func<UserToSkill, bool>> predicate)
+        public async Task<UserToSkill?> FindAsync(Expression<Func<UserToSkill, bool>> predicate)
         {
-            //_context.UserToSkill
-            //    .Include(a=>a.SkillLevel)
-            //    .Include(a=>a.Skill)
-            //    .Where(a => a.UserId == "");
-            //_context.UserToSkill.AddAsync(new UserToSkill()
-            //{
-            //    SkillId = 1,
-            //    SkillLevelId = 2,
-            //    UserId = ""
-            //})
-            return  _context.UserToSkill.Where(predicate).AsQueryable();
+             var result =  await _context.UserToSkill
+                .Include(u => u.Skill)
+                .Include(u => u.SkillLevel)
+                .FirstOrDefaultAsync(predicate);
+            return result;
         }
 
         public async Task<int> CreateUserToSkill(UserToSkill userToSkill)
@@ -68,6 +61,12 @@ namespace OurResumeIR.Infra.Data.Repositories
                 await _context.SaveChangesAsync();
                 return true;
       
+        }
+
+        public async Task DeleteUserSkillAsync(UserToSkill userSkill)
+        {
+            _context.UserToSkill.Remove(userSkill);
+            await _context.SaveChangesAsync();
         }
     }
 }

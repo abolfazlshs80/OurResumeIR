@@ -36,10 +36,12 @@ namespace OurResumeIR.Infra.Ioc
             services.AddScoped<IUserToSkillRepository, UserToSkillRepository>();
             services.AddScoped<ISkillRepository, SkillRepository>();
 
-            #endregion
 
+            #endregion
+            services.AddScoped<IMySkillsRepository, MySkillsRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IFileUploaderService, LocalUploaderService>();
+
 
 
 

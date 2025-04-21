@@ -56,5 +56,10 @@ namespace OurResumeIR.Infra.Data.Repositories
  
             
         }
+
+        public async Task<List<SkillLevel>> GetAllSkillLevelAsync()
+        {
+            return await _context.SkillLevel.ToListAsync();
+        }
     }
 }

@@ -1,10 +1,16 @@
 ﻿using AutoMapper;
+using CleanArch.Store.Application.Extention;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.Elfie.Serialization;
+using OurResumeIR.Application.Services.Implementation;
 using OurResumeIR.Application.Services.Interfaces;
 using OurResumeIR.Application.ViewModels.Experience;
+using OurResumeIR.Application.ViewModels.MySkills;
+using OurResumeIR.Domain.Interfaces;
 using OurResumeIR.Domain.Models;
 using OurResumeIR.Infra.Data.Repositories;
+using System.Security.Claims;
 
 namespace OurResumeIR.MVC.Areas.User.Controllers
 {
@@ -102,12 +108,11 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
                 // دوباره لیست سطح‌ها رو برای DropDown پر می‌کنیم
                 model = await skillLayersService.GetAllSkillLevelAsync();
                 model.Name = model.Name; // چون ممکنه کاربر مقداری وارد کرده باشد
-                //model.ExpertiseLayerId = model.ExpertiseLayerId;
                 return View(model);
             }
 
             await skillLayersService.AddSkillAsync(model);
-            return RedirectToAction("SkillIndex"); 
+            return RedirectToAction("SkillIndex");
         }
 
 
@@ -122,17 +127,6 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         [HttpPost]
         public async Task<IActionResult> SkillEdit(SkillFormViewModel model)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    model = await skillLayersService.GetCreateFormAsync(model);
-            //    return View(model);
-            //}
-
-            //await skillLayersService.UpdateSkillAsync(model);
-            //return RedirectToAction("SkillIndex");
-
-
-
             if (!ModelState.IsValid)
             {
                 //// لیست سطح‌ها رو دوباره بارگذاری می‌کنیم
@@ -164,6 +158,83 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             return RedirectToAction("SkillIndex");
         }
 
+
+        #endregion
+
+
+
+        #region My skills
+
+        public async Task<IActionResult> MySkillsList()
+        {
+            // گرفتن ویو مدل از لایه سرویس برای نمایش نام تخصص و سطح تخصص داخل یک لیست
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            //User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            var model = await skillLayersService.GetAllSkillAndSkillLevelForViewAsync(userId);
+            return View(model);
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> AddMySkills()
+        {
+            // گرفتن نام تخصص ها و سطح تخصص ها از لایه سرویس و نمایش آن ها داخل دراپ دان ویو
+            var model = await skillLayersService.GetAllSkillAndSkillLevelForDropDownAsync();
+            model.UserId = User.GetUserId();
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddMySkills(AddMySkillsViewModel viewModel)
+        {
+            // گرفتن نام تخصص و سطح تخصص از کاربر و  برای لایه سرویس و تبدیل ویو مدل به مدل در لایه سرویس
+
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+       
+            await skillLayersService.AddMySkillAsync(viewModel);
+
+            return RedirectToAction("MySkillsList");
+        }
+
+
+
+        [HttpGet]
+        public async Task<IActionResult> EditMySkills(int id)
+        {
+            Console.WriteLine($"دریافت شده ID برای ویرایش: {id}");
+            // گرفتن نام تخصص و سطح تخصص  از لایه سرویس توسط یک ویو مدل برای نمایش مقادیری که کاربر میخواهد ویرایش کند
+            var model =  skillLayersService.GetSkillForEditAsync(id,out var skill , out var skillLevel);
+            ViewBag.SkillLevel = skillLevel;
+            ViewBag.Skill = skill;
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditMySkills(EditMySkillsViewModel viewModel)
+        {
+       
+            // ذخیره ویرایش از طریق سرویس
+            await skillLayersService.UpdateUserSkillAsync(viewModel);
+
+            return RedirectToAction("MySkillsList");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteMySkill(int id)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            var result = await skillLayersService.DeleteUserSkillAsync(id, userId);
+            if (!result)
+                return NotFound();
+
+            return RedirectToAction("MySkillsList");
+        }
 
         #endregion
 
