@@ -9,6 +9,6 @@ public interface IUserToSkillRepository
     Task<int> CreateUserToSkill(UserToSkill userToSkill);
     Task<bool> UpdateUserToSkill(UserToSkill userToSkill);
     Task<bool> DeleteUserToSkill(int UserToSkillId);
-    Task DeleteUserSkillAsync(UserToSkill userSkill);
+  
     Task<bool> SaveChanges();
 }

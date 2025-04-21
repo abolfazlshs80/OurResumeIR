@@ -13,7 +13,8 @@ namespace OurResumeIR.Domain.Interfaces
         Task<List<UserToSkill>> GetAllSkillAndSkillLevelAsync(string userId);
         Task<List<UserToSkill>> GetAllSkillAndSkillLevelAsync();
         Task AddMySkillsAsync(UserToSkill skill);
-       
-    
+        Task DeleteUserSkillAsync(UserToSkill userSkill);
+        Task<UserToSkill?> GetUserSkillByIdAsync(int id, string userId);
+
     }
 }

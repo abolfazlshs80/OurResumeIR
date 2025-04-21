@@ -8,7 +8,7 @@
     <div class="card bg-transparent border rounded-3">
         <div class="card-header bg-transparent border-bottom d-flex justify-content-between">
             <h3 class="mb-0 fs-5 ff-vb">لیست تخصص‌ها</h3>
-            <a class="btn btn-success btn-sm" asp-action="EditMySkills" asp-controller="ManageSkill" asp-area="User">افزودن تخصص جدید</a>
+            <a class="btn btn-success btn-sm" asp-action="AddMySkills" asp-controller="ManageSkill" asp-area="User">افزودن تخصص جدید</a>
         </div>
 
         <div class="card-body">
@@ -28,7 +28,7 @@
                             <td>@item.SkillLevelName</td>
                             <td>
                                 <a asp-action="EditMySkills" asp-route-id="@item.Id" class="btn btn-warning btn-sm">ویرایش</a>
-                                <form asp-action="DeleteSkill" asp-route-id="@item.Id" method="post" class="d-inline">
+                                <form asp-action="DeleteMySkill" asp-route-id="@item.Id" method="post" class="d-inline">
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('آیا از حذف اطمینان دارید؟')">حذف</button>
                                 </form>
                             </td>

@@ -25,6 +25,12 @@ namespace OurResumeIR.Infra.Data.Repositories
             _Context.SaveChanges();
         }
 
+        public async Task DeleteUserSkillAsync(UserToSkill userSkill)
+        {
+            _Context.UserToSkill.Remove(userSkill);
+            await _Context.SaveChangesAsync();
+        }
+
         public async Task<List<UserToSkill>> GetAllSkillAndSkillLevelAsync(string userId)
         {
             return await _Context.UserToSkill
@@ -43,6 +49,10 @@ namespace OurResumeIR.Infra.Data.Repositories
             return result;
         }
 
-      
+        public async Task<UserToSkill?> GetUserSkillByIdAsync(int id, string userId)
+        {
+            return await _Context.UserToSkill
+         .FirstOrDefaultAsync(us => us.Id == id && us.UserId == userId);
+        }
     }
 }

@@ -315,6 +315,16 @@ namespace OurResumeIR.Application.Services.Interfaces
             await unitOfWork.SaveChangesAsync();
         }
 
+        public async Task<bool> DeleteUserSkillAsync(int id, string userId)
+        {
+            var userSkill = await mySkills.GetUserSkillByIdAsync(id, userId);
+            if (userSkill == null)
+                return false;
+
+            await mySkills.DeleteUserSkillAsync(userSkill);
+            return true;
+        }
+
 
         #endregion
 

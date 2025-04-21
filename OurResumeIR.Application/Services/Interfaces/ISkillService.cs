@@ -54,6 +54,7 @@ namespace OurResumeIR.Application.Services.Interfaces
         Task FillDropDownsForEditViewModel(EditMySkillsViewModel model);
         // نوشتن متدی که ورودی ویو مدل دارد و تبدیل ویو مدل به مدل و صدا زدن متد ریپوزیتوری برای ثبت اطلاعات در بانک اطلاعاتی
         Task UpdateUserSkillAsync(EditMySkillsViewModel model);
+        Task<bool> DeleteUserSkillAsync(int id, string userId);
         #endregion
 
     }

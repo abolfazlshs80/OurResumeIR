@@ -235,7 +235,18 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             return RedirectToAction("MySkillsList");
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteMySkill(int id)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
+            var result = await skillLayersService.DeleteUserSkillAsync(id, userId);
+            if (!result)
+                return NotFound();
+
+            return RedirectToAction("MySkillsList");
+        }
 
         #endregion
 
