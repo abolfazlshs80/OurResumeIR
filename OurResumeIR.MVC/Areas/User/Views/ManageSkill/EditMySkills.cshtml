@@ -20,7 +20,7 @@
 
                         <label asp-for="SkillId" class="form-label">نام تخصص</label>
                         <select asp-for="SkillId" asp-items="@Model.Skills" class="form-select text-end" dir="rtl">
-                            <option value="" dir="rtl" style="text-align: right;">لطفاً انتخاب کنید</option>
+                            <option value="0" dir="rtl" style="text-align: right;">لطفاً انتخاب کنید</option>
                         </select>
                         <span asp-validation-for="SkillId" class="text-danger"></span>
                     </div>
@@ -28,7 +28,7 @@
                     <div class="col-md-6">
                         <label asp-for="SkillLevelId" class="form-label">سطح تخصص</label>
                         <select asp-for="SkillLevelId" asp-items="@Model.SkillLevels" class="form-select text-end" dir="rtl">
-                            <option value="" dir="rtl" style="text-align: right;">لطفاً انتخاب کنید</option>
+                            <option value="0" dir="rtl" style="text-align: right;">لطفاً انتخاب کنید</option>
                         </select>
                         <span asp-validation-for="SkillLevelId" class="text-danger"></span>
                     </div>

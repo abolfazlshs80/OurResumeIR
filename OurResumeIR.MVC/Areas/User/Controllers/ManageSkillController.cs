@@ -216,6 +216,13 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         {
             if (!ModelState.IsValid)
             {
+
+                //foreach (var error in state.Value.Errors)
+                //{
+                //    Console.WriteLine($"خطا در {state.Key}: {error.ErrorMessage}");
+                //}
+
+
                 // پر کردن DropDown ها از طریق سرویس، چون کنترلر به دیتابیس یا ریپو دسترسی نداره
                 await skillLayersService.FillDropDownsForEditViewModel(viewModel);
 

@@ -20,7 +20,6 @@ namespace OurResumeIR.Application.ViewModels.MySkills
         [Range(1, int.MaxValue, ErrorMessage = "لطفاً سطح تخصص را انتخاب کنید")]
         public int SkillLevelId { get; set; }
 
-        public string UserId { get; set; }
 
         // برای DropDown
         public List<SelectListItem> Skills { get; set; }

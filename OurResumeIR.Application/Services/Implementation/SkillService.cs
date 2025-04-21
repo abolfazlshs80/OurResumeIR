@@ -261,7 +261,7 @@ namespace OurResumeIR.Application.Services.Interfaces
                 Id = selected.Id,
                 SkillId = selected.SkillId,
                 SkillLevelId = selected.SkillLevelId,
-                UserId = selected.UserId.ToString(),
+                //UserId = selected.UserId.ToString(),
 
                 Skills = skillList.Select(s => new SelectListItem
                 {

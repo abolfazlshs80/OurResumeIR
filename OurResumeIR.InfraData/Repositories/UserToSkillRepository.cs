@@ -62,5 +62,11 @@ namespace OurResumeIR.Infra.Data.Repositories
                 return true;
       
         }
+
+        public async Task DeleteUserSkillAsync(UserToSkill userSkill)
+        {
+            _context.UserToSkill.Remove(userSkill);
+            await _context.SaveChangesAsync();
+        }
     }
 }
