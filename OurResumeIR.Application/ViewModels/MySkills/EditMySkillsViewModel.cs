@@ -18,7 +18,7 @@ namespace OurResumeIR.Application.ViewModels.MySkills
         [Required]
         public int SkillLevelId { get; set; }
 
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
 
         // برای DropDown
         public List<SelectListItem> Skills { get; set; }

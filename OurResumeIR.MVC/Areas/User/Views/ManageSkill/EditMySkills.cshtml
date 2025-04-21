@@ -1,5 +1,5 @@
 ﻿@using OurResumeIR.Application.ViewModels.MySkills
-@model AddMySkillsViewModel
+@model EditMySkillsViewModel
 
 @{
     Layout = "_ProfileLayout";
@@ -16,21 +16,21 @@
             <form asp-action="AddMySkills" asp-controller="ManageSkill" asp-area="User" method="post">
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <input asp-for="UserId" type="hidden" />
+                        <input asp-for="Id" type="hidden" />
 
-                        <label asp-for="SelectedSkillId" class="form-label">نام تخصص</label>
-                        <select asp-for="SelectedSkillId" asp-items="@Model.Skills" class="form-select text-end" dir="rtl">
-                            <option value="" dir="rtl" style="text-align: right;">لطفاً انتخاب کنید</option>
-                        </select>
-                        <span asp-validation-for="SelectedSkillId" class="text-danger"></span>
+                        <label asp-for="SkillId" class="form-label">نام تخصص</label>
+                        <select asp-for="SkillId" asp-items="@Model.Skills" class="form-select text-end" dir="rtl">
+@*                             <option value="" dir="rtl" style="text-align: right;">لطفاً انتخاب کنید</option>
+ *@                        </select>
+                        <span asp-validation-for="SkillId" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-6">
-                        <label asp-for="SelectedSkillLevelId" class="form-label">سطح تخصص</label>
-                        <select asp-for="SelectedSkillLevelId" asp-items="@Model.SkillLevels" class="form-select text-end" dir="rtl">
-                            <option value="" dir="rtl" style="text-align: right;">لطفاً انتخاب کنید</option>
-                        </select>
-                        <span asp-validation-for="SelectedSkillLevelId" class="text-danger"></span>
+                        <label asp-for="SkillLevelId" class="form-label">سطح تخصص</label>
+                        <select asp-for="SkillLevelId" asp-items="@Model.SkillLevels" class="form-select text-end" dir="rtl">
+@*                             <option value="" dir="rtl" style="text-align: right;">لطفاً انتخاب کنید</option>
+ *@                        </select>
+                        <span asp-validation-for="SkillLevelId" class="text-danger"></span>
                     </div>
                 </div>
 

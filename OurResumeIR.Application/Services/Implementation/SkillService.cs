@@ -199,19 +199,17 @@ namespace OurResumeIR.Application.Services.Interfaces
             return userSkills.Select(x => new MySkillsForListViewModel
             {
                 SkillName = x.Skill.Name,
-                SkillLevelName = x.SkillLevel.Name
+                SkillLevelName = x.SkillLevel.Name,
+                Id = x.Id,
 
             }).ToList();
         }
 
         public async Task<AddMySkillsViewModel> GetAllSkillAndSkillLevelForDropDownAsync()
         {
-            // var userSkill = await mySkills.GetAllSkillAndSkillLevelAsync();
-            var skill = await unitOfWork.SkillRepository.GetAllSkillAsync();
+                      var skill = await unitOfWork.SkillRepository.GetAllSkillAsync();
             var skillLevel = await unitOfWork.SkillRepository.GetAllSkillLevelAsync();
-            // از ورودی گرفته شود
-            //     int iduserToSkill = 0;
-            //  var userToSkill =  await unitOfWork.UserToSkillRepository.FindAsync(a => a.Id == iduserToSkill).Result.FirstOrDefaultAsync();
+    
             var model = new AddMySkillsViewModel
             {
                 // پر کردن SelectListItem برای دراپ دان ها داخل ویو
@@ -219,8 +217,6 @@ namespace OurResumeIR.Application.Services.Interfaces
                 {
                     Value = s.Id.ToString(),
                     Text = s.Name,
-                    //    Selected = s.Id == userToSkill.SkillId,
-
 
                 }).ToList(),
 
@@ -247,14 +243,42 @@ namespace OurResumeIR.Application.Services.Interfaces
 
         }
 
-        public async Task<EditMySkillsViewModel> GetSkillForEditAsync(int userToSkill)
+        public async Task<EditMySkillsViewModel> GetSkillForEditAsync(int userToSkillId)
         {
-            var userSkill = await unitOfWork.UserToSkillRepository.FindAsync(u => u.Id == userToSkill);
+            // حالا FindAsync خودش یک UserToSkill برمی‌گردونه
+            var selected = await unitOfWork.UserToSkillRepository.FindAsync(u => u.Id == userToSkillId);
 
-            var selected = userSkill.FirstOrDefaultAsync(); 
+            if (selected == null)
+                return null;
 
+            // گرفتن لیست کامل برای DropDown ها
             var skillList = await unitOfWork.SkillRepository.GetAllSkillAsync();
-            var skillLevelList = await unitOfWork.SkillLevelRepository
+            var skillLevelList = await unitOfWork.SkillLevelRepository.GetAllSkillLevelAsync();
+
+            // ساخت ViewModel با پر کردن DropDown و مقادیر انتخاب‌شده
+            var model = new EditMySkillsViewModel
+            {
+                Id = selected.Id,
+                SkillId = selected.SkillId,
+                SkillLevelId = selected.SkillLevelId,
+                UserId = selected.UserId.ToString(),
+
+                Skills = skillList.Select(s => new SelectListItem
+                {
+                    Value = s.Id.ToString(),
+                    Text = s.Name,
+                    Selected = s.Id == selected.SkillId
+                }).ToList(),
+
+                SkillLevels = skillLevelList.Select(s => new SelectListItem
+                {
+                    Value = s.Id.ToString(),
+                    Text = s.Name,
+                    Selected = s.Id == selected.SkillLevelId
+                }).ToList(),
+            };
+
+            return model;
         }
 
 

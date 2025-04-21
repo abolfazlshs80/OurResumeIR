@@ -50,7 +50,9 @@ namespace OurResumeIR.Application.Services.Interfaces
         Task AddMySkillAsync(AddMySkillsViewModel model);
         // درست کردن ویو مدل برای پر کردن دراپ دان های تخصص و سطح تخصص که در هنگام ویرایش مقدار لازم پر شده باشد
         // نوشتن یک متد که خروجی ویو مدل داشته باشد و مقدار سلکت آپشن ها پر شود و برای نمایش به کاربر آماده باشد
-        Task<EditMySkillsViewModel> GetSkillForEditAsync(int userToSkill);
+        Task<EditMySkillsViewModel> GetSkillForEditAsync(int userToSkillId);
+
+       // نوشتن متدی که ورودی ویو مدل دارد و تبدیل ویو مدل به مدل و صدا زدن متد ریپوزیتوری برای ثبت اطلاعات در بانک اطلاعاتی
         #endregion
 
     }

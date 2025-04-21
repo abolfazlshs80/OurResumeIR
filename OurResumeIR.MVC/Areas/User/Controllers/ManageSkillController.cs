@@ -7,6 +7,7 @@ using OurResumeIR.Application.Services.Implementation;
 using OurResumeIR.Application.Services.Interfaces;
 using OurResumeIR.Application.ViewModels.Experience;
 using OurResumeIR.Application.ViewModels.MySkills;
+using OurResumeIR.Domain.Interfaces;
 using OurResumeIR.Domain.Models;
 using OurResumeIR.Infra.Data.Repositories;
 using System.Security.Claims;
@@ -204,9 +205,30 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         [HttpGet]
         public async Task<IActionResult> EditMySkills(int id)
         {
+            Console.WriteLine($"دریافت شده ID برای ویرایش: {id}");
             // گرفتن نام تخصص و سطح تخصص  از لایه سرویس توسط یک ویو مدل برای نمایش مقادیری که کاربر میخواهد ویرایش کند
-            return View();
+            var model = await skillLayersService.GetSkillForEditAsync(id);
+            return View(model);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> EditMySkills(EditMySkillsViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                // پر کردن DropDown ها از طریق سرویس، چون کنترلر به دیتابیس یا ریپو دسترسی نداره
+                await skillLayersService.FillDropDownsForEditViewModel(viewModel);
+
+                return View(viewModel);
+            }
+
+            // ذخیره ویرایش از طریق سرویس
+            await skillLayersService.UpdateUserSkillAsync(viewModel);
+
+            return RedirectToAction("MySkillsList");
+        }
+
+
 
         #endregion
 
