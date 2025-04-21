@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using OurResumeIR.Application.ViewModels.Experience;
 using OurResumeIR.Application.ViewModels.ExpertiseLayers;
 using OurResumeIR.Application.ViewModels.MySkills;
@@ -50,7 +51,7 @@ namespace OurResumeIR.Application.Services.Interfaces
         Task AddMySkillAsync(AddMySkillsViewModel model);
         // درست کردن ویو مدل برای پر کردن دراپ دان های تخصص و سطح تخصص که در هنگام ویرایش مقدار لازم پر شده باشد
         // نوشتن یک متد که خروجی ویو مدل داشته باشد و مقدار سلکت آپشن ها پر شود و برای نمایش به کاربر آماده باشد
-        Task<EditMySkillsViewModel> GetSkillForEditAsync(int userToSkillId);
+        EditMySkillsViewModel GetSkillForEditAsync(int userToSkillId ,out  List<SelectListItem> skill , out List<SelectListItem> skillLevel);
         Task FillDropDownsForEditViewModel(EditMySkillsViewModel model);
         // نوشتن متدی که ورودی ویو مدل دارد و تبدیل ویو مدل به مدل و صدا زدن متد ریپوزیتوری برای ثبت اطلاعات در بانک اطلاعاتی
         Task UpdateUserSkillAsync(EditMySkillsViewModel model);

@@ -243,17 +243,22 @@ namespace OurResumeIR.Application.Services.Interfaces
 
         }
 
-        public async Task<EditMySkillsViewModel> GetSkillForEditAsync(int userToSkillId)
+        public      EditMySkillsViewModel GetSkillForEditAsync(int userToSkillId ,out List<SelectListItem> skill, out List<SelectListItem> skillLevel)
         {
             // حالا FindAsync خودش یک UserToSkill برمی‌گردونه
-            var selected = await unitOfWork.UserToSkillRepository.FindAsync(u => u.Id == userToSkillId);
+            var selected =  unitOfWork.UserToSkillRepository.FindAsync(u => u.Id == userToSkillId).Result;
 
             if (selected == null)
-                return null;
+            {
+                skill = new List<SelectListItem>();
+                skillLevel = new List<SelectListItem>();
+                return new EditMySkillsViewModel();
+            }
+              
 
             // گرفتن لیست کامل برای DropDown ها
-            var skillList = await unitOfWork.SkillRepository.GetAllSkillAsync();
-            var skillLevelList = await unitOfWork.SkillLevelRepository.GetAllSkillLevelAsync();
+            var skillList =  unitOfWork.SkillRepository.GetAllSkillAsync().Result;
+            var skillLevelList =  unitOfWork.SkillLevelRepository.GetAllSkillLevelAsync().Result;
 
             // ساخت ViewModel با پر کردن DropDown و مقادیر انتخاب‌شده
             var model = new EditMySkillsViewModel
@@ -263,20 +268,34 @@ namespace OurResumeIR.Application.Services.Interfaces
                 SkillLevelId = selected.SkillLevelId,
                 //UserId = selected.UserId.ToString(),
 
-                Skills = skillList.Select(s => new SelectListItem
-                {
-                    Value = s.Id.ToString(),
-                    Text = s.Name,
-                    Selected = s.Id == selected.SkillId
-                }).ToList(),
+                //Skills = skillList.Select(s => new SelectListItem
+                //{
+                //    Value = s.Id.ToString(),
+                //    Text = s.Name,
+                //    Selected = s.Id == selected.SkillId
+                //}).ToList(),
 
-                SkillLevels = skillLevelList.Select(s => new SelectListItem
-                {
-                    Value = s.Id.ToString(),
-                    Text = s.Name,
-                    Selected = s.Id == selected.SkillLevelId
-                }).ToList(),
+                //SkillLevels = skillLevelList.Select(s => new SelectListItem
+                //{
+                //    Value = s.Id.ToString(),
+                //    Text = s.Name,
+                //    Selected = s.Id == selected.SkillLevelId
+                //}).ToList(),
             };
+            skill = skillList.Select(s => new SelectListItem
+            {
+                Value = s.Id.ToString(),
+                Text = s.Name,
+                Selected = s.Id == selected.SkillId
+            }).ToList();
+
+            skillLevel = skillLevelList.Select(s => new SelectListItem
+            {
+                Value = s.Id.ToString(),
+                Text = s.Name,
+                Selected = s.Id == selected.SkillId
+            }).ToList();
+
 
             return model;
         }
@@ -286,19 +305,19 @@ namespace OurResumeIR.Application.Services.Interfaces
             var skillList = await unitOfWork.SkillRepository.GetAllSkillAsync();
             var skillLevelList = await unitOfWork.SkillLevelRepository.GetAllSkillLevelAsync();
 
-            model.Skills = skillList.Select(s => new SelectListItem
-            {
-                Value = s.Id.ToString(),
-                Text = s.Name,
-                Selected = s.Id == model.SkillId
-            }).ToList();
+            //model.Skills = skillList.Select(s => new SelectListItem
+            //{
+            //    Value = s.Id.ToString(),
+            //    Text = s.Name,
+            //    Selected = s.Id == model.SkillId
+            //}).ToList();
 
-            model.SkillLevels = skillLevelList.Select(s => new SelectListItem
-            {
-                Value = s.Id.ToString(),
-                Text = s.Name,
-                Selected = s.Id == model.SkillLevelId
-            }).ToList();
+            //model.SkillLevels = skillLevelList.Select(s => new SelectListItem
+            //{
+            //    Value = s.Id.ToString(),
+            //    Text = s.Name,
+            //    Selected = s.Id == model.SkillLevelId
+            //}).ToList();
         }
 
         public async Task UpdateUserSkillAsync(EditMySkillsViewModel model)

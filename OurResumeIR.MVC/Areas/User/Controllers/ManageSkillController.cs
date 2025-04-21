@@ -207,28 +207,16 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         {
             Console.WriteLine($"دریافت شده ID برای ویرایش: {id}");
             // گرفتن نام تخصص و سطح تخصص  از لایه سرویس توسط یک ویو مدل برای نمایش مقادیری که کاربر میخواهد ویرایش کند
-            var model = await skillLayersService.GetSkillForEditAsync(id);
+            var model =  skillLayersService.GetSkillForEditAsync(id,out var skill , out var skillLevel);
+            ViewBag.SkillLevel = skillLevel;
+            ViewBag.Skill = skill;
             return View(model);
         }
 
         [HttpPost]
         public async Task<IActionResult> EditMySkills(EditMySkillsViewModel viewModel)
         {
-            if (!ModelState.IsValid)
-            {
-
-                //foreach (var error in state.Value.Errors)
-                //{
-                //    Console.WriteLine($"خطا در {state.Key}: {error.ErrorMessage}");
-                //}
-
-
-                // پر کردن DropDown ها از طریق سرویس، چون کنترلر به دیتابیس یا ریپو دسترسی نداره
-                await skillLayersService.FillDropDownsForEditViewModel(viewModel);
-
-                return View(viewModel);
-            }
-
+       
             // ذخیره ویرایش از طریق سرویس
             await skillLayersService.UpdateUserSkillAsync(viewModel);
 

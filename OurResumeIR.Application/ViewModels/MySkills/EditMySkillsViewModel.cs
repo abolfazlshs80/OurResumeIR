@@ -22,7 +22,7 @@ namespace OurResumeIR.Application.ViewModels.MySkills
 
 
         // برای DropDown
-        public List<SelectListItem> Skills { get; set; }
-        public List<SelectListItem> SkillLevels { get; set; }
+        //public List<SelectListItem> Skills { get; set; }
+        //public List<SelectListItem> SkillLevels { get; set; }
     }
 }
