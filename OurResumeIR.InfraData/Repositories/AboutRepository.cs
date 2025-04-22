@@ -25,9 +25,9 @@ namespace OurResumeIR.Infra.Data.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(string userId)
+        public async Task DeleteAsync(AboutMe aboutMe)
         {
-            _context.Remove(userId);
+            _context.Remove(aboutMe);
             await _context.SaveChangesAsync();
 
         }
