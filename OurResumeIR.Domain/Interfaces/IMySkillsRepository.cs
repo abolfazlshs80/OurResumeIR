@@ -15,6 +15,7 @@ namespace OurResumeIR.Domain.Interfaces
         Task AddMySkillsAsync(UserToSkill skill);
         Task DeleteUserSkillAsync(UserToSkill userSkill);
         Task<UserToSkill?> GetUserSkillByIdAsync(int id, string userId);
+        Task<bool> IsDuplicateSkillAsync(string userId, int skillId, int skillLevelId);
 
     }
 }

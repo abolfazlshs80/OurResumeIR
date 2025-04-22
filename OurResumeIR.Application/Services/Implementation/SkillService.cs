@@ -198,18 +198,19 @@ namespace OurResumeIR.Application.Services.Interfaces
 
             return userSkills.Select(x => new MySkillsForListViewModel
             {
+                Id = x.Id,
                 SkillName = x.Skill.Name,
                 SkillLevelName = x.SkillLevel.Name,
-                Id = x.Id,
+
 
             }).ToList();
         }
 
         public async Task<AddMySkillsViewModel> GetAllSkillAndSkillLevelForDropDownAsync()
         {
-                      var skill = await unitOfWork.SkillRepository.GetAllSkillAsync();
+            var skill = await unitOfWork.SkillRepository.GetAllSkillAsync();
             var skillLevel = await unitOfWork.SkillRepository.GetAllSkillLevelAsync();
-    
+
             var model = new AddMySkillsViewModel
             {
                 // پر کردن SelectListItem برای دراپ دان ها داخل ویو
@@ -230,23 +231,29 @@ namespace OurResumeIR.Application.Services.Interfaces
             return model;
         }
 
-        public async Task AddMySkillAsync(AddMySkillsViewModel model)
+        public async Task<bool> AddMySkillAsync(AddMySkillsViewModel model , string userId)
         {
+            // چک کردن اینکه تخصص و سطح تخصص وارد شده برای کاربر تکراری است؟
+            var isDuplicate = await mySkills.IsDuplicateSkillAsync(userId, model.SelectedSkillId, model.SelectedSkillLevelId);
+            if (isDuplicate)
+                return false;
+
             var UserSkills = new UserToSkill
             {
+                UserId = userId,
                 SkillId = model.SelectedSkillId,
                 SkillLevelId = model.SelectedSkillLevelId,
-                UserId = model.UserId.ToString(),
+            
             };
 
             await mySkills.AddMySkillsAsync(UserSkills);
-
+            return true;
         }
 
-        public      EditMySkillsViewModel GetSkillForEditAsync(int userToSkillId ,out List<SelectListItem> skill, out List<SelectListItem> skillLevel)
+        public EditMySkillsViewModel GetSkillForEditAsync(int userToSkillId, out List<SelectListItem> skill, out List<SelectListItem> skillLevel)
         {
             // حالا FindAsync خودش یک UserToSkill برمی‌گردونه
-            var selected =  unitOfWork.UserToSkillRepository.FindAsync(u => u.Id == userToSkillId).Result;
+            var selected = unitOfWork.UserToSkillRepository.FindAsync(u => u.Id == userToSkillId).Result;
 
             if (selected == null)
             {
@@ -254,11 +261,11 @@ namespace OurResumeIR.Application.Services.Interfaces
                 skillLevel = new List<SelectListItem>();
                 return new EditMySkillsViewModel();
             }
-              
+
 
             // گرفتن لیست کامل برای DropDown ها
-            var skillList =  unitOfWork.SkillRepository.GetAllSkillAsync().Result;
-            var skillLevelList =  unitOfWork.SkillLevelRepository.GetAllSkillLevelAsync().Result;
+            var skillList = unitOfWork.SkillRepository.GetAllSkillAsync().Result;
+            var skillLevelList = unitOfWork.SkillLevelRepository.GetAllSkillLevelAsync().Result;
 
             // ساخت ViewModel با پر کردن DropDown و مقادیر انتخاب‌شده
             var model = new EditMySkillsViewModel
@@ -342,6 +349,24 @@ namespace OurResumeIR.Application.Services.Interfaces
 
             await mySkills.DeleteUserSkillAsync(userSkill);
             return true;
+        }
+
+        public async Task FillDropDownsAsync(AddMySkillsViewModel model)
+        {
+            var skills = await unitOfWork.SkillRepository.GetAllSkillAsync();
+            var skillLevels = await unitOfWork.SkillRepository.GetAllSkillLevelAsync();
+
+            model.Skills = skills.Select(s => new SelectListItem
+            {
+                Value = s.Id.ToString(),
+                Text = s.Name
+            }).ToList();
+
+            model.SkillLevels = skillLevels.Select(s => new SelectListItem
+            {
+                Value = s.Id.ToString(),
+                Text = s.Name
+            }).ToList();
         }
 
 

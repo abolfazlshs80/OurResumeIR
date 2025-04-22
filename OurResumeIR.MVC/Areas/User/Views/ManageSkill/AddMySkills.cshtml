@@ -16,7 +16,7 @@
             <form asp-action="AddMySkills" asp-controller="ManageSkill" asp-area="User" method="post">
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <input asp-for="UserId" type="hidden" />
+                       @*  <input asp-for="UserId" type="hidden" /> *@
 
                         <label asp-for="SelectedSkillId" class="form-label">نام تخصص</label>
                         <select asp-for="SelectedSkillId" asp-items="@Model.Skills" class="form-select text-end" dir="rtl">

@@ -12,10 +12,9 @@ namespace OurResumeIR.Application.ViewModels.MySkills
     {
         [Required]
         public int SelectedSkillId { get; set; }
-
-        [Required]
+        [Required(ErrorMessage ="لطفا سطح تخصص را وارد کنید")]
         public int SelectedSkillLevelId { get; set; }
-        public string UserId { get; set; }
+        //public string UserId { get; set; }
 
         public List<SelectListItem> Skills { get; set; } = new();
         public List<SelectListItem> SkillLevels { get; set; } = new();

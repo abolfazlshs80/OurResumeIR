@@ -54,5 +54,11 @@ namespace OurResumeIR.Infra.Data.Repositories
             return await _Context.UserToSkill
          .FirstOrDefaultAsync(us => us.Id == id && us.UserId == userId);
         }
+
+        public async Task<bool> IsDuplicateSkillAsync(string userId, int skillId, int skillLevelId)
+        {
+            return await _Context.UserToSkill
+          .AnyAsync(u => u.UserId == userId && u.SkillId == skillId && u.SkillLevelId == skillLevelId);
+        }
     }
 }
