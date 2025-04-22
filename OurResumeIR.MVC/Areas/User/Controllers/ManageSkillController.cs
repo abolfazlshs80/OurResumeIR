@@ -199,7 +199,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             if (!isSuccess)
             {
                 ModelState.AddModelError(string.Empty, "این تخصص با همین سطح قبلاً ثبت شده است.");
-                await skillLayersService.GetAllSkillAndSkillLevelForDropDownAsync(); // باز هم DropDownها
+                await skillLayersService.FillDropDownsAsync(viewModel); // باز هم DropDownها
                 return View(viewModel);
             }
 
