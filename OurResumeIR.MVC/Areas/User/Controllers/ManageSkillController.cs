@@ -179,7 +179,6 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         {
 
             var model = await skillLayersService.GetAllSkillAndSkillLevelForDropDownAsync();
-            //model.UserId = User.GetUserId();
             return View(model);
         }
 
@@ -189,7 +188,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
 
             if (!ModelState.IsValid)
             {
-                await skillLayersService.GetAllSkillAndSkillLevelForDropDownAsync(); // پر کردن مجدد DropDownها
+                await skillLayersService.GetAllSkillAndSkillLevelForDropDownAsync();
                 return View(viewModel);
             }
             // گرفتن آیدی کاربر از سرور برای ثبت تخصص و سطح تخصص کاربر لاگین شده

@@ -13,7 +13,7 @@ namespace OurResumeIR.Application.Services.Interfaces
 {
     public interface ISkillService
     {
-        #region Specialties Layer
+        #region Skill Level
 
         Task<List<SkillLevelVM>> GetAll();
         Task<SkillLevelVM> GetById(int Id);
@@ -24,7 +24,7 @@ namespace OurResumeIR.Application.Services.Interfaces
         #endregion
 
 
-        #region Specialties 
+        #region Skill
            
 
         Task<List<SkillFormViewModel>> GetAllAsync();
