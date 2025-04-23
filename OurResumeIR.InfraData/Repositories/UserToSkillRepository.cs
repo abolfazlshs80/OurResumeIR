@@ -15,52 +15,46 @@ namespace OurResumeIR.Infra.Data.Repositories
     {
         private AppDbContext _context;
 
-        public UserToSkillRepository( AppDbContext context) 
+        public UserToSkillRepository(AppDbContext context)
         {
             _context = context;
         }
 
-                  
+
 
         public async Task<UserToSkill?> FindAsync(Expression<Func<UserToSkill, bool>> predicate)
         {
-             var result =  await _context.UserToSkill
-                .Include(u => u.Skill)
-                .Include(u => u.SkillLevel)
-                .FirstOrDefaultAsync(predicate);
+            var result = await _context.UserToSkill
+               .Include(u => u.Skill)
+               .Include(u => u.SkillLevel)
+               .FirstOrDefaultAsync(predicate);
             return result;
         }
 
         public async Task<int> CreateUserToSkill(UserToSkill userToSkill)
         {
-                _context.Add(userToSkill);
-                return userToSkill.Id;
-       
-      
-            
+            _context.Add(userToSkill);
+            return userToSkill.Id;
+
         }
 
         public async Task<bool> UpdateUserToSkill(UserToSkill userToSkill)
         {
-                _context.Update(userToSkill);
-                return true;
-      
-           
+            _context.Update(userToSkill);
+            return true;
         }
 
         public async Task<bool> DeleteUserToSkill(int UserToSkillId)
         {
-                _context.Remove(await _context.UserToSkill.FindAsync(UserToSkillId));
-                return true;
-          
-           
+            _context.Remove(await _context.UserToSkill.FindAsync(UserToSkillId));
+            return true;
         }
 
         public async Task<bool> SaveChanges()
         {
-                await _context.SaveChangesAsync();
-                return true;
-      
+            await _context.SaveChangesAsync();
+            return true;
+
         }
 
         public async Task DeleteUserSkillAsync(UserToSkill userSkill)
