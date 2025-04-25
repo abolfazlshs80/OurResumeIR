@@ -38,5 +38,10 @@ namespace OurResumeIR.Application.Services.Implementation
 
             await _blogRepository.AddBlogAsync(blog);
         }
+
+        public Task<BlogPostListViewModel> GetAllBlogForView()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

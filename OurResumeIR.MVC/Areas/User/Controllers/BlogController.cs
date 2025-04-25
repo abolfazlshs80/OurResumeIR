@@ -18,6 +18,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
 
         public IActionResult BlogList()
         {
+            // گرفتن فیلد نام  و عکس از سرویس برای نمایش داخل لیست
             return View();
         }
 
