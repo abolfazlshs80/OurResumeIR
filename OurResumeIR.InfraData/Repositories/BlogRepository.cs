@@ -36,6 +36,11 @@ namespace OurResumeIR.Infra.Data.Repositories
            return await  _context.Blogs.ToListAsync();
         }
 
+        public async Task<Blog> GetBlogByIdAndUserIdAsync(int blogId, string userId)
+        {
+            return await _context.Blogs.FirstOrDefaultAsync(b => b.Id == blogId && b.UserId == userId);
+        }
+
         public async Task<Blog> GetByUserId(string userId)
         {
             return await _context.Blogs.FirstOrDefaultAsync(b => b.UserId == userId);   

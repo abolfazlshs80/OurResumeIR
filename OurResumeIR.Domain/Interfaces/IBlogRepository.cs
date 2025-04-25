@@ -15,5 +15,6 @@ namespace OurResumeIR.Domain.Interfaces
         Task UpdateBlogAsync(Blog blog);
         Task DeleteBlogAsync(Blog blog);
         Task SaveChangesAsync();
+        Task<Blog> GetBlogByIdAndUserIdAsync(int blogId, string userId);
     }
 }

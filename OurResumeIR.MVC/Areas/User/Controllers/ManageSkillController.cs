@@ -167,10 +167,9 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
 
         public async Task<IActionResult> MySkillsList()
         {
-            // گرفتن ویو مدل از لایه سرویس برای نمایش نام تخصص و سطح تخصص داخل یک لیست
+         
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            //User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
+      
             var model = await skillLayersService.GetAllSkillAndSkillLevelForViewAsync(userId);
             return View(model);
         }
@@ -179,7 +178,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         [HttpGet]
         public async Task<IActionResult> AddMySkills()
         {
-            // گرفتن نام تخصص ها و سطح تخصص ها از لایه سرویس و نمایش آن ها داخل دراپ دان ویو
+      
             var model = await skillLayersService.GetAllSkillAndSkillLevelForDropDownAsync();
             model.UserId = User.GetUserId();
             return View(model);
@@ -188,7 +187,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         [HttpPost]
         public async Task<IActionResult> AddMySkills(AddMySkillsViewModel viewModel)
         {
-            // گرفتن نام تخصص و سطح تخصص از کاربر و  برای لایه سرویس و تبدیل ویو مدل به مدل در لایه سرویس
+            
 
             if (!ModelState.IsValid)
             {
@@ -205,8 +204,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         [HttpGet]
         public async Task<IActionResult> EditMySkills(int id)
         {
-            Console.WriteLine($"دریافت شده ID برای ویرایش: {id}");
-            // گرفتن نام تخصص و سطح تخصص  از لایه سرویس توسط یک ویو مدل برای نمایش مقادیری که کاربر میخواهد ویرایش کند
+            
             var model =  skillLayersService.GetSkillForEditAsync(id,out var skill , out var skillLevel);
             ViewBag.SkillLevel = skillLevel;
             ViewBag.Skill = skill;
