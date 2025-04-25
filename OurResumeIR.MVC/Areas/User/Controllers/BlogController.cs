@@ -16,10 +16,11 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             _blogService = blogService;
         }
 
-        public IActionResult BlogList()
+        public async Task<IActionResult> BlogList()
         {
             // گرفتن فیلد نام  و عکس از سرویس برای نمایش داخل لیست
-            return View();
+            var model = await _blogService.GetAllBlogForView();
+            return View(model);
         }
 
         [HttpGet]
