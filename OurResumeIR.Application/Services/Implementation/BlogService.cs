@@ -39,6 +39,19 @@ namespace OurResumeIR.Application.Services.Implementation
             await _blogRepository.AddBlogAsync(blog);
         }
 
+        public async Task<bool> DeleteBlogAsync(int blogId, string userId)
+        {
+            var blog = await _blogRepository.GetBlogByIdAndUserIdAsync(blogId, userId);
+
+            if (blog == null)
+            {
+                return false;
+            }
+            await _blogRepository.DeleteBlogAsync(blog);
+
+            return true;
+        }
+
         public async Task<List<BlogPostListViewModel>> GetAllBlogForView()
         {
            var BlogPosts = await _blogRepository.GetAllBlogAsync();
