@@ -16,7 +16,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             _blogService = blogService;
         }
 
-        public IActionResult Index()
+        public IActionResult BlogList()
         {
             return View();
         }
@@ -39,7 +39,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             string userId = User.GetUserId();
             await _blogService.CreateBlogAsync(viewModel, userId);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("BlogList");
         }
     }
 }
