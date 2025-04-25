@@ -21,13 +21,13 @@ namespace OurResumeIR.Infra.Data.Repositories
 
         public async Task AddBlogAsync(Blog blog)
         {
-            _context.Add(blog);
+            _context.Blogs.Add(blog);
             await _context.SaveChangesAsync();
         }
 
         public async Task DeleteBlogAsync(Blog blog)
         {
-            _context.Remove(blog);
+            _context.Blogs.Remove(blog);
             await _context.SaveChangesAsync();
         }
 
@@ -43,7 +43,7 @@ namespace OurResumeIR.Infra.Data.Repositories
 
         public async Task UpdateBlogAsync(Blog blog)
         {
-            _context.Update(blog);
+            _context.Blogs.Update(blog);
             await _context.SaveChangesAsync();
         }
     }

@@ -12,30 +12,30 @@
         </div>
 
         <div class="card-body">
-            <form asp-action="CreateBlog" asp-controller="Blog" asp-area="User" method="post" enctype="multipart/form-data">
+            <form asp-action="AddBlog" asp-controller="Blog" asp-area="User" method="post" enctype="multipart/form-data">
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label asp-for="Title" class="form-label">عنوان مقاله</label>
-                        <input asp-for="Title" class="form-control text-end" dir="rtl" />
+                        <input asp-for="@Model.Title" class="form-control text-end" dir="rtl" />
                         <span asp-validation-for="Title" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-6">
                         <label asp-for="Description" class="form-label">توضیح کوتاه</label>
-                        <input asp-for="Description" class="form-control text-end" dir="rtl" />
+                        <input asp-for="@Model.Description" class="form-control text-end" dir="rtl" />
                         <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
                 </div>
 
                 <div class="mb-3">
                     <label asp-for="Text" class="form-label">متن مقاله</label>
-                    <textarea asp-for="Text" class="form-control text-end" rows="5" dir="rtl"></textarea>
+                    <textarea asp-for="@Model.Text" class="form-control text-end" rows="5" dir="rtl"></textarea>
                     <span asp-validation-for="Text" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
                     <label asp-for="ImageFile" class="form-label">آپلود تصویر مقاله</label>
-                    <input asp-for="ImageFile" type="file" class="form-control" onchange="previewImage(this)" />
+                    <input asp-for="@Model.ImageFile" type="file" class="form-control" onchange="previewImage(this)" />
                     <span asp-validation-for="ImageFile" class="text-danger"></span>
 
                     <!-- پیش‌نمایش عکس -->
