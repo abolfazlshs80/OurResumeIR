@@ -15,7 +15,7 @@ namespace OurResumeIR.Application.Services.Implementation
            if(file == null || file.Length == 0)  return null; 
 
            // ساخت نام جدید و گرفتن اکستنشن فایل 
-           var uniqueName = Guid.NewGuid().ToString() + Path.GetExtension(file.Name);
+           var uniqueName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
             var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot" , folderName);
 
             if (!Directory.Exists(uploadPath))

@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using CleanArch.Store.Application.Extention;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using OurResumeIR.Application.Services.Interfaces;
 using OurResumeIR.Application.ViewModels.Blog;
 
 namespace OurResumeIR.MVC.Areas.User.Controllers
@@ -8,6 +10,12 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
     [Authorize]
     public class BlogController : Controller
     {
+        private IBlogService _blogService;
+        public BlogController(IBlogService blogService)
+        {
+            _blogService = blogService;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -23,13 +31,15 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         public async Task<IActionResult> AddBlog(CreateBlogPostViewModel viewModel)
         {
             // ثبت مقادیر داخل ویو از طریق صدا زدن متد داخل سرویس
-            if (!ModelState.IsValid) 
+            if (!ModelState.IsValid)
             {
                 return View(viewModel);
             }
 
+            string userId = User.GetUserId();
+            await _blogService.CreateBlogAsync(viewModel, userId);
 
-            RedirectToAction("Index");
+            return RedirectToAction("Index");
         }
     }
 }

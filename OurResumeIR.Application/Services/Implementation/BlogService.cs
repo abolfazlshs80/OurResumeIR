@@ -14,9 +14,10 @@ namespace OurResumeIR.Application.Services.Implementation
     {
         private IFileUploader _fileUploader;
         private IBlogRepository _blogRepository;
-        public BlogService(IFileUploader fileUploader)
+        public BlogService(IFileUploader fileUploader , IBlogRepository blogRepository)
         {
             _fileUploader = fileUploader;
+            _blogRepository = blogRepository;   
         }
         public async Task CreateBlogAsync(CreateBlogPostViewModel model, string userId)
         {
