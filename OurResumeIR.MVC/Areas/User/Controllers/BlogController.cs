@@ -62,8 +62,10 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             var result = await _blogService.DeleteBlogAsync(id , userId);
             if (!result)
             {
-                return NotFound("عملیات حذف انجام نشد.");
+                TempData["ErrorMessage"] = "حذف مقاله ناموفق بود!";
+                return RedirectToAction("BlogList");
             }
+            TempData["SuccessMessage"] = "مقاله با موفقیت حذف شد!";
             return RedirectToAction("BlogList");
         }
     }
