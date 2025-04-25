@@ -45,12 +45,26 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         }
 
 
-        [HttpGet]
-        public async Task<IActionResult> EditBlog() 
-        {
-            // گرفتن مقادیر بلاگ از سرویس برای پر کردن فیلدها  و آماده ویرایش بودن
+        //[HttpGet]
+        //public async Task<IActionResult> EditBlog() 
+        //{
+        //    // گرفتن مقادیر بلاگ از سرویس برای پر کردن فیلدها  و آماده ویرایش بودن
 
-            return View();
+        //    return View();
+        //}
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteBlog(int id) 
+        {
+             var userId = User.GetUserId();
+
+            var result = await _blogService.DeleteBlogAsync(id , userId);
+            if (!result)
+            {
+                return NotFound("عملیات حذف انجام نشد.");
+            }
+            return RedirectToAction("BlogList");
         }
     }
 }

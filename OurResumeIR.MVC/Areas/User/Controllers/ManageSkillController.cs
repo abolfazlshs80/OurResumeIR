@@ -229,7 +229,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
 
             var result = await skillLayersService.DeleteUserSkillAsync(id, userId);
             if (!result)
-                return NotFound();
+                return NotFound("عملیات حذف انجام نشد");
 
             return RedirectToAction("MySkillsList");
         }
