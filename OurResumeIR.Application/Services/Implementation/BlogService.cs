@@ -39,9 +39,18 @@ namespace OurResumeIR.Application.Services.Implementation
             await _blogRepository.AddBlogAsync(blog);
         }
 
-        public Task<BlogPostListViewModel> GetAllBlogForView()
+        public async Task<List<BlogPostListViewModel>> GetAllBlogForView()
         {
-            throw new NotImplementedException();
+           var BlogPosts = await _blogRepository.GetAllBlogAsync();
+
+
+            return BlogPosts.Select(p => new BlogPostListViewModel
+            {                 
+                Id = p.Id,
+                Title = p.Title,
+                ImageName = p.ImageName 
+            }).ToList();
+
         }
     }
 }

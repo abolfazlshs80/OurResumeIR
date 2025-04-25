@@ -11,6 +11,6 @@ namespace OurResumeIR.Application.Services.Interfaces
     {
         // نوشتن یک متد برای استفاده از سرویس آپلود عکس و تبدیل ویو مدل به مدل و ثبت اطلاعات داخل بانک از طریق صدا زدن متد ریپوزیتوری
         Task CreateBlogAsync(CreateBlogPostViewModel model , string userId);
-        Task<BlogPostListViewModel> GetAllBlogForView();
+        Task<List<BlogPostListViewModel>> GetAllBlogForView();
     }
 }
