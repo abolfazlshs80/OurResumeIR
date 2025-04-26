@@ -97,7 +97,23 @@ namespace OurResumeIR.Application.Services.Implementation
         public async Task<string> UploadProfile(IFormFile file, string userId)
         {
             var result = await _uploaderService.UpdloadFile(file, "Profile", userId);
+            var User = await _userManager.FindByIdAsync(userId);
+            if (User == null)
+                return string.Empty;
+            User.ImageName = result;
+            await _userManager.UpdateAsync(User);
             return result ?? string.Empty;
+        }
+
+        public async Task<bool> UpdateFullNameProfile(string Name, string userId)
+        {
+          
+            var User = await _userManager.FindByIdAsync(userId);
+            if (User == null)
+                return false;
+            User.FullName = Name;
+            await _userManager.UpdateAsync(User);
+            return true;
         }
     }
 }

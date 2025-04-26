@@ -12,5 +12,6 @@ namespace OurResumeIR.Domain.Models
     {
         // می‌توانید فیلدهای اضافی برای کاربر اضافه کنید
         public string FullName { get; set; }
+        public string? ImageName { get; set; }
     }
 }

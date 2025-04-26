@@ -9,9 +9,9 @@ namespace OurResumeIR.Domain.Models
 {
     public class User: IdentityUser
     {
-     
-  
 
+        public string? FullName { get; set; }
+        public string? ImageName { get; set; }
         // Navigation Property  
         public ICollection<UserToSkill> UserToSkill { get; set; }
         public ICollection<Blog> Blog { get; set; }
