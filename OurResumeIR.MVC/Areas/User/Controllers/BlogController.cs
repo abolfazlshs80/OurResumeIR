@@ -49,17 +49,17 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         public async Task<IActionResult> EditBlog(int id)
         {
             // گرفتن مقادیر بلاگ از سرویس برای پر کردن فیلدها  و آماده ویرایش بودن
-
-            return View();
+            var model = await _blogService.GetBlogForEditView(id);
+            return View(model);
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> DeleteBlog(int id) 
+        public async Task<IActionResult> DeleteBlog(int id)
         {
-             var userId = User.GetUserId();
+            var userId = User.GetUserId();
 
-            var result = await _blogService.DeleteBlogAsync(id , userId);
+            var result = await _blogService.DeleteBlogAsync(id, userId);
             if (!result)
             {
                 TempData["ErrorMessage"] = "حذف مقاله ناموفق بود!";
