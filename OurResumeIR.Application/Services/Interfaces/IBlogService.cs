@@ -13,7 +13,7 @@ namespace OurResumeIR.Application.Services.Interfaces
         Task CreateBlogAsync(CreateBlogPostViewModel model , string userId);
         Task<List<BlogPostListViewModel>> GetAllBlogForView();
         Task<bool> DeleteBlogAsync(int blogId , string userId);
-        Task<>
+        Task<EditBlogPostListViewModel> GetBlogForEditView(int id);
 
     }
 }

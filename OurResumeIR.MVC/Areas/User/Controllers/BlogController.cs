@@ -46,7 +46,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> EditBlog()
+        public async Task<IActionResult> EditBlog(int id)
         {
             // گرفتن مقادیر بلاگ از سرویس برای پر کردن فیلدها  و آماده ویرایش بودن
 
