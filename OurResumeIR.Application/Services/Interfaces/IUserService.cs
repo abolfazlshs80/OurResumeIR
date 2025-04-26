@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using OurResumeIR.Application.ViewModels.Account;
 using OurResumeIR.Domain.Enums;
 
 using System;
@@ -17,5 +18,6 @@ namespace OurResumeIR.Application.Services.Interfaces
         Task<RegisterResult> RegisterUser(RegisterViewModel viewModel);
         Task<string> UploadProfile(IFormFile file, string userId);
         Task<bool> UpdateFullNameProfile(string Name, string userId);
+        Task<UserProfileVM> LoadPrifile( string userId);
     }
 }
