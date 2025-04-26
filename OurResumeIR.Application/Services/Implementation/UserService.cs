@@ -117,7 +117,7 @@ namespace OurResumeIR.Application.Services.Implementation
             return true;
         }
 
-        public async Task<UserProfileVM> LoadPrifile( string userId)
+        public async Task<UserProfileVM> LoadProfile( string userId)
         {
             var model = new UserProfileVM();
             var User = await _userManager.FindByIdAsync(userId);

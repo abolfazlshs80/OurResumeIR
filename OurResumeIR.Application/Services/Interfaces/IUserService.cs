@@ -18,6 +18,6 @@ namespace OurResumeIR.Application.Services.Interfaces
         Task<RegisterResult> RegisterUser(RegisterViewModel viewModel);
         Task<string> UploadProfile(IFormFile file, string userId);
         Task<bool> UpdateFullNameProfile(string Name, string userId);
-        Task<UserProfileVM> LoadPrifile( string userId);
+        Task<UserProfileVM> LoadProfile( string userId);
     }
 }
