@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace OurResumeIR.Application.Services.Implementation
 {
@@ -68,7 +69,21 @@ namespace OurResumeIR.Application.Services.Implementation
 
         public async Task<EditBlogPostListViewModel> GetBlogForEditView(int id)
         {
-            var blog = await _blogRepository.GetBlogByUserId(id);
+            var blogPost = await _blogRepository.GetBlogById(id);
+
+            var model = new EditBlogPostListViewModel
+            {
+                
+                Id = blogPost.Id,
+                Title = blogPost.Title,
+                ImageName = blogPost.ImageName,
+                Description = blogPost.Description,
+                Text = blogPost.Text,
+              
+            };
+
+            return model;
+
         }
     }
 }
