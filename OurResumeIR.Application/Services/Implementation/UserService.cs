@@ -13,6 +13,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using OurResumeIR.Application.ViewModels.Account;
 using LoginViewModel = OurResumeIR.Application.ViewModels.Account.LoginViewModel;
 using RegisterViewModel = OurResumeIR.Application.ViewModels.Account.RegisterViewModel;
@@ -46,6 +47,7 @@ namespace OurResumeIR.Application.Services.Implementation
             {
                 Email = viewModel.Email,
                 UserName = viewModel.Email,
+                FullName = viewModel.Email,
 
             };
 
@@ -120,11 +122,16 @@ namespace OurResumeIR.Application.Services.Implementation
         public async Task<UserProfileVM> LoadProfile( string userId)
         {
             var model = new UserProfileVM();
-            var User = await _userManager.FindByIdAsync(userId);
+            var User = await _userManager.Users
+                .Include(a => a.UserToSkill)
+                .Include(a => a.Documents)
+                .Include(a => a.Blog)
+                .FirstOrDefaultAsync(a => a.Id.Equals(userId));
             if (User == null)
                 return model;
             model.ImagePath = User?.ImageName;
             model.FullName = User?.FullName;
+            model.UserId = User?.Id;
             model.BlogCount = User.Blog.Count;
             model.DocumentCount = User.Documents.Count;
             model.SkillCount = User.UserToSkill.Count;

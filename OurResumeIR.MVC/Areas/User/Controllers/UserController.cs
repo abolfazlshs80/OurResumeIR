@@ -1,15 +1,17 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using OurResumeIR.Application.Services.Interfaces;
+using OurResumeIR.Domain.Models;
 
 namespace OurResumeIR.MVC.Areas.User.Controllers
 {
     [Area("User")]
     public class UserController(IUserService _userService) : Controller
     {
-        public IActionResult Dashboard()
+        public async Task<IActionResult> Dashboard()
         {
-            return View();
+            var model = await _userService.LoadProfile(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            return View(model);
         }
         public async Task<IActionResult> UploadImageProfile(IFormFile file)
         {

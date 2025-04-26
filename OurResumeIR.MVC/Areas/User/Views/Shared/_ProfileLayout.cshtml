@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 
 <head>
@@ -21,7 +22,7 @@
 
 		<!-- =======================
 		Page Banner START -->
-		@await Component.InvokeAsync("ProFileUser_ProfileLayout")
+		@await Component.InvokeAsync("ProFileUser_ProfileLayout", new { userId = User.FindFirstValue(ClaimTypes.NameIdentifier) })
 		<!-- =======================
 		Page Banner END -->
 		<!-- =======================

@@ -13,5 +13,11 @@ using System.Threading.Tasks;
                 return string.Empty;
             return $"/Images/AboutMe/{name}";
         }
-    }
+        public static string ConvartImagePathForProfile(this string name)
+        {
+            if (string.IsNullOrEmpty(name))
+                return string.Empty;
+            return $"/Images/Profile/{name}";
+        }
+}
 

@@ -1,4 +1,7 @@
-﻿	<section class="pt-0">
+﻿@model OurResumeIR.Application.ViewModels.Account.UserProfileVM
+
+
+<section class="pt-0">
 			<div class="container-fluid px-0">
 				<div class="card bg-blue h-100px h-md-200px rounded-0" style="background:url(/assets/images/pattern/04.png) no-repeat center center; background-size:cover;">
 				</div>
@@ -11,14 +14,15 @@
 								<!-- Avatar -->
 								<div class="col-auto">
 									<div class="avatar avatar-xxl position-relative mt-n3">
-										<img class="avatar-img rounded-circle border border-white border-3 shadow" src="/assets/images/avatar/09.jpg" alt="">
+										<input type="file" />
+										<img class="avatar-img rounded-circle border border-white border-3 shadow" src="@Model.ImagePath.ConvartImagePathForProfile()" alt="">
 										<span class="badge text-bg-success rounded-pill position-absolute top-50 start-100 translate-middle mt-4 mt-md-5 ms-n3 px-md-3">حرفه ای</span>
 									</div>
 								</div>
 								<!-- Profile info -->
 								<div class="col d-sm-flex justify-content-between align-items-center">
 									<div>
-										<h1 class="my-1 fs-4">نیلوفر جلیلی</h1>
+										<h1 class="my-1 fs-4">@Model.FullName</h1>
 									@* 	<ul class="list-inline mb-0">
 											<li class="list-inline-item me-3 mb-1 mb-sm-0">
 												<span class="h6">255</span>
