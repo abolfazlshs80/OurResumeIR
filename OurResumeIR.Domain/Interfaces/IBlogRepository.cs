@@ -10,7 +10,7 @@ namespace OurResumeIR.Domain.Interfaces
     public interface IBlogRepository
     {
         Task<List<Blog>> GetAllBlogAsync();
-        Task<Blog> GetBlogByUserId(int userId);
+        Task<Blog> GetBlogById(int Id);
         Task AddBlogAsync(Blog blog);
         Task UpdateBlogAsync(Blog blog);
         Task DeleteBlogAsync(Blog blog);

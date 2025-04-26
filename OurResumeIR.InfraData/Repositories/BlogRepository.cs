@@ -41,9 +41,9 @@ namespace OurResumeIR.Infra.Data.Repositories
             return await _context.Blogs.FirstOrDefaultAsync(b => b.Id == blogId && b.UserId == userId);
         }
 
-        public async Task<Blog> GetBlogByUserId(int userId)
+        public async Task<Blog> GetBlogById(int Id)
         {
-            return await _context.Blogs.FirstOrDefaultAsync(b => b.Id == userId);   
+            return await _context.Blogs.FirstOrDefaultAsync(b => b.Id == Id);   
         }
 
         public async Task SaveChangesAsync()

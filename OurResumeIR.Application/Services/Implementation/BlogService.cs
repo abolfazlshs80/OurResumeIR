@@ -65,5 +65,10 @@ namespace OurResumeIR.Application.Services.Implementation
             }).ToList();
 
         }
+
+        public async Task<EditBlogPostListViewModel> GetBlogForEditView(int id)
+        {
+            var blog = await _blogRepository.GetBlogByUserId(id);
+        }
     }
 }
