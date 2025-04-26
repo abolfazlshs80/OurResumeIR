@@ -13,10 +13,11 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             var model = await _userService.LoadProfile(User.FindFirstValue(ClaimTypes.NameIdentifier));
             return View(model);
         }
+        [HttpPost]
         public async Task<IActionResult> UploadImageProfile(IFormFile file)
         {
             var result = await _userService.UploadProfile(file, User.FindFirstValue(ClaimTypes.NameIdentifier));
-            return RedirectToAction("Dashboard");
+            return new JsonResult(result);
         }
         public async Task<IActionResult> UpdateFullName(string FullName)
         {
