@@ -45,13 +45,13 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         }
 
 
-        //[HttpGet]
-        //public async Task<IActionResult> EditBlog() 
-        //{
-        //    // گرفتن مقادیر بلاگ از سرویس برای پر کردن فیلدها  و آماده ویرایش بودن
+        [HttpGet]
+        public async Task<IActionResult> EditBlog()
+        {
+            // گرفتن مقادیر بلاگ از سرویس برای پر کردن فیلدها  و آماده ویرایش بودن
 
-        //    return View();
-        //}
+            return View();
+        }
 
 
         [HttpPost]
