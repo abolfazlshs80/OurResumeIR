@@ -16,6 +16,11 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             var result = await _userService.UploadProfile(file, User.FindFirstValue(ClaimTypes.NameIdentifier));
             return RedirectToAction("Dashboard");
         }
+        public async Task<IActionResult> UpdateFullName(string FullName)
+        {
+            var result = await _userService.UpdateFullNameProfile(FullName, User.FindFirstValue(ClaimTypes.NameIdentifier));
+            return RedirectToAction("Dashboard");
+        }
         public IActionResult DeleteProfile()
         {
             return RedirectToAction("Dashboard");
