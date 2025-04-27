@@ -5,13 +5,11 @@
 @{
 
 	Layout = "_ProfileLayout";
-	ViewBag.Title = "ویرایش درباره من";
+	ViewBag.Title = "مدرک جدید ";
 }
 
 @section Styles {
 
-	<!-- Dropzone CSS -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.css">
 
 }
 <style>
@@ -37,13 +35,13 @@
 				
 				<div class="mb-3">
 					<label asp-for="File" class="form-label"></label>
-					<input type="file" asp-for="File" class="btn btn-lg"/>
+					<input type="file" asp-for="File" class="form-control" />
 					<span asp-validation-for="File" class="text-danger"></span>
 				</div>
 				
 				<div class="mb-3">
 					<label asp-for="Image" class="form-label"></label>
-					<input type="file" asp-for="Image"/>
+					<input type="file" asp-for="Image" class="form-control" />
 					<span asp-validation-for="Image" class="text-danger"></span>
 				</div>
 				@* 		<input type="hidden" asp-for="Id" />
