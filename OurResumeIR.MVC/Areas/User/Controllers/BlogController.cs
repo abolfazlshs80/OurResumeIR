@@ -57,6 +57,9 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         public async Task<IActionResult> EditBlog(EditBlogPostListViewModel model)
         {
             // صدا زدن متد از سرویس برای ثبت مقادیر ویرایش شده داخل ویو مدل و تبدیل به مدل و ثبت در درتابیس
+            var userId = User.GetUserId();
+
+            await _blogService.UpdateBlogAsync(model, userId);
             return RedirectToAction("BlogList");
         }
 
