@@ -50,6 +50,7 @@ namespace OurResumeIR.Infra.Ioc
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ISkillService, SkillService>();
             services.AddScoped<IAboutMeService, AboutMeService>();
+            services.AddScoped<IDocumentService, DocumentService>();
             #endregion
             //services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddAutoMapper(typeof(MappingProfile));

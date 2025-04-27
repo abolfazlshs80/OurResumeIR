@@ -12,6 +12,7 @@ namespace OurResumeIR.Application.Services.Implementation
     {
         public async Task<string> UpdloadFile(IFormFile file, string directoryName ,string Name)
         {
+            Name = Name.Replace(" ", "-");
             string name = Name   + Path.GetExtension(file.FileName);
             string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images", directoryName, name);
             using (Stream stream = new FileStream(path, FileMode.Create))
