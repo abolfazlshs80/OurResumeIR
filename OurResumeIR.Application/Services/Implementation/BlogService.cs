@@ -22,7 +22,7 @@ namespace OurResumeIR.Application.Services.Implementation
             _fileUploader = fileUploader;
             _blogRepository = blogRepository;   
         }
-        public async Task CreateBlogAsync(CreateBlogPostViewModel model, string userId)
+        public async Task<bool> CreateBlogAsync(CreateBlogPostViewModel model, string userId)
         {
             string imageNmae = null;
             if (model.ImageFile != null) 
@@ -40,6 +40,7 @@ namespace OurResumeIR.Application.Services.Implementation
             };
 
             await _blogRepository.AddBlogAsync(blog);
+            return true;
         }
 
         public async Task<bool> DeleteBlogAsync(int blogId, string userId)

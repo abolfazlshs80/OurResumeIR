@@ -39,9 +39,16 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             }
 
             string userId = User.GetUserId();
-            await _blogService.CreateBlogAsync(viewModel, userId);
-
+        var result =  await _blogService.CreateBlogAsync(viewModel, userId);
+            if (!result)
+            {
+                TempData["ErrorMessage"] = "مقاله با موفقیت اضافه شد.";
+                return RedirectToAction("BlogList");
+            }
+            TempData["SuccessMessage"] = "ثبت مقاله با شکست رو برو شد.";
             return RedirectToAction("BlogList");
+
+     
         }
 
 
