@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OurResumeIR.Application.Services.Interfaces;
 using OurResumeIR.Application.ViewModels.Document;
+using OurResumeIR.Domain.Models;
 
 namespace OurResumeIR.MVC.Areas.User.Controllers
 {
@@ -40,7 +41,28 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             return View(viewmodel);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Update(int Id)
+        {
+            var model =await DocumentService.GetUpdate(Id);
+           model.UserId  = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            return View(model);
 
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update(UpdateDocumentVM viewmodel)
+        {
+           
+
+            if (!ModelState.IsValid)
+                return View(viewmodel);
+
+            var status = await DocumentService.Update(viewmodel);
+            if (status)
+                return RedirectToAction("Index");
+            return View(viewmodel);
+        }
         public async Task<IActionResult> Delete(int id)
         {
           await DocumentService.Delete(id);
