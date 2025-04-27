@@ -14,6 +14,7 @@ namespace OurResumeIR.Application.Services.Interfaces
         Task<List<BlogPostListViewModel>> GetAllBlogForView();
         Task<bool> DeleteBlogAsync(int blogId , string userId);
         Task<EditBlogPostListViewModel> GetBlogForEditView(int id);
+        Task<bool> UpdateBlogAsync(EditBlogPostListViewModel model , string userId);
 
     }
 }

@@ -54,7 +54,7 @@ namespace OurResumeIR.Infra.Data.Repositories
         public async Task UpdateBlogAsync(Blog blog)
         {
             _context.Blogs.Update(blog);
-            await _context.SaveChangesAsync();
+           
         }
     }
 }

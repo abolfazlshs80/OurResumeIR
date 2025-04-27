@@ -53,6 +53,13 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> EditBlog(EditBlogPostListViewModel model)
+        {
+            // صدا زدن متد از سرویس برای ثبت مقادیر ویرایش شده داخل ویو مدل و تبدیل به مدل و ثبت در درتابیس
+            return RedirectToAction("BlogList");
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> DeleteBlog(int id)
