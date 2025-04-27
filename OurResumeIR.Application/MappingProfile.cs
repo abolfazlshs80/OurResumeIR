@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OurResumeIR.Application.ViewModels.AboutMe;
+using OurResumeIR.Application.ViewModels.Document;
 using OurResumeIR.Application.ViewModels.Experience;
 using OurResumeIR.Application.ViewModels.ExpertiseLayers;
 using OurResumeIR.Domain.Models;
@@ -44,6 +45,15 @@ namespace OurResumeIR.Application
             CreateMap<AboutMe, AboutMeVM>().ReverseMap();
             CreateMap<CreateAboutMeVM, AboutMe>().ReverseMap();
             CreateMap<UpdateAboutMeVM, AboutMe>().ReverseMap();
+
+            #endregion
+
+            #region AboutMe 
+
+
+            CreateMap<Documents, DocumentVM>().ReverseMap();
+            CreateMap<CreateDocumentVM, Documents>().ReverseMap();
+            CreateMap<UpdateDocumentVM, Documents>().ReverseMap();
 
             #endregion
         }

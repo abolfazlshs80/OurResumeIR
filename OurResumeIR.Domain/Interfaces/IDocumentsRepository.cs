@@ -9,8 +9,9 @@ namespace OurResumeIR.Domain.Interfaces
 {
     public interface IDocumentsRepository
     {
+        Task<IQueryable<Documents>> GetAllDocumentsAsync(string userId);
         Task<IQueryable<Documents>> GetAllDocumentsAsync();
-        Task GetDocumentByIdAsync(int id);
+        Task<Documents> GetDocumentByIdAsync(int id);
         Task AddDocumentAsync(Documents documents);
         Task UpdateDocumentAsync(Documents documents);
         //Task DeleteDocumentByIdAsync(int id);

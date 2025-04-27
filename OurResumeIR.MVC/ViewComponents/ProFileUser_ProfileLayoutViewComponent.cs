@@ -2,25 +2,23 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Drawing.Printing;
+using OurResumeIR.Application.Services.Interfaces;
 using OurResumeIR.Infra.Data.Context;
+using System.Security.Claims;
 
 namespace SlideCloud.ViewComponents
 {
-    public class ProFileUser_ProfileLayoutViewComponent : ViewComponent
+    public class ProFileUser_ProfileLayoutViewComponent
+        (IUserService _userService)
+        : ViewComponent
     {
-        private readonly AppDbContext _appDbContext;
-        
 
-        public ProFileUser_ProfileLayoutViewComponent(AppDbContext appDbContext)
+        public async Task<IViewComponentResult> InvokeAsync(string userId)
         {
-            _appDbContext = appDbContext;
+
+            var model =await _userService.LoadProfile(userId);
+            return View("~/Views/Shared/Components/User/Layout/ProFileUser_ProfileLayoutView.cshtml",model);
         }
-  
-        public async Task<IViewComponentResult> InvokeAsync()
-        {
-   
-            return View("~/Views/Shared/Components/User/Layout/ProFileUser_ProfileLayoutView.cshtml");
-        }
-        
+
     }
 }

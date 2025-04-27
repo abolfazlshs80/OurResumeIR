@@ -41,10 +41,14 @@ namespace OurResumeIR.Infra.Data.Repositories
         {
             return _context.Documents.AsQueryable();
         }
-
-        public async Task GetDocumentByIdAsync(int id)
+        public async Task<IQueryable<Documents>> GetAllDocumentsAsync(string userId)
         {
-            await _context.Documents.FirstOrDefaultAsync(x => x.Id == id);
+            return _context.Documents.Where(a=>a.UserId.Equals(userId)).AsQueryable();
+        }
+
+        public async Task<Documents> GetDocumentByIdAsync(int id)
+        {
+           return await _context.Documents.FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task SaveChangeAsync()

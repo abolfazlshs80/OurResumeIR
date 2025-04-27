@@ -55,7 +55,11 @@ namespace OurResumeIR.Infra.Ioc
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ISkillService, SkillService>();
             services.AddScoped<IAboutMeService, AboutMeService>();
+
             services.AddScoped<IBlogService, BlogService>();
+
+
+            services.AddScoped<IDocumentService, DocumentService>();
 
             #endregion
 

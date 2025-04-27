@@ -12,26 +12,24 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using OurResumeIR.Application.ViewModels.Account;
 using LoginViewModel = OurResumeIR.Application.ViewModels.Account.LoginViewModel;
 using RegisterViewModel = OurResumeIR.Application.ViewModels.Account.RegisterViewModel;
 
 namespace OurResumeIR.Application.Services.Implementation
 {
-    public class UserService : IUserService
+    public class UserService(IUserRepository _userRepository
+        , UserManager<User> _userManager
+        , SignInManager<User> _signInManager
+        , IFileUploaderService _uploaderService)
+        : IUserService
     {
 
-        private  IUserRepository _userRepository;
-        private  UserManager<User> _userManager;
-        private  SignInManager<User> _signInManager;
+
         //private readonly RoleManager<ApplicationRole> _roleManager;
-        public UserService(IUserRepository userRepository,
-            UserManager<User> userManager,
-            SignInManager<User> signInManager)
-        {
-            _userRepository = userRepository;
-            _userManager = userManager;
-            _signInManager = signInManager;
-        }
+
         public async Task<RegisterResult> RegisterUser(RegisterViewModel viewModel)
         {
             if (await _userRepository.EmailIsExist(viewModel.Email))
@@ -49,6 +47,7 @@ namespace OurResumeIR.Application.Services.Implementation
             {
                 Email = viewModel.Email,
                 UserName = viewModel.Email,
+                FullName = viewModel.Email,
 
             };
 
@@ -74,9 +73,11 @@ namespace OurResumeIR.Application.Services.Implementation
                 await _signInManager.SignInAsync(user, properties);
 
             }
-      
+
             return RegisterResult.Success;
         }
+
+
 
 
         public async Task<LoginResult> LoginUser(LoginViewModel viewModel)
@@ -96,6 +97,45 @@ namespace OurResumeIR.Application.Services.Implementation
             return LoginResult.InvalidPassword;
         }
 
+        public async Task<string> UploadProfile(IFormFile file, string userId)
+        {
+            var result = await _uploaderService.UpdloadFile(file, "Profile", userId);
+            var User = await _userManager.FindByIdAsync(userId);
+            if (User == null)
+                return string.Empty;
+            User.ImageName = result;
+            await _userManager.UpdateAsync(User);
+            return result ?? string.Empty;
+        }
 
+        public async Task<bool> UpdateFullNameProfile(string Name, string userId)
+        {
+          
+            var User = await _userManager.FindByIdAsync(userId);
+            if (User == null)
+                return false;
+            User.FullName = Name;
+            await _userManager.UpdateAsync(User);
+            return true;
+        }
+
+        public async Task<UserProfileVM> LoadProfile( string userId)
+        {
+            var model = new UserProfileVM();
+            var User = await _userManager.Users
+                .Include(a => a.UserToSkill)
+                .Include(a => a.Documents)
+                .Include(a => a.Blog)
+                .FirstOrDefaultAsync(a => a.Id.Equals(userId));
+            if (User == null)
+                return model;
+            model.ImagePath = User?.ImageName;
+            model.FullName = User?.FullName;
+            model.UserId = User?.Id;
+            model.BlogCount = User.Blog.Count;
+            model.DocumentCount = User.Documents.Count;
+            model.SkillCount = User.UserToSkill.Count;
+            return model;
+        }
     }
-}
+} 
