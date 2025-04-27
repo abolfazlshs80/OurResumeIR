@@ -11,8 +11,6 @@ namespace OurResumeIR.Application.ViewModels.Document
         [Required(ErrorMessage = "عکس را وارد کنید")]
         [Display(Name = "عکس مدرک")]
         public IFormFile Image { get; set; }
-        //     public string ImageName { get; set; }
-        // public string? FileName { get; set; }
         [Required(ErrorMessage = "فایل مدرک را وارد  کنید")]
         [Display(Name = "فایل مدرک")]
         public IFormFile File { get; set; }
