@@ -53,8 +53,21 @@ namespace OurResumeIR.Application.Services.Implementation
                 curentDocument.UserId=model.UserId;
               
                 curentDocument.Id=model.Id;
-                curentDocument.ImageName=model.ImageName;
-                curentDocument.FileName=model.FileName;
+                if (model.File != null)
+                {
+
+                    await uploaderService.DeleteFile("Document", curentDocument.FileName);
+                    curentDocument.FileName = await uploaderService.UpdloadFile(model.File, "Document", "File" + model.Name + DateTime.Now.ToString("yyyy-M-d dddd"));
+
+                }
+
+                if (model.Image != null)
+                {
+                    await uploaderService.DeleteFile("Document", curentDocument.ImageName);
+                    curentDocument.ImageName = await uploaderService.UpdloadFile(model.Image, "Document", "Image" + model.Name + model.Name + DateTime.Now.ToString("yyyy-M-d dddd"));
+
+                }
+
                 curentDocument.Name=model.Name;
                 await curentRep.UpdateDocumentAsync(curentDocument);
                 await unitOfWork.SaveChangesAsync();
