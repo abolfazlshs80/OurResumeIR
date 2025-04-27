@@ -18,7 +18,6 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
 
         public async Task<IActionResult> BlogList()
         {
-            // گرفتن فیلد نام  و عکس از سرویس برای نمایش داخل لیست
             var model = await _blogService.GetAllBlogForView();
             return View(model);
         }
@@ -32,7 +31,6 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         [HttpPost]
         public async Task<IActionResult> AddBlog(CreateBlogPostViewModel viewModel)
         {
-            // ثبت مقادیر داخل ویو از طریق صدا زدن متد داخل سرویس
             if (!ModelState.IsValid)
             {
                 return View(viewModel);
@@ -55,7 +53,6 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         [HttpGet]
         public async Task<IActionResult> EditBlog(int id)
         {
-            // گرفتن مقادیر بلاگ از سرویس برای پر کردن فیلدها  و آماده ویرایش بودن
             var model = await _blogService.GetBlogForEditView(id);
             return View(model);
         }
