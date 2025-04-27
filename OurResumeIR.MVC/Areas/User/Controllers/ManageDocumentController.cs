@@ -40,18 +40,12 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             return View(viewmodel);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> UploadFile(IFormFile file)
-        //{
-        //    if (file != null && file.Length > 0)
-        //    {
-        //        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        //        await DocumentService.UploadFile(file, userId);
-        //        return Json(new { success = true, message = "فایل با موفقیت آپلود شد." });
-        //    }
 
-        //    return Json(new { success = false, message = "هیچ فایلی ارسال نشد." });
-        //}
+        public async Task<IActionResult> Delete(int id)
+        {
+          await DocumentService.Delete(id);
+            return RedirectToAction("Index");
+        }
 
         //[HttpGet]
         //public async Task<IActionResult> Update()
@@ -79,11 +73,5 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         //    return View(viewmodel);
         //}
 
-        //public async Task<IActionResult> Delete(int id)
-        //{
-        //    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        //    await DocumentService.Delete(userId);
-        //    return RedirectToAction("Index");
-        //}
     }
 }
