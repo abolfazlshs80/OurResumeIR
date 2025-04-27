@@ -91,6 +91,7 @@ namespace OurResumeIR.Application.Services.Implementation
                 var curentRep = unitOfWork.DocumentsRepository;
                 var Document = await curentRep.GetDocumentByIdAsync(Id);
                 await uploaderService.DeleteFile("Document", Document.ImageName);
+                await uploaderService.DeleteFile("Document", Document.FileName);
                 await curentRep.DeleteDocumentAsync(Document);
                 await unitOfWork.SaveChangesAsync();
                 return true;
