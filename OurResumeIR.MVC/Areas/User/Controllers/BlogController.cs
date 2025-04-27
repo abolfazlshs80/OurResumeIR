@@ -63,16 +63,15 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         [HttpPost]
         public async Task<IActionResult> EditBlog(EditBlogPostListViewModel model)
         {
-            // صدا زدن متد از سرویس برای ثبت مقادیر ویرایش شده داخل ویو مدل و تبدیل به مدل و ثبت در درتابیس
             var userId = User.GetUserId();
 
           var result =  await _blogService.UpdateBlogAsync(model, userId);
             if (!result)
             {
-                TempData["ErrorMessage"] = "حذف مقاله ناموفق بود!";
+                TempData["ErrorMessage"] = "ویرایش مقاله ناموفق بود!";
                 return RedirectToAction("BlogList");
             }
-            TempData["SuccessMessage"] = "مقاله با موفقیت حذف شد!";
+            TempData["SuccessMessage"] = "مقاله با موفقیت ویرایش شد!";
             return RedirectToAction("BlogList");
         
         }
