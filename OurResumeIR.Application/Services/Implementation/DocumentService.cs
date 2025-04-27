@@ -79,6 +79,21 @@ namespace OurResumeIR.Application.Services.Implementation
             }
         }
 
+        public async Task<UpdateDocumentVM> GetUpdate(int Id)
+        {
+            UpdateDocumentVM model = new();
+            var curentRep = unitOfWork.DocumentsRepository;
+            var curentDocument = await curentRep.GetDocumentByIdAsync(Id);
+            if (curentDocument != null)
+            {
+                model.Name=curentDocument.Name;
+                model.Id=Id;
+                model.UserId = curentDocument.UserId;
+            }
+
+            return model;
+        }
+
         public async Task<bool> UploadFile(IFormFile File, int Id)
         {
             if (File != null)
