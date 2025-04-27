@@ -59,8 +59,15 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             // صدا زدن متد از سرویس برای ثبت مقادیر ویرایش شده داخل ویو مدل و تبدیل به مدل و ثبت در درتابیس
             var userId = User.GetUserId();
 
-            await _blogService.UpdateBlogAsync(model, userId);
+          var result =  await _blogService.UpdateBlogAsync(model, userId);
+            if (!result)
+            {
+                TempData["ErrorMessage"] = "حذف مقاله ناموفق بود!";
+                return RedirectToAction("BlogList");
+            }
+            TempData["SuccessMessage"] = "مقاله با موفقیت حذف شد!";
             return RedirectToAction("BlogList");
+        
         }
 
 
