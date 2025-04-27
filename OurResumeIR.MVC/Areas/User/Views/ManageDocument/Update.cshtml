@@ -1,0 +1,69 @@
+﻿@using OurResumeIR.Application.ViewModels.Experience
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model OurResumeIR.Application.ViewModels.Document.UpdateDocumentVM
+
+@{
+
+	Layout = "_ProfileLayout";
+	ViewBag.Title = "مدرک جدید ";
+}
+
+@section Styles {
+
+
+}
+<style>
+
+</style>
+<div class="col-xl-9">
+	<div class="card bg-transparent border rounded-3">
+		<div class="card-header bg-transparent border-bottom">
+			<h3 class="mb-0 fs-5 ff-vb">@ViewBag.Title</h3>
+		</div>
+
+		<div class="card-body">
+
+			<form asp-action="Update" asp-controller="ManageDocument" asp-area="User" method="post" enctype="multipart/form-data">
+				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+				@*                 <input type="hidden" name="__RequestVerificationToken" value="@Antiforgery.GetTokens(HttpContext).RequestToken" />
+ *@
+				<div class="mb-3">
+					<label asp-for="Name" class="form-label"></label>
+					<input type="text" asp-for="Name" class="form-control myTextarea" id="myTextarea" />
+					<span asp-validation-for="Name" class="text-danger"></span>
+				</div>
+
+				<div class="mb-3">
+					<label asp-for="File" class="form-label"></label>
+					<input type="file" asp-for="File" class="form-control" />
+					<span asp-validation-for="File" class="text-danger"></span>
+				</div>
+
+				<div class="mb-3">
+					<label asp-for="Image" class="form-label"></label>
+					<input type="file" asp-for="Image" class="form-control" />
+					<span asp-validation-for="Image" class="text-danger"></span>
+				</div>
+				<input type="hidden" asp-for="Id" />
+
+				<input type="hidden" asp-for="UserId" />
+				<div class="mb-3">
+				</div>
+
+				<button type="submit" class="btn btn-primary">ثبت </button>
+			</form>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	<!-- Add this to the <head> section of your HTML -->
+	<!-- Dropzone JS -->
+
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}
