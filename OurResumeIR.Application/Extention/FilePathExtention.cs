@@ -19,5 +19,11 @@ using System.Threading.Tasks;
                 return string.Empty;
             return $"/Images/Profile/{name}";
         }
+        public static string ConvartImagePathForDocument(this string name)
+        {
+            if (string.IsNullOrEmpty(name))
+                return string.Empty;
+            return $"/Images/Document/{name}";
+        }
 }
 
