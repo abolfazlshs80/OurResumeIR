@@ -25,7 +25,7 @@
         <div class="card-header bg-transparent border-bottom">
             <h3 class="mb-0 fs-5 ff-vb">لیست @ViewBag.Title من</h3>
         </div>
-        <!-- پیام موفقیت یا خطا -->
+      @*   <!-- پیام موفقیت یا خطا -->
         @if (TempData["SuccessMessage"] != null)
         {
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -40,7 +40,7 @@
                 @TempData["ErrorMessage"]
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="بستن"></button>
             </div>
-        }
+        } *@
 
         <div class="card-body">
 
@@ -83,3 +83,83 @@
         </div>
     </div>
 </div>
+
+
+@* @section Scripts
+                                    {
+    <script>
+        // اگر پیام موفقیت وجود داشت
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <text>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'عملیات موفق',
+                            text: '@Html.Raw(TempData["SuccessMessage"])',  // 👈 اینجا تغییر دادم
+                        confirmButtonText: 'باشه',
+                        customClass: {
+                            confirmButton: 'btn btn-primary'
+                        },
+                        buttonsStyling: false
+                    });
+            </text>
+        }
+
+        // اگر پیام خطا وجود داشت
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <text>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'خطا',
+                            text: '@Html.Raw(TempData["ErrorMessage"])',  // 👈 اینجا هم تغییر دادم
+                        confirmButtonText: 'باشه',
+                        customClass: {
+                            confirmButton: 'btn btn-danger'
+                        },
+                        buttonsStyling: false
+                    });
+            </text>
+        }
+    </script>
+} *@
+
+@section Scripts
+        {
+    <script>
+        // چک میکنیم اگر پیام موفقیت وجود داشت
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <text>
+                    Swal.fire({
+                        icon: 'success',                 // آیکون: موفقیت
+                        title: 'عملیات موفق!',           // عنوان Popup
+                            text: '@Html.Raw(TempData["SuccessMessage"])',  // 👈 متن پیام موفقیت
+                        timer: 4000,                      // بعد از ۲ ثانیه خودش بسته بشه (به میلی‌ثانیه)
+                        timerProgressBar: true,           // نمایش نوار زمان در پایین پیام
+                        showConfirmButton: false,         // دکمه تایید رو حذف میکنیم
+                        didClose: () => {                 // وقتی پیام بسته شد
+                            window.location.href = '@Url.Action("BlogList", "Blog", new { area = "User" })';
+                            // هدایت کاربر به صفحه‌ی لیست مقالات
+                        }
+                    });
+            </text>
+        }
+
+        // اگر پیام خطا وجود داشت
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <text>
+                    Swal.fire({
+                        icon: 'error',                    // آیکون: خطا
+                        title: 'خطا!',                     // عنوان Popup
+                            text: '@Html.Raw(TempData["ErrorMessage"])',  // 👈  متن پیام خطا
+                        timer: 4000,                       // اینم بعد از ۳ ثانیه خودکار بسته بشه
+                        timerProgressBar: true,
+                        showConfirmButton: false
+                        // در حالت خطا، نیاز به ریدایرکت نداریم (میتونی اضافه هم بکنی)
+                    });
+            </text>
+        }
+    </script>
+}
