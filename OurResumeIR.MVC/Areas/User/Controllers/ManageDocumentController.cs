@@ -17,6 +17,29 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             return View(model);
         }
 
+
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            var model = new CreateDocumentVM();
+            model.UserId= User.FindFirstValue(ClaimTypes.NameIdentifier);;
+            return View(model);
+
+        }
+        [HttpPost,ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(CreateDocumentVM viewmodel)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (!ModelState.IsValid)
+                return View(viewmodel);
+
+            var status = await DocumentService.Create(viewmodel);
+            if (status)
+                return RedirectToAction("Index");
+            return View(viewmodel);
+        }
+
         //[HttpPost]
         //public async Task<IActionResult> UploadFile(IFormFile file)
         //{
