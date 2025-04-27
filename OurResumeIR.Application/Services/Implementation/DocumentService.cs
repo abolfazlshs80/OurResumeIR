@@ -14,12 +14,12 @@ namespace OurResumeIR.Application.Services.Implementation
 {
     public class DocumentService(IUnitOfWork unitOfWork, IFileUploaderService uploaderService, IMapper mapper) : IDocumentService
     {
-        public async Task<DocumentVM> GetAll(string userId)
+        public async Task<ICollection<DocumentVM>> GetAll(string userId)
         {
             var curentRep = unitOfWork.DocumentsRepository;
             var Document = await curentRep.GetAllDocumentsAsync(userId);
      
-            return mapper.Map<DocumentVM>(Document);
+            return mapper.Map<ICollection< DocumentVM>>(Document);
         }
 
         public async Task<bool> Create(CreateDocumentVM model)

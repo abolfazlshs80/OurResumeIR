@@ -10,7 +10,7 @@ namespace OurResumeIR.Application.Services.Interfaces
 {
     public interface IDocumentService
     {
-        Task<DocumentVM> GetAll(string userId);
+        Task<ICollection<DocumentVM>> GetAll(string userId);
         Task<bool> Create(CreateDocumentVM model);
         Task<bool> Update(UpdateDocumentVM model);
         Task<bool> UploadFile(IFormFile File,int Id);
