@@ -1,0 +1,107 @@
+﻿@using OurResumeIR.Application.ViewModels.Blog
+@model EditBlogPostListViewModel
+
+@{
+    Layout = "_ProfileLayout";
+    ViewBag.Title = "ویرایش مقاله";
+}
+
+<div class="col-xl-9">
+    <div class="card bg-transparent border rounded-3">
+        <div class="card-header bg-transparent border-bottom d-flex justify-content-between align-items-center">
+            <h3 class="mb-0 fs-5 ff-vb">ویرایش مقاله</h3>
+        </div>
+
+        <div class="card-body">
+            <form asp-action="EditBlog" asp-controller="Blog" asp-area="User" method="post" enctype="multipart/form-data">
+                <input type="hidden" asp-for="Id" />
+
+                <!-- عنوان مقاله -->
+                <div class="mb-3">
+                    <label asp-for="Title" class="form-label">عنوان مقاله</label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                <!-- توضیحات مقاله -->
+                <div class="mb-3">
+                    <label asp-for="Description" class="form-label">توضیحات</label>
+                    <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <!-- متن کامل مقاله -->
+                <div class="mb-3">
+                    <label asp-for="Text" class="form-label">متن کامل مقاله</label>
+                    <textarea asp-for="Text" class="form-control" rows="6"></textarea>
+                    <span asp-validation-for="Text" class="text-danger"></span>
+                </div>
+
+                <!-- نمایش عکس فعلی -->
+                @if (!string.IsNullOrEmpty(Model.ImageName))
+                {
+                    <div class="mb-3 text-center">
+                        <label class="form-label d-block">عکس فعلی مقاله</label>
+                        <img src="~/images/blog/@Model.ImageName"
+                             alt="عکس مقاله"
+                             class="img-fluid rounded shadow-sm"
+                             style="max-height: 150px;" />
+                    </div>
+                }
+
+                <!-- آپلود عکس جدید -->
+                <div class="mb-3">
+                    <label asp-for="NewImage" class="form-label">آپلود عکس جدید</label>
+                    <input asp-for="NewImage" type="file" class="form-control" accept="image/*" />
+                    <span asp-validation-for="NewImage" class="text-danger"></span>
+                </div>
+
+                <!-- دکمه‌ها -->
+                <div class="text-end">
+                    <button type="submit" class="btn btn-primary">ذخیره تغییرات</button>
+                    <a asp-action="BlogList" asp-controller="Blog" asp-area="User" class="btn btn-secondary">بازگشت</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+                    {
+    <script>
+        // چک میکنیم اگر پیام موفقیت وجود داشت
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <text>
+                        Swal.fire({
+                            icon: 'success',                 // آیکون: موفقیت
+                            title: 'عملیات موفق!',           // عنوان Popup
+                                text: '@Html.Raw(TempData["SuccessMessage"])',  // 👈 متن پیام موفقیت
+                            timer: 4000,                      // بعد از ۲ ثانیه خودش بسته بشه (به میلی‌ثانیه)
+                            timerProgressBar: true,           // نمایش نوار زمان در پایین پیام
+                            showConfirmButton: false,         // دکمه تایید رو حذف میکنیم
+                            didClose: () => {                 // وقتی پیام بسته شد
+                                window.location.href = '@Url.Action("BlogList", "Blog", new { area = "User" })';
+                                // هدایت کاربر به صفحه‌ی لیست مقالات
+                            }
+                        });
+            </text>
+        }
+
+        // اگر پیام خطا وجود داشت
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <text>
+                        Swal.fire({
+                            icon: 'error',                    // آیکون: خطا
+                            title: 'خطا!',                     // عنوان Popup
+                                text: '@Html.Raw(TempData["ErrorMessage"])',  // 👈  متن پیام خطا
+                            timer: 4000,                       // اینم بعد از ۳ ثانیه خودکار بسته بشه
+                            timerProgressBar: true,
+                            showConfirmButton: false
+                            // در حالت خطا، نیاز به ریدایرکت نداریم (میتونی اضافه هم بکنی)
+                        });
+            </text>
+        }
+    </script>
+}

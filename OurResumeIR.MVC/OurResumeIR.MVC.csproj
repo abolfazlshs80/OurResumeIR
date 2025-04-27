@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\User\Views\Shared\Partials\ProfileLayout\NewFolder\**" />
+    <Content Remove="Areas\User\Views\Shared\Partials\ProfileLayout\NewFolder\**" />
+    <EmbeddedResource Remove="Areas\User\Views\Shared\Partials\ProfileLayout\NewFolder\**" />
+    <None Remove="Areas\User\Views\Shared\Partials\ProfileLayout\NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0">
 
@@ -15,9 +22,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\User\Views\Shared\Partials\ProfileLayout\NewFolder\" />
     <Folder Include="wwwroot\Images\AboutMe\" />
+
+    <Folder Include="wwwroot\Images\Blog\" />
+
     <Folder Include="wwwroot\Images\Document\" />
+
     <Folder Include="wwwroot\madaeny.com\Home\" />
   </ItemGroup>
 

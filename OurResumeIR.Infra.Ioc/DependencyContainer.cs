@@ -35,23 +35,34 @@ namespace OurResumeIR.Infra.Ioc
             services.AddScoped<ISkillLevelRepository, SkillLevelRepository>();
             services.AddScoped<IUserToSkillRepository, UserToSkillRepository>();
             services.AddScoped<ISkillRepository, SkillRepository>();
+            services.AddScoped<IBlogRepository, BlogRepository>();
 
 
             #endregion
+
+
             services.AddScoped<IMySkillsRepository, MySkillsRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IFileUploaderService, LocalUploaderService>();
+            services.AddScoped<IFileUploader, FileUploader>();
 
 
 
 
 
             #region Service
+
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ISkillService, SkillService>();
             services.AddScoped<IAboutMeService, AboutMeService>();
+
+            services.AddScoped<IBlogService, BlogService>();
+
+
             services.AddScoped<IDocumentService, DocumentService>();
+
             #endregion
+
             //services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddAutoMapper(typeof(MappingProfile));
 

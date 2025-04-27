@@ -21,19 +21,29 @@ namespace OurResumeIR.Infra.Data.Repositories
 
         public async Task AddBlogAsync(Blog blog)
         {
-            _context.Add(blog);
+            _context.Blogs.Add(blog);
             await _context.SaveChangesAsync();
         }
 
         public async Task DeleteBlogAsync(Blog blog)
         {
-            _context.Remove(blog);
+            _context.Blogs.Remove(blog);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Blog> GetByUserId(string userId)
+        public async Task<List<Blog>> GetAllBlogAsync()
         {
-            return await _context.Blogs.FirstOrDefaultAsync(b => b.UserId == userId);   
+           return await  _context.Blogs.ToListAsync();
+        }
+
+        public async Task<Blog> GetBlogByIdAndUserIdAsync(int blogId, string userId)
+        {
+            return await _context.Blogs.FirstOrDefaultAsync(b => b.Id == blogId && b.UserId == userId);
+        }
+
+        public async Task<Blog> GetBlogById(int Id)
+        {
+            return await _context.Blogs.FirstOrDefaultAsync(b => b.Id == Id);   
         }
 
         public async Task SaveChangesAsync()
@@ -43,8 +53,8 @@ namespace OurResumeIR.Infra.Data.Repositories
 
         public async Task UpdateBlogAsync(Blog blog)
         {
-            _context.Update(blog);
-            await _context.SaveChangesAsync();
+            _context.Blogs.Update(blog);
+           
         }
     }
 }

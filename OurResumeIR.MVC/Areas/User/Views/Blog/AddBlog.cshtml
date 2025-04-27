@@ -1,0 +1,78 @@
+﻿@using OurResumeIR.Application.ViewModels.Blog
+@model CreateBlogPostViewModel
+@{
+    Layout = "_ProfileLayout";
+    ViewBag.Title = "ایجاد مقاله جدید";
+}
+
+<div class="col-xl-9">
+    <div class="card bg-transparent border rounded-3">
+        <div class="card-header bg-transparent border-bottom d-flex justify-content-between">
+            <h3 class="mb-0 fs-5 ff-vb">ایجاد مقاله جدید</h3>
+        </div>
+
+        <div class="card-body">
+            <form asp-action="AddBlog" asp-controller="Blog" asp-area="User" method="post" enctype="multipart/form-data">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label asp-for="Title" class="form-label">عنوان مقاله</label>
+                        <input asp-for="@Model.Title" class="form-control text-end" dir="rtl" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Description" class="form-label">توضیح کوتاه</label>
+                        <input asp-for="@Model.Description" class="form-control text-end" dir="rtl" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Text" class="form-label">متن مقاله</label>
+                    <textarea asp-for="@Model.Text" class="form-control text-end" rows="5" dir="rtl"></textarea>
+                    <span asp-validation-for="Text" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="ImageFile" class="form-label">آپلود تصویر مقاله</label>
+                    <input asp-for="@Model.ImageFile" type="file" class="form-control" onchange="previewImage(this)" />
+                    <span asp-validation-for="ImageFile" class="text-danger"></span>
+
+                    <!-- پیش‌نمایش عکس -->
+                    <div class="mt-3">
+                        <img id="imagePreview" src="#" alt="پیش‌نمایش تصویر" class="img-fluid d-none rounded border" style="max-height: 250px;" />
+                    </div>
+                </div>
+
+
+                <div class="text-end">
+                    <button type="submit" class="btn btn-primary">ثبت مقاله</button>
+                    <a asp-action="BlogList" class="btn btn-secondary">انصراف</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function previewImage(input) {
+            const preview = document.getElementById('imagePreview');
+            const file = input.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.classList.remove('d-none');
+                };
+
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = "#";
+                preview.classList.add('d-none');
+            }
+        }
+    </script>
+}
