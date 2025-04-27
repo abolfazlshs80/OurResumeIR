@@ -13,6 +13,7 @@ namespace OurResumeIR.Application.Services.Interfaces
         Task<ICollection<DocumentVM>> GetAll(string userId);
         Task<bool> Create(CreateDocumentVM model);
         Task<bool> Update(UpdateDocumentVM model);
+        Task<UpdateDocumentVM> GetUpdate(int Id);
         Task<bool> UploadFile(IFormFile File,int Id);
         Task<bool> Delete(int Id);
     }
