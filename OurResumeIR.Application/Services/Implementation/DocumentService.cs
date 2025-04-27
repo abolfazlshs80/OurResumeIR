@@ -50,6 +50,7 @@ namespace OurResumeIR.Application.Services.Implementation
               
                 curentDocument.Id=model.Id;
                 curentDocument.ImageName=model.ImageName;
+                curentDocument.FileName=model.FileName;
                 curentDocument.Name=model.Name;
                 await curentRep.UpdateDocumentAsync(curentDocument);
                 await unitOfWork.SaveChangesAsync();
