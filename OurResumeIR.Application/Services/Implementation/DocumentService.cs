@@ -27,7 +27,11 @@ namespace OurResumeIR.Application.Services.Implementation
             try
             {
                 var curentRep = unitOfWork.DocumentsRepository;
-                var Document = mapper.Map<Documents>(model);
+                var Document = new Documents();
+                Document.Name=model.Name;
+                Document.UserId = model.UserId;
+                Document.FileName = await uploaderService.UpdloadFile(model.File, "Document", "File" + model.Name+DateTime.Now.ToString("yyyy-M-d dddd"));
+                Document.ImageName = await uploaderService.UpdloadFile(model.Image, "Document", "Image" + model.Name + model.Name + DateTime.Now.ToString("yyyy-M-d dddd"));
                 await curentRep.AddDocumentAsync(Document);
                 await unitOfWork.SaveChangesAsync();
                 return true;
