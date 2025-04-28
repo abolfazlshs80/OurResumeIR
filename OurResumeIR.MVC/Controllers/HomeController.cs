@@ -12,6 +12,7 @@ namespace OurResumeIR.MVC.Controllers
 
      
         [Route("/{slug}")]
+        [Route("/")]
         public async Task< IActionResult> Index(string slug= "abolfazl")
         {
             //if (string.IsNullOrEmpty(slug))
