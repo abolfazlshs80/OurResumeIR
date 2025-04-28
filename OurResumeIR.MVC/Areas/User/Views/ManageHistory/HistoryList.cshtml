@@ -80,7 +80,7 @@
                             timerProgressBar: true,           // نمایش نوار زمان در پایین پیام
                             showConfirmButton: false,         // دکمه تایید رو حذف میکنیم
                             didClose: () => {                 // وقتی پیام بسته شد
-                                window.location.href = '@Url.Action("BlogList", "Blog", new { area = "User" })';
+                                        window.location.href = '@Url.Action("HistoryList", "ManageHistory", new { area = "User" })';
                                 // هدایت کاربر به صفحه‌ی لیست مقالات
                             }
                         });

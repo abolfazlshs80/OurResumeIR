@@ -43,7 +43,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
                 return RedirectToAction("BlogList");
             }
             TempData["SuccessMessage"] = " تجربه با موفقیت اضافه شد";
-            return RedirectToAction("BlogList");
+            return RedirectToAction("HistoryList");
 
             
         }
