@@ -9,7 +9,7 @@ namespace OurResumeIR.Application.Services.Interfaces
 {
     public interface IHistoryService
     {
-        Task<HistoryListViewModel> GetAlHistoryForListAsync();
+        Task<List<HistoryListViewModel>> GetAlHistoryForListAsync();
        Task<bool> CreateHistoryAsync(AddHistoryViewModel model, string userId);
     }
 }

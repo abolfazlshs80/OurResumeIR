@@ -1,4 +1,5 @@
-﻿using OurResumeIR.Application.Services.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using OurResumeIR.Application.Services.Interfaces;
 using OurResumeIR.Application.ViewModels.History;
 using OurResumeIR.Domain.Interfaces;
 using OurResumeIR.Domain.Models;
@@ -28,5 +29,18 @@ namespace OurResumeIR.Application.Services.Implementation
            await _repository.AddHistoryAsync(History);
             return true;
         }
+
+        public async Task<List<HistoryListViewModel>> GetAlHistoryForListAsync()
+        {
+            var History = await _repository.GetAllHistoryAsync();
+
+            return History.Select(h => new HistoryListViewModel
+            {
+                Id = h.Id,
+                Name = h.Name,
+            }).ToList();
+        }
+
+    
     }
 }

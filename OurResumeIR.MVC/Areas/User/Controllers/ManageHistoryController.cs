@@ -15,10 +15,10 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         {
             _historyService = historyService;
         }
-        public IActionResult HistoryList()
+        public async Task<IActionResult> HistoryList()
         {
-
-            return View();
+            var model = await _historyService.GetAlHistoryForListAsync();
+            return View(model);
         }
 
         [HttpGet]
