@@ -57,7 +57,17 @@ namespace OurResumeIR.Infra.Data.Repositories
         {
           return _context.Users.Where(x => x.Email == email).Any();
         }
-
+        public async Task<User> GetUserBySlug(string slug)
+        {
+            return await _context.Users.Where(x => x.Slug.Equals(slug))
+                .Include(a=>a.AboutMe)
+                .Include(a=>a.UserToSkill)
+                .Include(a=>a.Documents)
+                .Include(a=>a.History)
+                .Include(a=>a.Blog)
+                
+                .FirstOrDefaultAsync();
+        }
         public User UserIsExistForLogin(string email, string password)
         {
             return _context.Users.FirstOrDefault(u => u.Email == email && u.PasswordHash == password);
