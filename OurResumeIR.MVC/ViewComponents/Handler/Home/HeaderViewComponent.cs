@@ -1,22 +1,17 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Drawing.Printing;
+﻿using Microsoft.AspNetCore.Mvc;
 using OurResumeIR.Application.Services.Interfaces;
-using OurResumeIR.Infra.Data.Context;
-using System.Security.Claims;
+using OurResumeIR.Application.ViewModels.Account;
 
-namespace SlideCloud.ViewComponents
+namespace OurResumeIR.MVC.ViewComponents.Handler.Home
 {
     public class HeaderViewComponent
         (IUserService _userService)
         : ViewComponent
     {
 
-        public async Task<IViewComponentResult> InvokeAsync(string userId)
+        public async Task<IViewComponentResult> InvokeAsync(UserResumeVM model)
         {
 
-            var model =await _userService.LoadProfile(userId);
             return View("/ViewComponents/Views/Home/Header.cshtml", model);
         }
 
