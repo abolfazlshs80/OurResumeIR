@@ -33,7 +33,7 @@ namespace OurResumeIR.Infra.Data.Repositories
 
         public async Task AddHistoryAsync(History History)
         {
-          await  _context.AddAsync(History);
+          await  _context.History.AddAsync(History);
            await _context.SaveChangesAsync();
         }
 
