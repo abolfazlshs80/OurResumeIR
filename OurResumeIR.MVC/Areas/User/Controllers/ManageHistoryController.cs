@@ -38,10 +38,10 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
           var result =  await _historyService.CreateHistoryAsync(model, userId);
             if (!result)
             {
-                TempData["ErrorMessage"] = "مقاله با موفقیت اضافه شد.";
+                TempData["ErrorMessage"] = "ثبت تجربه با شکست رو برو شد.";
                 return RedirectToAction("BlogList");
             }
-            TempData["SuccessMessage"] = "ثبت مقاله با شکست رو برو شد.";
+            TempData["SuccessMessage"] = " تجربه با موفقیت اضافه شد";
             return RedirectToAction("BlogList");
 
             
