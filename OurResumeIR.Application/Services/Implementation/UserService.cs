@@ -149,6 +149,12 @@ namespace OurResumeIR.Application.Services.Implementation
             model.FullName=currentUser.FullName;
             model.Slug = slug;
             model.ImageName=currentUser.ImageName;
+            model.ResumeFile=currentUser.ResumeFile;
+            model.bio=currentUser.bio;
+            model.LinkInstagram=currentUser.LinkInstagram;
+            model.LinkLinkdin=currentUser.LinkLinkdin;
+            model.LinkTelegram=currentUser.LinkTelegram;
+            model.LinkX=currentUser.LinkX;
             model.AboutMe = new AboutMeVM()
             {
                 ImageName = currentUser.AboutMe.ImageName,
