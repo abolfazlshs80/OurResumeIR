@@ -171,10 +171,12 @@ namespace OurResumeIR.Application.Services.Implementation
                 FileName = _.FileName,
                 ImageName = _.ImageName
             }).ToList();
-            model.Blog = currentUser.Blog.Select(_ => new BlogPostListViewModel()
+            model.Blog = currentUser.Blog.Select(_ => new BlogVM()
             {
                 ImageName = _.ImageName,
                 Title = _.Title,
+                Desc = _.Description,
+                Text = _.Text,
                 Id = _.Id
             }).ToList();
           
