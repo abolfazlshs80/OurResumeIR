@@ -3,3 +3,45 @@
 	Layout = "_Layout";
 }
 
+@model OurResumeIR.Application.ViewModels.Account.UserResumeVM
+
+
+@await Component.InvokeAsync("Header",new {model=Model.AboutMe})
+@* 
+
+<partial name="./Partials/Layout/_Header" /> *@
+<!-- Brand -->
+
+@* <!-- About -->
+<partial name="./Partials/Layout/_About" />
+<!-- About -->
+
+
+
+<!-- Skils -->
+
+
+<partial name="./Partials/Layout/_Skill" />
+<!-- Documents -->
+
+
+<partial name="./Partials/Layout/_Document" />
+
+
+<!-- Banner Link -->
+
+
+
+
+<partial name="./Partials/Layout/_Experience" />
+
+<!-- Blogs -->
+
+
+
+<partial name="./Partials/Layout/_Blog" />
+<!-- Contact -->
+
+
+
+<partial name="./Partials/Layout/_Contact" /> *@
