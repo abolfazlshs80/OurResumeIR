@@ -9,7 +9,8 @@ namespace OurResumeIR.Domain.Models
 {
     public class User: IdentityUser
     {
-
+        //برای نمایش در مرورگر
+        public string? Slug { get; set; }
         public string? FullName { get; set; }
         public string? ImageName { get; set; }
         // Navigation Property  
