@@ -14,7 +14,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using OurResumeIR.Application.ViewModels.AboutMe;
 using OurResumeIR.Application.ViewModels.Account;
+using OurResumeIR.Application.ViewModels.Blog;
+using OurResumeIR.Application.ViewModels.Document;
 using LoginViewModel = OurResumeIR.Application.ViewModels.Account.LoginViewModel;
 using RegisterViewModel = OurResumeIR.Application.ViewModels.Account.RegisterViewModel;
 
@@ -136,6 +139,47 @@ namespace OurResumeIR.Application.Services.Implementation
             model.DocumentCount = User.Documents.Count;
             model.SkillCount = User.UserToSkill.Count;
             return model;
+        }
+
+        public async Task<UserResumeVM> LoadResume(string slug)
+        {
+            var currentUser = await _userRepository.GetUserBySlug(slug);
+            if (currentUser == null) return null;
+            var model = new UserResumeVM();
+            model.FullName=currentUser.FullName;
+            model.Slug = slug;
+            model.ImageName=currentUser.ImageName;
+            model.AboutMe = new AboutMeVM()
+            {
+                ImageName = currentUser.AboutMe.ImageName,
+                UserId = currentUser.AboutMe.UserId,
+                Description = currentUser.AboutMe.Description,
+                Id = currentUser.AboutMe.Id
+            };
+            model.Documents = currentUser.Documents.Select(_ => new DocumentVM()
+            {
+                Name = _.Name,
+                UserId = _.UserId,
+                Id = _.Id,
+                FileName = _.FileName,
+                ImageName = _.ImageName
+            }).ToList();
+            model.Blog = currentUser.Blog.Select(_ => new BlogPostListViewModel()
+            {
+                ImageName = _.ImageName,
+                Title = _.Title,
+                Id = _.Id
+            }).ToList();
+          
+            model.History  = currentUser.History.Select(_ => new History()
+            {
+                Name = _.Name,
+                UserId = _.UserId,
+                Id = _.Id
+            }).ToList();
+
+            return model;
+
         }
     }
 } 
