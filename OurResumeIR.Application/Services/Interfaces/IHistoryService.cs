@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace OurResumeIR.Application.Services.Interfaces
 {
-    internal class IHistoryService
+    public interface IHistoryService
     {
+
     }
 }

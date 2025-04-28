@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OurResumeIR.Application.Services.Implementation
 {
-    internal class HistoryService
+    public class HistoryService
     {
     }
 }
