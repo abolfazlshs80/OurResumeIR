@@ -1,5 +1,31 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model OurResumeIR.Application.ViewModels.History.HistoryViewModel
+
 @{
+    Layout = "_ProfileLayout";
+    ViewBag.Title = "افزودن تجربه جدید";
 }
+
+<div class="col-xl-9">
+    <div class="card bg-transparent border rounded-3">
+        <div class="card-header bg-transparent border-bottom d-flex justify-content-between">
+            <h3 class="mb-0 fs-5 ff-vb">افزودن تجربه جدید</h3>
+        </div>
+
+        <div class="card-body">
+            <form asp-action="AddHistory" asp-controller="History" asp-area="User" method="post">
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <label asp-for="Name" class="form-label">عنوان تجربه</label>
+                        <input asp-for="Name" class="form-control text-end" dir="rtl" placeholder="مثلاً توسعه وب، مدیریت پروژه و ..." />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="text-end">
+                    <button type="submit" class="btn btn-primary">ثبت تجربه</button>
+                    <a asp-action="HistoryList" class="btn btn-secondary">انصراف</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
