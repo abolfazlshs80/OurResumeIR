@@ -24,7 +24,7 @@ namespace OurResumeIR.Application.ViewModels.Account
         public string? LinkTelegram { get; set; }
         // Navigation Property  
         public ICollection<MySkillsForListViewModel> MySkill { get; set; }
-        public ICollection<BlogPostListViewModel> Blog { get; set; }
+        public ICollection<BlogVM> Blog { get; set; }
         public ICollection<DocumentVM> Documents { get; set; }
         public ICollection<History> History { get; set; }
         public AboutMeVM AboutMe { get; set; }
