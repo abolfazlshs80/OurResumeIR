@@ -1,5 +1,106 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using OurResumeIR.Application.ViewModels.Blog
+@model List<BlogPostListViewModel>
 @{
+    Layout = "_ProfileLayout";
+    ViewBag.Title = "تجربه ها";
+}
+
+
+<div class="col-xl-9">
+    <div class="row mb-3">
+        <div class="col-12 d-sm-flex justify-content-between align-items-center">
+
+            <a class="btn btn-success btn-sm" asp-action="AddHistory" asp-controller="ManageHistory" asp-area="User">افزودن تجربه</a>
+
+        </div>
+    </div>
+
+
+    <div class="card bg-transparent border rounded-3">
+        <div class="card-header bg-transparent border-bottom">
+            <h3 class="mb-0 fs-5 ff-vb">لیست @ViewBag.Title من</h3>
+        </div>
+
+
+        <div class="card-body">
+
+            <!-- لیست جدول تجربه ها -->
+            <div class="table-responsive border-0">
+                <table class="table table-dark-gray align-middle p-4 mb-0 table-hover">
+                    <thead>
+                        <tr>
+@*                             <th scope="col" class="border-0 rounded-start">تصویر</th>
+ *@                            <th scope="col" class="border-0">عنوان</th>
+                            <th scope="col" class="border-0 rounded-end">عملیات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                     @*            <td>
+                                    <img src="~/images/blog/@item.ImageName"
+                                         alt="@item.Title"
+                                         class="img-fluid rounded"
+                                         style="max-height: 60px; max-width: 100px;" />
+                                </td> *@
+                                <td>
+                                    <h6 class="mb-0">@item.Title</h6>
+                                </td>
+
+                                <td>
+                                    <a asp-area="User" asp-action="EditHistory" asp-controller="ManageHistory" asp-route-id="@item.Id" class="btn btn-warning btn-sm">ویرایش</a>
+                                    <form asp-area="User" asp-action="DeleteHistory" asp-controller="ManageHistory" asp-route-id="@item.Id" method="post" class="d-inline">
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('آیا از حذف اطمینان دارید؟')">حذف</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+@section Scripts
+{
+    <script>
+        // چک میکنیم اگر پیام موفقیت وجود داشت
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <text>
+                        Swal.fire({
+                            icon: 'success',                 // آیکون: موفقیت
+                            title: 'عملیات موفق!',           // عنوان Popup
+                                text: '@Html.Raw(TempData["SuccessMessage"])',  // 👈 متن پیام موفقیت
+                            timer: 4000,                      // بعد از ۲ ثانیه خودش بسته بشه (به میلی‌ثانیه)
+                            timerProgressBar: true,           // نمایش نوار زمان در پایین پیام
+                            showConfirmButton: false,         // دکمه تایید رو حذف میکنیم
+                            didClose: () => {                 // وقتی پیام بسته شد
+                                window.location.href = '@Url.Action("BlogList", "Blog", new { area = "User" })';
+                                // هدایت کاربر به صفحه‌ی لیست مقالات
+                            }
+                        });
+            </text>
+        }
+
+        // اگر پیام خطا وجود داشت
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <text>
+                        Swal.fire({
+                            icon: 'error',                    // آیکون: خطا
+                            title: 'خطا!',                     // عنوان Popup
+                                text: '@Html.Raw(TempData["ErrorMessage"])',  // 👈  متن پیام خطا
+                            timer: 4000,                       // اینم بعد از ۳ ثانیه خودکار بسته بشه
+                            timerProgressBar: true,
+                            showConfirmButton: false
+                            // در حالت خطا، نیاز به ریدایرکت نداریم (میتونی اضافه هم بکنی)
+                        });
+            </text>
+        }
+    </script>
 }
