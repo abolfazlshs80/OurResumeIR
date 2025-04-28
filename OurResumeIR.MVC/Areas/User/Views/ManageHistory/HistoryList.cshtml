@@ -1,5 +1,5 @@
-﻿@using OurResumeIR.Application.ViewModels.Blog
-@model List<BlogPostListViewModel>
+﻿@using OurResumeIR.Application.ViewModels.History
+@model List<HistoryListViewModel>
 @{
     Layout = "_ProfileLayout";
     ViewBag.Title = "تجربه ها";
@@ -45,7 +45,7 @@
                                          style="max-height: 60px; max-width: 100px;" />
                                 </td> *@
                                 <td>
-                                    <h6 class="mb-0">@item.Title</h6>
+                                    <h6 class="mb-0">@item.Name</h6>
                                 </td>
 
                                 <td>

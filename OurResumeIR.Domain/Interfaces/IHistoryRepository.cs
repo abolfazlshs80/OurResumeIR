@@ -16,5 +16,6 @@ namespace OurResumeIR.Domain.Interfaces
         Task DeletHistoryAsync(History History);
         Task DeleteHistoryByIdAsync(int id);
         Task SaveChangeAsync();
+        Task<History> GetHistoryByIdAndUserIdAsync(int id, string userId);
     }
 }

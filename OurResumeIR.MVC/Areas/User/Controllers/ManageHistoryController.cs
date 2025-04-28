@@ -17,6 +17,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         }
         public IActionResult HistoryList()
         {
+
             return View();
         }
 

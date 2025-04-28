@@ -59,5 +59,10 @@ namespace OurResumeIR.Infra.Data.Repositories
         {
             _context.SaveChanges();
         }
+
+        public  Task<History> GetHistoryByIdAndUserIdAsync(int id, string userId)
+        {
+            return _context.History.FirstOrDefaultAsync(h => h.Id == id && h.UserId == userId);
+        }
     }
 }
