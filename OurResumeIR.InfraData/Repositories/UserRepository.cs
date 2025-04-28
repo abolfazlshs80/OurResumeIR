@@ -62,6 +62,10 @@ namespace OurResumeIR.Infra.Data.Repositories
             return await _context.Users.Where(x => x.Slug.Equals(slug))
                 .Include(a=>a.AboutMe)
                 .Include(a=>a.UserToSkill)
+                .ThenInclude(a=>a.SkillLevel )
+                .Include(a => a.UserToSkill)
+                .ThenInclude(a =>  a.Skill)
+
                 .Include(a=>a.Documents)
                 .Include(a=>a.History)
                 .Include(a=>a.Blog)
