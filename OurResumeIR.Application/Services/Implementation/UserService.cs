@@ -18,6 +18,7 @@ using OurResumeIR.Application.ViewModels.AboutMe;
 using OurResumeIR.Application.ViewModels.Account;
 using OurResumeIR.Application.ViewModels.Blog;
 using OurResumeIR.Application.ViewModels.Document;
+using OurResumeIR.Application.ViewModels.MySkills;
 using LoginViewModel = OurResumeIR.Application.ViewModels.Account.LoginViewModel;
 using RegisterViewModel = OurResumeIR.Application.ViewModels.Account.RegisterViewModel;
 
@@ -184,6 +185,14 @@ namespace OurResumeIR.Application.Services.Implementation
                 Id = _.Id
             }).ToList();
 
+
+            model.MySkill= currentUser.UserToSkill.Select(_ => new MySkillsForListViewModel()
+            {
+                Percentage =_.SkillLevel.Percentage,
+                SkillName = _.Skill.Name,
+                SkillLevelName = _.SkillLevel.Name,
+                Id = _.Id
+            }).ToList();
             return model;
 
         }

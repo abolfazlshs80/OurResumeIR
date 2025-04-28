@@ -1,27 +1,32 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 	Layout = "_Layout";
+	ViewBag.FullName = Model.FullName;
 }
 
 @model OurResumeIR.Application.ViewModels.Account.UserResumeVM
 
 
-@await Component.InvokeAsync("Header",new {model=Model})
-@* 
+@await Component.InvokeAsync("HeaderHome",new {model=Model})
 
-<partial name="./Partials/Layout/_Header" /> *@
-<!-- Brand -->
 
-@* <!-- About -->
-<partial name="./Partials/Layout/_About" />
 <!-- About -->
-
+@await Component.InvokeAsync("AboutHome", new { model = Model.AboutMe })
+@await Component.InvokeAsync("MySkillHome", new { model = Model.MySkill })
+<!-- About -->
 
 
 <!-- Skils -->
 
+<!-- Skils -->
+@*
 
-<partial name="./Partials/Layout/_Skill" />
+
+
+
+
+
+
 <!-- Documents -->
 
 
