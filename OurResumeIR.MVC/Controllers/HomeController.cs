@@ -7,7 +7,7 @@ using OurResumeIR.Application.Services.Interfaces;
 
 namespace OurResumeIR.MVC.Controllers
 {
-    public class HomeController (IUserService userService): Controller
+    public class HomeController (IUserService userService,IBlogService blogService): Controller
     {
 
      
@@ -22,7 +22,18 @@ namespace OurResumeIR.MVC.Controllers
             return View(model);
        
         }
+        [Route("/blog/{id}")]
+        
+        public async Task<IActionResult> FindBlog(int id)
+        {
+            var model = await blogService.GetBlogForEditView(id);
+            if(model==null) return Error();
+            TempData["BlogTitle"] = model.Title;
+            TempData["BlogText"] = model.Text;
+            TempData["BlogImage"] = model.ImageName.ConvartImagePathForBlog();
+            return RedirectToAction("Index");
 
+        }
 
         [Route("{*url}", Order = 999)]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
