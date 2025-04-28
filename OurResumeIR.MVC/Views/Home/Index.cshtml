@@ -2,6 +2,7 @@
     ViewData["Title"] = "Home Page";
 	Layout = "_Layout";
 	ViewBag.FullName = Model.FullName;
+	ViewBag.ImagePth = Model.ImageName.ConvartImagePathForProfile();
 }
 
 @model OurResumeIR.Application.ViewModels.Account.UserResumeVM
@@ -35,30 +36,9 @@
 
 
 <!-- Blogs -->
-
-
-@*
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- Contact -->
-
-
-
-<partial name="./Partials/Layout/_Contact" />
+@* <partial name="./Partials/Layout/_Contact" /> *@
 <!-- Contact -->
-*@
 
 @section Scripts
 {
