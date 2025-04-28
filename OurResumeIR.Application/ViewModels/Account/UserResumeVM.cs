@@ -16,6 +16,12 @@ namespace OurResumeIR.Application.ViewModels.Account
         public string? Slug { get; set; }
         public string? FullName { get; set; }
         public string? ImageName { get; set; }
+        public string? ResumeFile { get; set; }
+        public string? bio { get; set; }
+        public string? LinkInstagram { get; set; }
+        public string? LinkLinkdin { get; set; }
+        public string? LinkX { get; set; }
+        public string? LinkTelegram { get; set; }
         // Navigation Property  
         public ICollection<MySkillsForListViewModel> MySkill { get; set; }
         public ICollection<BlogPostListViewModel> Blog { get; set; }
