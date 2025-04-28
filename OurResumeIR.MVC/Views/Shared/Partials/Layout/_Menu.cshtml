@@ -3,7 +3,7 @@
 	<nav class="navbar col-11 col-md-12 container navbar-expand-lg bg-body-tertiary">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="#">
-				<img src="img/SiteSetting/Logo/Light/0a01426cbd434cee8ebb44ab1e8e46ff.png" alt="ایمان مدائنی" class="logo" />
+				<img src="@ViewBag.ImagePth" alt="@Model.FullName" class="logo" />
 			</a>
 			<button class="navbar-toggler"
 					type="button"
@@ -38,10 +38,10 @@
 							@Html.ActionLink("ثبت نام", "Register", "Account", null, new { @class = "nav-link" })
 						</li>
 					}
-
+@* 
 					<li class="nav-item">
 						<a class="nav-link" href="">دانلود کتاب</a>
-					</li>
+					</li> *@
 					<li class="nav-item">
 						<a class="nav-link" href="#about">درباره من</a>
 					</li>
@@ -51,9 +51,9 @@
 					<li class="nav-item">
 						<a class="nav-link" href="#documents">مدارک من</a>
 					</li>
-					<li class="nav-item">
+		@* 			<li class="nav-item">
 						<a class="nav-link" href="#services">خدمات</a>
-					</li>
+					</li> *@
 					<li class="nav-item">
 						<a class="nav-link" href="#experience">تجربه های من</a>
 					</li>
