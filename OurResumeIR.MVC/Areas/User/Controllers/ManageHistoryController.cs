@@ -15,7 +15,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         {
             _historyService = historyService;
         }
-        public IActionResult Index()
+        public IActionResult HistoryList()
         {
             return View();
         }
