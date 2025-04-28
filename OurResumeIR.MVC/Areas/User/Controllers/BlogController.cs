@@ -25,7 +25,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         [HttpGet]
         public async Task<IActionResult> AddBlog()
         {
-            return View();
+            return View(new CreateBlogPostViewModel());
         }
 
         [HttpPost]

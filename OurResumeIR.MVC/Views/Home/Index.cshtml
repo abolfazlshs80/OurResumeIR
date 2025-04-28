@@ -12,13 +12,31 @@
 
 <!-- About -->
 @await Component.InvokeAsync("AboutHome", new { model = Model.AboutMe })
-@await Component.InvokeAsync("MySkillHome", new { model = Model.MySkill })
+
 <!-- About -->
 
 
 <!-- Skils -->
-
+@await Component.InvokeAsync("MySkillHome", new { model = Model.MySkill })
 <!-- Skils -->
+
+<!-- Documents -->
+@await Component.InvokeAsync("MyDocumentHome", new { model = Model.Documents })
+<!-- Documents -->
+
+
+<!-- Experience -->
+@await Component.InvokeAsync("MyExperienceHome", new { model = Model.History })
+<!-- Experience -->
+
+
+<!-- Blogs -->
+@await Component.InvokeAsync("MyBlogHome", new { model = Model.Blog })
+
+
+<!-- Blogs -->
+
+
 @*
 
 
@@ -27,26 +45,39 @@
 
 
 
-<!-- Documents -->
-
-
-<partial name="./Partials/Layout/_Document" />
-
-
-<!-- Banner Link -->
 
 
 
 
-<partial name="./Partials/Layout/_Experience" />
-
-<!-- Blogs -->
 
 
 
-<partial name="./Partials/Layout/_Blog" />
 <!-- Contact -->
 
 
 
-<partial name="./Partials/Layout/_Contact" /> *@
+<partial name="./Partials/Layout/_Contact" />
+<!-- Contact -->
+*@
+
+@section Scripts
+{
+	<script>
+		// چک میکنیم اگر پیام موفقیت وجود داشت
+		@if (TempData["BlogText"] != null)
+		{
+			<text>
+		Swal.fire({
+					title: "@Html.Raw(TempData["BlogTitle"])",
+					text: "@Html.Raw(TempData["BlogText"])",
+				imageUrl: "@Html.Raw(TempData["BlogImage"])",
+			imageWidth: 400,
+			imageHeight: 200,
+			imageAlt: "Custom image"
+		});
+			</text>
+		}
+
+	
+	</script>
+}
