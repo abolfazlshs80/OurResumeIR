@@ -3,39 +3,31 @@ using OurResumeIR.Domain.Interfaces;
 using OurResumeIR.MVC.Models;
 using System.Diagnostics;
 using System.Security.Claims;
+using OurResumeIR.Application.Services.Interfaces;
 
 namespace OurResumeIR.MVC.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController (IUserService userService): Controller
     {
 
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly ILogger<HomeController> _logger;
+     
+        [Route("/{slug}")]
+        public async Task< IActionResult> Index(string slug= "abolfazl")
+        {
+            //if (string.IsNullOrEmpty(slug))
+            //    return Error();
+            var model =await userService.LoadResume(slug);
 
-        public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-            _logger = logger;
-        }
-        [Route("/")]
-        public IActionResult Index()
-        {
-            if (User.Identity.IsAuthenticated)
-            {
-               // var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            }
-            return View();
+            return View(model);
        
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
+        [Route("{*url}", Order = 999)]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
+            Response.StatusCode = 404;
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
