@@ -22,6 +22,7 @@ namespace OurResumeIR.Application.Services.Implementation
             var History = new History
             {
                 Name = model.Name,
+                UserId = userId,
             };
 
            await _repository.AddHistoryAsync(History);

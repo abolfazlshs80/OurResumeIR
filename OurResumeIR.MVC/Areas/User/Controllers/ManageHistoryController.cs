@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using CleanArch.Store.Application.Extention;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using OurResumeIR.Application.Services.Interfaces;
 using OurResumeIR.Application.ViewModels.History;
 
 namespace OurResumeIR.MVC.Areas.User.Controllers
@@ -8,6 +10,11 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
     [Authorize]
     public class ManageHistoryController : Controller
     {
+        private IHistoryService _historyService;
+        public ManageHistoryController(IHistoryService historyService)
+        {
+            _historyService = historyService;
+        }
         public IActionResult Index()
         {
             return View();
@@ -26,7 +33,18 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             {
                return View(model);
             }
-            return View();
+
+            string userId = User.GetUserId();
+          var result =  await _historyService.CreateHistoryAsync(model, userId);
+            if (!result)
+            {
+                TempData["ErrorMessage"] = "مقاله با موفقیت اضافه شد.";
+                return RedirectToAction("BlogList");
+            }
+            TempData["SuccessMessage"] = "ثبت مقاله با شکست رو برو شد.";
+            return RedirectToAction("BlogList");
+
+            
         }
     }
 }
