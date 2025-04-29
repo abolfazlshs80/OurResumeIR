@@ -7,8 +7,9 @@ public class SkillLevelVM
 {
     public int Id { get; set; }
     public string Name { get; set; }
+    public int? Percentage { get; set; }
     // Navigation Property  
-   public ICollection<SkillVM> Skill { get; set; }
+    public ICollection<SkillVM> Skill { get; set; }
 
 
 }
