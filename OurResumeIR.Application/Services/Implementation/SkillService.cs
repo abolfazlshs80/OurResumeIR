@@ -51,7 +51,12 @@ namespace OurResumeIR.Application.Services.Interfaces
         public async Task<bool> Update(UpdateSkillLevelVM model)
         {
             var rep_SkillLevel = unitOfWork.SkillLevelRepository;
-            var newModel = mapper.Map<SkillLevel>(model);
+            var newModel = new SkillLevel()
+            {
+                Id = model.Id,
+                Name = model.Name,
+                Percentage = model.Percentage
+            };
             bool status = await rep_SkillLevel.UpdateSkillLevelLevel(newModel);
             await rep_SkillLevel.SaveChanges();
 
