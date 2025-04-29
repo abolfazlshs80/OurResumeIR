@@ -26,7 +26,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             return View(list);
         }
         [HttpGet]
-        public async Task<IActionResult> SkillLevelCreate() => View();
+        public async Task<IActionResult> SkillLevelCreate() => View(new CreateSkillLevelVM());
 
         [HttpPost]
         public async Task<IActionResult> SkillLevelCreate(CreateSkillLevelVM model)
@@ -58,8 +58,8 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         [HttpPost]
         public async Task<IActionResult> SkillLevelUpdate(UpdateSkillLevelVM model)
         {
-            if (!ModelState.IsValid)
-                return View(model);
+            //if (!ModelState.IsValid)
+            //    return View(model);
 
 
             bool status = await skillLayersService.Update(model);
