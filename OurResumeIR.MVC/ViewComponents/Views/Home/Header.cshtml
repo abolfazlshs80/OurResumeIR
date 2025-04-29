@@ -1,0 +1,43 @@
+﻿@using OurResumeIR.Application.ViewModels.Account
+@model UserResumeVM
+<div class="header">
+    <div class="container col-11 col-md-12 d-flex justify-content-between align-items-center flex-wrap">
+        <div class="header-title col-12 col-sm-12 col-md-6 order-1 order-md-0">
+            <header class="main-titles">@Model.FullName</header>
+            <h3 class="sub-title">
+              @Model.bio
+            </h3>
+            <div class="container d-flex align-items-center flex-wrap">
+          @*       <a class="button" href="">
+                    دانلود رزومه <i class="bi bi-download"></i>
+                </a> *@
+                <div class="media-wrapper">
+                    <a href="@Model.LinkTelegram" target="_blank">
+                        <i class="bi bi-telegram icon"></i>
+                    </a>
+                    <a href="@Model.LinkInstagram" target="_blank">
+                        <i class="bi bi-instagram icon"></i>
+                    </a>
+                    <a href="@Model.LinkX" target="_blank">
+                        <i class="bi bi-twitter icon"></i>
+                    </a>
+                    <a href="@Model.LinkLinkdin" target="_blank">
+                        <i class="bi bi-linkedin icon"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Header image -->
+        <div class="header-image col-12 col-sm-12 col-md-6 order-0 order-md-1">
+            <img src="@Model.ImageName.ConvartImagePathForProfile()" alt="@Model.FullName" />
+        </div>
+        <div class="scrollbar">
+            <a href="#about"
+               class="d-flex flex-column justify-content-center align-items-center"
+               style="color: white !important ; text-decoration: none">
+                <img src="/madaeny.com/assets/image/mouseDown.png" alt="" class="scroll-img" />
+                اسکرول کنید
+            </a>
+        </div>
+    </div>
+</div>

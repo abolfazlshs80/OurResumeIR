@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OurResumeIR.Infra.Data.Context;
 
@@ -11,9 +12,11 @@ using OurResumeIR.Infra.Data.Context;
 namespace OurResumeIR.Infra.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250428065932_add-fild-Percentage-Skill-table")]
+    partial class addfildPercentageSkilltable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -290,6 +293,9 @@ namespace OurResumeIR.Infra.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<int?>("Percentage")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Skill");
@@ -307,9 +313,6 @@ namespace OurResumeIR.Infra.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
-
-                    b.Property<int?>("Percentage")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

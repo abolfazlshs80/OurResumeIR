@@ -12,6 +12,6 @@ namespace OurResumeIR.Application.ViewModels.MySkills
         public int Id { get; set; }
         public string SkillName { get; set; }
         public string SkillLevelName { get; set; }
-
+        public int? Percentage { get; set; }
     }
 }

@@ -1,0 +1,26 @@
+﻿@model IEnumerable< OurResumeIR.Application.ViewModels.MySkills.MySkillsForListViewModel>
+<h1 class="section-title container">تخصص ها</h1>
+<div class="skills-wrapper" id="skill">
+    <div class="skills col-11 col-md-12 container gap-0 d-flex flex-column flex-md-row flex-wrap justify-content-start">
+    
+  @foreach (var item in Model)
+  {
+	  <div class="skill col-12 col-md-4">
+		  <div class="progress-wrapper">
+			  <div class="progress-title">
+				  <span class="level">@item.SkillLevelName</span>
+				  <span class="name">@item.SkillName</span>
+			  </div>
+			  <div class="progress">
+				  <div class="progress-bar"
+				       role="progressbar"
+				       aria-valuenow="@item.Percentage"
+				       aria-valuemin="0"
+				       aria-valuemax="100"></div>
+			  </div>
+		  </div>
+	  </div>
+  }
+    </div>
+    <div class="bg"></div>
+</div>

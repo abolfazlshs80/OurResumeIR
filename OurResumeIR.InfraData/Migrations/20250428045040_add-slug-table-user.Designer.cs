@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OurResumeIR.Infra.Data.Context;
 
@@ -11,9 +12,11 @@ using OurResumeIR.Infra.Data.Context;
 namespace OurResumeIR.Infra.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250428045040_add-slug-table-user")]
+    partial class addslugtableuser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -308,9 +311,6 @@ namespace OurResumeIR.Infra.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int?>("Percentage")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.ToTable("SkillLevel");
@@ -341,18 +341,6 @@ namespace OurResumeIR.Infra.Data.Migrations
                     b.Property<string>("ImageName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LinkInstagram")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LinkLinkdin")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LinkTelegram")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LinkX")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -376,9 +364,6 @@ namespace OurResumeIR.Infra.Data.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("ResumeFile")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -391,9 +376,6 @@ namespace OurResumeIR.Infra.Data.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("bio")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

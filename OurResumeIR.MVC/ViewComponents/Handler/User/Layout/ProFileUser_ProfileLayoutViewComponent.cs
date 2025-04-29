@@ -6,7 +6,7 @@ using OurResumeIR.Application.Services.Interfaces;
 using OurResumeIR.Infra.Data.Context;
 using System.Security.Claims;
 
-namespace SlideCloud.ViewComponents
+namespace OurResumeIR.MVC.ViewComponents.Handler.User.Layout
 {
     public class ProFileUser_ProfileLayoutViewComponent
         (IUserService _userService)
@@ -16,8 +16,8 @@ namespace SlideCloud.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync(string userId)
         {
 
-            var model =await _userService.LoadProfile(userId);
-            return View("~/Views/Shared/Components/User/Layout/ProFileUser_ProfileLayoutView.cshtml",model);
+            var model = await _userService.LoadProfile(userId);
+            return View("~/Views/Shared/Components/User/Layout/ProFileUser_ProfileLayoutView.cshtml", model);
         }
 
     }

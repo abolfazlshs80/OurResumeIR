@@ -1,0 +1,23 @@
+﻿@model IEnumerable<OurResumeIR.Application.ViewModels.Blog.BlogVM>
+<h1 class="section-title container">آخرین مقالات</h1>
+<div class="blogs container flex-column flex-md-row" id="blogs">
+	
+	@foreach (var item in Model)
+	{
+		<a href="/blog/@item.Id" target="_blank" style="text-decoration: none">
+			<div class="blog-card col-12 col-sm-6 col-md-6 col-lg-4">
+				<div class="blog-header">
+					<img class="lazy" src="@item.ImageName.ConvartImagePathForBlog()" data-src="@item.ImageName.ConvartImagePathForBlog()" alt="" />
+				</div>
+				<div class="blog-title">
+					<h1>@item.Title</h1>
+					<span>
+						@item.Desc
+						</span>
+				</div>
+			</div>
+		</a>
+
+	}
+
+</div>

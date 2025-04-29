@@ -19,6 +19,6 @@ namespace OurResumeIR.Domain.Interfaces
         Task<bool> SaveChanges();
         Task<bool> EmailIsExist(string email);
         User UserIsExistForLogin(string email , string password);
-      
+        Task<User> GetUserBySlug(string slug);
     }
 }

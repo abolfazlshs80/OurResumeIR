@@ -1,0 +1,105 @@
+﻿@model IEnumerable< OurResumeIR.Application.ViewModels.Document.DocumentVM>
+<h1 class="section-title container">مدارک، افتخارات، تقدیر نامه</h1>
+<div id="documents" class="documents col-12 col-md-12 container my-5">
+    <ul class="nav nav-tabs justify-content-center"
+        id="myTab"
+        role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active"
+                    id="honor10-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#honor10"
+                    type="button"
+                    role="tab"
+                    aria-controls="honor10"
+                    aria-selected="true"
+                    tabindex=&quot;-1&quot;>
+                مدارک
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link "
+                    id="honor11-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#honor11"
+                    type="button"
+                    role="tab"
+                    aria-controls="honor11"
+                    aria-selected="false">
+                تقدیر نامه ها
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link "
+                    id="honor12-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#honor12"
+                    type="button"
+                    role="tab"
+                    aria-controls="honor12"
+                    aria-selected="false">
+                افتخارات
+            </button>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+
+        <div class="tab-pane fade active show"
+             id="honor10"
+             role="tabpanel"
+             aria-labelledby="honor10-tab">
+            <div class="honors-wrapper container col-11 col-md-12 image_gallery">
+                @foreach (var item in Model)
+                {
+                    <a class="honors-card col-12 col-sm-6 col-md-3" href="@item.FileName.ConvartImagePathForDocument()">
+		                <div class="card-header">
+                            <img class="img-fluid h-100 lazy" src="@item.ImageName.ConvartImagePathForDocument()" data-src="/img/Honor/Main/0f307acafbe34484be9e1208fd396996.jpg" alt="Microsoft Trainer" />
+		                </div>
+		                <div class="card-body">
+			                <h3>@item.Name</h3>
+		                </div>
+	                </a>
+
+                }
+           
+
+            </div>
+        </div>
+        <div class="tab-pane fade "
+             id="honor11"
+             role="tabpanel"
+             aria-labelledby="honor11-tab">
+            <div class="honors-wrapper container col-11 col-md-12 image_gallery">
+@* 
+                <a class="honors-card col-12 col-sm-6 col-md-3" href="img/Honor/Main/1549bf7d5a214c92beb567aee09fccf4.jpg">
+                    <div class="card-header">
+                        <img class="img-fluid h-100 lazy" src="/madaeny.com/assets/image/LazyLoad/honor_lazy.webp" data-src="/img/Honor/Main/1549bf7d5a214c92beb567aee09fccf4.jpg" alt="ایران خودرو" />
+                    </div>
+                    <div class="card-body">
+                        <h3>ایران خودرو</h3>
+                    </div>
+                </a>
+ *@
+            </div>
+        </div>
+        <div class="tab-pane fade "
+             id="honor12"
+             role="tabpanel"
+             aria-labelledby="honor12-tab">
+            <div class="honors-wrapper container col-11 col-md-12 image_gallery">
+
+            @*     <a class="honors-card col-12 col-sm-6 col-md-3" href="img/Honor/Main/aae3b591329a49b3a290e451a4fabfd3.jpg">
+                    <div class="card-header">
+                        <img class="img-fluid h-100 lazy" src="/madaeny.com/assets/image/LazyLoad/honor_lazy.webp" data-src="/img/Honor/Main/aae3b591329a49b3a290e451a4fabfd3.jpg" alt="مجوز فعالیت رسانه صوت و تصویر فراگیر" />
+                    </div>
+                    <div class="card-body">
+                        <h3>مجوز فعالیت رسانه صوت و تصویر فراگیر</h3>
+                    </div>
+                </a>
+            
+ *@
+            </div>
+        </div>
+
+    </div>
+</div>
