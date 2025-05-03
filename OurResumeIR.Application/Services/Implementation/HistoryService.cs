@@ -32,15 +32,31 @@ namespace OurResumeIR.Application.Services.Implementation
 
         public async Task<List<HistoryListViewModel>> GetAlHistoryForListAsync()
         {
-            var History = await _repository.GetAllHistoryAsync();
+            var history = await _repository.GetAllHistoryAsync();
 
-            return History.Select(h => new HistoryListViewModel
+            return history.Select(h => new HistoryListViewModel
             {
                 Id = h.Id,
                 Name = h.Name,
             }).ToList();
         }
 
-    
+        public async Task<EditHistoryViewModel> GetHistoryShowForEdit(int id)
+        {
+            var history = await _repository.GetHistoryByIdAsync(id);
+
+            if (history == null) 
+            {
+                return null;
+            }
+
+            var model = new EditHistoryViewModel
+            {
+                Name = history.Name,
+                              
+            };
+
+            return model;
+        }
     }
 }
