@@ -23,23 +23,23 @@ namespace OurResumeIR.Infra.Data.Repositories
 
         public async Task<IQueryable<History>> GetAllHistoryAsync()
         {
-          return   _context.History.AsQueryable();
+            return _context.History.AsQueryable();
         }
 
         public async Task<History> GetHistoryByIdAsync(int id)
         {
-        return    await _context.History.FindAsync(id);
+            return await _context.History.FindAsync(id);
         }
 
         public async Task AddHistoryAsync(History History)
         {
-          await  _context.AddAsync(History);
-           await _context.SaveChangesAsync();
+            await _context.History.AddAsync(History);
+            await _context.SaveChangesAsync();
         }
 
         public async Task UpdateHistoryAsync(History History)
         {
-             _context.Update(History);
+            _context.History.Update(History);
             await _context.SaveChangesAsync();
         }
 
@@ -58,6 +58,11 @@ namespace OurResumeIR.Infra.Data.Repositories
         public async Task SaveChangeAsync()
         {
             _context.SaveChanges();
+        }
+
+        public Task<History> GetHistoryByIdAndUserIdAsync(int id, string userId)
+        {
+            return _context.History.FirstOrDefaultAsync(h => h.Id == id && h.UserId == userId);
         }
     }
 }

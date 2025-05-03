@@ -81,7 +81,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         #endregion
 
 
-        #region Specialties 
+        #region Skill 
 
 
         [HttpGet]

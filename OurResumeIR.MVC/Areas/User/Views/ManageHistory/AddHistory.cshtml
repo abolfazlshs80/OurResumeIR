@@ -1,0 +1,77 @@
+﻿@using OurResumeIR.Application.ViewModels.History
+@model AddHistoryViewModel
+
+@{
+    Layout = "_ProfileLayout";
+    ViewBag.Title = "افزودن تجربه جدید";
+}
+
+<div class="col-xl-9">
+    <!-- راست‌چین کردن کل ستون -->
+    <div class="card bg-transparent border rounded-3" style="width: 100%; margin-right: 0;">
+        <!-- حذف وسط چین شدن -->
+        <div class="card-header bg-transparent border-bottom d-flex justify-content-between">
+            <h3 class="mb-0 fs-5 ff-vb">افزودن تجربه جدید</h3>
+        </div>
+
+        <div class="card-body ">
+            <!-- اضافه کردن text-end به بدنه -->
+            <form asp-action="AddHistory" asp-controller="ManageHistory" asp-area="User" method="post" dir="rtl">
+                <div class="row mb-3">
+                    <div class="col-md-12 ">
+                        <label asp-for="Name" class="form-label">عنوان تجربه</label>
+                        <input asp-for="Name" class="form-control " placeholder="مثلاً توسعه وب، مدیریت پروژه و ..." />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 ">
+                        <button type="submit" class="btn btn-primary">ثبت تجربه</button>
+                        <a asp-action="HistoryList" asp-controller="ManageHistory" asp-area="User" class="btn btn-secondary">انصراف</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+        // چک میکنیم اگر پیام موفقیت وجود داشت
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <text>
+                            Swal.fire({
+                                icon: 'success',                 // آیکون: موفقیت
+                                title: 'عملیات موفق!',           // عنوان Popup
+                                    text: '@Html.Raw(TempData["SuccessMessage"])',  // 👈 متن پیام موفقیت
+                                timer: 4000,                      // بعد از ۲ ثانیه خودش بسته بشه (به میلی‌ثانیه)
+                                timerProgressBar: true,           // نمایش نوار زمان در پایین پیام
+                                showConfirmButton: false,         // دکمه تایید رو حذف میکنیم
+                                didClose: () => {                 // وقتی پیام بسته شد
+                                            window.location.href = '@Url.Action("HistoryList", "ManageHistory", new { area = "User" })';
+                                    // هدایت کاربر به صفحه‌ی لیست مقالات
+                                }
+                            });
+            </text>
+        }
+
+        // اگر پیام خطا وجود داشت
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <text>
+                            Swal.fire({
+                                icon: 'error',                    // آیکون: خطا
+                                title: 'خطا!',                     // عنوان Popup
+                                    text: '@Html.Raw(TempData["ErrorMessage"])',  // 👈  متن پیام خطا
+                                timer: 4000,                       // اینم بعد از ۳ ثانیه خودکار بسته بشه
+                                timerProgressBar: true,
+                                showConfirmButton: false
+                                // در حالت خطا، نیاز به ریدایرکت نداریم (میتونی اضافه هم بکنی)
+                            });
+            </text>
+        }
+    </script>
+}

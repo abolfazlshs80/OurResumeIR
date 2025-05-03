@@ -23,11 +23,11 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         public async Task<IActionResult> Create()
         {
             var model = new CreateDocumentVM();
-            model.UserId= User.FindFirstValue(ClaimTypes.NameIdentifier);;
+            model.UserId = User.FindFirstValue(ClaimTypes.NameIdentifier); ;
             return View(model);
 
         }
-        [HttpPost,ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateDocumentVM viewmodel)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -44,8 +44,8 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(int Id)
         {
-            var model =await DocumentService.GetUpdate(Id);
-           model.UserId  = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var model = await DocumentService.GetUpdate(Id);
+            model.UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             return View(model);
 
         }
@@ -53,8 +53,6 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(UpdateDocumentVM viewmodel)
         {
-           
-
             if (!ModelState.IsValid)
                 return View(viewmodel);
 
@@ -63,37 +61,14 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
                 return RedirectToAction("Index");
             return View(viewmodel);
         }
+
+
         public async Task<IActionResult> Delete(int id)
         {
-          await DocumentService.Delete(id);
+            await DocumentService.Delete(id);
             return RedirectToAction("Index");
         }
-
-        //[HttpGet]
-        //public async Task<IActionResult> Update()
-        //{
-        //    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        //    var model = await DocumentService.GetAll(userId);
-        //    UpdateDocumentVM viewmodel = new UpdateDocumentVM();
-        //    viewmodel.UserId = model.UserId;
-        //    viewmodel.Description = model.Description;
-        //    viewmodel.Id = model.Id;
-        //    return View(viewmodel);
-
-        //}
-        //[HttpPost]
-        //public async Task<IActionResult> Update(UpdateDocumentVM viewmodel)
-        //{
-        //    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-        //    if (!ModelState.IsValid)
-        //        return View(viewmodel);
-
-        //    var status = await DocumentService.Update(viewmodel);
-        //    if (status)
-        //        return RedirectToAction("Index");
-        //    return View(viewmodel);
-        //}
+          
 
     }
 }
