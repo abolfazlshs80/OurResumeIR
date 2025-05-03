@@ -16,8 +16,10 @@ namespace OurResumeIR.MVC
             builder.Services.AddControllersWithViews()
                 .AddRazorOptions(options =>
                 {
+          
                     // اضافه کردن مسیرهای سفارشی برای جست‌وجوی Partial View
                     options.ViewLocationFormats.Add("/Views/Shared/Partials/Layout/{0}.cshtml");
+          
                 });
             // 1. Configuration
             //  var connectionString = builder.Configuration.GetConnectionString("LocalMain");

@@ -12,8 +12,8 @@ namespace OurResumeIR.MVC.ViewComponents.Handler.Home
 
         public async Task<IViewComponentResult> InvokeAsync(AboutMeVM model)
         {
-
-            return View("/ViewComponents/Views/Home/about.cshtml", model);
+            string viewPath = this.GetDefaultViewPath();
+            return View(viewPath, model);
         }
 
     }
