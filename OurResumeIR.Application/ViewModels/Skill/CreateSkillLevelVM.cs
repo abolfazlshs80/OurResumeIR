@@ -12,5 +12,6 @@ namespace OurResumeIR.Application.ViewModels.Experience
         [Required(ErrorMessage ="نام را وارد کنید")]
         [Display(Name ="نام را وارد کنید")]
         public string Name { get; set; }
+        public int? Percentage { get; set; }
     }
 }

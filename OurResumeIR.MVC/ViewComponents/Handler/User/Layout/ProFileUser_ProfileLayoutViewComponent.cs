@@ -17,7 +17,7 @@ namespace OurResumeIR.MVC.ViewComponents.Handler.User.Layout
         {
 
             var model = await _userService.LoadProfile(userId);
-            return View("~/Views/Shared/Components/User/Layout/ProFileUser_ProfileLayoutView.cshtml", model);
+            return View("~/ViewComponents/Views/User/Layout/ProFileUser_ProfileLayoutView.cshtml", model);
         }
 
     }
