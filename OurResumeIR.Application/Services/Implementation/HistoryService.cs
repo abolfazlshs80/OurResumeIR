@@ -59,5 +59,20 @@ namespace OurResumeIR.Application.Services.Implementation
 
             return model;
         }
+
+        public async Task<bool> UpdateHistoryAsync(EditHistoryViewModel model, string id)
+        {
+            var history = await _repository.GetHistoryByIdAndUserIdAsync(model.Id, id);
+            if (history == null)
+            {
+                return false;
+            }
+
+            history.Name = model.Name;
+
+            _repository.UpdateHistoryAsync(history);
+
+            return true;
+        }
     }
 }

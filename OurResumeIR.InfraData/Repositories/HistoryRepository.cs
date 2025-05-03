@@ -39,7 +39,7 @@ namespace OurResumeIR.Infra.Data.Repositories
 
         public async Task UpdateHistoryAsync(History History)
         {
-            _context.Update(History);
+            _context.History.Update(History);
             await _context.SaveChangesAsync();
         }
 
