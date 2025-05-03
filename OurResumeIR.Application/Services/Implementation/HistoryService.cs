@@ -41,7 +41,7 @@ namespace OurResumeIR.Application.Services.Implementation
             }).ToList();
         }
 
-        public async Task<EditHistoryViewModel> GetHistoryShowForEdit(int id)
+        public async Task<EditHistoryViewModel> GetHistoryShowForEditAsync(int id)
         {
             var history = await _repository.GetHistoryByIdAsync(id);
 

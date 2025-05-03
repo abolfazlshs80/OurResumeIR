@@ -1,0 +1,72 @@
+﻿@using OurResumeIR.Application.ViewModels.History
+@model EditHistoryViewModel
+
+@{
+    Layout = "_ProfileLayout";
+    ViewBag.Title = "ویرایش تجربه";
+}
+
+<div class="col-xl-9">
+    <div class="card bg-transparent border rounded-3" style="width: 100%; margin-right: 0;">
+        <div class="card-header bg-transparent border-bottom d-flex justify-content-between">
+            <h3 class="mb-0 fs-5 ff-vb">ویرایش تجربه</h3>
+        </div>
+
+        <div class="card-body">
+            <form asp-action="EditHistory" asp-controller="ManageHistory" asp-area="User" method="post" dir="rtl">
+                <input type="hidden" asp-for="Id" />
+
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <label asp-for="Name" class="form-label">عنوان تجربه</label>
+                        <input asp-for="Name" class="form-control" placeholder="مثلاً توسعه وب، مدیریت پروژه و ..." />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">ویرایش تجربه</button>
+                        <a asp-action="HistoryList" asp-controller="ManageHistory" asp-area="User" class="btn btn-secondary">بازگشت</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <text>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'عملیات موفق!',
+                        text: '@Html.Raw(TempData["SuccessMessage"])',
+                        timer: 4000,
+                        timerProgressBar: true,
+                        showConfirmButton: false,
+                        didClose: () => {
+                            window.location.href = '@Url.Action("HistoryList", "ManageHistory", new { area = "User" })';
+                        }
+                    });
+            </text>
+        }
+
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <text>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'خطا!',
+                        text: '@Html.Raw(TempData["ErrorMessage"])',
+                        timer: 4000,
+                        timerProgressBar: true,
+                        showConfirmButton: false
+                    });
+            </text>
+        }
+    </script>
+}

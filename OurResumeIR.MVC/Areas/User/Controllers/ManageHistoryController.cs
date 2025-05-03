@@ -52,7 +52,8 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         public async Task<IActionResult> EditHistory(int id) 
         {
             // صدا زدن متد سرویس برای گرفتن اطلاعات رکورد انتخاب شده توسط آیدی و آماده ویرایش بودن
-            return View();
+            var model = await _historyService.GetHistoryShowForEditAsync(id);
+            return View(model);
         }
     }
 }
