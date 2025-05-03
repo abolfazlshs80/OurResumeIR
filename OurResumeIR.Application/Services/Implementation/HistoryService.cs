@@ -26,7 +26,7 @@ namespace OurResumeIR.Application.Services.Implementation
                 UserId = userId,
             };
 
-           await _repository.AddHistoryAsync(History);
+            await _repository.AddHistoryAsync(History);
             return true;
         }
 
@@ -45,7 +45,7 @@ namespace OurResumeIR.Application.Services.Implementation
         {
             var history = await _repository.GetHistoryByIdAsync(id);
 
-            if (history == null) 
+            if (history == null)
             {
                 return null;
             }
@@ -54,7 +54,7 @@ namespace OurResumeIR.Application.Services.Implementation
             {
                 Id = history.Id,
                 Name = history.Name,
-                              
+
             };
 
             return model;
@@ -70,8 +70,8 @@ namespace OurResumeIR.Application.Services.Implementation
 
             history.Name = model.Name;
 
-            _repository.UpdateHistoryAsync(history);
-
+            await _repository.UpdateHistoryAsync(history);
+            //_repository.SaveChangeAsync();
             return true;
         }
     }

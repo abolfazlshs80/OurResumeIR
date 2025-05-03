@@ -32,11 +32,11 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         {
             if (!ModelState.IsValid)
             {
-               return View(model);
+                return View(model);
             }
 
             string userId = User.GetUserId();
-          var result =  await _historyService.CreateHistoryAsync(model, userId);
+            var result = await _historyService.CreateHistoryAsync(model, userId);
             if (!result)
             {
                 TempData["ErrorMessage"] = "ثبت تجربه با شکست رو برو شد.";
@@ -45,11 +45,11 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             TempData["SuccessMessage"] = " تجربه با موفقیت اضافه شد";
             return RedirectToAction("HistoryList");
 
-            
+
         }
 
         [HttpGet]
-        public async Task<IActionResult> EditHistory(int id) 
+        public async Task<IActionResult> EditHistory(int id)
         {
             var model = await _historyService.GetHistoryShowForEditAsync(id);
             return View(model);
@@ -58,13 +58,27 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         [HttpPost]
         public async Task<IActionResult> EditHistory(EditHistoryViewModel model)
         {
-            if (!ModelState.IsValid) 
+            if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
             var userId = User.GetUserId();
+            var result = await _historyService.UpdateHistoryAsync(model, userId);
+            if (!result)
+            {
+                TempData["ErrorMessage"] = "ویرایش تجربه با شکست رو برو شد.";
+                return RedirectToAction("BlogList");
+            }
+            TempData["SuccessMessage"] = " تجربه با موفقیت ویرایش شد";
 
+            return RedirectToAction("HistoryList");
+
+
+        }
+
+        public Task<IActionResult> DeleteHistory(int id) 
+        {
 
             return RedirectToAction("HistoryList");
         }
