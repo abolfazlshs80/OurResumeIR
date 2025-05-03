@@ -77,9 +77,18 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
 
         }
 
-        public Task<IActionResult> DeleteHistory(int id) 
+        public async Task<IActionResult> DeleteHistory(int id) 
         {
+            var userId = User.GetUserId();
 
+           var result = await _historyService.DeleteHistoryAsync(id , userId);
+            if (!result)
+            {
+                TempData["ErrorMessage"] = "حذف تجربه ناموفق بود!";
+                return RedirectToAction("BlogList");
+            }
+            TempData["SuccessMessage"] = "تجربه با موفقیت حذف شد!";
+     
             return RedirectToAction("HistoryList");
         }
     }

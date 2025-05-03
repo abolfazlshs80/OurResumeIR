@@ -13,5 +13,6 @@ namespace OurResumeIR.Application.Services.Interfaces
         Task<bool> CreateHistoryAsync(AddHistoryViewModel model, string userId);
         Task<EditHistoryViewModel> GetHistoryShowForEditAsync(int id);
         Task<bool> UpdateHistoryAsync(EditHistoryViewModel model,string id);
+        Task<bool> DeleteHistoryAsync(int id,string userId);
     }
 }

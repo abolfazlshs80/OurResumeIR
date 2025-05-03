@@ -30,6 +30,19 @@ namespace OurResumeIR.Application.Services.Implementation
             return true;
         }
 
+        public async Task<bool> DeleteHistoryAsync(int id, string userId)
+        {
+            var history = await _repository.GetHistoryByIdAndUserIdAsync(id, userId);
+            if (history == null)
+            {
+                return false;
+            }
+
+            await _repository.DeletHistoryAsync(history);
+
+            return true;
+
+        }
         public async Task<List<HistoryListViewModel>> GetAlHistoryForListAsync()
         {
             var history = await _repository.GetAllHistoryAsync();
@@ -71,7 +84,7 @@ namespace OurResumeIR.Application.Services.Implementation
             history.Name = model.Name;
 
             await _repository.UpdateHistoryAsync(history);
-            //_repository.SaveChangeAsync();
+
             return true;
         }
     }

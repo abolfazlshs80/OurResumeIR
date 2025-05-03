@@ -40,10 +40,10 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         var result =  await _blogService.CreateBlogAsync(viewModel, userId);
             if (!result)
             {
-                TempData["ErrorMessage"] = "مقاله با موفقیت اضافه شد.";
+                TempData["ErrorMessage"] = " ثبت مقاله با شکست رو برو شد .";
                 return RedirectToAction("BlogList");
             }
-            TempData["SuccessMessage"] = "ثبت مقاله با شکست رو برو شد.";
+            TempData["SuccessMessage"] = "مقاله با موفقیت اضافه شد.";
             return RedirectToAction("BlogList");
 
      
