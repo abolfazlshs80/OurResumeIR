@@ -47,5 +47,11 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
 
             
         }
+
+        [HttpGet]
+        public async Task<IActionResult> EditHistory() 
+        {
+            return View();
+        }
     }
 }
