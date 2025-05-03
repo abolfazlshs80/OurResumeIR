@@ -55,5 +55,15 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             var model = await _historyService.GetHistoryShowForEditAsync(id);
             return View(model);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> EditHistory(EditHistoryViewModel model)
+        {
+            if (!ModelState.IsValid) 
+            {
+                return View(model);
+            }
+            return RedirectToAction("HistoryList");
+        }
     }
 }

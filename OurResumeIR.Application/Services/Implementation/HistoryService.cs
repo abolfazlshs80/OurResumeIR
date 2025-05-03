@@ -52,6 +52,7 @@ namespace OurResumeIR.Application.Services.Implementation
 
             var model = new EditHistoryViewModel
             {
+                Id = history.Id,
                 Name = history.Name,
                               
             };
