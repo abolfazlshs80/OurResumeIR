@@ -11,5 +11,8 @@ namespace OurResumeIR.Application.Services.Interfaces
     {
         Task<List<HistoryListViewModel>> GetAlHistoryForListAsync();
        Task<bool> CreateHistoryAsync(AddHistoryViewModel model, string userId);
+        // ساخت ویو مدل برای ادیت هیستوری
+        // نوشتن متد برایگرفتن اطلاعات یک رکورد خاص از دیتابیس و تبدیل مدل به ویو مدل و نمایش
+
     }
 }

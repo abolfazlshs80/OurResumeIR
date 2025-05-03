@@ -49,8 +49,9 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> EditHistory() 
+        public async Task<IActionResult> EditHistory(int id) 
         {
+            // صدا زدن متد سرویس برای گرفتن اطلاعات رکورد انتخاب شده توسط آیدی و آماده ویرایش بودن
             return View();
         }
     }
