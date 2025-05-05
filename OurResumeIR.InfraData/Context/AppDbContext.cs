@@ -34,6 +34,7 @@ namespace OurResumeIR.Infra.Data.Context
         public DbSet<SkillLevel> SkillLevel { get; set; }
         public DbSet<UserToSkill> UserToSkill { get; set; }
         public DbSet<History> History { get; set; }
+        public DbSet<ContactUs> ContactUs { get; set; }
 
 
 
