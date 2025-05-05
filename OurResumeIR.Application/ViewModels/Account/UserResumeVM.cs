@@ -13,9 +13,10 @@ namespace OurResumeIR.Application.ViewModels.Account
 {
     public class UserResumeVM
     {
+        public string? UserId { get; set; }
         public string? Slug { get; set; }
-        public string? FullName { get; set; }
-        public string? ImageName { get; set; }
+        public string? FullName { get; set; } = "";
+        public string? ImageName { get; set; } = "";
         public string? ResumeFile { get; set; }
         public string? bio { get; set; }
         public string? LinkInstagram { get; set; }
@@ -26,7 +27,7 @@ namespace OurResumeIR.Application.ViewModels.Account
         public ICollection<MySkillsForListViewModel> MySkill { get; set; }
         public ICollection<BlogVM> Blog { get; set; }
         public ICollection<DocumentVM> Documents { get; set; }
-        public ICollection<History> History { get; set; }
+        public ICollection<Domain.Models.History> History { get; set; }
         public AboutMeVM AboutMe { get; set; }
     }
 }
