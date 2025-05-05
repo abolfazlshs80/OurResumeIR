@@ -13,6 +13,7 @@ namespace OurResumeIR.Infra.Data.Repositories
         private readonly AppDbContext _context;
 
         public IAboutMeRepository AboutMeRepository { get; }
+        public IContactUsRepository ContactUsRepository { get; }
         public IBlogRepository BlogRepository { get; }
         public IDocumentsRepository DocumentsRepository { get; }
         public IHistoryRepository HistoryRepository { get; }
@@ -25,6 +26,7 @@ namespace OurResumeIR.Infra.Data.Repositories
         public UnitOfWork(
             ISkillRepository skillRepository,
             ISkillLevelRepository skillLevelRepository,
+            IContactUsRepository contactUsRepository,
             AppDbContext context,
             IAboutMeRepository aboutMeRepository,
             IBlogRepository blogRepository,
@@ -42,6 +44,7 @@ namespace OurResumeIR.Infra.Data.Repositories
             SkillRepository = skillRepository;
             SkillLevelRepository = skillLevelRepository;
             UserToSkillRepository = userToSkillRepository;
+            ContactUsRepository= contactUsRepository;
         }
 
         public async Task<int> SaveChangesAsync()
