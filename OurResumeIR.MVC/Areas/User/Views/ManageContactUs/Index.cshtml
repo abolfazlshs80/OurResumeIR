@@ -1,0 +1,71 @@
+﻿@using OurResumeIR.Application.ViewModels.Blog
+@model List<OurResumeIR.Application.ViewModels.ContactUs.AdminItemContactUsViewModel>
+@{
+    Layout = "_ProfileLayout";
+    ViewBag.Title = "پیام های من";
+}
+
+
+<div class="col-xl-9">
+    <div class="row mb-3">
+        <div class="col-12 d-sm-flex justify-content-between align-items-center">
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <div class="card bg-transparent border rounded-3">
+        <div class="card-header bg-transparent border-bottom">
+            <h3 class="mb-0 fs-5 ff-vb">لیست @ViewBag.Title </h3>
+        </div>
+ 
+
+        <div class="card-body">
+
+            <!-- لیست جدول مقالات -->
+            <div class="table-responsive border-0">
+                <table class="table table-dark-gray align-middle p-4 mb-0 table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="border-0 rounded-start">نام</th>
+                            <th scope="col" class="border-0">ایمیل</th>
+                            <th scope="col" class="border-0 rounded-end">عملیات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <h6 class="mb-0">@(item.Name+" "+item.Family)</h6>
+                                </td>
+                                <td>
+                                    <h6 class="mb-0">@item.Email</h6>
+                                </td>
+
+                                <td>
+                                    <a asp-area="User" asp-action="ReplayMessage" asp-controller="ManageContactUs" asp-route-id="@item.Id" class="btn btn-warning btn-sm">پاسخ</a>
+                           
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+@section Scripts
+{
+   <partial name="Partials/Layout/_Alert"/>
+}
