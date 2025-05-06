@@ -1,10 +1,9 @@
 ﻿
+using OurResumeIR.Application;
+using OurResumeIR.Infrastructure;
+
 namespace OurResumeIR.MVC
 {
-    using Infra.Ioc;
-    using Microsoft.AspNetCore.Identity;
-    using OurResumeIR.Domain.Models;
-    using OurResumeIR.Infra.Data.Context;
 
     public class Program
     {
@@ -13,30 +12,19 @@ namespace OurResumeIR.MVC
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddControllersWithViews()
+            builder.Services
+                .AddControllersWithViews()
                 .AddRazorOptions(options =>
                 {
-          
-                    // اضافه کردن مسیرهای سفارشی برای جست‌وجوی Partial View
                     options.ViewLocationFormats.Add("/Views/Shared/Partials/Layout/{0}.cshtml");
-          
                 });
-            // 1. Configuration
-            //  var connectionString = builder.Configuration.GetConnectionString("LocalMain");
-            var connectionString = builder.Configuration.GetConnectionString("LocalMain");
+      
+        
+            builder.Services.RegisterInfrastructureServices(builder.Configuration);
+            builder.Services.RegisterApplicationServices();
+       
 
-            // 2. Register DbContext
-            builder.Services.RegisterService(connectionString);
-
-            // ثبت سرویس‌ها از IoC
-
-            builder.Services.RegisterService(connectionString);
-
-            // تنظیمات Identity
-            builder.Services.AddIdentity<User, IdentityRole>()
-           .AddEntityFrameworkStores<AppDbContext>()
-           .AddDefaultTokenProviders();
-
+       
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
