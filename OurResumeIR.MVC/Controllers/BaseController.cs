@@ -25,5 +25,12 @@ namespace OurResumeIR.MVC.Controllers
             TempData["SuccessMessageLink"] = link;
 
         }
+        public void SendErrorMessage(string title)
+        {
+
+            TempData["ErrorMessage"] = title;
+
+
+        }
     }
 }
