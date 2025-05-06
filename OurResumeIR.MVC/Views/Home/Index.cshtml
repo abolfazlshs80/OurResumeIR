@@ -2,7 +2,7 @@
     ViewData["Title"] = "Home Page";
 	Layout = "_Layout";
 	ViewBag.FullName = Model.FullName;
-	ViewBag.ImagePth = Model.ImageName.ConvartImagePathForProfile();
+	ViewBag.ImagePth = Model.ImageName?.ConvartImagePathForProfile();
 }
 
 @model OurResumeIR.Application.ViewModels.Account.UserResumeVM
@@ -38,26 +38,9 @@
 <!-- Blogs -->
 <!-- Contact -->
 @* <partial name="./Partials/Layout/_Contact" /> *@
+@await Component.InvokeAsync("ContactUs", new { model = Model })
 <!-- Contact -->
-
 @section Scripts
 {
-	<script>
-		// چک میکنیم اگر پیام موفقیت وجود داشت
-		@if (TempData["BlogText"] != null)
-		{
-			<text>
-		Swal.fire({
-					title: "@Html.Raw(TempData["BlogTitle"])",
-					text: "@Html.Raw(TempData["BlogText"])",
-				imageUrl: "@Html.Raw(TempData["BlogImage"])",
-			imageWidth: 400,
-			imageHeight: 200,
-			imageAlt: "Custom image"
-		});
-			</text>
-		}
-
-	
-	</script>
+	<partial name="Partials/Layout/_Alert" />
 }

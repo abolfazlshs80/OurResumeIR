@@ -1,0 +1,54 @@
+﻿@model OurResumeIR.Application.ViewModels.ContactUs.CreateContactUsViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<h1 class="section-title container">تماس با من</h1>
+<div class="contacts">
+	<div class="contact container col-11 col-md-12" id="contacts">
+		<div class="contact-inputs col-12 col-sm-12 col-md-6 col-lg-5">
+			<div>
+				<h1>پیام خود را بنویسید!</h1>
+				@*       <h6>
+                    فرم تماس دوست ندارید؟ پس یک
+                    <a href="mailto:iman@madaeny.com">ایمیل</a>
+                    به من بفرستید. 👋
+                </h6>
+                <div class="contact-url">
+                    <span>
+                        <a href="mailto:iman@madaeny.com">iman@madaeny.com</a>
+                    </span>
+                    <span>
+                        <a href="tel:09126700311">۰۹۱۲۶۷۰۰۳۱۱</a>
+                    </span>
+                </div> *@
+			</div>
+
+			<form class="w-100 p-0" action="/Home/CreateContactUs" method="post">
+				<input asp-for="UserId" type="hidden" value="@Model.UserId"/>
+				<div class="form-group">
+					<input class="input" placeholder="نام" type="text" asp-for="Name" />
+					<span class="text-danger  field-validation-valid" asp-validation-for="Name"></span>
+				</div>
+				<div class="form-group">
+					<input class="input" placeholder="نام خانوادگی" asp-for="Family" />
+					<span class="text-danger field-validation-valid" asp-validation-for="Family"></span>
+				</div>
+				<div class="form-group">
+					<input class="input" placeholder="ایمیل" type="email" asp-for="Email" />
+					<span class="text-danger field-validation-valid" asp-validation-for="Email"></span>
+				</div>
+				<div class="form-group">
+					<input class="input" placeholder="موضوع" type="text" asp-for="Subject" />
+					<span class="text-danger field-validation-valid" asp-validation-for="Subject"></span>
+				</div>
+				<div class="form-group">
+					<textarea rows="6" class="input textarea" placeholder="متن پیام ..." asp-for="Text"></textarea>
+					<span class="text-danger field-validation-valid" asp-validation-for="Text"></span>
+				</div>
+				<button type="submit" class="button w-100">پیامتو بفرست رفیق</button>
+			</form>
+
+		</div>
+		<div class="contact-title col-12 col-sm-12 col-md-6">
+			<img class="img-fluid" src="/madaeny.com/assets/image/Contact/contactPicture.webp" alt="contact-us" />
+		</div>
+	</div>
+</div>

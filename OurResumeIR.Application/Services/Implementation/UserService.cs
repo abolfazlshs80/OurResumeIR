@@ -149,52 +149,77 @@ namespace OurResumeIR.Application.Services.Implementation
             var model = new UserResumeVM();
             model.FullName=currentUser.FullName;
             model.Slug = slug;
-            model.ImageName=currentUser.ImageName;
+            model.UserId = currentUser.Id;
+            model.ImageName=currentUser.ImageName??"";
             model.ResumeFile=currentUser.ResumeFile;
             model.bio=currentUser.bio;
             model.LinkInstagram=currentUser.LinkInstagram;
             model.LinkLinkdin=currentUser.LinkLinkdin;
             model.LinkTelegram=currentUser.LinkTelegram;
             model.LinkX=currentUser.LinkX;
-            model.AboutMe = new AboutMeVM()
+            if (currentUser.AboutMe != null)
             {
-                ImageName = currentUser.AboutMe.ImageName,
-                UserId = currentUser.AboutMe.UserId,
-                Description = currentUser.AboutMe.Description,
-                Id = currentUser.AboutMe.Id
-            };
-            model.Documents = currentUser.Documents.Select(_ => new DocumentVM()
-            {
-                Name = _.Name,
-                UserId = _.UserId,
-                Id = _.Id,
-                FileName = _.FileName,
-                ImageName = _.ImageName
-            }).ToList();
-            model.Blog = currentUser.Blog.Select(_ => new BlogVM()
-            {
-                ImageName = _.ImageName,
-                Title = _.Title,
-                Desc = _.Description,
-                Text = _.Text,
-                Id = _.Id
-            }).ToList();
-          
-            model.History  = currentUser.History.Select(_ => new History()
-            {
-                Name = _.Name,
-                UserId = _.UserId,
-                Id = _.Id
-            }).ToList();
+                model.AboutMe = new AboutMeVM()
+                {
+                    ImageName = currentUser.AboutMe?.ImageName,
+                    UserId = currentUser.AboutMe?.UserId,
+                    Description = currentUser.AboutMe?.Description,
+                    Id = currentUser.AboutMe.Id
+                };
+            }
+            else
+                model.AboutMe = new();
 
-
-            model.MySkill= currentUser.UserToSkill.Select(_ => new MySkillsForListViewModel()
+            if (currentUser.Documents != null)
             {
-                Percentage =_.SkillLevel.Percentage,
-                SkillName = _.Skill.Name,
-                SkillLevelName = _.SkillLevel.Name,
-                Id = _.Id
-            }).ToList();
+                model.Documents = currentUser.Documents.Select(_ => new DocumentVM()
+                {
+                    Name = _.Name,
+                    UserId = _.UserId,
+                    Id = _.Id,
+                    FileName = _.FileName,
+                    ImageName = _.ImageName
+                }).ToList();
+            }
+            else
+                model.Documents = new List<DocumentVM>();
+            if (currentUser.Blog != null)
+                {
+                    model.Blog = currentUser.Blog.Select(_ => new BlogVM()
+                    {
+                        ImageName = _.ImageName,
+                        Title = _.Title,
+                        Desc = _.Description,
+                        Text = _.Text,
+                        Id = _.Id
+                    }).ToList();
+            }
+            else
+                model.Blog = new List<BlogVM>();
+            if (currentUser.History != null)
+            {
+                model.History = currentUser.History.Select(_ => new History()
+                {
+                    Name = _.Name,
+                    UserId = _.UserId,
+                    Id = _.Id
+                }).ToList();
+            }
+            else
+                model.History = new List<History>();
+
+            if (currentUser.UserToSkill != null)
+            {
+                model.MySkill = currentUser.UserToSkill.Select(_ => new MySkillsForListViewModel()
+                {
+                    Percentage = _.SkillLevel.Percentage,
+                    SkillName = _.Skill.Name,
+                    SkillLevelName = _.SkillLevel.Name,
+                    Id = _.Id
+                }).ToList();
+            }
+            else
+                model.MySkill = new List<MySkillsForListViewModel>();
             return model;
 
         }

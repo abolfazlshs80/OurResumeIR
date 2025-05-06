@@ -1,0 +1,62 @@
+﻿
+	<script>
+		// چک میکنیم اگر پیام موفقیت وجود داشت
+		@if (TempData["BlogText"] != null)
+		{
+			<text>
+				Swal.fire({
+					title: "@Html.Raw(TempData["BlogTitle"])",
+					text: "@Html.Raw(TempData["BlogText"])",
+					imageUrl: "@Html.Raw(TempData["BlogImage"])",
+					imageWidth: 400,
+					imageHeight: 200,
+					imageAlt: "Custom image"
+				});
+			</text>
+		}
+		@if (TempData["SampleMessage"] != null)
+		{
+			<text>
+		Swal.fire({
+			title: "@Html.Raw(TempData["SampleMessageTitle"])",
+			text: "@Html.Raw(TempData["SampleMessageText"])"
+
+		});
+			</text>
+		}
+		// چک میکنیم اگر پیام موفقیت وجود داشت
+		@if (TempData["SuccessMessage"] != null)
+        {
+            <text>
+	            Swal.fire({
+		            icon: 'success',                 // آیکون: موفقیت
+		            title: 'عملیات موفق!',           // عنوان Popup
+		            text: '@Html.Raw(TempData["SuccessMessage"])',  // 👈 متن پیام موفقیت
+		            timer: 4000,                      // بعد از ۲ ثانیه خودش بسته بشه (به میلی‌ثانیه)
+		            timerProgressBar: true,           // نمایش نوار زمان در پایین پیام
+		            showConfirmButton: false,         // دکمه تایید رو حذف میکنیم
+		            didClose: () => {                 // وقتی پیام بسته شد
+						window.location.href = '@Html.Raw(TempData["SuccessMessageLink"])';
+			            // هدایت کاربر به صفحه‌ی لیست مقالات
+		            }
+	            });
+            </text>
+        }
+
+		// اگر پیام خطا وجود داشت
+		@if (TempData["ErrorMessage"] != null)
+        {
+            <text>
+		Swal.fire({
+			icon: 'error',                    // آیکون: خطا
+			title: 'خطا!',                     // عنوان Popup
+			text: '@Html.Raw(TempData["ErrorMessage"])',  // 👈  متن پیام خطا
+			timer: 4000,                       // اینم بعد از ۳ ثانیه خودکار بسته بشه
+			timerProgressBar: true,
+			showConfirmButton: false
+			// در حالت خطا، نیاز به ریدایرکت نداریم (میتونی اضافه هم بکنی)
+		});
+            </text>
+        }
+	</script>
+
