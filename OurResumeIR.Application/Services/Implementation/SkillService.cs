@@ -12,8 +12,7 @@ using OurResumeIR.Application.ViewModels.ExpertiseLayers;
 using OurResumeIR.Application.ViewModels.MySkills;
 using OurResumeIR.Domain.Interfaces;
 using OurResumeIR.Domain.Models;
-using OurResumeIR.Infra.Data.Context;
-using OurResumeIR.Infra.Data.Repositories;
+
 
 namespace OurResumeIR.Application.Services.Interfaces
 {
