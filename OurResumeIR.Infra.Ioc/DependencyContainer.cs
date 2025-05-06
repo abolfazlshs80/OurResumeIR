@@ -36,6 +36,7 @@ namespace OurResumeIR.Infra.Ioc
             services.AddScoped<IUserToSkillRepository, UserToSkillRepository>();
             services.AddScoped<ISkillRepository, SkillRepository>();
             services.AddScoped<IBlogRepository, BlogRepository>();
+            services.AddScoped<IContactUsRepository, ContactUsRepository>();
 
 
             #endregion
@@ -53,6 +54,7 @@ namespace OurResumeIR.Infra.Ioc
             #region Service
 
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IContactUsService, ContactUsService>();
             services.AddScoped<ISkillService, SkillService>();
             services.AddScoped<IAboutMeService, AboutMeService>();
             services.AddScoped<IHistoryService, HistoryService>();

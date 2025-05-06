@@ -53,30 +53,35 @@ namespace OurResumeIR.Infra.Data.Repositories
             return true;
         }
 
-        public async Task<bool> EmailIsExist(string email )
+        public async Task<bool> EmailIsExist(string email)
         {
-          return _context.Users.Where(x => x.Email == email).Any();
+            return _context.Users.Where(x => x.Email == email).Any();
         }
-        public async Task<User> GetUserBySlug(string slug)
+        public async Task<User> GetUserBySlug(string? slug)
         {
-            return await _context.Users.Where(x => x.Slug.Equals(slug))
-                .Include(a=>a.AboutMe)
-                .Include(a=>a.UserToSkill)
-                .ThenInclude(a=>a.SkillLevel )
-                .Include(a => a.UserToSkill)
-                .ThenInclude(a =>  a.Skill)
+            var user = _context.Users.AsQueryable();
+            if (!string.IsNullOrEmpty(slug))
+                user = user.Where(x => x.Slug.Equals(slug)).AsQueryable();
 
-                .Include(a=>a.Documents)
-                .Include(a=>a.History)
-                .Include(a=>a.Blog)
-                
-                .FirstOrDefaultAsync();
+
+
+            return await user.Include(a => a.AboutMe)
+               .Include(a => a.UserToSkill)
+               .ThenInclude(a => a.SkillLevel)
+               .Include(a => a.UserToSkill)
+               .ThenInclude(a => a.Skill)
+
+               .Include(a => a.Documents)
+               .Include(a => a.History)
+               .Include(a => a.Blog)
+
+               .FirstOrDefaultAsync();
         }
         public User UserIsExistForLogin(string email, string password)
         {
             return _context.Users.FirstOrDefault(u => u.Email == email && u.PasswordHash == password);
         }
 
-     
+
     }
 }
