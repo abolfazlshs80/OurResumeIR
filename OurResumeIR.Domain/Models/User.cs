@@ -19,6 +19,7 @@ namespace OurResumeIR.Domain.Models
         public string? LinkLinkdin{ get; set; }
         public string? LinkX{ get; set; }
         public string? LinkTelegram{ get; set; }
+
         // Navigation Property  
         public ICollection<UserToSkill> UserToSkill { get; set; }
         public ICollection<Blog> Blog { get; set; }
