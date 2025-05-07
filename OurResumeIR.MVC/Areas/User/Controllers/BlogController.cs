@@ -32,10 +32,14 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             var result = await _blogService.CreateBlogAsync(viewModel, userId);
             if (!result)
             {
-                SendErrorMessage(UserPanelMessage.Blog_Add_Error);
+                SendErrorMessage(UserPanelMessage.GetMessage(
+                    UserPanelMessage.Blog,
+                    UserPanelMessage.MessageType.AddError));
                 return RedirectToAction("BlogList");
             }
-            SendSuccessMessage(UserPanelMessage.Blog_Add_Success, Url.ActionLink(nameof(BlogList)));
+            SendSuccessMessage(UserPanelMessage.GetMessage(
+                UserPanelMessage.Blog,
+                UserPanelMessage.MessageType.AddSuccess), Url.ActionLink(nameof(BlogList)));
             return RedirectToAction("BlogList");
 
 
@@ -57,11 +61,15 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             var result = await _blogService.UpdateBlogAsync(model, userId);
             if (!result)
             {
-                SendErrorMessage(UserPanelMessage.Blog_Edit_Error);
+                SendErrorMessage(UserPanelMessage.GetMessage(
+                    UserPanelMessage.Blog,
+                    UserPanelMessage.MessageType.EditError));
 
                 return RedirectToAction(nameof(BlogList));
             }
-            SendSuccessMessage(UserPanelMessage.Blog_Edit_Success, Url.ActionLink(nameof(BlogList)));
+            SendSuccessMessage(UserPanelMessage.GetMessage(
+                UserPanelMessage.Blog,
+                UserPanelMessage.MessageType.EditSuccess), Url.ActionLink(nameof(BlogList)));
             return RedirectToAction(nameof(BlogList));
 
         }
@@ -75,11 +83,16 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             var result = await _blogService.DeleteBlogAsync(id, userId);
             if (!result)
             {
-                SendErrorMessage(UserPanelMessage.Blog_Delete_Error);
+                SendErrorMessage(UserPanelMessage.GetMessage(
+                    UserPanelMessage.Blog,
+                    UserPanelMessage.MessageType.DeleteError));
                 return RedirectToAction(nameof(BlogList));
             }
 
-            SendSuccessMessage(UserPanelMessage.Blog_Delete_Success, Url.ActionLink(nameof(BlogList)));
+            SendSuccessMessage(UserPanelMessage.GetMessage(
+                    UserPanelMessage.Blog,
+                UserPanelMessage.MessageType.DeleteSuccess)
+                , Url.ActionLink(nameof(BlogList)));
             return RedirectToAction(nameof(BlogList));
         }
     }
