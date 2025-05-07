@@ -15,9 +15,9 @@ namespace OurResumeIR.Application.Services.Implementation
 {
     public class BlogService : IBlogService
     {
-        private IFileUploader _fileUploader;
+        private IFileUploaderService _fileUploader;
         private IBlogRepository _blogRepository;
-        public BlogService(IFileUploader fileUploader , IBlogRepository blogRepository)
+        public BlogService(IFileUploaderService fileUploader , IBlogRepository blogRepository)
         {
             _fileUploader = fileUploader;
             _blogRepository = blogRepository;   

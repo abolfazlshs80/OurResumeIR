@@ -103,7 +103,7 @@ namespace OurResumeIR.Application.Services.Implementation
 
         public async Task<string> UploadProfile(IFormFile file, string userId)
         {
-            var result = await _uploaderService.UpdloadFile(file, "Profile", userId);
+            var result = await _uploaderService.UploadFileAsync(file, "Profile", userId);
             var User = await _userManager.FindByIdAsync(userId);
             if (User == null)
                 return string.Empty;

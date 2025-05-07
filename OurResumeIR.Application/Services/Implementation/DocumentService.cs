@@ -30,8 +30,8 @@ namespace OurResumeIR.Application.Services.Implementation
                 var Document = new Documents();
                 Document.Name=model.Name;
                 Document.UserId = model.UserId;
-                Document.FileName = await uploaderService.UpdloadFile(model.File, "Document", "File" + model.Name+DateTime.Now.ToString("yyyy-M-d dddd"));
-                Document.ImageName = await uploaderService.UpdloadFile(model.Image, "Document", "Image" + model.Name + model.Name + DateTime.Now.ToString("yyyy-M-d dddd"));
+                Document.FileName = await uploaderService.UploadFileAsync(model.File, "Document", "File" + model.Name+DateTime.Now.ToString("yyyy-M-d dddd"));
+                Document.ImageName = await uploaderService.UploadFileAsync(model.Image, "Document", "Image" + model.Name + model.Name + DateTime.Now.ToString("yyyy-M-d dddd"));
                 await curentRep.AddDocumentAsync(Document);
                 await unitOfWork.SaveChangesAsync();
                 return true;
@@ -57,14 +57,14 @@ namespace OurResumeIR.Application.Services.Implementation
                 {
 
                     await uploaderService.DeleteFile("Document", curentDocument.FileName);
-                    curentDocument.FileName = await uploaderService.UpdloadFile(model.File, "Document", "File" + model.Name + DateTime.Now.ToString("yyyy-M-d dddd"));
+                    curentDocument.FileName = await uploaderService.UploadFileAsync(model.File, "Document", "File" + model.Name + DateTime.Now.ToString("yyyy-M-d dddd"));
 
                 }
 
                 if (model.Image != null)
                 {
                     await uploaderService.DeleteFile("Document", curentDocument.ImageName);
-                    curentDocument.ImageName = await uploaderService.UpdloadFile(model.Image, "Document", "Image" + model.Name + model.Name + DateTime.Now.ToString("yyyy-M-d dddd"));
+                    curentDocument.ImageName = await uploaderService.UploadFileAsync(model.Image, "Document", "Image" + model.Name + model.Name + DateTime.Now.ToString("yyyy-M-d dddd"));
 
                 }
 
@@ -101,7 +101,7 @@ namespace OurResumeIR.Application.Services.Implementation
                 var curentRep = unitOfWork.DocumentsRepository;
                 var curentDocument = await curentRep.GetDocumentByIdAsync(Id);
                 await uploaderService.DeleteFile("Document", curentDocument.ImageName);
-                curentDocument.ImageName = await uploaderService.UpdloadFile(File, "Document", curentDocument.Name);
+                curentDocument.ImageName = await uploaderService.UploadFileAsync(File, "Document", curentDocument.Name);
                 await curentRep.UpdateDocumentAsync(curentDocument);
                 await unitOfWork.SaveChangesAsync();
                 return true;

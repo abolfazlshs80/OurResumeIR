@@ -10,8 +10,8 @@ namespace OurResumeIR.Application.Services.Interfaces
     public interface IFileUploaderService
     {
 
-
-        Task<string> UpdloadFile(IFormFile file, string directoryName,  string Name);
+        Task<string> UploadFileAsync(IFormFile file, string folderName);
+        Task<string> UploadFileAsync(IFormFile file, string directoryName,  string Name);
         Task DeleteFile(string directoryName, string Name);
         string DownloadFile(string filename, string type);
 

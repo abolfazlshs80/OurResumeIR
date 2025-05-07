@@ -17,7 +17,7 @@ namespace OurResumeIR.Application
         {
             #region Service
             services.AddScoped<IFileUploaderService, LocalUploaderService>();
-            services.AddScoped<IFileUploader, FileUploader>();
+
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IContactUsService, ContactUsService>();
             services.AddScoped<ISkillService, SkillService>();

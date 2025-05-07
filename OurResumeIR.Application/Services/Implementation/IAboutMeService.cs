@@ -76,7 +76,7 @@ namespace OurResumeIR.Application.Services.Implementation
                 var curentRep = unitOfWork.AboutMeRepository;
                 var curentAboutMe = await curentRep.GetByUserIdAsync(UserId);
                 await uploaderService.DeleteFile("AboutMe", curentAboutMe.ImageName);
-                curentAboutMe.ImageName = await uploaderService.UpdloadFile(File, "AboutMe", UserId);
+                curentAboutMe.ImageName = await uploaderService.UploadFileAsync(File, "AboutMe", UserId);
                 await curentRep.UpdateAsync(curentAboutMe);
                 await unitOfWork.SaveChangesAsync();
                 return true;
