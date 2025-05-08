@@ -35,12 +35,12 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
                 SendErrorMessage(UserPanelMessage.GetMessage(
                     UserPanelMessage.Blog,
                     UserPanelMessage.MessageType.AddError));
-                return RedirectToAction("BlogList");
+                return RedirectToAction(nameof(BlogList));
             }
             SendSuccessMessage(UserPanelMessage.GetMessage(
                 UserPanelMessage.Blog,
                 UserPanelMessage.MessageType.AddSuccess), Url.ActionLink(nameof(BlogList)));
-            return RedirectToAction("BlogList");
+            return RedirectToAction(nameof(BlogList));
 
 
         }

@@ -2,32 +2,23 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OurResumeIR.Application.Services.Interfaces;
+using OurResumeIR.Application.Static;
 using OurResumeIR.Application.ViewModels.History;
+using OurResumeIR.MVC.Controllers;
 
 namespace OurResumeIR.MVC.Areas.User.Controllers
 {
     [Area("User")]
     [Authorize]
-    public class ManageHistoryController : Controller
+    public class ManageHistoryController(IHistoryService _historyService) : BaseController
     {
-        private IHistoryService _historyService;
-        public ManageHistoryController(IHistoryService historyService)
-        {
-            _historyService = historyService;
-        }
-        public async Task<IActionResult> HistoryList()
-        {
-            var model = await _historyService.GetAlHistoryForListAsync();
-            return View(model);
-        }
+
+        public async Task<IActionResult> HistoryList()=> View(await _historyService.GetAlHistoryForListAsync());
+
 
         [HttpGet]
-        public async Task<IActionResult> AddHistory()
-        {
-            return View();
-        }
-
-        [HttpPost]
+        public async Task<IActionResult> AddHistory()=>View();
+        [HttpPost,ValidateAntiForgeryToken]
         public async Task<IActionResult> AddHistory(AddHistoryViewModel model)
         {
             if (!ModelState.IsValid)
@@ -39,12 +30,15 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             var result = await _historyService.CreateHistoryAsync(model, userId);
             if (!result)
             {
-                TempData["ErrorMessage"] = "ثبت تجربه با شکست رو برو شد.";
-                return RedirectToAction("BlogList");
+                SendErrorMessage(UserPanelMessage.GetMessage(
+                    UserPanelMessage.History,
+                    UserPanelMessage.MessageType.AddError));
+                return View(model);
             }
-            TempData["SuccessMessage"] = " تجربه با موفقیت اضافه شد";
-            return RedirectToAction("HistoryList");
-
+            SendSuccessMessage(UserPanelMessage.GetMessage(
+                UserPanelMessage.History,
+                UserPanelMessage.MessageType.AddSuccess), Url.ActionLink(nameof(HistoryList)));
+            return RedirectToAction(nameof(HistoryList));
 
         }
 
@@ -55,7 +49,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             return View(model);
         }
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> EditHistory(EditHistoryViewModel model)
         {
             if (!ModelState.IsValid)
@@ -67,12 +61,15 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             var result = await _historyService.UpdateHistoryAsync(model, userId);
             if (!result)
             {
-                TempData["ErrorMessage"] = "ویرایش تجربه با شکست رو برو شد.";
-                return RedirectToAction("BlogList");
+                SendErrorMessage(UserPanelMessage.GetMessage(
+                    UserPanelMessage.History,
+                    UserPanelMessage.MessageType.EditError));
+                return View(model);
             }
-            TempData["SuccessMessage"] = " تجربه با موفقیت ویرایش شد";
-
-            return RedirectToAction("HistoryList");
+            SendSuccessMessage(UserPanelMessage.GetMessage(
+                UserPanelMessage.History,
+                UserPanelMessage.MessageType.EditSuccess), Url.ActionLink(nameof(HistoryList)));
+            return RedirectToAction(nameof(HistoryList));
 
 
         }
@@ -82,14 +79,21 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             var userId = User.GetUserId();
 
            var result = await _historyService.DeleteHistoryAsync(id , userId);
+        
+
             if (!result)
             {
-                TempData["ErrorMessage"] = "حذف تجربه ناموفق بود!";
-                return RedirectToAction("BlogList");
+                SendErrorMessage(UserPanelMessage.GetMessage(
+                    UserPanelMessage.History,
+                    UserPanelMessage.MessageType.DeleteError));
+            
             }
-            TempData["SuccessMessage"] = "تجربه با موفقیت حذف شد!";
-     
-            return RedirectToAction("HistoryList");
+
+            SendSuccessMessage(UserPanelMessage.GetMessage(
+                    UserPanelMessage.History,
+                    UserPanelMessage.MessageType.DeleteSuccess)
+                , Url.ActionLink(nameof(HistoryList)));
+            return RedirectToAction(nameof(HistoryList));
         }
     }
 }

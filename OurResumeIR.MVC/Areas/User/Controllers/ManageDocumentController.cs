@@ -95,8 +95,8 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
               SendErrorMessage(UserPanelMessage.GetMessage(
                   UserPanelMessage.Document,
                   UserPanelMessage.MessageType.DeleteError));
-             
-          }
+              return RedirectToAction(nameof(Index));
+            }
 
           SendSuccessMessage(UserPanelMessage.GetMessage(
                   UserPanelMessage.Document,

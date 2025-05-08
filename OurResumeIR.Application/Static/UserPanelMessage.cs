@@ -5,6 +5,7 @@
         public  const string Blog = "مقاله";
         public  const string AboutMe = "درباره من";
         public  const string Document = "مدرک";
+        public  const string History = "تجربه";
         private static readonly Dictionary<MessageType, string> Messages = new()
         {
             { MessageType.DeleteError, "{0} با شکست مواجه شد!" },
