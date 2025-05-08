@@ -16,7 +16,9 @@ namespace OurResumeIR.MVC
                 .AddControllersWithViews()
                 .AddRazorOptions(options =>
                 {
-                    options.ViewLocationFormats.Add("/Views/Shared/Partials/Layout/{0}.cshtml");
+                    options.ViewLocationFormats.Add("/Views/Shared/Partials/MainLayout/{0}.cshtml");
+                    options.ViewLocationFormats.Add("/Views/Shared/Partials/AuthorizeLayout/{0}.cshtml");
+                    options.ViewLocationFormats.Add("/Views/Shared/Partials/{0}.cshtml");
                 });
       
         
