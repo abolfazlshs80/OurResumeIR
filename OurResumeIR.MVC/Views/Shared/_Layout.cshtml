@@ -7,26 +7,24 @@
 <!-- Added by HTTrack -->
 <meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 
-<partial name="./Partials/Layout/_Link.cshtml" />
+<partial name="_Link" />
+
+@await RenderSectionAsync("Links", required: false)
 <body dir="rtl">
 	<div b-mvpyz72na4 class="home-wrapper">
 
 		<!-- Navbar -->
 
 
-		<partial name="./Partials/Layout/_Menu" />
+		<partial name="_Menu" />
 		<!-- Header -->
 		@RenderBody()
 
-
-
-
-
 		<!-- Footer -->
-		<partial name="./Partials/Layout/_Footer" />
+		<partial name="_Footer" />
 	</div>
 
-	<partial name="./Partials/Layout/_Script" />
+	<partial name="_Script" />
 	@await RenderSectionAsync("Scripts", required: false)
 
 </body>
