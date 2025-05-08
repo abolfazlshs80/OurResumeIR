@@ -1,4 +1,4 @@
-﻿@model OurResumeIR.Application.ViewModels.Experience.CreateSkillLevelVM 
+﻿@model OurResumeIR.Application.ViewModels.Experience.UpdateSkillLevelVM
 
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @{
@@ -8,33 +8,35 @@
 
 
 
-
 <div class="col-xl-9">
 	<div class="row">
 		<div class="col-md-4">
 
 
-			<form method="post" asp-action="SkillLevelCreate" asp-controller="ManageSkill">
+			<form method="post" asp-action="SkillLevelUpdate" asp-controller="ManageSkillLevel">
 
 				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 				<div class="mb-3">
 					<label asp-for="Name" class="form-label"></label>
-					<input name="Name" class="form-control" placeholder="نام سطح تخصص را وارد کنید" />
+					<input asp-for="Name" value="@Model.Name"  class="form-control" placeholder="نام سطح تخصص را وارد کنید" />
 					<span asp-validation-for="Name" class="text-danger"></span>
 				</div>
 				<div class="form-group">
 
 					<label asp-for="Percentage" class="form-label">درصد پیشرفت را وارد کنید بین 0 تا100 است</label>
-					<input type="range" asp-for="Percentage" class="form-range" min="0" max="100" step="1" id="customRange3">
+					<input type="range" asp-for="Percentage" class="form-range" min="0" max="100" value="@Model.Percentage" step="1" id="customRange3">
 				</div>
 				<button type="submit" class="btn btn-primary">ثبت </button>
 			</form>
 		</div>
 	</div>
 </div>
+
 @section Scripts {
 	<script src="~/lib/jquery/dist/jquery.min.js"></script>
 	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
 }

@@ -13,7 +13,7 @@
 
             @Html.ActionLink("افزودن ",
                      "SkillLevelCreate",
-                     "ManageSkill",
+                  
                      new { area = "User" },
                      new { @class = "btn btn-sm btn-primary mb-0" })
 
@@ -88,12 +88,12 @@
                                 <!-- Table data -->
                                 <td>
 
-                                    @Html.ActionLink("ویرایش", "SkillLevelUpdate",
-                                             "ManageSkill", new { id = item.Id },
+	                                @Html.ActionLink("ویرایش", "SkillLevelUpdate",
+                                             "ManageSkillLevel", new { id = item.Id },
                                              new { @class = "btn btn-sm btn-primary-soft me-1 mb-1 mb-x;-0 " })
 
-                                    @Html.ActionLink("حذف", "SkillLevelDelete",
-                                             "ManageSkill", new { id = item.Id },
+	                                @Html.ActionLink("حذف", "SkillLevelDelete",
+                                             "ManageSkillLevel", new { id = item.Id },
                                              new { @class = "btn btn-sm btn-danger me-1" })
                                 </td>
                             </tr>

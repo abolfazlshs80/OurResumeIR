@@ -1,15 +1,18 @@
 ﻿using System.Security.Claims;
+using CleanArch.Store.Application.Extention;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OurResumeIR.Application.Services.Interfaces;
+using OurResumeIR.Application.Static;
 using OurResumeIR.Application.ViewModels.Document;
 using OurResumeIR.Domain.Models;
+using OurResumeIR.MVC.Controllers;
 
 namespace OurResumeIR.MVC.Areas.User.Controllers
 {
     [Area("User")]
     [Authorize]
-    public class ManageDocumentController(IDocumentService DocumentService) : Controller
+    public class ManageDocumentController(IDocumentService DocumentService) : BaseController
     {
         public async Task<IActionResult> Index()
         {
@@ -23,29 +26,39 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         public async Task<IActionResult> Create()
         {
             var model = new CreateDocumentVM();
-            model.UserId = User.FindFirstValue(ClaimTypes.NameIdentifier); ;
+            model.UserId = User.GetUserId();
             return View(model);
 
         }
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateDocumentVM viewmodel)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+           
 
             if (!ModelState.IsValid)
                 return View(viewmodel);
 
             var status = await DocumentService.Create(viewmodel);
-            if (status)
-                return RedirectToAction("Index");
-            return View(viewmodel);
+
+            if (!status)
+            {
+                SendErrorMessage(UserPanelMessage.GetMessage(
+                    UserPanelMessage.Document,
+                    UserPanelMessage.MessageType.AddError));
+
+                return View(viewmodel);
+            }
+            SendSuccessMessage(UserPanelMessage.GetMessage(
+                UserPanelMessage.Document,
+                UserPanelMessage.MessageType.AddSuccess), Url.ActionLink(nameof(Index)));
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
         public async Task<IActionResult> Update(int Id)
         {
             var model = await DocumentService.GetUpdate(Id);
-            model.UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            model.UserId = User.GetUserId();
             return View(model);
 
         }
@@ -57,16 +70,40 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
                 return View(viewmodel);
 
             var status = await DocumentService.Update(viewmodel);
-            if (status)
-                return RedirectToAction("Index");
-            return View(viewmodel);
+  
+            if (!status)
+            {
+                SendErrorMessage(UserPanelMessage.GetMessage(
+                    UserPanelMessage.Document,
+                    UserPanelMessage.MessageType.EditError));
+
+                return View(viewmodel);
+            }
+            SendSuccessMessage(UserPanelMessage.GetMessage(
+                UserPanelMessage.Document,
+                UserPanelMessage.MessageType.EditSuccess), Url.ActionLink(nameof(Index)));
+            return RedirectToAction(nameof(Index));
+
         }
 
 
         public async Task<IActionResult> Delete(int id)
         {
-            await DocumentService.Delete(id);
-            return RedirectToAction("Index");
+          var status=  await DocumentService.Delete(id);
+          if (!status)
+          {
+              SendErrorMessage(UserPanelMessage.GetMessage(
+                  UserPanelMessage.Document,
+                  UserPanelMessage.MessageType.DeleteError));
+              return RedirectToAction(nameof(Index));
+            }
+
+          SendSuccessMessage(UserPanelMessage.GetMessage(
+                  UserPanelMessage.Document,
+                  UserPanelMessage.MessageType.DeleteSuccess)
+              , Url.ActionLink(nameof(Index)));
+          return RedirectToAction(nameof(Index));
+           
         }
           
 

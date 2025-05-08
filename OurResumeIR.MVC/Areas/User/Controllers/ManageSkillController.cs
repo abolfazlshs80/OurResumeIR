@@ -11,96 +11,29 @@ using OurResumeIR.Domain.Interfaces;
 using OurResumeIR.Domain.Models;
 using OurResumeIR.Infra.Data.Repositories;
 using System.Security.Claims;
+using OurResumeIR.Application.Static;
+using OurResumeIR.MVC.Controllers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OurResumeIR.MVC.Areas.User.Controllers
 {
     [Area("User")]
-    public class ManageSkillController(ISkillService skillLayersService, IMapper mapper) : Controller
+    [Authorize]
+    public class ManageSkillController(ISkillService skillLayersService, IMapper mapper) : BaseController
     {
-        #region SkillLevel Layer
-
-        public async Task<IActionResult> SkillLevelList()
-        {
-            var list = await skillLayersService.GetAll();
-
-            return View(list);
-        }
-        [HttpGet]
-        public async Task<IActionResult> SkillLevelCreate() => View(new CreateSkillLevelVM());
-
-        [HttpPost]
-        public async Task<IActionResult> SkillLevelCreate(CreateSkillLevelVM model)
-        {
-            if (!ModelState.IsValid)
-                return View(model);
-
-
-            bool status = await skillLayersService.Create(model);
-            if (status)
-                return RedirectToAction("SkillLevelList");
-
-            return View(model);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> SkillLevelUpdate(int id)
-        {
-
-            var find_xpertiseLayers = await skillLayersService.GetById(id);
-            if (find_xpertiseLayers == null)
-                return NotFound();
-            return View(mapper.Map<UpdateSkillLevelVM>(find_xpertiseLayers));
-
-
-
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> SkillLevelUpdate(UpdateSkillLevelVM model)
-        {
-            //if (!ModelState.IsValid)
-            //    return View(model);
-
-
-            bool status = await skillLayersService.Update(model);
-            if (status)
-                return RedirectToAction("SkillLevelList");
-
-            return View(model);
-        }
-
-
-        [HttpGet]
-        public async Task<IActionResult> SkillLevelDelete(int id)
-        {
-            bool status = await skillLayersService.Delete(id);
-            return RedirectToAction("SkillLevelList");
-
-        }
-
-        #endregion
+        
 
 
         #region Skill 
 
 
         [HttpGet]
-        public async Task<IActionResult> SkillIndex()
-        {
-            var list = await skillLayersService.GetAllSkillAsync();
-            return View(list);
-        }
+        public async Task<IActionResult> SkillIndex()=>View(await skillLayersService.GetAllSkillAsync());
 
 
         [HttpGet]
-        public async Task<IActionResult> AddSkill()
-        {
-            var viewModel = await skillLayersService.GetAllSkillLevelAsync();
-            return View(viewModel);
-        }
-
-        [HttpPost]
-        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddSkill()=>View(await skillLayersService.GetAllSkillLevelAsync());
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> AddSkill(SkillFormViewModel model)
         {
             if (!ModelState.IsValid)
@@ -108,11 +41,16 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
                 // دوباره لیست سطح‌ها رو برای DropDown پر می‌کنیم
                 model = await skillLayersService.GetAllSkillLevelAsync();
                 model.Name = model.Name; // چون ممکنه کاربر مقداری وارد کرده باشد
+                SendErrorMessage(UserPanelMessage.GetMessage(
+                    UserPanelMessage.Skill,
+                    UserPanelMessage.MessageType.AddError));
                 return View(model);
             }
-
+            SendSuccessMessage(UserPanelMessage.GetMessage(
+                UserPanelMessage.Skill,
+                UserPanelMessage.MessageType.AddSuccess), Url.ActionLink(nameof(SkillIndex)));
             await skillLayersService.AddSkillAsync(model);
-            return RedirectToAction("SkillIndex");
+            return RedirectToAction(nameof(SkillIndex));
         }
 
 
@@ -124,7 +62,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             return View(model);
         }
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> SkillEdit(SkillFormViewModel model)
         {
             if (!ModelState.IsValid)
@@ -142,20 +80,28 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
 
             var result = await skillLayersService.UpdateSkillAsync(model);
             if (!result)
-                return NotFound();
-
-            return RedirectToAction("SkillIndex");
+                SendErrorMessage(UserPanelMessage.GetMessage(
+                    UserPanelMessage.Skill,
+                    UserPanelMessage.MessageType.EditError));
+            SendSuccessMessage(UserPanelMessage.GetMessage(
+                UserPanelMessage.Skill,
+                UserPanelMessage.MessageType.EditSuccess), Url.ActionLink(nameof(SkillIndex)));
+            return RedirectToAction(nameof(SkillIndex));
         }
 
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteSkill(int id)
         {
             var result = await skillLayersService.DeleteSkillAsync(id);
             if (!result)
-                return NotFound();
-
-            return RedirectToAction("SkillIndex");
+                SendErrorMessage(UserPanelMessage.GetMessage(
+                    UserPanelMessage.Skill,
+                    UserPanelMessage.MessageType.DeleteError));
+            SendSuccessMessage(UserPanelMessage.GetMessage(
+                UserPanelMessage.Skill,
+                UserPanelMessage.MessageType.DeleteSuccess), Url.ActionLink(nameof(SkillIndex)));
+            return RedirectToAction(nameof(SkillIndex));
         }
 
 
@@ -163,78 +109,6 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
 
 
 
-        #region My skills
-
-        public async Task<IActionResult> MySkillsList()
-        {
-         
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-      
-            var model = await skillLayersService.GetAllSkillAndSkillLevelForViewAsync(userId);
-            return View(model);
-        }
-
-
-        [HttpGet]
-        public async Task<IActionResult> AddMySkills()
-        {
-      
-            var model = await skillLayersService.GetAllSkillAndSkillLevelForDropDownAsync();
-            model.UserId = User.GetUserId();
-            return View(model);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> AddMySkills(AddMySkillsViewModel viewModel)
-        {
-            
-
-            if (!ModelState.IsValid)
-            {
-                return View(viewModel);
-            }
-       
-            await skillLayersService.AddMySkillAsync(viewModel);
-
-            return RedirectToAction("MySkillsList");
-        }
-
-
-
-        [HttpGet]
-        public async Task<IActionResult> EditMySkills(int id)
-        {
-            
-            var model =  skillLayersService.GetSkillForEditAsync(id,out var skill , out var skillLevel);
-            ViewBag.SkillLevel = skillLevel;
-            ViewBag.Skill = skill;
-            return View(model);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> EditMySkills(EditMySkillsViewModel viewModel)
-        {
-       
-            // ذخیره ویرایش از طریق سرویس
-            await skillLayersService.UpdateUserSkillAsync(viewModel);
-
-            return RedirectToAction("MySkillsList");
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteMySkill(int id)
-        {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
-            var result = await skillLayersService.DeleteUserSkillAsync(id, userId);
-            if (!result)
-                return NotFound("عملیات حذف انجام نشد");
-
-            return RedirectToAction("MySkillsList");
-        }
-
-        #endregion
 
 
     }
