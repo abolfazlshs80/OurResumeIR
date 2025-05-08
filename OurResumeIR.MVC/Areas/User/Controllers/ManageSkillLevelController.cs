@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OurResumeIR.Application.Services.Interfaces;
 using OurResumeIR.Application.Static;
@@ -7,6 +8,8 @@ using OurResumeIR.MVC.Controllers;
 
 namespace OurResumeIR.MVC.Areas.User.Controllers
 {
+    [Area("User")]
+    [Authorize]
     public class ManageSkillLevelController(ISkillService skillLayersService, IMapper mapper) : BaseController
     {
         #region SkillLevel Layer
@@ -16,7 +19,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         [HttpGet]
         public async Task<IActionResult> SkillLevelCreate() => View(new CreateSkillLevelVM());
 
-        [HttpPost]
+        [HttpPost,ValidateAntiForgeryToken]
         public async Task<IActionResult> SkillLevelCreate(CreateSkillLevelVM model)
         {
             if (!ModelState.IsValid)
@@ -51,7 +54,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
 
         }
 
-        [HttpPost]
+        [HttpPost,ValidateAntiForgeryToken]
         public async Task<IActionResult> SkillLevelUpdate(UpdateSkillLevelVM model)
         {
             //if (!ModelState.IsValid)

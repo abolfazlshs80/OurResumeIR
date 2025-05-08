@@ -13,10 +13,12 @@ using OurResumeIR.Infra.Data.Repositories;
 using System.Security.Claims;
 using OurResumeIR.Application.Static;
 using OurResumeIR.MVC.Controllers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OurResumeIR.MVC.Areas.User.Controllers
 {
     [Area("User")]
+    [Authorize]
     public class ManageSkillController(ISkillService skillLayersService, IMapper mapper) : BaseController
     {
         
@@ -48,7 +50,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
                 UserPanelMessage.Skill,
                 UserPanelMessage.MessageType.AddSuccess), Url.ActionLink(nameof(SkillIndex)));
             await skillLayersService.AddSkillAsync(model);
-            return RedirectToAction("SkillIndex");
+            return RedirectToAction(nameof(SkillIndex));
         }
 
 
@@ -84,7 +86,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             SendSuccessMessage(UserPanelMessage.GetMessage(
                 UserPanelMessage.Skill,
                 UserPanelMessage.MessageType.EditSuccess), Url.ActionLink(nameof(SkillIndex)));
-            return RedirectToAction("SkillIndex");
+            return RedirectToAction(nameof(SkillIndex));
         }
 
 
@@ -99,7 +101,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             SendSuccessMessage(UserPanelMessage.GetMessage(
                 UserPanelMessage.Skill,
                 UserPanelMessage.MessageType.DeleteSuccess), Url.ActionLink(nameof(SkillIndex)));
-            return RedirectToAction("SkillIndex");
+            return RedirectToAction(nameof(SkillIndex));
         }
 
 

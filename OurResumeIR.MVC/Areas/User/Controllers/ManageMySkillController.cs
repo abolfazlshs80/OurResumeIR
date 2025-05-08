@@ -5,9 +5,12 @@ using OurResumeIR.Application.ViewModels.MySkills;
 using System.Security.Claims;
 using OurResumeIR.Application.Static;
 using OurResumeIR.MVC.Controllers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OurResumeIR.MVC.Areas.User.Controllers
 {
+    [Area("User")]
+    [Authorize]
     public class ManageMySkillController(ISkillService skillLayersService) : BaseController
     {
 
