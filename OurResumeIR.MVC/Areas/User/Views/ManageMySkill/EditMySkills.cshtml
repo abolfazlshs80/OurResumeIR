@@ -1,0 +1,48 @@
+﻿@using OurResumeIR.Application.ViewModels.MySkills
+@model EditMySkillsViewModel
+
+@{
+    Layout = "_ProfileLayout";
+    ViewBag.Title = "افزودن تخصص جدید";
+    var Skill = ViewBag.Skill as List<SelectListItem>;
+    var SkillLevel = ViewBag.SkillLevel as List<SelectListItem>;
+}
+
+
+<div class="col-xl-9">
+    <div class="card bg-transparent border rounded-3">
+        <div class="card-header bg-transparent border-bottom d-flex justify-content-between">
+            <h3 class="mb-0 fs-5 ff-vb">افزودن تخصص جدید</h3>
+        </div>
+
+        <div class="card-body">
+            <form asp-action="EditMySkills"  asp-area="User" method="post">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <input asp-for="Id" type="hidden" />
+
+                        <label asp-for="SkillId" class="form-label">نام تخصص</label>
+                        <select asp-for="SkillId" asp-items="@Skill" class="form-select text-end" dir="rtl">
+                            <option value="0" dir="rtl" style="text-align: right;">لطفاً انتخاب کنید</option>
+                        </select>
+                        <span asp-validation-for="SkillId" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="SkillLevelId" class="form-label">سطح تخصص</label>
+                        <select asp-for="SkillLevelId" asp-items="@SkillLevel" class="form-select text-end" dir="rtl">
+                            <option value="0" dir="rtl" style="text-align: right;">لطفاً انتخاب کنید</option>
+                        </select>
+                        <span asp-validation-for="SkillLevelId" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <div class="text-end">
+                    <button type="submit" class="btn btn-primary">ذخیره تخصص</button>
+                    <a asp-action="MySkillsList" class="btn btn-secondary">انصراف</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
