@@ -14,7 +14,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace OurResumeIR.Application.Services.Implementation
 {
-    public class BlogService(IFileUploaderService _fileUploader, IBlogRepository _blogRepository) : IBlogService
+    public class BlogService(IUnitOfWork unitOfWork, IFileUploaderService _fileUploader) : IBlogService
     {
      
         public async Task<bool> CreateBlogAsync(CreateBlogPostViewModel model, string userId)
@@ -34,27 +34,27 @@ namespace OurResumeIR.Application.Services.Implementation
                ImageName = imageNmae
             };
 
-            await _blogRepository.AddBlogAsync(blog);
+            await unitOfWork.BlogRepository.AddBlogAsync(blog);
             return true;
         }
 
         public async Task<bool> DeleteBlogAsync(int blogId, string userId)
         {
-            var blog = await _blogRepository.GetBlogByIdAndUserIdAsync(blogId, userId);
+            var blog = await unitOfWork.BlogRepository.GetBlogByIdAndUserIdAsync(blogId, userId);
 
             if (blog == null)
             {
                 return false;
             }
             await _fileUploader.DeleteFile(FolderNameExtentions.Blog, blog.ImageName);
-            await _blogRepository.DeleteBlogAsync(blog);
+            await unitOfWork.BlogRepository.DeleteBlogAsync(blog);
 
             return true;
         }
 
         public async Task<List<BlogPostListViewModel>> GetAllBlogForView()
         {
-           var BlogPosts = await _blogRepository.GetAllBlogAsync();
+           var BlogPosts = await unitOfWork.BlogRepository.GetAllBlogAsync();
 
 
             return BlogPosts.Select(p => new BlogPostListViewModel
@@ -68,7 +68,7 @@ namespace OurResumeIR.Application.Services.Implementation
 
         public async Task<EditBlogPostListViewModel> GetBlogForEditView(int id)
         {
-            var blogPost = await _blogRepository.GetBlogById(id);
+            var blogPost = await unitOfWork.BlogRepository.GetBlogById(id);
 
             var model = new EditBlogPostListViewModel
             {
@@ -87,7 +87,7 @@ namespace OurResumeIR.Application.Services.Implementation
 
         public async Task<bool> UpdateBlogAsync(EditBlogPostListViewModel model, string userId)
         {
-            var blogPost = await _blogRepository.GetBlogByIdAndUserIdAsync(model.Id, userId);
+            var blogPost = await unitOfWork.BlogRepository.GetBlogByIdAndUserIdAsync(model.Id, userId);
             if (blogPost == null) 
             {
                 return false;
@@ -111,8 +111,8 @@ namespace OurResumeIR.Application.Services.Implementation
 
             // اگر کاربر عکسی انتخاب نکرده ➔ هیچ کاری روی ImageName انجام نمیدیم و همون قبلی باقی میمونه
 
-            await _blogRepository.UpdateBlogAsync(blogPost);
-            await _blogRepository.SaveChangesAsync();
+            await unitOfWork.BlogRepository.UpdateBlogAsync(blogPost);
+            await unitOfWork.BlogRepository.SaveChangesAsync();
             return true;
         }
     }
