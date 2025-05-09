@@ -7,6 +7,7 @@ namespace OurResumeIR.Application.Static
     {
         public const string Blog = "Blog";
         public const string Document = "Document";
+        public const string AboutMe = "AboutMe";
  
 
     }
