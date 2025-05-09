@@ -367,3 +367,4 @@ App.db
 /OurResumeIR.MVC/App.db
 /OurResumeIR.MVC/App.db-shm
 /OurResumeIR.MVC/App.db-wal
+/OurResumeIR.MVC/wwwroot/Images/*.*
