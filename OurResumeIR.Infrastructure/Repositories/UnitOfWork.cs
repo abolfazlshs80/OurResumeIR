@@ -21,6 +21,7 @@ namespace OurResumeIR.Infra.Data.Repositories
         public ISkillRepository SkillRepository { get; }
         public ISkillLevelRepository SkillLevelRepository { get; }
         public IUserToSkillRepository UserToSkillRepository { get; }
+        public IMySkillsRepository MySkillsRepository { get; }
       
 
         public UnitOfWork(
@@ -33,7 +34,8 @@ namespace OurResumeIR.Infra.Data.Repositories
             IDocumentsRepository documentsRepository,
             IHistoryRepository historyRepository,
             IUserRepository userRepository,
-            IUserToSkillRepository userToSkillRepository)
+            IUserToSkillRepository userToSkillRepository,
+            IMySkillsRepository mySkillsRepository)
         {
             _context = context;
             AboutMeRepository = aboutMeRepository;
@@ -44,7 +46,8 @@ namespace OurResumeIR.Infra.Data.Repositories
             SkillRepository = skillRepository;
             SkillLevelRepository = skillLevelRepository;
             UserToSkillRepository = userToSkillRepository;
-            ContactUsRepository= contactUsRepository;
+            ContactUsRepository = contactUsRepository;
+            MySkillsRepository = mySkillsRepository;
         }
 
         public async Task<int> SaveChangesAsync()
