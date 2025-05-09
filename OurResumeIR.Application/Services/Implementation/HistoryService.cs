@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace OurResumeIR.Application.Services.Implementation
 {
-    public class HistoryService (IHistoryRepository _repository) : IHistoryService
+    public class HistoryService (IUnitOfWork unitOfWork) : IHistoryService
     {
         
         public async Task<bool> CreateHistoryAsync(AddHistoryViewModel model, string userId)
@@ -22,26 +22,26 @@ namespace OurResumeIR.Application.Services.Implementation
                 UserId = userId,
             };
 
-            await _repository.AddHistoryAsync(History);
+            await unitOfWork.HistoryRepository.AddHistoryAsync(History);
             return true;
         }
 
         public async Task<bool> DeleteHistoryAsync(int id, string userId)
         {
-            var history = await _repository.GetHistoryByIdAndUserIdAsync(id, userId);
+            var history = await unitOfWork.HistoryRepository.GetHistoryByIdAndUserIdAsync(id, userId);
             if (history == null)
             {
                 return false;
             }
 
-            await _repository.DeletHistoryAsync(history);
+            await unitOfWork.HistoryRepository.DeletHistoryAsync(history);
 
             return true;
 
         }
         public async Task<List<HistoryListViewModel>> GetAlHistoryForListAsync()
         {
-            var history = await _repository.GetAllHistoryAsync();
+            var history = await unitOfWork.HistoryRepository.GetAllHistoryAsync();
 
             return history.Select(h => new HistoryListViewModel
             {
@@ -52,7 +52,7 @@ namespace OurResumeIR.Application.Services.Implementation
 
         public async Task<EditHistoryViewModel> GetHistoryShowForEditAsync(int id)
         {
-            var history = await _repository.GetHistoryByIdAsync(id);
+            var history = await unitOfWork.HistoryRepository.GetHistoryByIdAsync(id);
 
             if (history == null)
             {
@@ -71,7 +71,7 @@ namespace OurResumeIR.Application.Services.Implementation
 
         public async Task<bool> UpdateHistoryAsync(EditHistoryViewModel model, string id)
         {
-            var history = await _repository.GetHistoryByIdAndUserIdAsync(model.Id, id);
+            var history = await unitOfWork.HistoryRepository.GetHistoryByIdAndUserIdAsync(model.Id, id);
             if (history == null)
             {
                 return false;
@@ -79,7 +79,7 @@ namespace OurResumeIR.Application.Services.Implementation
 
             history.Name = model.Name;
 
-            await _repository.UpdateHistoryAsync(history);
+            await unitOfWork.HistoryRepository.UpdateHistoryAsync(history);
 
             return true;
         }
