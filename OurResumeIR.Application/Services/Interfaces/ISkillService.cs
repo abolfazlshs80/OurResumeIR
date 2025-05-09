@@ -13,20 +13,7 @@ namespace OurResumeIR.Application.Services.Interfaces
 {
     public interface ISkillService
     {
-        #region Specialties Layer
-
-        Task<List<SkillLevelVM>> GetAll();
-        Task<SkillLevelVM> GetById(int Id);
-        Task<bool> Update(UpdateSkillLevelVM model);
-        Task<bool> Create(CreateSkillLevelVM model);
-        Task<bool> Delete(int Id);
-
-        #endregion
-
-
-        #region Specialties 
-
-        // TO DO Interface
+     
 
         Task<List<SkillFormViewModel>> GetAllAsync();
         Task CreateAsync(SkillFormViewModel model);
@@ -37,9 +24,24 @@ namespace OurResumeIR.Application.Services.Interfaces
         Task<bool> UpdateSkillAsync(SkillFormViewModel model);
         Task<bool> DeleteSkillAsync(int id);
 
-        #endregion
+   
 
 
+        
+
+    }
+
+    public interface ISkillLevelService
+    {
+        Task<List<SkillLevelVM>> GetAll();
+        Task<SkillLevelVM> GetById(int Id);
+        Task<bool> Update(UpdateSkillLevelVM model);
+        Task<bool> Create(CreateSkillLevelVM model);
+        Task<bool> Delete(int Id);
+    }
+
+    public interface IMySkillService
+    {
         #region My Skills
         // ساخت ویو مدل برای نمایش نام تخصص و سطح تخصص داخل کنترولر
         // نوشتن متد گرفتن نام تخصص و سطح تخصص از ریپوزیتوری و خروجی ویو مدل برای کنترولر
@@ -51,12 +53,11 @@ namespace OurResumeIR.Application.Services.Interfaces
         Task AddMySkillAsync(AddMySkillsViewModel model);
         // درست کردن ویو مدل برای پر کردن دراپ دان های تخصص و سطح تخصص که در هنگام ویرایش مقدار لازم پر شده باشد
         // نوشتن یک متد که خروجی ویو مدل داشته باشد و مقدار سلکت آپشن ها پر شود و برای نمایش به کاربر آماده باشد
-        EditMySkillsViewModel GetSkillForEditAsync(int userToSkillId ,out  List<SelectListItem> skill , out List<SelectListItem> skillLevel);
+        EditMySkillsViewModel GetSkillForEditAsync(int userToSkillId, out List<SelectListItem> skill, out List<SelectListItem> skillLevel);
         Task FillDropDownsForEditViewModel(EditMySkillsViewModel model);
         // نوشتن متدی که ورودی ویو مدل دارد و تبدیل ویو مدل به مدل و صدا زدن متد ریپوزیتوری برای ثبت اطلاعات در بانک اطلاعاتی
         Task UpdateUserSkillAsync(EditMySkillsViewModel model);
         Task<bool> DeleteUserSkillAsync(int id, string userId);
         #endregion
-
     }
 }
