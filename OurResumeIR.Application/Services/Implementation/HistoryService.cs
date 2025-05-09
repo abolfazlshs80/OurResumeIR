@@ -11,13 +11,9 @@ using System.Threading.Tasks;
 
 namespace OurResumeIR.Application.Services.Implementation
 {
-    public class HistoryService : IHistoryService
+    public class HistoryService (IHistoryRepository _repository) : IHistoryService
     {
-        private IHistoryRepository _repository;
-        public HistoryService(IHistoryRepository historyRepository)
-        {
-            _repository = historyRepository;
-        }
+        
         public async Task<bool> CreateHistoryAsync(AddHistoryViewModel model, string userId)
         {
             var History = new History
