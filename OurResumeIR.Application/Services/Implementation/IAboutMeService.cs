@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
+using OurResumeIR.Application.Static;
 using OurResumeIR.Application.ViewModels.AboutMe;
 using OurResumeIR.Domain.Interfaces;
 using OurResumeIR.Domain.Models;
@@ -75,8 +76,8 @@ namespace OurResumeIR.Application.Services.Implementation
             {
                 var curentRep = unitOfWork.AboutMeRepository;
                 var curentAboutMe = await curentRep.GetByUserIdAsync(UserId);
-                await uploaderService.DeleteFile("AboutMe", curentAboutMe.ImageName);
-                curentAboutMe.ImageName = await uploaderService.UploadFileAsync(File, "AboutMe", UserId);
+                await uploaderService.DeleteFile(FolderNameExtentions.AboutMe, curentAboutMe.ImageName);
+                curentAboutMe.ImageName = await uploaderService.UploadFileAsync(File, FolderNameExtentions.AboutMe, UserId);
                 await curentRep.UpdateAsync(curentAboutMe);
                 await unitOfWork.SaveChangesAsync();
                 return true;
@@ -93,7 +94,7 @@ namespace OurResumeIR.Application.Services.Implementation
             {
                 var curentRep = unitOfWork.AboutMeRepository;
                 var aboutMe = await curentRep.GetByUserIdAsync(userId);
-                await uploaderService.DeleteFile("AboutMe", aboutMe.ImageName);
+                await uploaderService.DeleteFile(FolderNameExtentions.AboutMe, aboutMe.ImageName);
                 await curentRep.DeleteAsync(aboutMe);
                 await unitOfWork.SaveChangesAsync();
                 return true;

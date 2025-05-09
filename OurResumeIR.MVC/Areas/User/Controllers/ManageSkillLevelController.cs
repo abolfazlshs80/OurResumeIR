@@ -10,7 +10,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
 {
     [Area("User")]
     [Authorize]
-    public class ManageSkillLevelController(ISkillService skillLayersService, IMapper mapper) : BaseController
+    public class ManageSkillLevelController(ISkillLevelService skillLayersService, IMapper mapper) : BaseController
     {
         #region SkillLevel Layer
 
