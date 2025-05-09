@@ -11,7 +11,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
 {
     [Area("User")]
     [Authorize]
-    public class ManageMySkillController(ISkillService skillLayersService) : BaseController
+    public class ManageMySkillController(IMySkillService skillLayersService) : BaseController
     {
 
         #region My skills
