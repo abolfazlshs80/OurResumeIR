@@ -18,7 +18,7 @@ public class MySkillService(IUnitOfWork unitOfWork,
 
     public async Task<List<MySkillsForListViewModel>> GetAllSkillAndSkillLevelForViewAsync(string userId)
     {
-        var userSkills = await unitOfWork.SkillRepository.GetAllSkillAndSkillLevelAsync(userId);
+        var userSkills = await unitOfWork.MySkillsRepository.GetAllSkillAndSkillLevelAsync(userId);
 
         return userSkills.Select(x => new MySkillsForListViewModel
         {
@@ -63,7 +63,7 @@ public class MySkillService(IUnitOfWork unitOfWork,
             UserId = model.UserId.ToString(),
         };
 
-        await unitOfWork.sk.AddMySkillsAsync(UserSkills);
+        await unitOfWork.MySkillsRepository.AddMySkillsAsync(UserSkills);
 
     }
 
@@ -160,11 +160,11 @@ public class MySkillService(IUnitOfWork unitOfWork,
 
     public async Task<bool> DeleteUserSkillAsync(int id, string userId)
     {
-        var userSkill = await mySkills.GetUserSkillByIdAsync(id, userId);
+        var userSkill = await unitOfWork.MySkillsRepository.GetUserSkillByIdAsync(id, userId);
         if (userSkill == null)
             return false;
 
-        await mySkills.DeleteUserSkillAsync(userSkill);
+        await unitOfWork.MySkillsRepository.DeleteUserSkillAsync(userSkill);
         return true;
     }
 
