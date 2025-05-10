@@ -1,51 +1,150 @@
 ﻿@model OurResumeIR.Application.ViewModels.Account.UserProfileVM
 @{
-	Layout = "_ProfileLayout";
-}		
+    Layout = "_ProfileLayout";
+}
 
 <!-- Main content START -->
 <div class="col-xl-9">
 
-	<!-- Counter boxes START -->
-	<div class="row mb-4">
-		<!-- Counter item -->
-		<div class="col-sm-6 col-lg-4 mb-3 mb-lg-0">
-			<div class="d-flex justify-content-center align-items-center p-4 bg-orange bg-opacity-15 rounded-3">
-				<span class="display-6 lh-1 text-orange mb-0"><i class="fas fa-tv fa-fw"></i></span>
-				<div class="ms-4">
-					<div class="d-flex">
-						<h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="@Model.SkillCount" data-purecounter-delay="200">@Model.SkillCount</h5>
-					</div>
-					<p class="mb-0 h6 fw-light">تخصص های من</p>
-				</div>
-			</div>
-		</div>
-		<!-- Counter item -->
-		<div class="col-sm-6 col-lg-4 mb-3 mb-lg-0">
-			<div class="d-flex justify-content-center align-items-center p-4 bg-purple bg-opacity-15 rounded-3">
-				<span class="display-6 lh-1 text-purple mb-0"><i class="fas fa-clipboard-check fa-fw"></i></span>
-				<div class="ms-4">
-					<div class="d-flex">
-						<h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="@Model.BlogCount" data-purecounter-delay="200">@Model.BlogCount</h5>
-					</div>
-					<p class="mb-0 h6 fw-light">مقاله ها من</p>
-				</div>
-			</div>
-		</div>
-		<!-- Counter item -->
-		<div class="col-sm-6 col-lg-4 mb-3 mb-lg-0">
-			<div class="d-flex justify-content-center align-items-center p-4 bg-success bg-opacity-10 rounded-3">
-				<span class="display-6 lh-1 text-success mb-0"><i class="fas fa-medal fa-fw"></i></span>
-				<div class="ms-4">
-					<div class="d-flex">
-						<h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="@Model.DocumentCount" data-purecounter-delay="300">@Model.DocumentCount</h5>
-					</div>
-					<p class="mb-0 h6 fw-light">مدارک معتبر</p>
-				</div>
-			</div>
-		</div>
-	</div>
+    <!-- Counter boxes START -->
+    <div class="row mb-4">
+        <!-- Counter item -->
+        <div class="col-sm-6 col-lg-4 mb-3 mb-lg-0">
+            <div class="d-flex justify-content-center align-items-center p-4 bg-orange bg-opacity-15 rounded-3">
+                <span class="display-6 lh-1 text-orange mb-0"><i class="fas fa-tv fa-fw"></i></span>
+                <div class="ms-4">
+                    <div class="d-flex">
+                        <h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="@Model.SkillCount" data-purecounter-delay="200">@Model.SkillCount</h5>
+                    </div>
+                    <p class="mb-0 h6 fw-light">تخصص های من</p>
+                </div>
+            </div>
+        </div>
+        <!-- Counter item -->
+        <div class="col-sm-6 col-lg-4 mb-3 mb-lg-0">
+            <div class="d-flex justify-content-center align-items-center p-4 bg-purple bg-opacity-15 rounded-3">
+                <span class="display-6 lh-1 text-purple mb-0"><i class="fas fa-clipboard-check fa-fw"></i></span>
+                <div class="ms-4">
+                    <div class="d-flex">
+                        <h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="@Model.BlogCount" data-purecounter-delay="200">@Model.BlogCount</h5>
+                    </div>
+                    <p class="mb-0 h6 fw-light">مقاله ها من</p>
+                </div>
+            </div>
+        </div>
+        <!-- Counter item -->
+        <div class="col-sm-6 col-lg-4 mb-3 mb-lg-0">
+            <div class="d-flex justify-content-center align-items-center p-4 bg-success bg-opacity-10 rounded-3">
+                <span class="display-6 lh-1 text-success mb-0"><i class="fas fa-medal fa-fw"></i></span>
+                <div class="ms-4">
+                    <div class="d-flex">
+                        <h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="@Model.DocumentCount" data-purecounter-delay="300">@Model.DocumentCount</h5>
+                    </div>
+                    <p class="mb-0 h6 fw-light">مدارک معتبر</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- فرم ویرایش اطلاعات پروفایل -->
+    <div class="card border bg-transparent rounded-3 mt-4">
+        <div class="card-header bg-light border-bottom">
+            <h5 class="card-title mb-0">ویرایش اطلاعات پروفایل</h5>
+        </div>
+        <div class="card-body">
+            <form asp-action="UpdateProfile" asp-controller="User" asp-area="User" method="post" enctype="multipart/form-data">
+
+                @* 	<input type="hidden" asp-for="UserId" /> *@
+
+                <div class="row g-3">
+
+                    <div class="col-md-6">
+                        <label asp-for="FullName" class="form-label">نام کامل</label>
+                        <input asp-for="FullName" class="form-control text-end" dir="rtl" />
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Slug" class="form-label">نامک (Slug)</label>
+                        <input asp-for="Slug" class="form-control text-end" dir="rtl" />
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="ResumeFile" class="form-label">فایل رزومه (لینک یا نام فایل)</label>
+                        <input asp-for="ResumeFile" class="form-control text-end" dir="rtl" />
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <label asp-for="LinkInstagram" class="form-label">لینک اینستاگرام</label>
+                        <input asp-for="LinkInstagram" class="form-control text-end" dir="rtl" />
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="LinkLinkdin" class="form-label">لینک لینکدین</label>
+                        <input asp-for="LinkLinkdin" class="form-control text-end" dir="rtl" />
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="LinkX" class="form-label">لینک X (توییتر)</label>
+                        <input asp-for="LinkX" class="form-control text-end" dir="rtl" />
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="LinkTelegram" class="form-label">لینک تلگرام</label>
+                        <input asp-for="LinkTelegram" class="form-control text-end" dir="rtl" />
+                    </div>
+                </div>
+
+
+                <div class="col-md-12">
+                    <label asp-for="bio" class="form-label">بیوگرافی کوتاه</label>
+                    <textarea asp-for="bio" class="form-control text-end" rows="3" dir="rtl"></textarea>
+                </div>
+
+                <div class=" mt-3">
+                    <button type="submit" class="btn btn-primary">ذخیره تغییرات</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
 </div><!-- Row END -->
+@section Scripts
+{
+    <script>
+        // چک میکنیم اگر پیام موفقیت وجود داشت
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <text>
+                                Swal.fire({
+                                    icon: 'success',                 // آیکون: موفقیت
+                                    title: 'عملیات موفق!',           // عنوان Popup
+                                        text: '@Html.Raw(TempData["SuccessMessage"])',  // 👈 متن پیام موفقیت
+                                    timer: 4000,                      // بعد از ۲ ثانیه خودش بسته بشه (به میلی‌ثانیه)
+                                    timerProgressBar: true,           // نمایش نوار زمان در پایین پیام
+                                    showConfirmButton: false,         // دکمه تایید رو حذف میکنیم
+                                    didClose: () => {                 // وقتی پیام بسته شد
+                                                window.location.href = '@Url.Action("Dashboard", "User", new { area = "User" })';
+                                        // هدایت کاربر به صفحه‌ی لیست مقالات
+                                    }
+                                });
+            </text>
+        }
 
-
+        // اگر پیام خطا وجود داشت
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <text>
+                                Swal.fire({
+                                    icon: 'error',                    // آیکون: خطا
+                                    title: 'خطا!',                     // عنوان Popup
+                                        text: '@Html.Raw(TempData["ErrorMessage"])',  // 👈  متن پیام خطا
+                                    timer: 4000,                       // اینم بعد از ۳ ثانیه خودکار بسته بشه
+                                    timerProgressBar: true,
+                                    showConfirmButton: false
+                                    // در حالت خطا، نیاز به ریدایرکت نداریم (میتونی اضافه هم بکنی)
+                                });
+            </text>
+        }
+    </script>
+}

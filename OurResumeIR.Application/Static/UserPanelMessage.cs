@@ -9,6 +9,7 @@
         public  const string MySkill = "مهارت های من";
         public  const string Skill = "مهارت";
         public  const string Skill_Level = "سطح مهارت";
+        public const string User = "پروفایل";
         private static readonly Dictionary<MessageType, string> Messages = new()
         {
             { MessageType.DeleteError, "{0} با شکست مواجه شد!" },

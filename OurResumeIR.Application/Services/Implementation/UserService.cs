@@ -24,19 +24,17 @@ using RegisterViewModel = OurResumeIR.Application.ViewModels.Account.RegisterVie
 
 namespace OurResumeIR.Application.Services.Implementation
 {
-    public class UserService(IUserRepository _userRepository
-        , UserManager<User> _userManager
+    public class UserService(IUnitOfWork unitOfWork
+   
         , SignInManager<User> _signInManager
         , IFileUploaderService _uploaderService)
         : IUserService
     {
-
-
-        //private readonly RoleManager<ApplicationRole> _roleManager;
+               
 
         public async Task<RegisterResult> RegisterUser(RegisterViewModel viewModel)
         {
-            if (await _userRepository.EmailIsExist(viewModel.Email))
+            if (await unitOfWork.UserRepository.EmailIsExist(viewModel.Email))
             {
                 return RegisterResult.DupplicateEmail;
             }
@@ -55,8 +53,8 @@ namespace OurResumeIR.Application.Services.Implementation
 
             };
 
-            var status = await _userManager.CreateAsync(user, viewModel.Password);
-            if (status.Succeeded)
+            var status = await unitOfWork.UserRepository.CreateUser(user, viewModel.Password);
+            if (status != null)
             {
                 var claims = new List<Claim>
                     {
@@ -86,7 +84,7 @@ namespace OurResumeIR.Application.Services.Implementation
 
         public async Task<LoginResult> LoginUser(LoginViewModel viewModel)
         {
-            var user = await _userManager.FindByEmailAsync(viewModel.Email);
+            var user = await unitOfWork.UserRepository.GetUserByEmail(viewModel.Email);
 
             if (user == null)
                 return LoginResult.UserNotFound;
@@ -104,47 +102,52 @@ namespace OurResumeIR.Application.Services.Implementation
         public async Task<string> UploadProfile(IFormFile file, string userId)
         {
             var result = await _uploaderService.UploadFileAsync(file, "Profile", userId);
-            var User = await _userManager.FindByIdAsync(userId);
+            var User = await unitOfWork.UserRepository.GetUserById(userId);
             if (User == null)
                 return string.Empty;
             User.ImageName = result;
-            await _userManager.UpdateAsync(User);
+            await unitOfWork.UserRepository.UpdateUserAsync(User);
             return result ?? string.Empty;
         }
 
         public async Task<bool> UpdateFullNameProfile(string Name, string userId)
         {
           
-            var User = await _userManager.FindByIdAsync(userId);
+            var User =  await unitOfWork.UserRepository.GetUserById(userId);
             if (User == null)
                 return false;
             User.FullName = Name;
-            await _userManager.UpdateAsync(User);
+            await unitOfWork.UserRepository.UpdateUserAsync(User);
             return true;
         }
 
         public async Task<UserProfileVM> LoadProfile( string userId)
         {
             var model = new UserProfileVM();
-            var User = await _userManager.Users
-                .Include(a => a.UserToSkill)
-                .Include(a => a.Documents)
-                .Include(a => a.Blog)
-                .FirstOrDefaultAsync(a => a.Id.Equals(userId));
+
+            var User = await unitOfWork.UserRepository.LoadProfileByUserId(userId);
             if (User == null)
                 return model;
+
             model.ImagePath = User?.ImageName;
             model.FullName = User?.FullName;
             model.UserId = User?.Id;
             model.BlogCount = User.Blog.Count;
             model.DocumentCount = User.Documents.Count;
             model.SkillCount = User.UserToSkill.Count;
+            model.Slug = User?.Slug;
+            model.ResumeFile = User?.ResumeFile;
+            model.bio = User?.bio;
+            model.LinkInstagram = User?.LinkInstagram;
+            model.LinkLinkdin = User?.LinkLinkdin;
+            model.LinkX = User?.LinkX;
+            model.LinkTelegram = User?.LinkTelegram;
             return model;
         }
 
         public async Task<UserResumeVM> LoadResume(string slug)
         {
-            var currentUser = await _userRepository.GetUserBySlug(slug);
+            var currentUser = await unitOfWork.UserRepository.GetUserBySlug(slug);
             if (currentUser == null) return null;
             var model = new UserResumeVM();
             model.FullName=currentUser.FullName;
@@ -222,6 +225,29 @@ namespace OurResumeIR.Application.Services.Implementation
                 model.MySkill = new List<MySkillsForListViewModel>();
             return model;
 
+        }
+
+        public async Task<bool> UpdateUserProfileAsync(UserProfileVM profile, string userId)
+        {
+           var user = await unitOfWork.UserRepository.GetUserById(userId);
+            if (user == null) 
+            {
+                return false;
+            }
+
+            user.FullName = profile.FullName;
+            user.Slug = profile.Slug;
+            user.ResumeFile = profile.ResumeFile;
+            user.bio = profile.bio;
+            user.LinkLinkdin = profile.LinkLinkdin;
+            user.LinkInstagram = profile.LinkInstagram;
+            user.LinkX = profile.LinkX;
+            user.LinkTelegram = profile.LinkTelegram;
+
+            await unitOfWork.UserRepository.UpdateUserAsync(user);
+            await unitOfWork.UserRepository.SaveChangesAsync();
+
+            return true;
         }
     }
 } 
