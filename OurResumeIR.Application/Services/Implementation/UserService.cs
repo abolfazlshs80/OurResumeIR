@@ -25,7 +25,7 @@ using RegisterViewModel = OurResumeIR.Application.ViewModels.Account.RegisterVie
 namespace OurResumeIR.Application.Services.Implementation
 {
     public class UserService(IUnitOfWork unitOfWork
-        , UserManager<User> _userManager
+   
         , SignInManager<User> _signInManager
         , IFileUploaderService _uploaderService)
         : IUserService
@@ -53,8 +53,8 @@ namespace OurResumeIR.Application.Services.Implementation
 
             };
 
-            var status = await _userManager.CreateAsync(user, viewModel.Password);
-            if (status.Succeeded)
+            var status = await unitOfWork.UserRepository.CreateUser(user, viewModel.Password);
+            if (status != null)
             {
                 var claims = new List<Claim>
                     {
@@ -84,7 +84,7 @@ namespace OurResumeIR.Application.Services.Implementation
 
         public async Task<LoginResult> LoginUser(LoginViewModel viewModel)
         {
-            var user = await _userManager.FindByEmailAsync(viewModel.Email);
+            var user = await unitOfWork.UserRepository.GetUserByEmail(viewModel.Email);
 
             if (user == null)
                 return LoginResult.UserNotFound;
@@ -102,35 +102,33 @@ namespace OurResumeIR.Application.Services.Implementation
         public async Task<string> UploadProfile(IFormFile file, string userId)
         {
             var result = await _uploaderService.UploadFileAsync(file, "Profile", userId);
-            var User = await _userManager.FindByIdAsync(userId);
+            var User = await unitOfWork.UserRepository.GetUserById(userId);
             if (User == null)
                 return string.Empty;
             User.ImageName = result;
-            await _userManager.UpdateAsync(User);
+            await unitOfWork.UserRepository.UpdateUserAsync(User);
             return result ?? string.Empty;
         }
 
         public async Task<bool> UpdateFullNameProfile(string Name, string userId)
         {
           
-            var User = await _userManager.FindByIdAsync(userId);
+            var User =  await unitOfWork.UserRepository.GetUserById(userId);
             if (User == null)
                 return false;
             User.FullName = Name;
-            await _userManager.UpdateAsync(User);
+            await unitOfWork.UserRepository.UpdateUserAsync(User);
             return true;
         }
 
         public async Task<UserProfileVM> LoadProfile( string userId)
         {
             var model = new UserProfileVM();
-            var User = await _userManager.Users
-                .Include(a => a.UserToSkill)
-                .Include(a => a.Documents)
-                .Include(a => a.Blog)
-                .FirstOrDefaultAsync(a => a.Id.Equals(userId));
+
+            var User = await unitOfWork.UserRepository.LoadProfileByUserId(userId);
             if (User == null)
                 return model;
+
             model.ImagePath = User?.ImageName;
             model.FullName = User?.FullName;
             model.UserId = User?.Id;

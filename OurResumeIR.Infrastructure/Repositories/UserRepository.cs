@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using OurResumeIR.Domain.Enums;
 using OurResumeIR.Domain.Interfaces;
 using OurResumeIR.Domain.Models;
@@ -16,10 +17,12 @@ namespace OurResumeIR.Infra.Data.Repositories
     public class UserRepository : IUserRepository
     {
         private AppDbContext _context;
+        UserManager<User> _userManager;
 
-        public UserRepository(AppDbContext context)
+        public UserRepository(AppDbContext context, UserManager<User> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
 
@@ -28,9 +31,9 @@ namespace OurResumeIR.Infra.Data.Repositories
             return _context.Users.Where(predicate).AsQueryable();
         }
 
-        public async Task<string> CreateUser(User User)
+        public async Task<string> CreateUser(User user, string Password)
         {
-            _context.Add(User);
+            await _userManager.CreateAsync(user, Password);
             return "";
         }
 
@@ -84,8 +87,22 @@ namespace OurResumeIR.Infra.Data.Repositories
 
         public async Task<User> GetUserById(string userId)
         {
-          var result =  await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            var result = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
             return result;
+        }
+
+        public async Task<User> GetUserByEmail(string email)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+        }
+
+        public Task<User> LoadProfileByUserId(string userId)
+        {
+            return _userManager.Users
+                 .Include(a => a.UserToSkill)
+                 .Include(a => a.Documents)
+                 .Include(a => a.Blog)
+                 .FirstOrDefaultAsync(a => a.Id.Equals(userId));
         }
     }
 }

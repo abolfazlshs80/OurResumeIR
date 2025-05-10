@@ -13,7 +13,7 @@ namespace OurResumeIR.Domain.Interfaces
     public interface IUserRepository
     {
         Task<IQueryable<User>> FindAsync(Expression<Func<User, bool>> predicate);
-        Task<string> CreateUser(User User);
+        Task<string> CreateUser(User user, string Password);
         Task<bool> UpdateUserAsync(User User);
         Task<bool> DeleteUser(string UserId);
         Task<bool> SaveChangesAsync();
@@ -21,5 +21,7 @@ namespace OurResumeIR.Domain.Interfaces
         User UserIsExistForLogin(string email , string password);
         Task<User> GetUserBySlug(string? slug);
         Task<User> GetUserById(string userId);
+        Task<User> GetUserByEmail(string email);
+        Task<User> LoadProfileByUserId(string userId);
     }
 }
