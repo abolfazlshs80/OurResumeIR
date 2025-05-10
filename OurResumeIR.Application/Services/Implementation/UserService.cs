@@ -139,6 +139,13 @@ namespace OurResumeIR.Application.Services.Implementation
             model.BlogCount = User.Blog.Count;
             model.DocumentCount = User.Documents.Count;
             model.SkillCount = User.UserToSkill.Count;
+            model.Slug = User?.Slug;
+            model.ResumeFile = User?.ResumeFile;
+            model.bio = User?.bio;
+            model.LinkInstagram = User?.LinkInstagram;
+            model.LinkLinkdin = User?.LinkLinkdin;
+            model.LinkX = User?.LinkX;
+            model.LinkTelegram = User?.LinkTelegram;
             return model;
         }
 
