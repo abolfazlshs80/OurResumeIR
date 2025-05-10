@@ -22,11 +22,14 @@
   </ItemGroup>
 
   <ItemGroup>
+
     <Folder Include="wwwroot\Images\AboutMe\" />
 
     <Folder Include="wwwroot\Images\Blog\" />
 
     <Folder Include="wwwroot\Images\Document\" />
+
+    <Folder Include="wwwroot\Images\Profile\" />
 
     <Folder Include="wwwroot\madaeny.com\Home\" />
   </ItemGroup>

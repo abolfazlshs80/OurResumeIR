@@ -16,10 +16,14 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
 
         public async Task<IActionResult> Index()
         {
-        //    SendSuccessMessage("saalam", "/");
+      
             var model = await contactUsService.GetAllAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
             return View(model);
         }
+        public async Task<IActionResult> ReplayMessage(int id)
+        {
 
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

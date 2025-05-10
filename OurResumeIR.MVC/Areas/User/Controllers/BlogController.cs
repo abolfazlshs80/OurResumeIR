@@ -1,34 +1,26 @@
 ﻿using CleanArch.Store.Application.Extention;
+using CleanArch.Store.Application.Static;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OurResumeIR.Application.Services.Interfaces;
+using OurResumeIR.Application.Static;
 using OurResumeIR.Application.ViewModels.Blog;
+using OurResumeIR.MVC.Controllers;
 
 namespace OurResumeIR.MVC.Areas.User.Controllers
 {
     [Area("User")]
     [Authorize]
-    public class BlogController : Controller
+    public class BlogController(IBlogService _blogService) : BaseController
     {
-        private IBlogService _blogService;
-        public BlogController(IBlogService blogService)
-        {
-            _blogService = blogService;
-        }
 
-        public async Task<IActionResult> BlogList()
-        {
-            var model = await _blogService.GetAllBlogForView();
-            return View(model);
-        }
+
+        public async Task<IActionResult> BlogList() => View(await _blogService.GetAllBlogForView());
+
 
         [HttpGet]
-        public async Task<IActionResult> AddBlog()
-        {
-            return View(new CreateBlogPostViewModel());
-        }
-
-        [HttpPost]
+        public async Task<IActionResult> AddBlog() => View(new CreateBlogPostViewModel());
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> AddBlog(CreateBlogPostViewModel viewModel)
         {
             if (!ModelState.IsValid)
@@ -37,16 +29,20 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             }
 
             string userId = User.GetUserId();
-        var result =  await _blogService.CreateBlogAsync(viewModel, userId);
+            var result = await _blogService.CreateBlogAsync(viewModel, userId);
             if (!result)
             {
-                TempData["ErrorMessage"] = " ثبت مقاله با شکست رو برو شد .";
-                return RedirectToAction("BlogList");
+                SendErrorMessage(UserPanelMessage.GetMessage(
+                    UserPanelMessage.Blog,
+                    UserPanelMessage.MessageType.AddError));
+                return RedirectToAction(nameof(BlogList));
             }
-            TempData["SuccessMessage"] = "مقاله با موفقیت اضافه شد.";
-            return RedirectToAction("BlogList");
+            SendSuccessMessage(UserPanelMessage.GetMessage(
+                UserPanelMessage.Blog,
+                UserPanelMessage.MessageType.AddSuccess), Url.ActionLink(nameof(BlogList)));
+            return RedirectToAction(nameof(BlogList));
 
-     
+
         }
 
 
@@ -57,24 +53,29 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             return View(model);
         }
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> EditBlog(EditBlogPostListViewModel model)
         {
             var userId = User.GetUserId();
 
-          var result =  await _blogService.UpdateBlogAsync(model, userId);
+            var result = await _blogService.UpdateBlogAsync(model, userId);
             if (!result)
             {
-                TempData["ErrorMessage"] = "ویرایش مقاله ناموفق بود!";
-                return RedirectToAction("BlogList");
+                SendErrorMessage(UserPanelMessage.GetMessage(
+                    UserPanelMessage.Blog,
+                    UserPanelMessage.MessageType.EditError));
+
+                return RedirectToAction(nameof(BlogList));
             }
-            TempData["SuccessMessage"] = "مقاله با موفقیت ویرایش شد!";
-            return RedirectToAction("BlogList");
-        
+            SendSuccessMessage(UserPanelMessage.GetMessage(
+                UserPanelMessage.Blog,
+                UserPanelMessage.MessageType.EditSuccess), Url.ActionLink(nameof(BlogList)));
+            return RedirectToAction(nameof(BlogList));
+
         }
 
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteBlog(int id)
         {
             var userId = User.GetUserId();
@@ -82,11 +83,17 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             var result = await _blogService.DeleteBlogAsync(id, userId);
             if (!result)
             {
-                TempData["ErrorMessage"] = "حذف مقاله ناموفق بود!";
-                return RedirectToAction("BlogList");
+                SendErrorMessage(UserPanelMessage.GetMessage(
+                    UserPanelMessage.Blog,
+                    UserPanelMessage.MessageType.DeleteError));
+                return RedirectToAction(nameof(BlogList));
             }
-            TempData["SuccessMessage"] = "مقاله با موفقیت حذف شد!";
-            return RedirectToAction("BlogList");
+
+            SendSuccessMessage(UserPanelMessage.GetMessage(
+                    UserPanelMessage.Blog,
+                UserPanelMessage.MessageType.DeleteSuccess)
+                , Url.ActionLink(nameof(BlogList)));
+            return RedirectToAction(nameof(BlogList));
         }
     }
 }

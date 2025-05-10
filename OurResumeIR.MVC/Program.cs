@@ -10,13 +10,15 @@ namespace OurResumeIR.MVC
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
+            builder.Services.AddHealthChecks();
             // Add services to the container.
             builder.Services
                 .AddControllersWithViews()
                 .AddRazorOptions(options =>
                 {
-                    options.ViewLocationFormats.Add("/Views/Shared/Partials/Layout/{0}.cshtml");
+                    options.ViewLocationFormats.Add("/Views/Shared/Partials/MainLayout/{0}.cshtml");
+                    options.ViewLocationFormats.Add("/Views/Shared/Partials/AuthorizeLayout/{0}.cshtml");
+                    options.ViewLocationFormats.Add("/Views/Shared/Partials/{0}.cshtml");
                 });
       
         
@@ -37,23 +39,17 @@ namespace OurResumeIR.MVC
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
             app.UseAuthorization();
-            app.MapControllerRoute(
-                name: "areas",
+
+            app.MapControllerRoute(name: "areas",
                 pattern: "{area:exists}/{controller=User}/{action=ProFile}/{id?}"
             );
-
-   
-
-                app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=SkillIndex}/{id?}");
+            app.MapControllerRoute(name: "default",
+            pattern: "{controller=Home}/{action=SkillIndex}/{id?}");
 
             //app.MapRazorPages();
-
+            app.UseHealthChecks("/Health");
             app.Run();
         }
     }

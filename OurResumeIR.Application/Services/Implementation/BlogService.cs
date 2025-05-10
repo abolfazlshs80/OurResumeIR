@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OurResumeIR.Application.Services.Interfaces;
+using OurResumeIR.Application.Static;
 using OurResumeIR.Application.ViewModels.Blog;
 using OurResumeIR.Domain.Interfaces;
 using OurResumeIR.Domain.Models;
@@ -13,21 +14,15 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace OurResumeIR.Application.Services.Implementation
 {
-    public class BlogService : IBlogService
+    public class BlogService(IUnitOfWork unitOfWork, IFileUploaderService _fileUploader) : IBlogService
     {
-        private IFileUploader _fileUploader;
-        private IBlogRepository _blogRepository;
-        public BlogService(IFileUploader fileUploader , IBlogRepository blogRepository)
-        {
-            _fileUploader = fileUploader;
-            _blogRepository = blogRepository;   
-        }
+     
         public async Task<bool> CreateBlogAsync(CreateBlogPostViewModel model, string userId)
         {
             string imageNmae = null;
             if (model.ImageFile != null) 
             {
-                imageNmae = await _fileUploader.UploadFileAsync(model.ImageFile, "Images/Blog");
+                imageNmae = await _fileUploader.UploadFileAsync(model.ImageFile, FolderNameExtentions.Blog,  model.Title + DateTime.Now.ToString("yyyy-M-d dddd"));
             }
 
             var blog = new Blog
@@ -39,26 +34,27 @@ namespace OurResumeIR.Application.Services.Implementation
                ImageName = imageNmae
             };
 
-            await _blogRepository.AddBlogAsync(blog);
+            await unitOfWork.BlogRepository.AddBlogAsync(blog);
             return true;
         }
 
         public async Task<bool> DeleteBlogAsync(int blogId, string userId)
         {
-            var blog = await _blogRepository.GetBlogByIdAndUserIdAsync(blogId, userId);
+            var blog = await unitOfWork.BlogRepository.GetBlogByIdAndUserIdAsync(blogId, userId);
 
             if (blog == null)
             {
                 return false;
             }
-            await _blogRepository.DeleteBlogAsync(blog);
+            await _fileUploader.DeleteFile(FolderNameExtentions.Blog, blog.ImageName);
+            await unitOfWork.BlogRepository.DeleteBlogAsync(blog);
 
             return true;
         }
 
         public async Task<List<BlogPostListViewModel>> GetAllBlogForView()
         {
-           var BlogPosts = await _blogRepository.GetAllBlogAsync();
+           var BlogPosts = await unitOfWork.BlogRepository.GetAllBlogAsync();
 
 
             return BlogPosts.Select(p => new BlogPostListViewModel
@@ -72,7 +68,7 @@ namespace OurResumeIR.Application.Services.Implementation
 
         public async Task<EditBlogPostListViewModel> GetBlogForEditView(int id)
         {
-            var blogPost = await _blogRepository.GetBlogById(id);
+            var blogPost = await unitOfWork.BlogRepository.GetBlogById(id);
 
             var model = new EditBlogPostListViewModel
             {
@@ -91,7 +87,7 @@ namespace OurResumeIR.Application.Services.Implementation
 
         public async Task<bool> UpdateBlogAsync(EditBlogPostListViewModel model, string userId)
         {
-            var blogPost = await _blogRepository.GetBlogByIdAndUserIdAsync(model.Id, userId);
+            var blogPost = await unitOfWork.BlogRepository.GetBlogByIdAndUserIdAsync(model.Id, userId);
             if (blogPost == null) 
             {
                 return false;
@@ -105,32 +101,18 @@ namespace OurResumeIR.Application.Services.Implementation
             // حذف عکس قبلی از سرور
             if (model.NewImage != null && model.NewImage.Length > 0) 
             {
-                if (!string.IsNullOrEmpty(blogPost.ImageName)) 
-                {
-                    var oldImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/blog", blogPost.ImageName);
-                    if (System.IO.File.Exists(oldImagePath)) 
-                    {
-                        System.IO.File.Delete(oldImagePath);
-                    }
-                }
 
-                // ذخیره عکس جدید
-                var newImageName = $"{Guid.NewGuid()}{Path.GetExtension(model.NewImage.FileName)}";
-                var newImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/blog", newImageName);
 
-                using (var stream = new FileStream(newImagePath, FileMode.Create))
-                {
-                    await model.NewImage.CopyToAsync(stream);
-                }
 
+                await _fileUploader.DeleteFile("Document", model.Title);
                 // بروزرسانی نام عکس جدید در دیتابیس
-                blogPost.ImageName = newImageName;
+                blogPost.ImageName  = await _fileUploader.UploadFileAsync(model.NewImage, FolderNameExtentions.Blog,   model.Title + DateTime.Now.ToString("yyyy-M-d dddd"));
             }
 
             // اگر کاربر عکسی انتخاب نکرده ➔ هیچ کاری روی ImageName انجام نمیدیم و همون قبلی باقی میمونه
 
-            await _blogRepository.UpdateBlogAsync(blogPost);
-            await _blogRepository.SaveChangesAsync();
+            await unitOfWork.BlogRepository.UpdateBlogAsync(blogPost);
+            await unitOfWork.BlogRepository.SaveChangesAsync();
             return true;
         }
     }

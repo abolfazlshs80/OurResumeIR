@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using OurResumeIR.Application.ViewModels.Document;
 using OurResumeIR.Domain.Interfaces;
 using OurResumeIR.Domain.Models;
+using OurResumeIR.Application.Static;
 
 namespace OurResumeIR.Application.Services.Implementation
 {
@@ -30,8 +31,8 @@ namespace OurResumeIR.Application.Services.Implementation
                 var Document = new Documents();
                 Document.Name=model.Name;
                 Document.UserId = model.UserId;
-                Document.FileName = await uploaderService.UpdloadFile(model.File, "Document", "File" + model.Name+DateTime.Now.ToString("yyyy-M-d dddd"));
-                Document.ImageName = await uploaderService.UpdloadFile(model.Image, "Document", "Image" + model.Name + model.Name + DateTime.Now.ToString("yyyy-M-d dddd"));
+                Document.FileName = await uploaderService.UploadFileAsync(model.File, FolderNameExtentions.Document, "File" + model.Name+DateTime.Now.ToString("yyyy-M-d dddd"));
+                Document.ImageName = await uploaderService.UploadFileAsync(model.Image, FolderNameExtentions.Document, "Image" + model.Name + model.Name + DateTime.Now.ToString("yyyy-M-d dddd"));
                 await curentRep.AddDocumentAsync(Document);
                 await unitOfWork.SaveChangesAsync();
                 return true;
@@ -56,15 +57,15 @@ namespace OurResumeIR.Application.Services.Implementation
                 if (model.File != null)
                 {
 
-                    await uploaderService.DeleteFile("Document", curentDocument.FileName);
-                    curentDocument.FileName = await uploaderService.UpdloadFile(model.File, "Document", "File" + model.Name + DateTime.Now.ToString("yyyy-M-d dddd"));
+                    await uploaderService.DeleteFile(FolderNameExtentions.Document, curentDocument.FileName);
+                    curentDocument.FileName = await uploaderService.UploadFileAsync(model.File, FolderNameExtentions.Document, "File" + model.Name + DateTime.Now.ToString("yyyy-M-d dddd"));
 
                 }
 
                 if (model.Image != null)
                 {
-                    await uploaderService.DeleteFile("Document", curentDocument.ImageName);
-                    curentDocument.ImageName = await uploaderService.UpdloadFile(model.Image, "Document", "Image" + model.Name + model.Name + DateTime.Now.ToString("yyyy-M-d dddd"));
+                    await uploaderService.DeleteFile(FolderNameExtentions.Document, curentDocument.ImageName);
+                    curentDocument.ImageName = await uploaderService.UploadFileAsync(model.Image, FolderNameExtentions.Document, "Image" + model.Name + model.Name + DateTime.Now.ToString("yyyy-M-d dddd"));
 
                 }
 
@@ -100,8 +101,8 @@ namespace OurResumeIR.Application.Services.Implementation
             {
                 var curentRep = unitOfWork.DocumentsRepository;
                 var curentDocument = await curentRep.GetDocumentByIdAsync(Id);
-                await uploaderService.DeleteFile("Document", curentDocument.ImageName);
-                curentDocument.ImageName = await uploaderService.UpdloadFile(File, "Document", curentDocument.Name);
+                await uploaderService.DeleteFile(FolderNameExtentions.Document, curentDocument.ImageName);
+                curentDocument.ImageName = await uploaderService.UploadFileAsync(File, FolderNameExtentions.Document, curentDocument.Name);
                 await curentRep.UpdateDocumentAsync(curentDocument);
                 await unitOfWork.SaveChangesAsync();
                 return true;
@@ -118,8 +119,8 @@ namespace OurResumeIR.Application.Services.Implementation
             {
                 var curentRep = unitOfWork.DocumentsRepository;
                 var Document = await curentRep.GetDocumentByIdAsync(Id);
-                await uploaderService.DeleteFile("Document", Document.ImageName);
-                await uploaderService.DeleteFile("Document", Document.FileName);
+                await uploaderService.DeleteFile(FolderNameExtentions.Document, Document.ImageName);
+                await uploaderService.DeleteFile(FolderNameExtentions.Document, Document.FileName);
                 await curentRep.DeleteDocumentAsync(Document);
                 await unitOfWork.SaveChangesAsync();
                 return true;
