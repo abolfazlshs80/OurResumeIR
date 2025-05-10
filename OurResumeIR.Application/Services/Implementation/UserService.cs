@@ -230,5 +230,27 @@ namespace OurResumeIR.Application.Services.Implementation
             return model;
 
         }
+
+        public async Task<bool> UpdateUserProfileAsync(UserProfileVM profile, string userId)
+        {
+           var user = await _userRepository.GetUserById(userId);
+            if (user != null) 
+            {
+                return false;
+            }
+
+            user.Slug = profile.Slug;
+            user.ResumeFile = profile.ResumeFile;
+            user.bio = profile.bio;
+            user.LinkLinkdin = profile.LinkLinkdin;
+            user.LinkInstagram = profile.LinkInstagram;
+            user.LinkX = profile.LinkX;
+            user.LinkTelegram = profile.LinkTelegram;
+
+            await _userRepository.UpdateUserAsync(user);
+            await _userRepository.SaveChangesAsync();
+
+            return true;
+        }
     }
 } 

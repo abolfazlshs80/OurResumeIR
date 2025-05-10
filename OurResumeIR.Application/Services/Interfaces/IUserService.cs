@@ -20,5 +20,6 @@ namespace OurResumeIR.Application.Services.Interfaces
         Task<bool> UpdateFullNameProfile(string Name, string userId);
         Task<UserProfileVM> LoadProfile( string userId);
         Task<UserResumeVM> LoadResume( string slug);
+        Task<bool> UpdateUserProfileAsync(UserProfileVM profile , string userId);
     }
 }

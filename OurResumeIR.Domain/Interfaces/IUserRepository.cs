@@ -14,11 +14,12 @@ namespace OurResumeIR.Domain.Interfaces
     {
         Task<IQueryable<User>> FindAsync(Expression<Func<User, bool>> predicate);
         Task<string> CreateUser(User User);
-        Task<bool> UpdateUser(User User);
+        Task<bool> UpdateUserAsync(User User);
         Task<bool> DeleteUser(string UserId);
-        Task<bool> SaveChanges();
+        Task<bool> SaveChangesAsync();
         Task<bool> EmailIsExist(string email);
         User UserIsExistForLogin(string email , string password);
         Task<User> GetUserBySlug(string? slug);
+        Task<User> GetUserById(string userId);
     }
 }

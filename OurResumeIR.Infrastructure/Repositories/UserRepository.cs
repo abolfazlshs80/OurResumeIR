@@ -34,7 +34,7 @@ namespace OurResumeIR.Infra.Data.Repositories
             return "";
         }
 
-        public async Task<bool> UpdateUser(User User)
+        public async Task<bool> UpdateUserAsync(User User)
         {
             _context.Update(User);
             return true;
@@ -47,7 +47,7 @@ namespace OurResumeIR.Infra.Data.Repositories
 
         }
 
-        public async Task<bool> SaveChanges()
+        public async Task<bool> SaveChangesAsync()
         {
             await _context.SaveChangesAsync();
             return true;
@@ -82,6 +82,9 @@ namespace OurResumeIR.Infra.Data.Repositories
             return _context.Users.FirstOrDefault(u => u.Email == email && u.PasswordHash == password);
         }
 
-
+        public async Task<User> GetUserById(string userId)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+        }
     }
 }
