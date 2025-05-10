@@ -1,6 +1,8 @@
 ﻿using System.Security.Claims;
+using CleanArch.Store.Application.Extention;
 using Microsoft.AspNetCore.Mvc;
 using OurResumeIR.Application.Services.Interfaces;
+using OurResumeIR.Application.ViewModels.Account;
 using OurResumeIR.Domain.Models;
 
 namespace OurResumeIR.MVC.Areas.User.Controllers
@@ -13,6 +15,15 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
             var model = await _userService.LoadProfile(User.FindFirstValue(ClaimTypes.NameIdentifier));
             return View(model);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateProfile(UserProfileVM model)
+        {
+           var userId = User.GetUserId();
+
+            return RedirectToAction("Dashboard");
+        }
+
         [HttpPost]
         public async Task<IActionResult> UploadImageProfile(IFormFile file)
         {
