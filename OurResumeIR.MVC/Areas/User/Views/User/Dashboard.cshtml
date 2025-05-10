@@ -46,6 +46,61 @@
 		</div>
 	</div>
 
+	<!-- فرم ویرایش اطلاعات پروفایل -->
+	<div class="card border bg-transparent rounded-3 mt-4">
+		<div class="card-header bg-light border-bottom">
+			<h5 class="card-title mb-0">ویرایش اطلاعات پروفایل</h5>
+		</div>
+		<div class="card-body">
+			<form asp-action="UpdateProfile" asp-controller="User" asp-area="User" method="post" enctype="multipart/form-data">
+
+				<input type="hidden" asp-for="UserId" />
+
+				<div class="row g-3">
+
+					<div class="col-md-6">
+						<label asp-for="Slug" class="form-label">نامک (Slug)</label>
+						<input asp-for="Slug" class="form-control text-end" dir="rtl" />
+					</div>
+
+					<div class="col-md-6">
+						<label asp-for="ResumeFile" class="form-label">فایل رزومه (لینک یا نام فایل)</label>
+						<input asp-for="ResumeFile" class="form-control text-end" dir="rtl" />
+					</div>
+
+					<div class="col-md-12">
+						<label asp-for="bio" class="form-label">بیوگرافی کوتاه</label>
+						<textarea asp-for="bio" class="form-control text-end" rows="3" dir="rtl"></textarea>
+					</div>
+
+					<div class="col-md-6">
+						<label asp-for="LinkInstagram" class="form-label">لینک اینستاگرام</label>
+						<input asp-for="LinkInstagram" class="form-control text-end" dir="rtl" />
+					</div>
+
+					<div class="col-md-6">
+						<label asp-for="LinkLinkdin" class="form-label">لینک لینکدین</label>
+						<input asp-for="LinkLinkdin" class="form-control text-end" dir="rtl" />
+					</div>
+
+					<div class="col-md-6">
+						<label asp-for="LinkX" class="form-label">لینک X (توییتر)</label>
+						<input asp-for="LinkX" class="form-control text-end" dir="rtl" />
+					</div>
+
+					<div class="col-md-6">
+						<label asp-for="LinkTelegram" class="form-label">لینک تلگرام</label>
+						<input asp-for="LinkTelegram" class="form-control text-end" dir="rtl" />
+					</div>
+				</div>
+
+				<div class=" mt-3">
+					<button type="submit" class="btn btn-primary">ذخیره تغییرات</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+
 </div><!-- Row END -->
-
-
