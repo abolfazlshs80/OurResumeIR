@@ -21,6 +21,15 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         {
            var userId = User.GetUserId();
 
+            var result = await _userService.UpdateUserProfileAsync(model, userId);
+
+            if (!result)
+            {
+                TempData["ErrorMessage"] = "ویرایش پروفایل ناموفق بود!";
+                return RedirectToAction("BlogList");
+            }
+            TempData["SuccessMessage"] = "پروفایل با موفقیت ویرایش شد!";
+
             return RedirectToAction("Dashboard");
         }
 
