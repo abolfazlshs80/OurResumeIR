@@ -22,5 +22,6 @@ namespace OurResumeIR.Application.Services.Interfaces
         Task<UserProfileVM> LoadProfile( string userId);
         Task<UserResumeVM> LoadResume( string slug);
         Task<bool> UpdateUserProfileAsync(UserProfileVM profile , string userId);
+
     }
 }
