@@ -15,6 +15,7 @@ namespace OurResumeIR.Application.Services.Interfaces
     public interface IUserService
     {
         Task<LoginResult> LoginUser(LoginViewModel model);
+        Task<bool> Logout();
         Task<RegisterResult> RegisterUser(RegisterViewModel viewModel);
         Task<string> UploadProfile(IFormFile file, string userId);
         Task<bool> UpdateFullNameProfile(string Name, string userId);

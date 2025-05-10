@@ -8,28 +8,15 @@ using OurResumeIR.Domain.Models;
 
 namespace OurResumeIR.MVC.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController (IUserService _userService): Controller
     {
-        private  IUserService _userService;
-        private  SignInManager<User> _signInManager;
-        public AccountController(IUserService userService , SignInManager<User> signInManager)
-        {
-            _userService = userService;
-            _signInManager = signInManager;
-        }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
 
         [HttpGet]
-        public IActionResult Register()
-        {
-            return View();
-        }
+        public IActionResult Register()=>View();
 
-        [HttpPost]
+
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel register)
         {
             if (!ModelState.IsValid)
@@ -63,7 +50,7 @@ namespace OurResumeIR.MVC.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpPost,ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
             if (!ModelState.IsValid)
@@ -91,14 +78,11 @@ namespace OurResumeIR.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Logout()
         {
-            await _signInManager.SignOutAsync();
-            return RedirectToAction("Login", "Account");
+            await _userService.Logout();
+            return RedirectToAction(nameof(Login));
         }
 
 
-        public IActionResult ForgotPassword()
-        {
-            return View();
-        }
+        public IActionResult ForgotPassword() => View(); 
     }
 }

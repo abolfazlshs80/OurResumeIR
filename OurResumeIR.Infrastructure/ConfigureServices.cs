@@ -11,6 +11,7 @@ using OurResumeIR.Domain.Interfaces;
 using OurResumeIR.Domain.Models;
 using OurResumeIR.Infra.Data.Context;
 using OurResumeIR.Infra.Data.Repositories;
+using OurResumeIR.Infrastructure.Services;
 
 namespace OurResumeIR.Infrastructure;
 
@@ -48,6 +49,11 @@ public static class ConfigureServices
 
         #endregion
 
+        #region Service
+
+        services.AddScoped<IAuthService, AuthService>();
+
+        #endregion
 
         return services;
     }

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
+
 using Microsoft.AspNetCore.Identity;
 using OurResumeIR.Application.Services.Interfaces;
 using OurResumeIR.Domain.Enums;
@@ -26,11 +26,15 @@ namespace OurResumeIR.Application.Services.Implementation
 {
     public class UserService(IUnitOfWork unitOfWork
    
-        , SignInManager<User> _signInManager
+        ,IAuthService authService
         , IFileUploaderService _uploaderService)
         : IUserService
     {
-               
+        public async Task<bool> Logout()
+        {
+          
+          return await authService.SignOutAsync();
+        }
 
         public async Task<RegisterResult> RegisterUser(RegisterViewModel viewModel)
         {
@@ -56,23 +60,8 @@ namespace OurResumeIR.Application.Services.Implementation
             var status = await unitOfWork.UserRepository.CreateUser(user, viewModel.Password);
             if (status != null)
             {
-                var claims = new List<Claim>
-                    {
-                        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                        new Claim(ClaimTypes.Name, user.Email),
-                         new Claim("CodeMeli", "3"),
 
-                    };
-                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
-                var principal = new ClaimsPrincipal(identity);
-
-                var properties = new AuthenticationProperties
-                {
-                    IsPersistent = true
-                };
-
-                await _signInManager.SignInAsync(user, properties);
+                await authService.PasswordSignInAsync(user, viewModel.Password, false, false);
 
             }
 
@@ -89,9 +78,9 @@ namespace OurResumeIR.Application.Services.Implementation
             if (user == null)
                 return LoginResult.UserNotFound;
 
-            var result = await _signInManager.PasswordSignInAsync(user, viewModel.Password, viewModel.RememberMe, false);
+            var result =await authService.PasswordSignInAsync(user, viewModel.Password, viewModel.RememberMe, false);
 
-            if (result.Succeeded)
+            if (result)
             {
                 return LoginResult.Success;
             }
