@@ -24,19 +24,17 @@ using RegisterViewModel = OurResumeIR.Application.ViewModels.Account.RegisterVie
 
 namespace OurResumeIR.Application.Services.Implementation
 {
-    public class UserService(IUserRepository _userRepository
+    public class UserService(IUnitOfWork unitOfWork
         , UserManager<User> _userManager
         , SignInManager<User> _signInManager
         , IFileUploaderService _uploaderService)
         : IUserService
     {
-
-
-        //private readonly RoleManager<ApplicationRole> _roleManager;
+               
 
         public async Task<RegisterResult> RegisterUser(RegisterViewModel viewModel)
         {
-            if (await _userRepository.EmailIsExist(viewModel.Email))
+            if (await unitOfWork.UserRepository.EmailIsExist(viewModel.Email))
             {
                 return RegisterResult.DupplicateEmail;
             }
@@ -151,7 +149,7 @@ namespace OurResumeIR.Application.Services.Implementation
 
         public async Task<UserResumeVM> LoadResume(string slug)
         {
-            var currentUser = await _userRepository.GetUserBySlug(slug);
+            var currentUser = await unitOfWork.UserRepository.GetUserBySlug(slug);
             if (currentUser == null) return null;
             var model = new UserResumeVM();
             model.FullName=currentUser.FullName;
@@ -233,7 +231,7 @@ namespace OurResumeIR.Application.Services.Implementation
 
         public async Task<bool> UpdateUserProfileAsync(UserProfileVM profile, string userId)
         {
-           var user = await _userRepository.GetUserById(userId);
+           var user = await unitOfWork.UserRepository.GetUserById(userId);
             if (user == null) 
             {
                 return false;
@@ -248,8 +246,8 @@ namespace OurResumeIR.Application.Services.Implementation
             user.LinkX = profile.LinkX;
             user.LinkTelegram = profile.LinkTelegram;
 
-            await _userRepository.UpdateUserAsync(user);
-            await _userRepository.SaveChangesAsync();
+            await unitOfWork.UserRepository.UpdateUserAsync(user);
+            await unitOfWork.UserRepository.SaveChangesAsync();
 
             return true;
         }
