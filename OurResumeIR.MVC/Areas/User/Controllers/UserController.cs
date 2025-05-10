@@ -2,13 +2,15 @@
 using CleanArch.Store.Application.Extention;
 using Microsoft.AspNetCore.Mvc;
 using OurResumeIR.Application.Services.Interfaces;
+using OurResumeIR.Application.Static;
 using OurResumeIR.Application.ViewModels.Account;
 using OurResumeIR.Domain.Models;
+using OurResumeIR.MVC.Controllers;
 
 namespace OurResumeIR.MVC.Areas.User.Controllers
 {
     [Area("User")]
-    public class UserController(IUserService _userService) : Controller
+    public class UserController(IUserService _userService) : BaseController
     {
         public async Task<IActionResult> Dashboard()
         {
@@ -25,10 +27,14 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
 
             if (!result)
             {
-                TempData["ErrorMessage"] = "ویرایش پروفایل ناموفق بود!";
-                return RedirectToAction("BlogList");
+                SendErrorMessage(UserPanelMessage.GetMessage(
+                    UserPanelMessage.User,
+                    UserPanelMessage.MessageType.AddError));
+                return RedirectToAction(nameof(Dashboard));
             }
-            TempData["SuccessMessage"] = "پروفایل با موفقیت ویرایش شد!";
+            SendSuccessMessage(UserPanelMessage.GetMessage(
+                UserPanelMessage.User,
+                UserPanelMessage.MessageType.AddSuccess), Url.ActionLink(nameof(Dashboard)));
 
             return RedirectToAction("Dashboard");
         }
