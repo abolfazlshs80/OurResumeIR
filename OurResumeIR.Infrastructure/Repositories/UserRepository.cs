@@ -84,7 +84,8 @@ namespace OurResumeIR.Infra.Data.Repositories
 
         public async Task<User> GetUserById(string userId)
         {
-            return await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+          var result =  await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            return result;
         }
     }
 }

@@ -234,11 +234,12 @@ namespace OurResumeIR.Application.Services.Implementation
         public async Task<bool> UpdateUserProfileAsync(UserProfileVM profile, string userId)
         {
            var user = await _userRepository.GetUserById(userId);
-            if (user != null) 
+            if (user == null) 
             {
                 return false;
             }
 
+            user.FullName = profile.FullName;
             user.Slug = profile.Slug;
             user.ResumeFile = profile.ResumeFile;
             user.bio = profile.bio;
