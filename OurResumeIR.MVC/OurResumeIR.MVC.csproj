@@ -31,7 +31,7 @@
 
     <Folder Include="wwwroot\Images\Profile\" />
 
-    <Folder Include="wwwroot\madaeny.com\Home\" />
+    <Folder Include="wwwroot\MainTemplate\Home\" />
   </ItemGroup>
 
   <ItemGroup>
