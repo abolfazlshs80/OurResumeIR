@@ -11,6 +11,7 @@ using OurResumeIR.Domain.Interfaces;
 using OurResumeIR.Domain.Models;
 using OurResumeIR.Infra.Data.Context;
 using OurResumeIR.Infra.Data.Repositories;
+using OurResumeIR.Infrastructure.Models.AppSettings;
 using OurResumeIR.Infrastructure.Services;
 
 namespace OurResumeIR.Infrastructure;
@@ -19,6 +20,14 @@ public static class ConfigureServices
 {
     public static IServiceCollection RegisterInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
+        #region AppSetting Bind
+
+        services.Configure<PainginagtionViewModel>(options =>
+            configuration.GetSection("Painginagtion").Bind(options));
+
+        #endregion
+
+
         #region DbContext
         services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("LocalMain")));
@@ -54,6 +63,7 @@ public static class ConfigureServices
         services.AddScoped<IAuthService, AuthService>();
 
         #endregion
+
 
         return services;
     }
