@@ -5,12 +5,13 @@ using System.Diagnostics;
 using System.Security.Claims;
 using OurResumeIR.Application.Services.Interfaces;
 using OurResumeIR.Application.ViewModels.ContactUs;
+using Microsoft.Extensions.Options;
+using OurResumeIR.Infrastructure.Models.AppSettings;
 
 namespace OurResumeIR.MVC.Controllers
 {
-    public class HomeController (IUserService userService,IBlogService blogService,IContactUsService contactUsService): BaseController
+    public class HomeController (IUserService userService,IBlogService blogService,IContactUsService contactUsService, IOptions<PainginagtionViewModel> Options) : BaseController
     {
-
      
         [Route("/{slug}")]
         [Route("/")]
