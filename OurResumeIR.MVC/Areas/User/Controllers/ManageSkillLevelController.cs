@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
+using CleanArch.Store.Application.Extention;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OurResumeIR.Application.Services.Interfaces;
 using OurResumeIR.Application.Static;
-using OurResumeIR.Application.ViewModels.Experience;
+using OurResumeIR.Application.ViewModels.SkillLevel;
 using OurResumeIR.MVC.Controllers;
 
 namespace OurResumeIR.MVC.Areas.User.Controllers
@@ -14,7 +15,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
     {
         #region SkillLevel Layer
 
-        public async Task<IActionResult> SkillLevelList()=>View(await skillLayersService.GetAll());
+        public async Task<IActionResult> SkillLevelList()=>View(await skillLayersService.GetAll(User.GetUserId()));
 
         [HttpGet]
         public async Task<IActionResult> SkillLevelCreate() => View(new CreateSkillLevelVM());
@@ -81,7 +82,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         [HttpGet]
         public async Task<IActionResult> SkillLevelDelete(int id)
         {
-            bool status = await skillLayersService.Delete(id);
+            bool status = await skillLayersService.Delete(id,User.GetUserId());
             if (!status)
                 SendErrorMessage(UserPanelMessage.GetMessage(
                     UserPanelMessage.Skill_Level,

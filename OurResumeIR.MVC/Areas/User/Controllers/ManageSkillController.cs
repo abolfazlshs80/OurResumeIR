@@ -28,7 +28,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> SkillIndex()=>View(await skillLayersService.GetAllSkillAsync());
+        public async Task<IActionResult> SkillIndex()=>View(await skillLayersService.GetAllAsyncByUserId(User.GetUserId()));
 
 
         [HttpGet]
@@ -88,12 +88,12 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
                 UserPanelMessage.MessageType.EditSuccess), Url.ActionLink(nameof(SkillIndex)));
             return RedirectToAction(nameof(SkillIndex));
         }
-
-
+        //todo seed data create role admin and roletoUsers
+  
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteSkill(int id)
         {
-            var result = await skillLayersService.DeleteSkillAsync(id);
+            var result = await skillLayersService.DeleteSkillAsync(id,User.GetUserId());
             if (!result)
                 SendErrorMessage(UserPanelMessage.GetMessage(
                     UserPanelMessage.Skill,
