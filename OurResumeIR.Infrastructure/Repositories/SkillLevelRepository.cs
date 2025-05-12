@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using OurResumeIR.Application.ViewModels.ExpertiseLayers;
 using OurResumeIR.Domain.Interfaces;
 using OurResumeIR.Domain.Models;
 using OurResumeIR.Infra.Data.Context;
@@ -48,7 +49,17 @@ namespace OurResumeIR.Infra.Data.Repositories
             return true;
         }
 
- 
+        public async Task<SkillLevel> GetSkillLevelById(int SkillLevelLevelId)
+        {
+            return await _context.SkillLevel.Where(a=>a.Id.Equals(SkillLevelLevelId)).FirstOrDefaultAsync();
+        }
+
+
+        public async Task<List<SkillLevel>> GetAllSkillLevelAsync(string userId)
+        {
+            return await _context.SkillLevel.Where(_=>_.UserId.Equals(userId)).ToListAsync();
+        }
+
         public async Task<bool> SaveChanges()
         {
                 await _context.SaveChangesAsync();

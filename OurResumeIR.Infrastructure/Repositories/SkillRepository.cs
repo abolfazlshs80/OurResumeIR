@@ -46,6 +46,11 @@ namespace OurResumeIR.Infra.Data.Repositories
             return await _context.Skill.ToListAsync();
         }
 
+        public async Task<List<Skill>> GetAllSkillAsyncByUserId(string userId)
+        {
+            return await _context.Skill.Where(_=> _.UserId.Equals(userId)).ToListAsync();
+        }
+
         public async Task<Skill> GetByIdAsync(int id)
         {
             return await _context.Skill.FirstOrDefaultAsync(x => x.Id == id);
