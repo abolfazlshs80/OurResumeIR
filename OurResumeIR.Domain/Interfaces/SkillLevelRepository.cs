@@ -10,6 +10,8 @@ public interface ISkillLevelRepository
     Task<int> CreateSkillLevelLevel(SkillLevel skillLevel);
     Task<bool> UpdateSkillLevelLevel(SkillLevel skillLevel);
     Task<bool> DeleteSkillLevelLevel(int SkillLevelLevelId);
+    Task<SkillLevel> GetSkillLevelById(int SkillLevelLevelId);
     Task<List<SkillLevel>> GetAllSkillLevelAsync();
+    Task<List<SkillLevel>> GetAllSkillLevelAsync(string userId);
     Task<bool> SaveChanges();
 }
