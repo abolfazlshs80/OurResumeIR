@@ -7,7 +7,8 @@ public class SkillVM
     public int Id { get; set; }
     //public int ExpertiseLayerId { get; set; }
     public string Name { get; set; }
+    public string? UserId { get; set; }
     // Navigation Property  
     //public SkillLevelVM SkillLevel { get; set; }
-  //  public ICollection<UserToSkill> UserToSkill { get; set; }
+    //  public ICollection<UserToSkill> UserToSkill { get; set; }
 }
