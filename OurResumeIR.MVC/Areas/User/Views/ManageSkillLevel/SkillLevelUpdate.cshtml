@@ -1,6 +1,7 @@
-﻿@model OurResumeIR.Application.ViewModels.Experience.UpdateSkillLevelVM
+﻿@using CleanArch.Store.Application.Extention
+@model OurResumeIR.Application.ViewModels.SkillLevel.UpdateSkillLevelVM
 
-@using Microsoft.AspNetCore.Mvc.TagHelpers
+
 @{
 	Layout = "_ProfileLayout";
 	ViewBag.titlepage = "سطح تخصص";
@@ -16,7 +17,7 @@
 			<form method="post" asp-action="SkillLevelUpdate" asp-controller="ManageSkillLevel">
 
 				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
+				<input type="hidden" asp-for="UserId" value="@User.GetUserId()"/>
 				<div class="mb-3">
 					<label asp-for="Name" class="form-label"></label>
 					<input asp-for="Name" value="@Model.Name"  class="form-control" placeholder="نام سطح تخصص را وارد کنید" />

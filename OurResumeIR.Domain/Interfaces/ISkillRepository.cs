@@ -11,6 +11,7 @@ public interface ISkillRepository
     Task SaveChangesAsync();
     Task<List<SkillLevel>> GetAllSkillLevelAsync();
     Task<List<Skill>> GetAllSkillAsync();
+    Task<List<Skill>> GetAllSkillAsyncByUserId(string userId);
     Task<Skill> GetByIdAsync(int id);
     Task UpdateAsync(Skill skill);
     Task DeleteAsync(Skill skill);

@@ -15,7 +15,7 @@ namespace OurResumeIR.Application.ViewModels.Experience
 
         [Required(ErrorMessage = "نام تخصص را وارد کنید")]
         public string Name { get; set; }
-
+        public string? UserId { get; set; }
         //[Required(ErrorMessage = "سطح تخصص را انتخاب کنید")]
         //public int ExpertiseLayerId { get; set; }
 

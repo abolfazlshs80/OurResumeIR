@@ -5,6 +5,7 @@ public class Skill
     public int Id { get; set; }
     //public int ExpertiseLayerId { get; set; }
     public string Name { get; set; }
+    public string? UserId { get; set; }
 
 
     // Navigation Property  

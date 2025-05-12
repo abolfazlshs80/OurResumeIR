@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OurResumeIR.Infra.Data.Context;
 
@@ -11,9 +12,11 @@ using OurResumeIR.Infra.Data.Context;
 namespace OurResumeIR.Infra.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250512085755_add-userid-skill")]
+    partial class adduseridskill
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -354,9 +357,6 @@ namespace OurResumeIR.Infra.Data.Migrations
                     b.Property<int?>("Percentage")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.ToTable("SkillLevel");
@@ -456,18 +456,18 @@ namespace OurResumeIR.Infra.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9ea1523d-081b-463b-9b71-c183cf446fcc",
+                            Id = "e91270af-28b4-4195-b0e2-86d24b790d65",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5b351b22-0b17-47d7-9e47-9d8948de8d94",
+                            ConcurrencyStamp = "20a3a470-1209-4df8-b202-b61267fb45b5",
                             Email = "admin@example.com",
                             EmailConfirmed = true,
                             FullName = "Admin User",
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@EXAMPLE.COM",
                             NormalizedUserName = "ADMIN@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEbEGk4Wumy2o4w2ju4nR0lClRZTJSsVapoWR6pW6oNs6NxHNOMSpKfY5wTgknOJdQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDezCiQYhoanoZ8YgyTn4ZzzqoDOdX6aAHF0AxS0TcngNBtIHkyTeXL3F9ADXB/0Uw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "af04f781-c127-4f79-93f9-05ef2acfd365",
+                            SecurityStamp = "8668b2e6-f7c3-432b-bb00-8ffa49f653ee",
                             TwoFactorEnabled = false,
                             UserName = "admin@example.com"
                         });

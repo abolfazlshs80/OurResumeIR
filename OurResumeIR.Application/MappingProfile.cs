@@ -12,6 +12,7 @@ using OurResumeIR.Domain.Models;
 namespace OurResumeIR.Application
 {
     using AutoMapper;
+    using OurResumeIR.Application.ViewModels.SkillLevel;
 
     public class MappingProfile : Profile
     {

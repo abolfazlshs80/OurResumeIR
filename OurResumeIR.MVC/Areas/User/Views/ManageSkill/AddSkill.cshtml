@@ -1,5 +1,6 @@
 ﻿@using OurResumeIR.Application.ViewModels.Experience
 @using Microsoft.AspNetCore.Mvc.TagHelpers
+@using CleanArch.Store.Application.Extention
 @model SkillFormViewModel
 
 @{
@@ -18,9 +19,11 @@
         <div class="card-body">
             <form asp-action="AddSkill" asp-controller="ManageSkill" asp-area="User" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-@*                 <input type="hidden" name="__RequestVerificationToken" value="@Antiforgery.GetTokens(HttpContext).RequestToken" />
+	            @*                 <input type="hidden" name="__RequestVerificationToken" value="@Antiforgery.GetTokens(HttpContext).RequestToken" />
  *@   
-                <div class="mb-3">
+	            <input type="hidden" asp-for="UserId" value="@User.GetUserId()"/>
+
+	            <div class="mb-3">
                     <label asp-for="Name" class="form-label"></label>
                     <input name="Name" class="form-control" placeholder="نام تخصص را وارد کنید" />
                     <span asp-validation-for="Name" class="text-danger"></span>

@@ -96,6 +96,7 @@ namespace OurResumeIR.Application.Services.Implementation
                 return string.Empty;
             User.ImageName = result;
             await unitOfWork.UserRepository.UpdateUserAsync(User);
+            await unitOfWork.SaveChangesAsync();
             return result ?? string.Empty;
         }
 

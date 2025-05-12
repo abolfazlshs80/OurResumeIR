@@ -32,11 +32,25 @@ namespace OurResumeIR.Application.Services.Interfaces
             throw new NotImplementedException();
         }
 
+        public async Task<List<SkillListViewModel>> GetAllAsyncByUserId(string userId)
+        {
+            var experiences = await unitOfWork.SkillRepository.GetAllSkillAsyncByUserId(userId);
+
+            return experiences.Select(e => new SkillListViewModel
+            {
+                Id = e.Id,
+                Name = e.Name,
+                UserId = e.UserId
+            }).ToList();
+            //return mapper.Map<List<SkillListViewModel>>(experiences);
+        }
+
         public async Task CreateAsync(SkillFormViewModel model)
         {
             Skill newSkill = new Skill()
             {
                 Name = model.Name,
+                UserId = model.UserId
 
             };
 
@@ -63,6 +77,7 @@ namespace OurResumeIR.Application.Services.Interfaces
             var experience = new Skill
             {
                 Name = model.Name,
+                UserId = model.UserId,
             };
 
             await unitOfWork.SkillRepository.AddSkillAsync(experience);
@@ -106,21 +121,21 @@ namespace OurResumeIR.Application.Services.Interfaces
         public async Task<bool> UpdateSkillAsync(SkillFormViewModel model)
         {
             var experience = await unitOfWork.SkillRepository.GetByIdAsync(model.Id);
-            if (experience == null)
+
+            if (experience == null || !experience.UserId.Equals(model.UserId))
                 return false;
-
             experience.Name = model.Name;
-
-
+            experience.UserId = model.UserId;
             await unitOfWork.SkillRepository.UpdateAsync(experience);
             return true;
         }
 
-        public async Task<bool> DeleteSkillAsync(int id)
+        public async Task<bool> DeleteSkillAsync(int id,string userId)
         {
             var experience = await unitOfWork.SkillRepository.GetByIdAsync(id);
-            if (experience == null)
+            if (experience == null|| !experience.UserId.Equals(userId))
                 return false;
+
 
             await unitOfWork.SkillRepository.DeleteAsync(experience);
             return true;

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OurResumeIR.Application.ViewModels.Experience
+namespace OurResumeIR.Application.ViewModels.SkillLevel
 {
     public class UpdateSkillLevelVM
     {
@@ -13,6 +13,7 @@ namespace OurResumeIR.Application.ViewModels.Experience
         [Display(Name = "نام را وارد کنید")]
         public string Name { get; set; }
         public int Id { get; set; }
+        public string? UserId { get; set; }
         public int? Percentage { get; set; } = 0;
     }
 }
