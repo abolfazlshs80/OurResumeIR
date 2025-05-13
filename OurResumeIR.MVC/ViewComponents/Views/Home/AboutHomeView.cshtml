@@ -1,9 +1,9 @@
 ﻿@model OurResumeIR.Application.ViewModels.AboutMe.AboutMeVM
 <h1 class="section-title container">دربـــاره  @ViewBag.FullName</h1>
 <div id="about" class="about container col-11 col-md-12">
-	<div class="about-image col-12 col-sm-12 col-md-5">
+@* 	<div class="about-image col-12 col-sm-12 col-md-5">
 		<img src="@Model.ImageName.ConvartImagePathForAboutMe()" class="px-3" alt="درباره @ViewBag.FullName" />
-	</div>
+	</div> *@
 	<div class="about-title col-12 col-sm-12 col-md-7">
 		@Html.Raw(Model.Description)
 	</div>

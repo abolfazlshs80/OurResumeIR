@@ -130,7 +130,7 @@ body {
 
 .home-wrapper .header .header-image img {
   width: 100%;
-  padding: 80px 50px;
+  padding: 80px 45px;
   animation: toAnimation 1.8s infinite alternate-reverse !important;
 }
 
@@ -167,8 +167,8 @@ body {
 }
 
 .home-wrapper .header .header-title .main-titles {
-  font-size: 70px;
-  font-weight: 700;
+  font-size: 60px;
+  font-weight: 600;
   color: #fff;
   transition: all .2s ease;
   font-family: "Yekan Bakh" !important;
