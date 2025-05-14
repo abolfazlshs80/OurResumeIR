@@ -3,6 +3,7 @@ using OurResumeIR.Domain.Interfaces;
 using OurResumeIR.MVC.Models;
 using System.Diagnostics;
 using System.Security.Claims;
+using CleanArch.Store.Application.Extention;
 using OurResumeIR.Application.Services.Interfaces;
 using OurResumeIR.Application.ViewModels.ContactUs;
 using Microsoft.Extensions.Options;
@@ -20,7 +21,11 @@ namespace OurResumeIR.MVC.Controllers
         
             //if (string.IsNullOrEmpty(slug))
             //    return Error();
-            var model =await userService.LoadResume(slug);
+            string userId=string.Empty;
+          
+            if (User.Identity.IsAuthenticated && string.IsNullOrEmpty(slug))
+                userId = User.GetUserId();
+            var model =await userService.LoadResume(slug, userId);
 
             return View(model);
        
@@ -31,9 +36,7 @@ namespace OurResumeIR.MVC.Controllers
         {
             var model = await blogService.GetBlogForEditView(id);
             if(model==null) return Error();
-            TempData["BlogTitle"] = model.Title;
-            TempData["BlogText"] = model.Text;
-            TempData["BlogImage"] = model.ImageName.ConvartImagePathForBlog();
+            DisplayBlog(model.Title, model.Text, model.ImageName.ConvartImagePathForBlog());
             return RedirectToAction("Index");
 
         }
