@@ -15,9 +15,9 @@
             <a asp-area="User" asp-controller="ManageContactUs" asp-action="Index" class="list-group-item">  پیام های من </a>
 
 
-            @Html.ActionLink("ورود به سایت", "Index", "Home", null, new { @class = "list-group-item" })
-            @Html.ActionLink("خروج", "Logout", "Account", null, new { @class = "list-group-item text-danger bg-danger-soft-hover" })
-            @Html.ActionLink("حذف پروفایل", "DeleteProfile", "User", new { area = "User" }, new { @class = "list-group-item text-danger bg-danger-soft-hover" })
+            <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-slug="@ViewBag.Slug" class="list-group-item" >  ورود به سایت   </a>
+            <a asp-area="" asp-controller="Account" asp-action="Logout" class="list-group-item text-danger bg-danger-soft-hover">  خروج   </a>
+           @Html.ActionLink("حذف پروفایل", "DeleteProfile", "User", new { area = "User" }, new { @class = "list-group-item text-danger bg-danger-soft-hover" })
                      
         </div>
     </div>
