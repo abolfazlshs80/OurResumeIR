@@ -52,13 +52,14 @@ namespace OurResumeIR.Application.Services.Implementation
             return true;
         }
 
-        public async Task<List<BlogPostListViewModel>> GetAllBlogForView()
+        public async Task<List<BlogPostListViewModel>> GetAllBlogForView(string userId)
         {
-           var BlogPosts = await unitOfWork.BlogRepository.GetAllBlogAsync();
+           var BlogPosts = await unitOfWork.BlogRepository.GetAllBlogAsync(userId);
 
 
             return BlogPosts.Select(p => new BlogPostListViewModel
             {                 
+                
                 Id = p.Id,
                 Title = p.Title,
                 ImageName = p.ImageName 

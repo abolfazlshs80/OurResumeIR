@@ -31,9 +31,9 @@ namespace OurResumeIR.Infra.Data.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<List<Blog>> GetAllBlogAsync()
+        public async Task<List<Blog>> GetAllBlogAsync(string? userId)
         {
-           return await  _context.Blogs.ToListAsync();
+           return await  _context.Blogs.Where(a=>a.UserId.Equals(userId)).ToListAsync();
         }
 
         public async Task<Blog> GetBlogByIdAndUserIdAsync(int blogId, string userId)

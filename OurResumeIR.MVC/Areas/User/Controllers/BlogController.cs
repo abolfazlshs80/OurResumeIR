@@ -15,7 +15,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
     {
 
 
-        public async Task<IActionResult> BlogList() => View(await _blogService.GetAllBlogForView());
+        public async Task<IActionResult> BlogList() => View(await _blogService.GetAllBlogForView(User.GetUserId()));
 
 
         [HttpGet]
