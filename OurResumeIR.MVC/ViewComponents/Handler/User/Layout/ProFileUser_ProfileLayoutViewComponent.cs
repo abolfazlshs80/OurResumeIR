@@ -17,6 +17,7 @@ namespace OurResumeIR.MVC.ViewComponents.Handler.User.Layout
         {
 
             var model = await _userService.LoadProfile(userId);
+            ViewBag.Slug = model?.Slug;
             return View("~/ViewComponents/Views/User/Layout/ProFileUser_ProfileLayoutView.cshtml", model);
         }
 
