@@ -364,4 +364,7 @@ FodyWeavers.xsd
 
 # database File SQlite
 
-/OurResumeIR.MVC/wwwroot/Images/*
+/OurResumeIR.MVC/wwwroot/Images/Profile/*
+/OurResumeIR.MVC/wwwroot/Images/Document/*
+/OurResumeIR.MVC/wwwroot/Images/AboutMe/*
+/OurResumeIR.MVC/wwwroot/Images/Blog/*
