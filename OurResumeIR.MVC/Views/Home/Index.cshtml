@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+	ViewBag.Title = Model.FullName;
 	Layout = "_Layout";
 	ViewBag.FullName = Model.FullName;
 	ViewBag.ImagePth = Model.ImageName?.ConvartImagePathForProfile();
