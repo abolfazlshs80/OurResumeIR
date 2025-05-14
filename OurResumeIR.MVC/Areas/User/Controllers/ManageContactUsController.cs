@@ -22,7 +22,8 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         }
         public async Task<IActionResult> ReplayMessage(int id)
         {
-
+            var contact = await contactUsService.GetAsync(id, User.GetUserId());
+            SendSampleMessage(contact.Subject, contact.Text);
             return RedirectToAction(nameof(Index));
         }
     }

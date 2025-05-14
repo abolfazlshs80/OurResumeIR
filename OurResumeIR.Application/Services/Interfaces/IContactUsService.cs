@@ -11,6 +11,7 @@ namespace OurResumeIR.Application.Services.Interfaces
     public interface IContactUsService
     {
         Task<List<AdminItemContactUsViewModel>> GetAllAsync(string userId);
+        Task<AdminItemContactUsViewModel> GetAsync(int Id, string userId);
         Task<bool> CreateContactUsAsync(CreateContactUsViewModel model);
        
 

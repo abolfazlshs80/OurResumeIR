@@ -33,6 +33,23 @@ namespace OurResumeIR.Application.Services.Implementation
 
         }
 
+        public async Task<AdminItemContactUsViewModel> GetAsync(int Id, string userId)
+        {
+         var contact=   await unitOfWork.ContactUsRepository.GetAsync(Id, userId);
+         var model = new AdminItemContactUsViewModel
+         {
+             Id = contact.Id,
+             Name = contact.Name,
+             Family = contact.Family,
+             Email = contact.Email,
+             Subject = contact.Subject,
+             Text = contact.Text,
+             UserId = contact.UserId,
+
+         };
+         return model;
+        }
+
         public async Task<bool> CreateContactUsAsync(CreateContactUsViewModel model)
         {
             await unitOfWork.ContactUsRepository.CreateAsync(new ContactUs()

@@ -10,6 +10,7 @@ namespace OurResumeIR.Domain.Interfaces
     public interface IContactUsRepository
     {
         Task<List<ContactUs>> GetAllAsync(string userId);
+        Task<ContactUs> GetAsync(int Id, string userId);
         Task<bool> CreateAsync(ContactUs model);
 
     }

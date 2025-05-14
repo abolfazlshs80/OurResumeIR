@@ -19,7 +19,7 @@ namespace OurResumeIR.Domain.Interfaces
         Task<bool> SaveChangesAsync();
         Task<bool> EmailIsExist(string email);
         User UserIsExistForLogin(string email , string password);
-        Task<User> GetUserBySlug(string? slug);
+        Task<User> GetUserBySlug(string? slug, string? userId);
         Task<User> GetUserById(string userId);
         Task<User> GetUserByEmail(string email);
         Task<User> LoadProfileByUserId(string userId);

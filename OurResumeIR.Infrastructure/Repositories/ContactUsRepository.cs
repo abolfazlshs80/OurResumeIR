@@ -17,6 +17,11 @@ namespace OurResumeIR.Infra.Data.Repositories
            return await context.ContactUs.Where(a=>a.UserId.Equals(userId)).ToListAsync();
         }
 
+        public async Task<ContactUs> GetAsync(int Id, string userId)
+        {
+            return await context.ContactUs.Where(a => a.UserId.Equals(userId)&&a.Id.Equals(Id)).FirstOrDefaultAsync();
+        }
+
         public async Task<bool> CreateAsync(ContactUs model)
         {
             await context.ContactUs.AddAsync(model);
