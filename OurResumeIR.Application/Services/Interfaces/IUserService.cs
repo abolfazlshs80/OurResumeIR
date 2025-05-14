@@ -20,7 +20,8 @@ namespace OurResumeIR.Application.Services.Interfaces
         Task<string> UploadProfile(IFormFile file, string userId);
         Task<bool> UpdateFullNameProfile(string Name, string userId);
         Task<UserProfileVM> LoadProfile( string userId);
-        Task<UserResumeVM> LoadResume( string slug);
+        Task<UserResumeVM> LoadResume( string? slug,string? userId);
+     
         Task<bool> UpdateUserProfileAsync(UserProfileVM profile , string userId);
 
     }

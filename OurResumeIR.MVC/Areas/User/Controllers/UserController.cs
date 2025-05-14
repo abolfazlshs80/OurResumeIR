@@ -15,6 +15,7 @@ namespace OurResumeIR.MVC.Areas.User.Controllers
         public async Task<IActionResult> Dashboard()
         {
             var model = await _userService.LoadProfile(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            ViewBag.Slug = model?.Slug;
             return View(model);
         }
 

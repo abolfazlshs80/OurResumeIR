@@ -60,13 +60,13 @@ namespace OurResumeIR.Infra.Data.Repositories
         {
             return _context.Users.Where(x => x.Email == email).Any();
         }
-        public async Task<User> GetUserBySlug(string? slug)
+        public async Task<User> GetUserBySlug(string? slug,string? userId)
         {
             var user = _context.Users.AsQueryable();
             if (!string.IsNullOrEmpty(slug))
                 user = user.Where(x => x.Slug.Equals(slug)).AsQueryable();
-
-
+            if (!string.IsNullOrEmpty(userId))
+                user = user.Where(x => x.Id.Equals(userId)).AsQueryable();
 
             return await user.Include(a => a.AboutMe)
                .Include(a => a.UserToSkill)

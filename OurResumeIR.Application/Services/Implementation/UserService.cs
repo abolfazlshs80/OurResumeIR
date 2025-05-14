@@ -135,9 +135,14 @@ namespace OurResumeIR.Application.Services.Implementation
             return model;
         }
 
-        public async Task<UserResumeVM> LoadResume(string slug)
+        public async Task<UserResumeVM> LoadResume(string? slug,string? userId)
         {
-            var currentUser = await unitOfWork.UserRepository.GetUserBySlug(slug);
+            User currentUser=new();
+
+            if (!string.IsNullOrEmpty(userId))
+                 currentUser = await unitOfWork.UserRepository.GetUserBySlug(null,userId);
+            else if (!string.IsNullOrEmpty(slug))
+                currentUser = await unitOfWork.UserRepository.GetUserBySlug(slug, null);
             if (currentUser == null) return null;
             var model = new UserResumeVM();
             model.FullName=currentUser.FullName;
@@ -216,6 +221,7 @@ namespace OurResumeIR.Application.Services.Implementation
             return model;
 
         }
+
 
         public async Task<bool> UpdateUserProfileAsync(UserProfileVM profile, string userId)
         {
