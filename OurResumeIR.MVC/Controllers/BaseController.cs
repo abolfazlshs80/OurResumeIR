@@ -25,6 +25,15 @@ namespace OurResumeIR.MVC.Controllers
             TempData["SuccessMessageLink"] = link;
 
         }
+
+        public void DisplayBlog(string title, string text,string imagePath)
+        {
+
+            TempData["BlogTitle"] = title;
+            TempData["BlogText"] = text;
+            TempData["BlogImage"] = imagePath;
+
+        }
         public void SendErrorMessage(string title)
         {
 
